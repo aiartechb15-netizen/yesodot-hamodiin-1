@@ -26,9 +26,9 @@ export const hero = {
   ctaTo: routes.chapter1,
 }
 
-import chapter1Image from '../assets/images/תמונה פרק 1.png'
-import chapter2Image from '../assets/images/תמונה פרק 2.png'
-import chapter3Image from '../assets/images/תמונה פרק 3.png'
+import chapter1Image from '../assets/images/ת1.png'
+import chapter2Image from '../assets/images/ת2.png'
+import chapter3Image from '../assets/images/ת3.png'
 
 export const topicCards = [
   {
@@ -37,11 +37,9 @@ export const topicCards = [
     caption: 'פרק 1',
     to: routes.chapter1,
     src: chapter1Image,
-    alt: 'זכוכית מגדלת מונחת על מסמך כתוב ומפה ישנה',
-    // עדשת הזכוכית במרכז הפריים — חיתוך מרכזי שומר עליה במלואה
-    position: '50% 48%',
-    // איזון קל כדי ששלושת התצלומים ייראו כסדרה אחת
-    filter: 'contrast(1.06) saturate(0.94)',
+    alt: 'זכוכית מגדלת מונחת על מסמכים ומפה ישנה',
+    // הזכוכית במרכז הפריים
+    position: '50% 50%',
   },
   {
     id: 'topic-2',
@@ -49,10 +47,8 @@ export const topicCards = [
     caption: 'פרק 2',
     to: routes.chapter2,
     src: chapter2Image,
-    alt: 'כדור הארץ בלילה מן החלל, אורות ערים ביבשות',
-    // אזור האורות המואר נוטה לשמאל־מרכז הפריים
-    position: '42% 52%',
-    filter: 'brightness(1.1) contrast(1.04)',
+    alt: 'כדור הארץ בלילה מן החלל, אורות ערים ורשת נתונים',
+    position: '50% 50%',
   },
   {
     id: 'topic-3',
@@ -60,11 +56,10 @@ export const topicCards = [
     caption: 'פרק 3',
     to: routes.chapter3,
     src: chapter3Image,
-    alt: 'לוחמים בציוד מבצעי נעים לאורך קיר בשעת לילה',
-    // הלוחם המרכזי בצד שמאל של הפריים
-    position: '36% 45%',
-    // התצלום כהה מאוד — הבהרה עדינה כדי שהלוחמים יהיו ברורים
-    filter: 'brightness(1.28) contrast(1.06) saturate(1.05)',
+    alt: 'שני לוחמים בתצפית על עמק, רחפן מעליהם ומסך שטח בידיהם',
+    position: '50% 50%',
+    // התצלום כהה יחסית — הבהרה עדינה לבהירות בגודל הכרטיס
+    filter: 'brightness(1.1) contrast(1.03)',
   },
 ]
 
