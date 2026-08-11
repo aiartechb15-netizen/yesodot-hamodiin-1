@@ -1,4 +1,5 @@
 import SectionProgress from '../components/SectionProgress/SectionProgress'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 import ChapterOpening from '../sections/ChapterOpening'
 import ChapterMap from '../sections/ChapterMap'
@@ -22,6 +23,8 @@ import { videos } from '../data/chapter1'
 
 // עמוד פרק 1 — "מהו מודיעין?" — כל תוכן הפרק והאינטראקציות.
 export default function ChapterPage() {
+  useDocumentTitle('יסודות המודיעין — פרק 1: מהו מודיעין?')
+
   return (
     <>
       <SectionProgress />

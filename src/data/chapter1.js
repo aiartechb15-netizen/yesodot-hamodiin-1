@@ -5,6 +5,7 @@
 export const routes = {
   home: '/',
   chapter1: '/chapter/what-is-intelligence',
+  chapter2: '/chapter/national-strategic',
 }
 
 export const course = {
@@ -12,7 +13,7 @@ export const course = {
   homeHref: routes.home,
   chapters: [
     { id: 'ch1', title: 'מהו מודיעין', subtitle: 'פרק 1', to: routes.chapter1 },
-    { id: 'ch2', title: 'לאומי־אסטרטגי', subtitle: 'פרק 2', to: null },
+    { id: 'ch2', title: 'לאומי־אסטרטגי', subtitle: 'פרק 2', to: routes.chapter2 },
     { id: 'ch3', title: 'אופרטיבי־טקטי', subtitle: 'פרק 3', to: null },
   ],
 }
@@ -37,7 +38,7 @@ export const topicCards = [
     id: 'topic-2',
     title: 'לאומי־אסטרטגי',
     caption: 'פרק 2',
-    to: null,
+    to: routes.chapter2,
     image: 'Topic image — earth at night / national level',
     motif: 'globe',
   },

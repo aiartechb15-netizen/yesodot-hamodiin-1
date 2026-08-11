@@ -1,0 +1,624 @@
+/* ---------- כותרות תחנה ---------- */
+.st__head {
+  margin-bottom: clamp(26px, 3vw, 40px);
+}
+
+.st__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+
+.st__kicker::before {
+  content: '';
+  width: 26px;
+  height: 2px;
+  background: var(--gold);
+}
+
+.st__intro {
+  max-width: 820px;
+}
+
+.st__hint {
+  margin-top: 6px;
+  font-size: 14.5px;
+  color: var(--muted);
+}
+
+.st__blocks {
+  display: grid;
+  gap: clamp(22px, 3vw, 34px);
+}
+
+/* ---------- תחנה 1 — פתיח ---------- */
+.ch2hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 520px;
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  scroll-margin-top: var(--header-h);
+}
+
+/* רקע דקורטיבי: שכבות נייר ארכיון וקווי מפה — ללא טקסט */
+.ch2hero__art {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* האיור יושב בצד שמאל הפנוי; הטקסט בצד ימין */
+.ch2hero__art svg {
+  position: absolute;
+  left: -2%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(58%, 720px);
+  height: auto;
+  color: var(--navy-secondary);
+  opacity: 0.16;
+}
+
+.ch2hero__inner {
+  position: relative;
+  width: 100%;
+}
+
+.ch2hero__text {
+  width: min(46%, 620px);
+  margin-inline-start: 4%;
+  padding-block: 64px;
+}
+
+.ch2hero__badge {
+  display: inline-block;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--navy-secondary);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 16px;
+  margin-bottom: 18px;
+}
+
+.ch2hero__title {
+  font-size: clamp(34px, 4.4vw, 56px);
+  line-height: 1.1;
+}
+
+.ch2hero__message {
+  font-size: clamp(19px, 1.8vw, 24px);
+  font-weight: 700;
+  color: var(--navy-secondary);
+  margin-bottom: 16px;
+}
+
+.ch2hero__text-body {
+  font-size: 17.5px;
+  color: #3b4757;
+  margin-bottom: 30px;
+}
+
+.ch2hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.ch2hero__meta {
+  margin-top: 34px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+  max-width: 560px;
+}
+
+.ch2hero__metaLabel {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+
+.ch2hero__metaText {
+  font-size: 15.5px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.ch2hero__metaLabel--spaced {
+  margin-top: 16px;
+}
+
+.ch2hero__structure {
+  font-size: 14.5px;
+  line-height: 1.9;
+}
+
+/* ---------- תחנה 4 — קמ״ן וקברניט ---------- */
+.split2 {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
+  gap: 0;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.split2__side {
+  padding: 30px 28px;
+}
+
+.split2__side--a {
+  background: var(--paper);
+}
+
+.split2__divider {
+  width: 1px;
+  background: var(--border);
+  position: relative;
+}
+
+.split2__vs {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 50%;
+  transform: translate(50%, -50%);
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.split2__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--navy-secondary);
+  margin-bottom: 14px;
+}
+
+.split2__side--b .split2__icon {
+  background: var(--teal-soft);
+  color: var(--teal);
+}
+
+.split2__title {
+  font-size: var(--fs-h3);
+}
+
+/* ציר זמן — מקרי בוחן */
+.tline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 26px;
+  margin-top: 8px;
+  padding: 34px 0 0;
+  list-style: none;
+}
+
+.tline::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  inset-inline: 6%;
+  border-top: 1px dashed var(--border);
+}
+
+.tline__item {
+  position: relative;
+}
+
+.tline__dot {
+  position: absolute;
+  top: -34px;
+  inset-inline-start: 50%;
+  transform: translateX(50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--paper);
+}
+
+.tline__btn {
+  width: 100%;
+  padding: 20px 22px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  text-align: start;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.tline__btn:hover {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.tline__btn.is-open {
+  border-color: var(--gold);
+}
+
+.tline__when {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--teal);
+  margin-bottom: 4px;
+}
+
+.tline__title {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.tline__text {
+  margin: 12px 0 0;
+  color: #3b4757;
+  font-size: 15.5px;
+}
+
+.tline__tag {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--navy-secondary);
+  background: var(--cream);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+
+/* ---------- תחנה 6 — תוצרים ---------- */
+.products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--teal);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.product:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.product__btn {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 30px 28px 22px;
+  background: transparent;
+  border: 0;
+  text-align: start;
+}
+
+.product__panel {
+  padding: 0 28px 28px;
+}
+
+.product__cue {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.product__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--teal-soft);
+  color: var(--teal);
+}
+
+.product__title {
+  font-size: 21px;
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.product__text {
+  color: #3b4757;
+  margin: 0;
+}
+
+.product__link {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--navy-secondary);
+}
+
+/* ---------- תחנה 7 — בניין כוח ---------- */
+.steps {
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 18px 22px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: start;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.step:hover {
+  border-color: var(--gold);
+}
+
+.step.is-open {
+  box-shadow: var(--shadow-card);
+}
+
+.step.is-highlight {
+  border-inline-start: 4px solid var(--gold);
+  background: var(--cream);
+}
+
+.step__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.step__label {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.step__chev {
+  color: var(--muted);
+  transition: transform 0.2s ease;
+}
+
+.step.is-open .step__chev {
+  transform: rotate(180deg);
+}
+
+.step__text {
+  margin: 0;
+  padding: 0 72px 18px;
+  color: #3b4757;
+}
+
+.steps__actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ---------- תחנה 9 — עדשות ---------- */
+.lenses {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.lens {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  padding: 26px 24px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  text-align: start;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+}
+
+.lens:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.lens.is-open {
+  border-color: var(--gold);
+}
+
+.lens__top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lens__ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  flex: none;
+  border-radius: 50%;
+  border: 2px solid var(--teal);
+  color: var(--navy-secondary);
+  background: var(--white);
+}
+
+.lens__num {
+  position: absolute;
+  top: -6px;
+  inset-inline-start: -6px;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.lens__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.lens__body {
+  display: flex;
+  flex-direction: column;
+  color: #3b4757;
+  font-size: 15.5px;
+}
+
+.lens__body[hidden] {
+  display: none;
+}
+
+.lens__example {
+  display: block;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+  font-size: 14.5px;
+  color: var(--muted);
+}
+
+.lens__more {
+  margin-top: auto;
+  padding-top: 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--teal);
+}
+
+/* ---------- תחנה 9 — מה בוחנים ---------- */
+.examine {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.examine li {
+  position: relative;
+  padding-inline-start: 28px;
+  color: #3b4757;
+}
+
+.examine li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 6px;
+  top: 12px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--teal);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1000px) {
+  .lenses {
+    grid-template-columns: 1fr;
+  }
+  .products {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .ch2hero__text {
+    width: 100%;
+    margin-inline: 0;
+    padding-block: 48px;
+  }
+  .ch2hero__art svg {
+    left: auto;
+    right: -18%;
+    opacity: 0.08;
+    width: 88%;
+  }
+  .split2 {
+    grid-template-columns: 1fr;
+  }
+  .split2__divider {
+    width: auto;
+    height: 1px;
+  }
+  .split2__vs {
+    inset-inline-start: 50%;
+    transform: translate(50%, -50%);
+  }
+  .tline {
+    grid-template-columns: 1fr;
+  }
+  .tline::before {
+    display: none;
+  }
+  .tline__dot {
+    display: none;
+  }
+  .step__text {
+    padding-inline: 22px;
+  }
+}

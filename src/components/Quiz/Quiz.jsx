@@ -1,10 +1,8 @@
 import { useMemo, useRef, useState } from 'react'
 import Icon from '../Icons/Icons'
-import { quiz } from '../../data/chapter1'
+import { quiz as chapter1Quiz } from '../../data/chapter1'
 import './Quiz.css'
 
-const L = quiz.labels
-const questions = quiz.questions
 const MAX_ATTEMPTS = 2
 
 function emptyAnswer(q) {
@@ -32,7 +30,10 @@ function evaluate(q, answer) {
   }
 }
 
-export default function Quiz() {
+export default function Quiz({ data = chapter1Quiz }) {
+  const quiz = data
+  const L = quiz.labels
+  const questions = quiz.questions
   const [index, setIndex] = useState(0)
   const [answer, setAnswer] = useState(() => emptyAnswer(questions[0]))
   const [attempts, setAttempts] = useState(0)
@@ -81,7 +82,7 @@ export default function Quiz() {
     setDone(false)
   }
 
-  if (done) return <Summary results={results} onRestart={restart} />
+  if (done) return <Summary quiz={quiz} results={results} onRestart={restart} />
 
   const canCheck = evaluation.answered && !checked
 
@@ -245,7 +246,7 @@ export default function Quiz() {
   )
 }
 
-function Summary({ results, onRestart }) {
+function Summary({ quiz, results, onRestart }) {
   const byTopic = {}
   Object.values(results).forEach((r) => {
     if (!byTopic[r.topic]) byTopic[r.topic] = { total: 0, sum: 0 }
@@ -279,6 +280,24 @@ function Summary({ results, onRestart }) {
             )
           })}
         </ul>
+
+        {quiz.summary.refresh ? (
+          <div className="quiz__refresh">
+            <h4 className="quiz__refreshTitle">{quiz.summary.refreshTitle}</h4>
+            <span className="gold-rule gold-rule--sm" aria-hidden="true" />
+            <p className="small muted">{quiz.summary.refreshHint}</p>
+            <ul className="quiz__refreshList">
+              {quiz.summary.refresh.map((r) => (
+                <li key={r.id}>
+                  <a className="quiz__refreshItem" href={r.to}>
+                    <span className="quiz__refreshName">{r.title}</span>
+                    <span className="quiz__refreshText">{r.text}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
 
         <button className="btn btn--ghost btn--sm quiz__restart" type="button" onClick={onRestart}>
           {quiz.labels.restart}
