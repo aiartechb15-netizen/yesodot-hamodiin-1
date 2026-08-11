@@ -31,7 +31,7 @@
 
 /* אזור התמונה בראש הכרטיס — גובה זהה בשלושת הכרטיסים */
 .topic__media {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: var(--radius-sm);
   background: var(--cream);
@@ -43,6 +43,13 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  /* מונע ריכוך של התצלום בהקטנה */
+  image-rendering: auto;
+  transition: transform 0.3s ease;
+}
+
+.topic:hover .topic__img {
+  transform: scale(1.02);
 }
 
 .topic__body {

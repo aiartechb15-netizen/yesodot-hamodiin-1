@@ -11,7 +11,13 @@ export default function TopicCards() {
             const body = (
               <>
                 <div className="topic__media">
-                  <img className="topic__img" src={card.src} alt={card.alt} loading="lazy" />
+                  <img
+                    className="topic__img"
+                    src={card.src}
+                    alt={card.alt}
+                    loading="lazy"
+                    style={{ objectPosition: card.position, filter: card.filter }}
+                  />
                 </div>
                 <div className="topic__body">
                   <h3 className="topic__title">{card.title}</h3>

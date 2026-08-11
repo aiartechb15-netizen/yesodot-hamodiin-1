@@ -38,6 +38,8 @@ export const topicCards = [
     to: routes.chapter1,
     src: chapter1Image,
     alt: 'זכוכית מגדלת מונחת על מסמך כתוב ומפה ישנה',
+    // עדשת הזכוכית במרכז הפריים — חיתוך מרכזי שומר עליה במלואה
+    position: '50% 50%',
   },
   {
     id: 'topic-2',
@@ -46,6 +48,8 @@ export const topicCards = [
     to: routes.chapter2,
     src: chapter2Image,
     alt: 'כדור הארץ בלילה מן החלל, אורות ערים ביבשות',
+    // אזור האורות המואר נוטה לשמאל־מרכז הפריים
+    position: '42% 55%',
   },
   {
     id: 'topic-3',
@@ -54,6 +58,10 @@ export const topicCards = [
     to: routes.chapter3,
     src: chapter3Image,
     alt: 'לוחמים בציוד מבצעי נעים לאורך קיר בשעת לילה',
+    // הלוחם המרכזי בצד שמאל של הפריים
+    position: '36% 45%',
+    // התצלום כהה מאוד — הבהרה עדינה כדי שהלוחמים יהיו ברורים
+    filter: 'brightness(1.28) contrast(1.06) saturate(1.05)',
   },
 ]
 
