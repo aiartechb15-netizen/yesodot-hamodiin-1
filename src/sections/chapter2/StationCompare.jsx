@@ -1,5 +1,4 @@
 import ComparisonTable from '../../components/ComparisonTable/ComparisonTable'
-import StationNav from '../../components/StationNav/StationNav'
 import { comparison } from '../../data/chapter2'
 import './chapter2.css'
 
@@ -17,8 +16,6 @@ export default function StationCompare() {
         </header>
 
         <ComparisonTable />
-
-        <StationNav current={comparison.station} />
       </div>
     </section>
   )

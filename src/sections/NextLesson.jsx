@@ -12,6 +12,7 @@ export default function NextLesson() {
             <ImagePlaceholder label={nextLesson.image} motif={nextLesson.imageMotif} />
           </div>
           <div className="next__body">
+            <span className="kicker">{nextLesson.kicker}</span>
             <h2 className="next__title" id="next-lesson-title">
               {nextLesson.title}
             </h2>

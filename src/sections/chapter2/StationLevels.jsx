@@ -1,5 +1,4 @@
 import LevelPyramid from '../../components/LevelPyramid/LevelPyramid'
-import StationNav from '../../components/StationNav/StationNav'
 import { levelsMap, national } from '../../data/chapter2'
 import './chapter2.css'
 
@@ -23,8 +22,6 @@ export default function StationLevels() {
             {levelsMap.cta}
           </a>
         </div>
-
-        <StationNav current={levelsMap.station} />
       </div>
     </section>
   )

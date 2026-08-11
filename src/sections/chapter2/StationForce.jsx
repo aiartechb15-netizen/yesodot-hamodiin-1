@@ -1,6 +1,5 @@
 import { useId, useState } from 'react'
 import Icon from '../../components/Icons/Icons'
-import StationNav from '../../components/StationNav/StationNav'
 import { forceBuilding as fb } from '../../data/chapter2'
 import './chapter2.css'
 
@@ -59,8 +58,6 @@ export default function StationForce() {
             {fb.revealAll}
           </button>
         </div>
-
-        <StationNav current={fb.station} />
       </div>
     </section>
   )

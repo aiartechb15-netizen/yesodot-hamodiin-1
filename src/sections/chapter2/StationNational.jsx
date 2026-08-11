@@ -1,5 +1,4 @@
 import IdentityCard from '../../components/IdentityCard/IdentityCard'
-import StationNav from '../../components/StationNav/StationNav'
 import { national } from '../../data/chapter2'
 import './chapter2.css'
 
@@ -16,8 +15,6 @@ export default function StationNational() {
         </header>
 
         <IdentityCard data={national} tone="navy" />
-
-        <StationNav current={national.station} />
       </div>
     </section>
   )

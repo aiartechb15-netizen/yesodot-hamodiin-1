@@ -32,7 +32,7 @@ export const topicCards = [
     title: 'מהו מודיעין',
     caption: 'פרק 1',
     to: routes.chapter1,
-    image: 'Topic image — magnifier over documents',
+    image: 'זכוכית מגדלת מונחת על מסמכים',
     motif: 'magnifier',
   },
   {
@@ -40,7 +40,7 @@ export const topicCards = [
     title: 'לאומי־אסטרטגי',
     caption: 'פרק 2',
     to: routes.chapter2,
-    image: 'Topic image — earth at night / national level',
+    image: 'כדור הארץ בלילה — הרמה הלאומית',
     motif: 'globe',
   },
   {
@@ -48,7 +48,7 @@ export const topicCards = [
     title: 'אופרטיבי־טקטי',
     caption: 'פרק 3',
     to: routes.chapter3,
-    image: 'Topic image — city at night / operational level',
+    image: 'עיר בלילה — הרמה המבצעית',
     motif: 'city',
   },
 ]
@@ -74,7 +74,7 @@ export const chapterOpening = {
   navigationTitle: 'הנחיית ניווט ללומד',
   navigation:
     'גללו לאורך הפרק. בנקודות המסומנות תוכלו ללחוץ, לפתוח הרחבות ולענות על שאלות קצרות. השלמת כל פריטי החובה תאפשר מעבר לתרגול המסכם.',
-  image: 'Section image — researcher desk: map, lamp, notebook, documents',
+  image: 'שולחן עבודה של חוקר: מפה, מנורה, מחברת ומסמכים',
   imageMotif: 'desk',
 }
 
@@ -114,7 +114,7 @@ export const videos = {
     note: 'הסרטון יתווסף בהמשך',
     detail:
       'עד להוספת הסרטון מוצגים תמונת מקום, הכותרת והודעה זו. במימוש הסופי יתווספו כתוביות, תמלול נגיש ופקדי נגן נגישים.',
-    placeholder: 'Video placeholder 16:9 — “מהו מודיעין?”',
+    placeholder: '',
   },
   history: {
     id: 'video-history',
@@ -122,7 +122,7 @@ export const videos = {
     note: 'הסרטון יתווסף בהמשך',
     detail:
       'עד להוספת הסרטון מוצגים תמונת מקום, הכותרת והודעה זו. במימוש הסופי יתווספו כתוביות, תמלול נגיש ופקדי נגן נגישים.',
-    placeholder: 'Video placeholder 16:9 — “מודיעין מהמקרא ועד המדינה”',
+    placeholder: '',
   },
 }
 
@@ -549,7 +549,7 @@ export const byDomain = {
       tab: 'צבאי',
       icon: 'shield',
       text: 'מתאר כוחות צבאיים או סמי־צבאיים ואת שדה הקרב שבו הם פועלים.',
-      image: 'Domain image — military terrain',
+      image: 'שדה קרב ותוואי שטח',
     },
     {
       id: 'political',
@@ -557,7 +557,7 @@ export const byDomain = {
       tab: 'מדיני',
       icon: 'building',
       text: 'מתאר התנהלות של מדינות: החלטות, שיקולים, מתחים, מהלכים מדיניים, בריתות וועידות.',
-      image: 'Domain image — diplomacy hall',
+      image: 'אולם דיונים מדיני',
     },
     {
       id: 'technological',
@@ -565,7 +565,7 @@ export const byDomain = {
       tab: 'טכנולוגי',
       icon: 'antenna',
       text: 'מנתח יכולות של אמצעי לחימה וטכנולוגיות ואת השפעתן האפשרית על כוחותינו בזמן לחימה.',
-      image: 'Domain image — technology lab',
+      image: 'מעבדה טכנולוגית',
     },
     {
       id: 'economic',
@@ -573,7 +573,7 @@ export const byDomain = {
       tab: 'כלכלי',
       icon: 'chart',
       text: 'מנתח מגמות ותהליכים כלכליים, יכולות ואילוצים של מדינות וארגונים, והזדמנויות או סיכונים הנובעים ממצבם הכלכלי.',
-      image: 'Domain image — economic charts',
+      image: 'תרשימים כלכליים',
     },
     {
       id: 'counterterror',
@@ -581,7 +581,7 @@ export const byDomain = {
       tab: 'נגד טרור',
       icon: 'eye',
       text: 'מתאר ארגוני טרור, חוליות ומפגעים יחידים, דרכי פעולה, אמצעי לחימה ומימון — וכיצד אפשר לסכלם.',
-      image: 'Domain image — investigation board',
+      image: 'לוח חקירה וקשרים',
     },
   ],
 }
@@ -861,17 +861,18 @@ export const quiz = {
 }
 
 export const nextLesson = {
-  title: 'המשך לשיעור הבא',
-  text: 'סיימתם את פרק ‘מהו מודיעין?’. השיעור הבא ממשיך אל רמות המודיעין ותכליותיו.',
-  cta: 'המשך לשיעור הבא',
-  ctaTo: routes.home,
-  image: 'Next lesson image — stack of archive folders and notebooks',
+  kicker: 'הפרק הבא',
+  title: 'לאומי־אסטרטגי',
+  text: 'סיימתם את פרק ‘מהו מודיעין?’. בפרק הבא נכיר את רמות המודיעין הלאומית והאסטרטגית, נבין למי הן מיועדות ואילו שאלות הן מנסות לפתור.',
+  cta: 'מעבר לפרק 2',
+  ctaTo: routes.chapter2,
+  image: 'ערימת תיקי ארכיון ומחברות',
   imageMotif: 'folders',
 }
 
 export const footer = {
   title: 'יסודות המודיעין',
-  tagline: 'קורס מתוקשב — פרק 1: מהו מודיעין?',
+  tagline: 'קורס מתוקשב — רמות ותכליות המודיעין',
   links: [
     { label: 'צור קשר', href: '#' },
     { label: 'מדיניות פרטיות', href: '#' },
@@ -883,19 +884,31 @@ export const footer = {
   },
 }
 
-// עוגני מסלול ההתקדמות בצד העמוד (rail)
+// תחנות הפרק — משמשות את סרגל הניווט (שם התחנה + מיקום + הקודם/הבא)
 export const railSections = [
-  { id: 'chapter-open', label: 'פתיחת הפרק' },
-  { id: 'chapter-map', label: 'מפת הפרק' },
-  { id: 'video-intro', label: 'סרטון פתיחה' },
-  { id: 'gate-1', label: 'שער 1' },
-  { id: 'knowledge-flow', label: 'מידע לידע' },
-  { id: 'approaches', label: 'גישות מחקר' },
-  { id: 'knowledge-bodies', label: 'גופים יוצרי ידע' },
-  { id: 'unique-traits', label: 'ייחוד המודיעין' },
-  { id: 'gate-2', label: 'שער 2' },
-  { id: 'gate-3', label: 'שער 3' },
-  { id: 'by-process', label: 'מעגל המודיעין' },
-  { id: 'quiz', label: 'תרגול מסכם' },
-  { id: 'next-lesson', label: 'סיום' },
+  { id: 'chapter-open', label: 'פתיחת הפרק', station: 1 },
+  { id: 'chapter-map', label: 'מפת הפרק', station: 2 },
+  { id: 'video-intro', label: 'סרטון פתיחה', station: 3 },
+  { id: 'gate-1', label: 'שער 1 — מבוא ויסודות', station: 4 },
+  { id: 'knowledge-flow', label: 'מידע, ידע והבנה', station: 5 },
+  { id: 'approaches', label: 'גישות מחקר', station: 6 },
+  { id: 'choosing-approach', label: 'בחירת גישה', station: 7 },
+  { id: 'knowledge-bodies', label: 'גופים יוצרי ידע', station: 8 },
+  { id: 'unique-traits', label: 'ייחוד עבודת המודיעין', station: 9 },
+  { id: 'gate-2', label: 'שער 2 — התפתחות היסטורית', station: 10 },
+  { id: 'gate-3', label: 'שער 3 — המודיעין השלם', station: 11 },
+  { id: 'by-purpose', label: 'לפי ייעוד', station: 12 },
+  { id: 'by-level', label: 'לפי רמה', station: 13 },
+  { id: 'by-output', label: 'לפי תפוקה', station: 14 },
+  { id: 'by-process', label: 'מעגל המודיעין', station: 15 },
+  { id: 'by-domain', label: 'לפי תחום', station: 16 },
+  { id: 'quiz', label: 'תרגול מסכם', station: 17 },
+  { id: 'next-lesson', label: 'סיום הפרק', station: 18 },
 ]
+
+export const chapterNavLabels = {
+  prev: 'הקודם',
+  next: 'הבא',
+  position: (n, total) => `${n} מתוך ${total}`,
+  ariaLabel: 'ניווט בין תחנות הפרק',
+}

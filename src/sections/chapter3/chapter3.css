@@ -1,10 +1,3 @@
-/* סרגל התחנות הדביק מוסיף גובה — העוגנים נעצרים מתחתיו */
-.ch3page .section,
-.ch3page .ch3hero,
-.ch3page .syl {
-  scroll-margin-top: calc(var(--header-h) + 72px);
-}
-
 /* ---------- פתיח ---------- */
 .ch3hero {
   position: relative;

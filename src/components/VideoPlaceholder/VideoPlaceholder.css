@@ -53,14 +53,6 @@
   font-size: 15px;
 }
 
-.video__ph {
-  position: absolute;
-  bottom: 22px;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
-  direction: ltr;
-}
-
 .video__caption {
   margin-top: 14px;
   font-size: 14.5px;

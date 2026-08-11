@@ -1,5 +1,4 @@
 import Quiz from '../../components/Quiz/Quiz'
-import StationNav from '../../components/StationNav/StationNav'
 import { exam } from '../../data/chapter2'
 import './chapter2.css'
 
@@ -19,8 +18,6 @@ export default function StationExam() {
         </header>
 
         <Quiz data={exam} />
-
-        <StationNav current={exam.station} />
       </div>
     </section>
   )

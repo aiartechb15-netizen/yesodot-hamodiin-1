@@ -1,4 +1,5 @@
 import ChapterNav from '../components/ChapterNav/ChapterNav'
+import NextChapter from '../components/NextChapter/NextChapter'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
 import S1Opener from '../sections/chapter3/S1Opener'
@@ -15,7 +16,7 @@ import S11Relations from '../sections/chapter3/S11Relations'
 import S12Summary from '../sections/chapter3/S12Summary'
 import S13Exam from '../sections/chapter3/S13Exam'
 
-import { nav, stations } from '../data/chapter3'
+import { nav, nextChapter, stations } from '../data/chapter3'
 
 // עמוד פרק 3 — "מודיעין אופרטיבי וטקטי" — שלוש עשרה תחנות.
 export default function Chapter3Page() {
@@ -24,7 +25,7 @@ export default function Chapter3Page() {
   return (
     <>
       <ChapterNav stations={stations} labels={nav} />
-      <main id="main" className="ch3page">
+      <main id="main" className="chapterPage">
         <S1Opener />
         <S2Levels />
         <S3Operational />
@@ -38,6 +39,7 @@ export default function Chapter3Page() {
         <S11Relations />
         <S12Summary />
         <S13Exam />
+        <NextChapter {...nextChapter} />
       </main>
     </>
   )

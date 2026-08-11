@@ -1,7 +1,6 @@
 import { useId, useState } from 'react'
 import Icon from '../../components/Icons/Icons'
 import ExpandCards from '../../components/ExpandCards/ExpandCards'
-import StationNav from '../../components/StationNav/StationNav'
 import { officerAndLeader as ol } from '../../data/chapter2'
 import './chapter2.css'
 
@@ -94,8 +93,6 @@ export default function StationOfficer() {
             <Timeline />
           </div>
         </div>
-
-        <StationNav current={ol.station} />
       </div>
     </section>
   )

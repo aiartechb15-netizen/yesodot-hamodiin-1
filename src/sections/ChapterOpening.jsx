@@ -9,6 +9,7 @@ export default function ChapterOpening() {
       <div className="container">
         <div className="split split--wideText">
           <div>
+            <span className="kicker">פרק 1</span>
             <h2 className="section-title" id="chapter-open-title">
               {chapterOpening.title}
             </h2>
@@ -40,7 +41,7 @@ export default function ChapterOpening() {
           </div>
 
           <div className="open__media">
-            <ImagePlaceholder label={chapterOpening.image} motif={chapterOpening.imageMotif} ratio="4 / 5" />
+            <ImagePlaceholder label={chapterOpening.image} motif={chapterOpening.imageMotif} ratio="3 / 4" />
           </div>
         </div>
 

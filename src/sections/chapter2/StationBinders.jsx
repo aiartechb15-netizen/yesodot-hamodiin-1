@@ -1,5 +1,4 @@
 import BinderExercise from '../../components/BinderExercise/BinderExercise'
-import StationNav from '../../components/StationNav/StationNav'
 import { binders } from '../../data/chapter2'
 import './chapter2.css'
 
@@ -16,8 +15,6 @@ export default function StationBinders() {
         </header>
 
         <BinderExercise />
-
-        <StationNav current={binders.station} />
       </div>
     </section>
   )

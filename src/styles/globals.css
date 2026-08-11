@@ -139,6 +139,14 @@ svg {
   color: var(--teal-light);
 }
 
+/* בעמודי הפרקים יש סרגל תחנות דביק מתחת ל-Header — העוגנים נעצרים מתחתיו */
+.chapterPage .section,
+.chapterPage .ch2hero,
+.chapterPage .ch3hero,
+.chapterPage .syl {
+  scroll-margin-top: calc(var(--header-h) + 72px);
+}
+
 .split {
   display: grid;
   grid-template-columns: 1fr 1fr;

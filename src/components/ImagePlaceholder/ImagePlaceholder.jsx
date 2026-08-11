@@ -94,7 +94,6 @@ export default function ImagePlaceholder({
       <svg className="imgph__art" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
         {motifs[motif] || motifs.generic}
       </svg>
-      <figcaption className="imgph__label">{label}</figcaption>
     </figure>
   )
 }

@@ -1,5 +1,4 @@
 import MiniCheck from '../../components/MiniCheck/MiniCheck'
-import StationNav from '../../components/StationNav/StationNav'
 import { quickCheck } from '../../data/chapter2'
 import './chapter2.css'
 
@@ -17,8 +16,6 @@ export default function StationCheck() {
         </header>
 
         <MiniCheck />
-
-        <StationNav current={quickCheck.station} />
       </div>
     </section>
   )

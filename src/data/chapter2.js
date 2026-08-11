@@ -3,6 +3,8 @@
 // „רמות ותכליות המודיעין — המודיעין הלאומי והמודיעין האסטרטגי”).
 // אין להמציא תוכן; רכיבי ה-UI צורכים את הקובץ הזה בלבד.
 
+import { routes } from './chapter1'
+
 export const chapter2Meta = {
   number: 'פרק 2',
   title: 'מודיעין לאומי ואסטרטגי',
@@ -723,6 +725,16 @@ export const exam = {
   },
 }
 
+/* ---------------- מעבר לפרק הבא ---------------- */
+
+export const nextChapter = {
+  kicker: 'הפרק הבא',
+  title: 'אופרטיבי־טקטי',
+  text: 'בפרק הבא נכיר שתי רמות מרכזיות נוספות: מודיעין אופרטיבי ומודיעין מבצעי (טקטי) — מטרתה של כל רמה, למי היא מיועדת וכיצד התוצרים משתלבים בתכנון ובהוצאה לפועל של הפעילות המבצעית.',
+  cta: 'מעבר לפרק 3',
+  to: routes.chapter3,
+}
+
 /* ---------------- ניווט בין התחנות ---------------- */
 
 export const stations = [
@@ -739,8 +751,9 @@ export const stations = [
   { id: exam.id, label: exam.navLabel, station: 11 },
 ]
 
-export const stationNav = {
-  prev: 'לתחנה הקודמת',
-  next: 'לתחנה הבאה',
-  ofLabel: (n, total) => `תחנה ${n} מתוך ${total}`,
+export const nav = {
+  prev: 'הקודם',
+  next: 'הבא',
+  position: (n, total) => `${n} מתוך ${total}`,
+  ariaLabel: 'ניווט בין תחנות הפרק',
 }

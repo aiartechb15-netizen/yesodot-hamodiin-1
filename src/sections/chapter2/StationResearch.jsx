@@ -1,6 +1,5 @@
 import { useId, useState } from 'react'
 import Icon from '../../components/Icons/Icons'
-import StationNav from '../../components/StationNav/StationNav'
 import { strategicResearch as sr } from '../../data/chapter2'
 import './chapter2.css'
 
@@ -89,8 +88,6 @@ export default function StationResearch() {
             </div>
           </div>
         </div>
-
-        <StationNav current={sr.station} />
       </div>
     </section>
   )

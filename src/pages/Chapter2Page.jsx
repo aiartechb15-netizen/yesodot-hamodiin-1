@@ -1,4 +1,5 @@
-import SectionProgress from '../components/SectionProgress/SectionProgress'
+import ChapterNav from '../components/ChapterNav/ChapterNav'
+import NextChapter from '../components/NextChapter/NextChapter'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
 import StationIntro from '../sections/chapter2/StationIntro'
@@ -13,7 +14,7 @@ import StationResearch from '../sections/chapter2/StationResearch'
 import StationCompare from '../sections/chapter2/StationCompare'
 import StationExam from '../sections/chapter2/StationExam'
 
-import { stations } from '../data/chapter2'
+import { nav, nextChapter, stations } from '../data/chapter2'
 
 // עמוד פרק 2 — "מודיעין לאומי ואסטרטגי" — אחת עשרה תחנות.
 export default function Chapter2Page() {
@@ -21,8 +22,8 @@ export default function Chapter2Page() {
 
   return (
     <>
-      <SectionProgress sections={stations} label="תחנות הפרק" />
-      <main id="main">
+      <ChapterNav stations={stations} labels={nav} />
+      <main id="main" className="chapterPage">
         <StationIntro />
         <StationLevels />
         <StationNational />
@@ -34,6 +35,7 @@ export default function Chapter2Page() {
         <StationResearch />
         <StationCompare />
         <StationExam />
+        <NextChapter {...nextChapter} />
       </main>
     </>
   )

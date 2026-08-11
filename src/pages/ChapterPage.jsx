@@ -1,4 +1,4 @@
-import SectionProgress from '../components/SectionProgress/SectionProgress'
+import ChapterNav from '../components/ChapterNav/ChapterNav'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
 import ChapterOpening from '../sections/ChapterOpening'
@@ -19,7 +19,7 @@ import ByDomain from '../sections/ByDomain'
 import QuizSection from '../sections/QuizSection'
 import NextLesson from '../sections/NextLesson'
 
-import { videos } from '../data/chapter1'
+import { chapterNavLabels, railSections, videos } from '../data/chapter1'
 
 // עמוד פרק 1 — "מהו מודיעין?" — כל תוכן הפרק והאינטראקציות.
 export default function ChapterPage() {
@@ -27,8 +27,8 @@ export default function ChapterPage() {
 
   return (
     <>
-      <SectionProgress />
-      <main id="main">
+      <ChapterNav stations={railSections} labels={chapterNavLabels} />
+      <main id="main" className="chapterPage">
         <ChapterOpening />
         <ChapterMap />
         <VideoSection video={videos.intro} />
