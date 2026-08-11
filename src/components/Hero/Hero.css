@@ -33,15 +33,25 @@
 
 .hero__textInner .gold-rule {
   margin-inline: auto;
-  margin-block: 26px 24px;
+  margin-block: 26px 30px;
   width: 96px;
 }
 
+/* משפט הפתיחה — בינוני ומעט מודגש יותר מהפסקה שמתחתיו */
+.hero__tagline {
+  font-size: clamp(19px, 1.6vw, 22px);
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--navy-secondary);
+  margin-bottom: 10px;
+}
+
+/* שתי השורות כבלוק אחד, עם מרווח פנימי צפוף */
 .hero__lead {
-  font-size: 18px;
-  line-height: 1.85;
+  font-size: 17px;
+  line-height: 1.7;
   color: #3b4757;
-  margin-bottom: 34px;
+  margin-bottom: 28px;
 }
 
 .hero__cta {

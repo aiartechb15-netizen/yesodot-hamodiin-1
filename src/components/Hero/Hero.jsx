@@ -12,11 +12,12 @@ export default function Hero() {
           ))}
         </h1>
         <span className="gold-rule" aria-hidden="true" />
+        <p className="hero__tagline">{hero.tagline}</p>
         <p className="hero__lead">
-          {hero.lead.split('\n').map((line, i) => (
+          {hero.lead.split('\n').map((line, i, all) => (
             <span key={i}>
               {line}
-              <br />
+              {i < all.length - 1 ? <br /> : null}
             </span>
           ))}
         </p>
