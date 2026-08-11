@@ -1,0 +1,115 @@
+.msel__scenario {
+  margin-bottom: 22px;
+  max-width: 900px;
+}
+
+.msel__set {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.msel__question {
+  padding: 0;
+  margin-bottom: 14px;
+  font-size: 17.5px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.msel__opt {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 14px 18px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.msel__opt:hover {
+  border-color: var(--navy-secondary);
+}
+
+.msel__opt input {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  accent-color: var(--teal);
+}
+
+.msel__opt.is-picked {
+  border-color: var(--navy-secondary);
+}
+
+.msel__opt.is-correct {
+  background: rgba(23, 152, 154, 0.1);
+  border-color: var(--teal);
+}
+
+.msel__opt.is-wrong {
+  background: rgba(160, 60, 50, 0.07);
+  border-color: #a03c32;
+}
+
+.msel__why {
+  grid-column: 2;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+  font-size: 14.5px;
+  color: var(--muted);
+}
+
+.msel__feedbackWrap:focus {
+  outline: none;
+}
+
+.msel__feedback {
+  margin-top: 20px;
+  padding: 16px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--teal);
+  background: rgba(23, 152, 154, 0.1);
+  max-width: 900px;
+}
+
+.msel__feedback.is-partial {
+  border-color: var(--gold);
+  background: rgba(196, 163, 71, 0.12);
+}
+
+.msel__feedback.is-incorrect {
+  border-color: #a03c32;
+  background: rgba(160, 60, 50, 0.07);
+}
+
+.msel__feedbackTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+
+.msel__feedback.is-partial .msel__feedbackTitle {
+  color: #8a6f1f;
+}
+
+.msel__feedback.is-incorrect .msel__feedbackTitle {
+  color: #a03c32;
+}
+
+.msel__feedback p {
+  margin: 0;
+}
+
+.msel__actions {
+  margin-top: 18px;
+}

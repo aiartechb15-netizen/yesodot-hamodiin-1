@@ -1,0 +1,119 @@
+.scen__hint {
+  margin-bottom: 18px;
+}
+
+.scen__list {
+  display: grid;
+  gap: 18px;
+  padding: 0;
+  list-style: none;
+}
+
+.scen__item {
+  padding: 22px 24px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.scen__head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.scen__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.scen__text {
+  margin: 0;
+  color: #3b4757;
+}
+
+.scen__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border: 0;
+  padding: 0;
+  margin: 16px 0 0;
+}
+
+.scen__opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.scen__opt:hover {
+  border-color: var(--navy-secondary);
+}
+
+.scen__opt input {
+  accent-color: var(--teal);
+}
+
+.scen__opt.is-picked {
+  font-weight: 600;
+}
+
+.scen__opt.is-correct {
+  background: rgba(23, 152, 154, 0.12);
+  border-color: var(--teal);
+}
+
+.scen__opt.is-wrong {
+  background: rgba(160, 60, 50, 0.08);
+  border-color: #a03c32;
+}
+
+.scen__feedback {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--teal);
+  background: rgba(23, 152, 154, 0.1);
+}
+
+.scen__feedback.is-wrong {
+  border-color: #a03c32;
+  background: rgba(160, 60, 50, 0.07);
+}
+
+.scen__feedbackTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+
+.scen__feedback.is-wrong .scen__feedbackTitle {
+  color: #a03c32;
+}
+
+.scen__feedback p {
+  margin: 0;
+  font-size: 15.5px;
+}

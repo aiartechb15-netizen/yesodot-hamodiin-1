@@ -1,0 +1,744 @@
+/* סרגל התחנות הדביק מוסיף גובה — העוגנים נעצרים מתחתיו */
+.ch3page .section,
+.ch3page .ch3hero,
+.ch3page .syl {
+  scroll-margin-top: calc(var(--header-h) + 72px);
+}
+
+/* ---------- פתיח ---------- */
+.ch3hero {
+  position: relative;
+  background: var(--navy);
+  color: var(--teal-light);
+  overflow: hidden;
+  scroll-margin-top: var(--header-h);
+}
+
+/* רקע דקורטיבי: קווי מערכה ורשת תכנון — ללא טקסט */
+.ch3hero__art {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+}
+
+.ch3hero__art svg {
+  position: absolute;
+  left: -6%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(62%, 760px);
+  height: auto;
+  color: var(--teal-light);
+}
+
+.ch3hero__inner {
+  position: relative;
+  padding-block: clamp(56px, 7vw, 92px);
+}
+
+.ch3hero__text {
+  width: min(52%, 640px);
+}
+
+.ch3hero__badge {
+  display: inline-block;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  border: 1px solid rgba(196, 163, 71, 0.5);
+  border-radius: 999px;
+  padding: 6px 16px;
+  margin-bottom: 18px;
+}
+
+.ch3hero__title {
+  color: var(--white);
+  font-size: clamp(32px, 4.2vw, 52px);
+  line-height: 1.12;
+}
+
+.ch3hero__intro p {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 17px;
+}
+
+.ch3hero__actions {
+  margin-top: 30px;
+}
+
+.ch3hero .btn {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--navy);
+}
+
+.ch3hero .btn:hover {
+  background: #d3b45c;
+  border-color: #d3b45c;
+}
+
+/* מה נלמד בפרק */
+.syl {
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  padding-block: clamp(40px, 5vw, 64px);
+}
+
+.syl__title {
+  font-size: var(--fs-h3);
+}
+
+.syl__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 22px;
+  margin-top: 22px;
+}
+
+.syl__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: inherit;
+  transition: border-color 0.16s ease, transform 0.16s ease;
+}
+
+.syl__item:hover {
+  text-decoration: none;
+  border-color: var(--gold);
+  transform: translateX(-3px);
+}
+
+.syl__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.syl__label {
+  font-weight: 600;
+  color: var(--navy);
+  font-size: 15.5px;
+}
+
+/* ---------- כותרות תחנה ---------- */
+.s3head {
+  margin-bottom: clamp(24px, 3vw, 38px);
+}
+
+.s3head__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+
+.s3head__kicker::before {
+  content: '';
+  width: 26px;
+  height: 2px;
+  background: var(--gold);
+}
+
+.s3blocks {
+  display: grid;
+  gap: clamp(22px, 3vw, 34px);
+}
+
+.s3sub {
+  font-size: var(--fs-h3);
+  color: var(--navy);
+}
+
+.s3hint {
+  margin-top: 6px;
+  font-size: 14.5px;
+  color: var(--muted);
+}
+
+/* ---------- רמות המודיעין (תחנה 2) ---------- */
+.lvls {
+  display: grid;
+  grid-template-columns: minmax(300px, 1fr) 1fr;
+  gap: clamp(24px, 4vw, 50px);
+  align-items: start;
+}
+
+.lvls__list {
+  display: grid;
+  gap: 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.lvls__btn {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: start;
+  transition: border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.lvls__btn:hover {
+  border-color: var(--gold);
+}
+
+.lvls__btn.is-focus {
+  border-inline-start: 4px solid var(--teal);
+}
+
+.lvls__btn.is-active {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+.lvls__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.lvls__btn.is-active .lvls__num {
+  background: var(--gold);
+}
+
+.lvls__name {
+  font-weight: 700;
+  font-size: 16.5px;
+  color: var(--navy);
+}
+
+.lvls__btn.is-active .lvls__name {
+  color: var(--white);
+}
+
+.lvls__tag {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--teal);
+  background: var(--teal-soft);
+  border-radius: 999px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+.lvls__btn.is-active .lvls__tag {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--teal-light);
+}
+
+.lvls__arrow {
+  display: flex;
+  justify-content: center;
+  color: var(--muted);
+  padding-block: 2px;
+}
+
+.lvls__panel {
+  position: sticky;
+  top: calc(var(--header-h) + 74px);
+}
+
+/* ---------- צרכנים / גורמים ---------- */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 14px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.tile__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--navy-secondary);
+}
+
+.tile__title {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.tiles--5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* ---------- שאלות מרכזיות ---------- */
+.qlist {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 0;
+  list-style: none;
+}
+
+.qlist li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--cream);
+  border-inline-start: 3px solid var(--gold);
+  border-radius: var(--radius-sm);
+  font-size: 16.5px;
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.qlist__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--navy-secondary);
+  font-weight: 700;
+}
+
+/* ---------- לוחמ״מ (תחנה 7) ---------- */
+.flow3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 26px 20px;
+  margin: 0;
+  list-style: none;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.flow3__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.flow3__node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 190px;
+  text-align: center;
+}
+
+.flow3__circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  color: var(--white);
+}
+
+.flow3__circle--0 {
+  background: #8fbcbb;
+}
+.flow3__circle--1 {
+  background: var(--teal);
+}
+.flow3__circle--2 {
+  background: var(--navy);
+}
+
+.flow3__label {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.flow3__arrow {
+  color: var(--navy);
+  opacity: 0.5;
+  margin-bottom: 26px;
+}
+
+/* ---------- השוואת סביבות (תחנה 8) ---------- */
+.envs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.env {
+  padding: 28px 26px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--navy-secondary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.env--tac {
+  border-top-color: var(--teal);
+}
+
+.env__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--navy-secondary);
+  margin-bottom: 12px;
+}
+
+.env--tac .env__icon {
+  background: var(--teal-soft);
+  color: var(--teal);
+}
+
+.env__title {
+  font-size: 21px;
+}
+
+/* ---------- המחקר האופרטיבי (תחנה 9) ---------- */
+.abbrs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.abbr {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  padding: 24px 22px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  text-align: start;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.abbr:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+}
+
+.abbr.is-open {
+  border-color: var(--gold);
+}
+
+.abbr__top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.abbr__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--gold);
+}
+
+.abbr__code {
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.abbr__title {
+  font-size: 14.5px;
+  color: var(--muted);
+  display: block;
+}
+
+.abbr__text {
+  color: #3b4757;
+  font-size: 15.5px;
+}
+
+.abbr__cue {
+  margin-top: auto;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--teal);
+}
+
+/* ---------- מודיעין למטרות (תחנה 10) ---------- */
+.principle {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 26px;
+  align-items: center;
+  padding: 28px 30px;
+  background: var(--navy);
+  color: var(--teal-light);
+  border-radius: var(--radius);
+}
+
+.principle__formula {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 700;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.principle__eq {
+  color: var(--gold);
+}
+
+.principle__text {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.rungs {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.rung {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 8px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-bottom: 3px solid var(--gold);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 15.5px;
+}
+
+.rung--0 {
+  height: 58px;
+}
+.rung--1 {
+  height: 70px;
+}
+.rung--2 {
+  height: 82px;
+}
+.rung--3 {
+  height: 94px;
+}
+
+/* ---------- טבלת סיכום (תחנה 12) ---------- */
+.t3wrap {
+  overflow-x: auto;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.t3 {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+}
+
+.t3 th,
+.t3 td {
+  padding: 16px 20px;
+  text-align: start;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.t3 thead th {
+  background: var(--navy);
+  color: var(--white);
+  font-size: 16px;
+  border-bottom: 0;
+}
+
+.t3 thead th:first-child {
+  background: var(--navy-secondary);
+}
+
+.t3 tbody th {
+  width: 150px;
+  background: var(--paper);
+  color: var(--navy-secondary);
+  font-weight: 700;
+}
+
+.t3 tbody td {
+  color: #3b4757;
+}
+
+.t3 tbody tr:last-child th,
+.t3 tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* גרסת כרטיסים למובייל */
+.t3cards {
+  display: none;
+  gap: 16px;
+}
+
+.t3card {
+  padding: 20px 22px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.t3card__label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+
+.t3card__row + .t3card__row {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+}
+
+.t3card__col {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.t3card__val {
+  display: block;
+  font-size: 15.5px;
+  color: #3b4757;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1000px) {
+  .tiles,
+  .abbrs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tiles--5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .lvls {
+    grid-template-columns: 1fr;
+  }
+  .lvls__panel {
+    position: static;
+  }
+}
+
+@media (max-width: 860px) {
+  .ch3hero__text {
+    width: 100%;
+  }
+  .ch3hero__art svg {
+    left: auto;
+    right: -20%;
+    opacity: 0.5;
+    width: 90%;
+  }
+  .syl__list {
+    grid-template-columns: 1fr;
+  }
+  .envs {
+    grid-template-columns: 1fr;
+  }
+  .principle {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 700px) {
+  .tiles,
+  .tiles--5,
+  .abbrs {
+    grid-template-columns: 1fr;
+  }
+  .flow3__arrow {
+    transform: rotate(-90deg);
+    margin-bottom: 0;
+  }
+  .rungs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .rung {
+    height: auto !important;
+  }
+  .t3wrap {
+    display: none;
+  }
+  .t3cards {
+    display: grid;
+  }
+}

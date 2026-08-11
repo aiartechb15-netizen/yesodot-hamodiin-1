@@ -1,0 +1,100 @@
+.cnav {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 90;
+  background: rgba(251, 248, 241, 0.94);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+}
+
+.cnav__inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  min-height: 54px;
+}
+
+.cnav__arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-self: start;
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--navy-secondary);
+  font-size: 14.5px;
+  font-weight: 600;
+  transition: background-color 0.16s ease;
+}
+
+.cnav__arrow--next {
+  justify-self: end;
+}
+
+.cnav__arrow:hover {
+  background: rgba(7, 26, 45, 0.05);
+  text-decoration: none;
+}
+
+.cnav__arrow.is-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ב-RTL: "הבא" מצביע שמאלה, "הקודם" ימינה */
+.cnav__chev {
+  color: var(--teal);
+}
+
+.cnav__chev--prev {
+  transform: rotate(-90deg);
+}
+
+.cnav__chev--next {
+  transform: rotate(90deg);
+}
+
+.cnav__current {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  text-align: center;
+}
+
+.cnav__name {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.cnav__sep {
+  color: var(--gold);
+}
+
+.cnav__pos {
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.cnav__track {
+  display: block;
+  height: 2px;
+  background: var(--border);
+}
+
+.cnav__fill {
+  display: block;
+  height: 100%;
+  background: var(--teal);
+  transition: width 0.25s ease;
+}
+
+@media (max-width: 620px) {
+  .cnav__arrow span {
+    display: none;
+  }
+  .cnav__name {
+    font-size: 14.5px;
+  }
+}
