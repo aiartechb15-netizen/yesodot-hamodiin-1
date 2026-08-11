@@ -1,0 +1,489 @@
+/* ---------- פתיחת הפרק ---------- */
+.open__outcomes {
+  margin-top: 22px;
+}
+
+.open__list {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.open__list li {
+  position: relative;
+  padding-inline-start: 30px;
+  font-size: 16.5px;
+  color: #3b4757;
+}
+
+.open__list li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 6px;
+  top: 12px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+}
+
+.open__meta {
+  margin-top: 26px;
+}
+
+.open__flow {
+  margin-top: 40px;
+  padding-top: 34px;
+  border-top: 1px solid var(--border);
+}
+
+.open__media {
+  align-self: start;
+  position: sticky;
+  top: calc(var(--header-h) + 28px);
+}
+
+.open__media .imgph {
+  max-height: 620px;
+}
+
+/* ---------- מפת הפרק ---------- */
+.gates {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 34px;
+}
+
+.gate {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  padding: 28px 26px 30px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gate:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+  text-decoration: none;
+}
+
+.gate__num {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+}
+
+.gate__title {
+  font-size: 21px;
+}
+
+.gate__desc {
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0;
+}
+
+.gate__go {
+  margin-top: auto;
+  padding-top: 16px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--navy-secondary);
+}
+
+/* ---------- כותרות שער ---------- */
+.gateHead {
+  margin-bottom: 40px;
+}
+
+.gateHead__num {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--teal);
+  margin-bottom: 8px;
+}
+
+.blocks {
+  display: grid;
+  gap: 34px;
+}
+
+.block__title {
+  font-size: var(--fs-h3);
+}
+
+.sides {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 16px;
+}
+
+.side {
+  padding: 18px 22px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  border-top: 3px solid var(--navy-secondary);
+}
+
+.side--red {
+  border-top-color: #a03c32;
+}
+
+.side__term {
+  display: block;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.layers {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.layer {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 18px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.layer__term {
+  font-weight: 700;
+  color: var(--navy-secondary);
+}
+
+/* ---------- שער 2 ---------- */
+.reflect {
+  margin-top: 34px;
+  max-width: 780px;
+}
+
+.reflect__q {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 14px;
+}
+
+.reflect__area {
+  width: 100%;
+  min-height: 130px;
+  padding: 14px 16px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--text);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  resize: vertical;
+}
+
+.reflect__saved {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--teal);
+}
+
+/* ---------- צירי המיון ---------- */
+.axes {
+  position: relative;
+  margin-top: 40px;
+}
+
+.axes__line {
+  position: absolute;
+  top: 27px;
+  inset-inline: 40px;
+  height: 0;
+  border-top: 1px dashed var(--border);
+}
+
+.axes__list {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.axis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  color: inherit;
+  padding-bottom: 6px;
+}
+
+.axis:hover {
+  text-decoration: none;
+}
+
+.axis__dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--navy-secondary);
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.axis:hover .axis__dot {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+
+.axis__title {
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 16.5px;
+}
+
+.axis__index {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ---------- כרטיסי ייעוד / תפוקה ---------- */
+.bigCards {
+  display: grid;
+  gap: 24px;
+  margin-top: 34px;
+}
+
+.bigCards--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.bigCards--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.bigCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 30px 28px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.bigCard__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--navy-secondary);
+}
+
+.bigCard__title {
+  font-size: 21px;
+}
+
+.bigCard__example {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px dashed var(--border);
+  font-size: 15.5px;
+  color: var(--muted);
+}
+
+/* ---------- סולם הרמות ---------- */
+.ladder {
+  display: grid;
+  grid-template-columns: minmax(280px, 380px) 1fr;
+  gap: clamp(22px, 3vw, 44px);
+  align-items: start;
+  margin-top: 34px;
+}
+
+.ladder__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ladder__item {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.ladder__btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  text-align: start;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.ladder__btn:hover {
+  border-color: var(--gold);
+}
+
+.ladder__btn.is-active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+
+.ladder__step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ladder__btn.is-active .ladder__step {
+  background: var(--gold);
+}
+
+.ladder__name {
+  font-weight: 700;
+  font-size: 16.5px;
+}
+
+.ladder__arrow {
+  display: flex;
+  justify-content: center;
+  color: var(--muted);
+  padding-block: 6px;
+}
+
+.ladder__panel {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+}
+
+/* ---------- לפי תחום ---------- */
+.domain__panel {
+  display: grid;
+  grid-template-columns: 1fr 0.85fr;
+  gap: 28px;
+  align-items: center;
+}
+
+/* ---------- שיעור הבא ---------- */
+.next {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  gap: 0;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.next__media .imgph {
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+  min-height: 320px;
+}
+
+.next__body {
+  padding: clamp(30px, 4vw, 56px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.next__title {
+  font-size: var(--fs-h3);
+}
+
+.next__text {
+  color: var(--muted);
+  max-width: 420px;
+  margin-bottom: 26px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1000px) {
+  .gates,
+  .bigCards--3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .axes__list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .axes__line {
+    display: none;
+  }
+  .ladder {
+    grid-template-columns: 1fr;
+  }
+  .ladder__panel {
+    position: static;
+  }
+  .domain__panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .gates,
+  .bigCards--2,
+  .bigCards--3,
+  .sides,
+  .next {
+    grid-template-columns: 1fr;
+  }
+  .axes__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .layer {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .open__media {
+    position: static;
+  }
+}

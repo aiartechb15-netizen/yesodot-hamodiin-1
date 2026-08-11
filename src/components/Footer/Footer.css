@@ -1,0 +1,96 @@
+.ftr {
+  background: var(--navy);
+  color: rgba(255, 255, 255, 0.78);
+  padding-block: 46px 34px;
+}
+
+.ftr__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ftr__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ftr__brand svg {
+  color: var(--gold);
+}
+
+.ftr__title {
+  display: block;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.ftr__tagline {
+  display: block;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.ftr__links {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.ftr__links a {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 15.5px;
+}
+
+.ftr__links a:hover {
+  color: var(--white);
+}
+
+.ftr__credits {
+  padding-top: 20px;
+}
+
+.ftr__creditsBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 15px;
+  padding: 6px 0;
+}
+
+.ftr__creditsBtn:hover {
+  color: var(--white);
+}
+
+.ftr__creditsBtn svg {
+  transition: transform 0.2s ease;
+}
+
+.ftr__creditsBtn svg.is-open {
+  transform: rotate(180deg);
+}
+
+.ftr__creditsPanel {
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.6);
+  padding-top: 6px;
+}
+
+@media (max-width: 620px) {
+  .ftr__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ftr__links {
+    gap: 18px;
+  }
+}

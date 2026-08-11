@@ -1,0 +1,159 @@
+.kflow {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 4px;
+  list-style: none;
+}
+
+.kflow__node {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.kflow__btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 148px;
+  padding: 12px 8px 14px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  text-align: center;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.kflow__btn:hover {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: var(--border);
+}
+
+.kflow__btn.is-active {
+  background: var(--white);
+  border-color: var(--gold-soft);
+  box-shadow: var(--shadow-card);
+}
+
+.kflow__circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  color: var(--white);
+  transition: transform 0.18s ease;
+}
+
+.kflow__btn.is-active .kflow__circle {
+  transform: scale(1.05);
+}
+
+.kflow__circle--0 {
+  background: #8fbcbb;
+}
+.kflow__circle--1 {
+  background: var(--teal);
+}
+.kflow__circle--2 {
+  background: var(--navy-secondary);
+}
+.kflow__circle--3 {
+  background: var(--navy);
+}
+
+.kflow__label {
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 17px;
+}
+
+.kflow__short {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.kflow__arrow {
+  color: var(--navy);
+  opacity: 0.55;
+  margin-inline: 2px;
+  margin-bottom: 26px;
+  flex: none;
+}
+
+.kflow--mini {
+  gap: 6px;
+}
+
+.kflow--mini .kflow__node {
+  flex-direction: row;
+}
+
+.kflow--mini .kflow__circle {
+  width: 66px;
+  height: 66px;
+}
+
+.kflow--mini .kflow__node {
+  flex-direction: column;
+  position: relative;
+  padding-inline: 4px;
+}
+
+.kflow--mini .kflow__label {
+  font-size: 15.5px;
+}
+
+.kflow--mini .kflow__arrow {
+  position: absolute;
+  inset-inline-start: -22px;
+  top: 27px;
+  margin: 0;
+}
+
+.kflow__panel {
+  margin-top: 26px;
+}
+
+@media (max-width: 900px) {
+  .kflow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .kflow__node {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .kflow__btn {
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: start;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .kflow__btn .kflow__circle {
+    width: 56px;
+    height: 56px;
+  }
+  .kflow__short {
+    width: 100%;
+  }
+  .kflow__arrow {
+    margin: 4px auto;
+    transform: rotate(-90deg);
+  }
+  .kflow--mini .kflow__node {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+  }
+  .kflow--mini .kflow__arrow {
+    position: static;
+    transform: rotate(-90deg);
+  }
+}

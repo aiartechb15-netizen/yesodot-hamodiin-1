@@ -1,0 +1,149 @@
+.xcards__progress {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.xcards__progressText {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy-secondary);
+}
+
+.xcards__progressBar {
+  flex: 1;
+  min-width: 140px;
+  max-width: 260px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.xcards__progressBar span {
+  display: block;
+  height: 100%;
+  background: var(--teal);
+  transition: width 0.25s ease;
+}
+
+.xcards__done {
+  font-size: 14px;
+  color: var(--teal);
+  font-weight: 600;
+}
+
+.xcards__grid {
+  display: grid;
+  gap: 20px;
+}
+
+.xcards__grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.xcards__grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.xcard {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.xcard:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.xcard.is-open {
+  border-color: var(--gold-soft);
+}
+
+.xcard__btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 20px;
+  background: transparent;
+  border: 0;
+  text-align: start;
+}
+
+.xcard__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--navy-secondary);
+}
+
+.xcard.is-visited .xcard__icon {
+  background: var(--teal-soft);
+  color: var(--teal);
+}
+
+.xcard__title {
+  flex: 1;
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.4;
+}
+
+.xcard__flag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: var(--white);
+  flex: none;
+}
+
+.xcard__chev {
+  color: var(--muted);
+  flex: none;
+  transition: transform 0.2s ease;
+}
+
+.xcard.is-open .xcard__chev {
+  transform: rotate(180deg);
+}
+
+.xcard__panel {
+  padding: 0 20px 22px;
+  color: #3b4757;
+  font-size: 16px;
+}
+
+.xcard__panel .gold-rule {
+  margin-block: 0 14px;
+}
+
+@media (max-width: 1000px) {
+  .xcards__grid--3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .xcards__grid--3,
+  .xcards__grid--2 {
+    grid-template-columns: 1fr;
+  }
+}

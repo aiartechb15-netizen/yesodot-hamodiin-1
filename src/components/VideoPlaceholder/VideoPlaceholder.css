@@ -1,0 +1,69 @@
+.video {
+  margin: 0;
+}
+
+.video__frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--navy);
+  border: 1px solid var(--navy);
+  border-radius: var(--radius);
+  color: var(--white);
+  text-align: center;
+  padding: 24px;
+  overflow: hidden;
+}
+
+.video__frame::after {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(196, 163, 71, 0.35);
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+}
+
+.video__play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--white);
+  padding-inline-start: 4px;
+}
+
+.video__title {
+  color: var(--white);
+  font-size: clamp(20px, 2vw, 26px);
+  margin-top: 4px;
+}
+
+.video__note {
+  margin: 0;
+  color: var(--teal-light);
+  font-size: 15px;
+}
+
+.video__ph {
+  position: absolute;
+  bottom: 22px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  direction: ltr;
+}
+
+.video__caption {
+  margin-top: 14px;
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.7;
+}
