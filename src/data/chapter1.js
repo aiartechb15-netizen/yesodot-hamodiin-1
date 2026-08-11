@@ -39,7 +39,9 @@ export const topicCards = [
     src: chapter1Image,
     alt: 'זכוכית מגדלת מונחת על מסמך כתוב ומפה ישנה',
     // עדשת הזכוכית במרכז הפריים — חיתוך מרכזי שומר עליה במלואה
-    position: '50% 50%',
+    position: '50% 48%',
+    // איזון קל כדי ששלושת התצלומים ייראו כסדרה אחת
+    filter: 'contrast(1.06) saturate(0.94)',
   },
   {
     id: 'topic-2',
@@ -49,7 +51,8 @@ export const topicCards = [
     src: chapter2Image,
     alt: 'כדור הארץ בלילה מן החלל, אורות ערים ביבשות',
     // אזור האורות המואר נוטה לשמאל־מרכז הפריים
-    position: '42% 55%',
+    position: '42% 52%',
+    filter: 'brightness(1.1) contrast(1.04)',
   },
   {
     id: 'topic-3',
