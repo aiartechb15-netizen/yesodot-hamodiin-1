@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import ImagePlaceholder from '../ImagePlaceholder/ImagePlaceholder'
 import { topicCards } from '../../data/chapter1'
 import './TopicCards.css'
 
@@ -11,7 +10,9 @@ export default function TopicCards() {
           {topicCards.map((card) => {
             const body = (
               <>
-                <ImagePlaceholder label={card.image} motif={card.motif} className="topic__img" />
+                <div className="topic__media">
+                  <img className="topic__img" src={card.src} alt={card.alt} loading="lazy" />
+                </div>
                 <div className="topic__body">
                   <h3 className="topic__title">{card.title}</h3>
                   <span className="gold-rule gold-rule--sm gold-rule--center" aria-hidden="true" />

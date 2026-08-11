@@ -26,30 +26,34 @@ export const hero = {
   ctaTo: routes.chapter1,
 }
 
+import chapter1Image from '../assets/images/תמונה פרק 1.png'
+import chapter2Image from '../assets/images/תמונה פרק 2.png'
+import chapter3Image from '../assets/images/תמונה פרק 3.png'
+
 export const topicCards = [
   {
     id: 'topic-1',
     title: 'מהו מודיעין',
     caption: 'פרק 1',
     to: routes.chapter1,
-    image: 'זכוכית מגדלת מונחת על מסמכים',
-    motif: 'magnifier',
+    src: chapter1Image,
+    alt: 'זכוכית מגדלת מונחת על מסמך כתוב ומפה ישנה',
   },
   {
     id: 'topic-2',
     title: 'לאומי־אסטרטגי',
     caption: 'פרק 2',
     to: routes.chapter2,
-    image: 'כדור הארץ בלילה — הרמה הלאומית',
-    motif: 'globe',
+    src: chapter2Image,
+    alt: 'כדור הארץ בלילה מן החלל, אורות ערים ביבשות',
   },
   {
     id: 'topic-3',
     title: 'אופרטיבי־טקטי',
     caption: 'פרק 3',
     to: routes.chapter3,
-    image: 'עיר בלילה — הרמה המבצעית',
-    motif: 'city',
+    src: chapter3Image,
+    alt: 'לוחמים בציוד מבצעי נעים לאורך קיר בשעת לילה',
   },
 ]
 
