@@ -27,7 +27,7 @@ export const hero = {
   ctaTo: routes.chapter1,
 }
 
-import chapter1Image from '../assets/images/ת1.png'
+import chapter1Image from '../assets/images/תמונה פרק 1 נסיון.png'
 import chapter2Image from '../assets/images/ת2.png'
 import chapter3Image from '../assets/images/ת3.png'
 
@@ -38,8 +38,8 @@ export const topicCards = [
     caption: 'פרק 1',
     to: routes.chapter1,
     src: chapter1Image,
-    alt: 'זכוכית מגדלת מונחת על מסמכים ומפה ישנה',
-    // הזכוכית במרכז הפריים
+    alt: 'שולחן עבודה מודיעיני: מפה, זכוכית מגדלת, תיק מסמכים, משקפת ומסך נתונים',
+    // המפה וזכוכית המגדלת במרכז — חיתוך מרכזי מסיר רק שוליים משני הצדדים
     position: '50% 50%',
   },
   {
