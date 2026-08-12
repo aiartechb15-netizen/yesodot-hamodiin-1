@@ -9,7 +9,7 @@ export default function Header() {
     <header className="hdr">
       <div className="hdr__inner">
         <Link className="hdr__brand" to={course.homeHref}>
-          <Icon name="bookOpen" size={26} />
+          <Icon name="bookOpen" size={22} />
           <span className="hdr__brandText">{course.title}</span>
         </Link>
 

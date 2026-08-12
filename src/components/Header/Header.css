@@ -18,12 +18,22 @@
 }
 
 .hdr__brand {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 12px;
   color: var(--white);
   font-weight: 700;
   font-size: 17px;
+}
+
+/* line-height 1 — תיבת הטקסט שווה לגובה האותיות, כך שהאייקון יושב בדיוק על אותה שורה */
+.hdr__brandText {
+  display: block;
+  line-height: 1;
+}
+
+.hdr__brand svg {
+  flex: none;
 }
 
 .hdr__brand:hover {
@@ -35,10 +45,11 @@
   color: var(--gold);
 }
 
-/* לוגו ארטק — יחס מקורי נשמר, ללא חיתוך או מתיחה */
+/* לוגו ארטק — יחס מקורי נשמר, ללא חיתוך או מתיחה.
+   הגובה מותאם למשקל הוויזואלי של המיתוג שמנגד. */
 .hdr__logo {
   display: block;
-  height: 32px;
+  height: 24px;
   width: auto;
   max-width: 40vw;
   object-fit: contain;
@@ -46,7 +57,7 @@
 
 @media (max-width: 620px) {
   .hdr__logo {
-    height: 24px;
+    height: 20px;
   }
   .hdr__brand {
     font-size: 15.5px;
