@@ -7,10 +7,14 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* רוחב מלא: המיתוג נצמד לקצה הימני והלוגו לקצה השמאלי, עם padding מסודר */
 .hdr__inner {
   height: var(--header-h);
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-inline: clamp(20px, 2.4vw, 36px);
 }
 
 .hdr__brand {
@@ -29,4 +33,23 @@
 
 .hdr__brand svg {
   color: var(--gold);
+}
+
+/* לוגו ארטק — יחס מקורי נשמר, ללא חיתוך או מתיחה */
+.hdr__logo {
+  display: block;
+  height: 32px;
+  width: auto;
+  max-width: 40vw;
+  object-fit: contain;
+}
+
+@media (max-width: 620px) {
+  .hdr__logo {
+    height: 24px;
+  }
+  .hdr__brand {
+    font-size: 15.5px;
+    gap: 9px;
+  }
 }
