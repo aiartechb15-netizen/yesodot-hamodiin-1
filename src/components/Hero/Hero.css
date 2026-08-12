@@ -22,16 +22,14 @@
   text-align: center;
 }
 
+/* שתי המילים בשורה אחת — הגודל מותאם כדי שייכנסו בנוחות ברוחב הבלוק */
 .hero__title {
-  font-size: clamp(44px, 5.6vw, 76px);
+  font-size: clamp(38px, 5.2vw, 76px);
   font-weight: 700;
-  line-height: 1.05;
+  line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--navy);
-}
-
-.hero__title span {
-  display: block;
+  white-space: nowrap;
 }
 
 /* קו זהב עם נקודה במרכזו:  —— ● —— */

@@ -7,9 +7,7 @@ export default function Hero() {
     <section className="hero" id="hero" aria-labelledby="hero-title">
       <div className="hero__textInner">
         <h1 className="hero__title" id="hero-title">
-          {hero.titleLines.map((line) => (
-            <span key={line}>{line}</span>
-          ))}
+          {hero.title}
         </h1>
         <span className="hero__rule" aria-hidden="true">
           <i className="hero__ruleLine" />
