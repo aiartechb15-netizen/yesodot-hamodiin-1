@@ -42,9 +42,6 @@ export default function MiniCheck() {
   if (done) {
     return (
       <div className="mcheck card card--pad">
-        <span className="mcheck__doneIcon" aria-hidden="true">
-          <Icon name="check" size={26} />
-        </span>
         <p className="mcheck__doneText">{L.done}</p>
         <button className="btn btn--ghost btn--sm" type="button" onClick={restart}>
           {L.again}

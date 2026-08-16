@@ -112,18 +112,6 @@
   line-height: 1.4;
 }
 
-.xcard__flag {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--teal);
-  color: var(--white);
-  flex: none;
-}
-
 .xcard__chev {
   color: var(--muted);
   flex: none;

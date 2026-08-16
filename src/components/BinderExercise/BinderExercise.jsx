@@ -47,11 +47,6 @@ export default function BinderExercise() {
                   <span className="binder__letter">{o.letter}</span>
                 </span>
                 <span className="binder__text">{o.text}</span>
-                {picked && o.id === binders.correctId ? (
-                  <span className="binder__mark" aria-hidden="true">
-                    <Icon name="check" size={16} />
-                  </span>
-                ) : null}
               </button>
             </li>
           )

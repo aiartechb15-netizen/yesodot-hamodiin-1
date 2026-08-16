@@ -119,20 +119,6 @@
   opacity: 0.5;
 }
 
-.binder__mark {
-  position: absolute;
-  top: 12px;
-  inset-inline-end: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--teal);
-  color: var(--white);
-}
-
 .binders__feedbackWrap:focus {
   outline: none;
 }

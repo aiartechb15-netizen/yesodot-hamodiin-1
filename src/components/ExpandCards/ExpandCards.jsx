@@ -58,11 +58,6 @@ export default function ExpandCards({
                     <Icon name={item.icon} size={24} />
                   </span>
                   <span className="xcard__title">{item.title2 || item.title}</span>
-                  {isVisited ? (
-                    <span className="xcard__flag" aria-label="נפתח">
-                      <Icon name="check" size={14} />
-                    </span>
-                  ) : null}
                   <Icon name="chevron" size={20} className="xcard__chev" />
                 </button>
                 <div className="xcard__panel" id={`${uid}-${item.id}`} hidden={!isOpen}>
