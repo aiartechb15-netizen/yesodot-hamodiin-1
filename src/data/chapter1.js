@@ -91,27 +91,27 @@ export const chapterOpening = {
 
 // שלושת הרעיונות המרכזיים של הפרק — תצוגה ויזואלית, לא ניווט
 export const chapterFocus = {
-  title: 'מה נבין בפרק?',
+  title: 'מה נלמד בפרק?',
   intro:
     'שלושה רעיונות מרכזיים ילוו אותנו לאורך הפרק ויעזרו לבנות בהדרגה את התמונה המלאה של עולם המודיעין.',
   steps: [
     {
       id: 'focus-1',
+      number: '01',
       title: 'להבין מהו מודיעין',
       description: 'מידע, ידע, הבנה וגישות למחקר.',
-      icon: 'search',
     },
     {
       id: 'focus-2',
+      number: '02',
       title: 'להבין איך המודיעין התפתח',
-      description: 'מהעבר אל ההווה, ואיך השתנו הצרכים והדרכים לייצר ידע.',
-      icon: 'clock',
+      description: 'מהמעבר אל ההווה, דרך השתנות הצרכים והדרכים לייצר ידע.',
     },
     {
       id: 'focus-3',
+      number: '03',
       title: 'להבין איך עולם המודיעין בנוי ופועל',
-      description: 'רמות, תכליות, מעגל המודיעין ותחומי הפעילות.',
-      icon: 'share',
+      description: 'רמות, תכליות, מעגל המודיעין והתהליך הפעילותי.',
     },
   ],
 }
@@ -896,7 +896,7 @@ export const footer = {
 // תחנות הפרק — משמשות את סרגל הניווט (שם התחנה + מיקום + הקודם/הבא)
 export const railSections = [
   { id: 'chapter-open', label: 'פתיחת הפרק', station: 1 },
-  { id: 'chapter-map', label: 'מה נבין בפרק', station: 2 },
+  { id: 'chapter-map', label: 'מה נלמד בפרק', station: 2 },
   { id: 'video-intro', label: 'סרטון פתיחה', station: 3 },
   { id: 'gate-1', label: 'שער 1 — מבוא ויסודות', station: 4 },
   { id: 'knowledge-flow', label: 'מידע, ידע והבנה', station: 5 },

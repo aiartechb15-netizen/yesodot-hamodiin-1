@@ -1,8 +1,7 @@
-import Icon from '../components/Icons/Icons'
 import { chapterFocus } from '../data/chapter1'
 import './sections.css'
 
-// שלושת הרעיונות המרכזיים כמסלול אחד מתפתח — הסבר ויזואלי, ללא ניווט.
+// שלושת הרעיונות המרכזיים ככרטיסים אופקיים — תוכן רציף בעמוד, ללא ניווט.
 export default function ChapterMap() {
   return (
     <section className="section section--white" id="chapter-map" aria-labelledby="chapter-focus-title">
@@ -15,20 +14,19 @@ export default function ChapterMap() {
           {chapterFocus.intro}
         </p>
 
-        <ol className="journey">
-          <span className="journey__track" aria-hidden="true" />
-          {chapterFocus.steps.map((s, i) => (
-            <li className="journey__item" key={s.id}>
-              <span className={`journey__marker journey__marker--${i}`}>
-                <span className="journey__circle">
-                  <Icon name={s.icon} size={30} />
+        <ol className="ideas">
+          {chapterFocus.steps.map((s) => (
+            <li className="ideas__card" key={s.id}>
+              <div className="ideas__num">
+                <span className="ideas__digits ltr-num" aria-hidden="true">
+                  {s.number}
                 </span>
-                <span className="journey__num ltr-num" aria-hidden="true">
-                  {i + 1}
-                </span>
-              </span>
-              <h3 className="journey__title">{s.title}</h3>
-              <p className="journey__text">{s.description}</p>
+                <span className="ideas__numRule" aria-hidden="true" />
+              </div>
+              <div className="ideas__body">
+                <h3 className="ideas__title">{s.title}</h3>
+                <p className="ideas__text">{s.description}</p>
+              </div>
             </li>
           ))}
         </ol>

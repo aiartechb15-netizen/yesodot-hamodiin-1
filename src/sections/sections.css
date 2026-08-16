@@ -72,115 +72,80 @@
   border-radius: var(--radius);
 }
 
-/* ---------- מה נבין בפרק — מסלול בן שלוש תחנות ---------- */
-.journey {
-  position: relative;
+/* ---------- מה נלמד בפרק — שלושה כרטיסים אופקיים ---------- */
+.ideas {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  margin: clamp(40px, 5vw, 60px) 0 0;
+  grid-auto-rows: 1fr; /* גובה זהה לכל הכרטיסים */
+  gap: 22px;
+  margin: clamp(34px, 4vw, 48px) 0 0;
   padding: 0;
   list-style: none;
 }
 
-/* הקו המחבר עובר מאחורי העיגולים בגובה מרכזם */
-.journey__track {
-  position: absolute;
-  top: 44px;
-  inset-inline: 16%;
-  border-top: 2px dashed var(--border);
+.ideas__card {
+  display: grid;
+  grid-template-columns: minmax(110px, 132px) 1fr;
+  align-items: stretch;
+  gap: 30px;
+  padding: 30px 34px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.journey__item {
-  position: relative;
+.ideas__card:hover {
+  border-color: var(--gold-soft);
+  box-shadow: var(--shadow-card);
+}
+
+/* עמודת המספר — מספר זהב גדול וקו זהב קצר מתחתיו */
+.ideas__num {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  padding-inline: 10px;
-  transition: transform 0.25s ease;
-}
-
-.journey__item:hover {
-  transform: translateY(-4px);
-}
-
-.journey__marker {
-  position: relative;
-  margin-bottom: 22px;
-}
-
-/* טבעת בצבע הרקע מנקה את הקו סביב כל עיגול */
-.journey__circle {
-  display: inline-flex;
-  align-items: center;
   justify-content: center;
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  color: var(--white);
-  box-shadow: 0 0 0 10px var(--white);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  gap: 12px;
 }
 
-.journey__marker--0 .journey__circle {
-  background: #8fbcbb;
-}
-.journey__marker--1 .journey__circle {
-  background: var(--teal);
-}
-.journey__marker--2 .journey__circle {
-  background: var(--navy);
-}
-
-.journey__item:hover .journey__circle {
-  transform: scale(1.06);
-}
-
-.journey__num {
-  position: absolute;
-  top: -2px;
-  inset-inline-start: -2px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--gold);
-  color: var(--navy);
-  font-size: 13.5px;
+.ideas__digits {
+  font-size: clamp(38px, 4vw, 52px);
   font-weight: 700;
-  border: 3px solid var(--white);
+  line-height: 1;
+  color: var(--gold);
+  letter-spacing: 0.02em;
 }
 
-.journey__title {
-  font-size: 19px;
-  line-height: 1.4;
-  color: var(--navy);
-  max-width: 260px;
-}
-
-.journey__title::after {
-  content: '';
+.ideas__numRule {
   display: block;
-  width: 40px;
-  height: 2px;
+  width: 46px;
+  height: 3px;
   background: var(--gold);
   border-radius: 2px;
-  margin: 12px auto 14px;
 }
 
-.journey__text {
+/* קו אנכי דק בין אזור המספר לטקסט (inline-start בעברית הוא הצד הפונה למספר) */
+.ideas__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding-inline-start: 30px;
+  border-inline-start: 1px solid var(--gold-soft);
+  text-align: start;
+}
+
+.ideas__title {
+  font-size: clamp(19px, 1.7vw, 23px);
+  color: var(--navy);
+  line-height: 1.35;
+}
+
+.ideas__text {
   margin: 0;
-  font-size: 15.5px;
+  font-size: 16.5px;
   color: var(--muted);
-  max-width: 290px;
-  transition: color 0.25s ease;
-}
-
-.journey__item:hover .journey__text {
-  color: #3b4757;
 }
 
 /* ---------- כותרות שער ---------- */
@@ -531,12 +496,6 @@
   .bigCards--3 {
     grid-template-columns: repeat(2, 1fr);
   }
-  .journey__title {
-    font-size: 17.5px;
-  }
-  .journey__track {
-    inset-inline: 20%;
-  }
   .axes__list {
     grid-template-columns: repeat(3, 1fr);
     gap: 22px;
@@ -562,18 +521,17 @@
   .next {
     grid-template-columns: 1fr;
   }
-  /* המסלול הופך לטור אנכי, והקו המחבר עובר במרכז */
-  .journey {
-    grid-template-columns: 1fr;
-    gap: 38px;
+  /* הכרטיסים נשארים אופקיים; המספר מתכווץ והמרווחים מתהדקים */
+  .ideas__card {
+    grid-template-columns: 78px 1fr;
+    gap: 18px;
+    padding: 24px 20px;
   }
-  .journey__track {
-    top: 44px;
-    bottom: 90px;
-    inset-inline: auto;
-    inset-inline-start: 50%;
-    border-top: 0;
-    border-inline-start: 2px dashed var(--border);
+  .ideas__body {
+    padding-inline-start: 18px;
+  }
+  .ideas__text {
+    font-size: 15.5px;
   }
   .axes__list {
     grid-template-columns: repeat(2, 1fr);
