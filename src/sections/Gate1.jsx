@@ -38,21 +38,18 @@ export default function Gate1() {
 
           <div className="grid-2 kuPair">
             <article className="card card--pad kuCard">
-              {/* כל התוכן כיחידה אחת, כדי שנוכל למרכז אותה אנכית בתוך הכרטיס */}
-              <div className="kuCard__content">
-                <h3 className="card-title">{ku.title}</h3>
-                <span className="gold-rule gold-rule--sm" aria-hidden="true" />
-                <p>{ku.lead}</p>
-                <div className="layers">
-                  {ku.layers.map((l) => (
-                    <div className="layer" key={l.term}>
-                      <span className="layer__term">{l.term}</span>
-                      <span>{l.text}</span>
-                    </div>
-                  ))}
-                </div>
-                <p>{ku.closing}</p>
+              <h3 className="card-title">{ku.title}</h3>
+              <span className="gold-rule gold-rule--sm" aria-hidden="true" />
+              <p>{ku.lead}</p>
+              <div className="layers">
+                {ku.layers.map((l) => (
+                  <div className="layer" key={l.term}>
+                    <span className="layer__term">{l.term}</span>
+                    <span>{l.text}</span>
+                  </div>
+                ))}
               </div>
+              <p>{ku.closing}</p>
             </article>
 
             <article className="card card--pad">
