@@ -207,24 +207,31 @@
   height: auto;
 }
 
-/* כרטיס "בין ידיעה להבנה" — התוכן נצמד לראש הכרטיס ברצף צפוף.
-   flex-start בלבד: אין space-between ואין margin-top: auto,
-   כך ששטח ריק (אם יש) נשאר רק מתחת לכל התוכן. */
+/* כרטיס "בין ידיעה להבנה" — כל התוכן הוא יחידה אחת (.kuCard__content),
+   וה-margin-block: auto ממרכז את היחידה כולה אנכית בתוך הכרטיס.
+   אין space-between/around/evenly — המרווחים הפנימיים נשארים אחידים. */
 .kuCard {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+}
+
+.kuCard__content {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
   gap: 12px;
+  width: 100%;
+  margin-block: auto;
 }
 
 /* .layers לא נמתח לגובה שנותר — הוא נשאר בגובה התוכן שלו */
-.kuCard > * {
+.kuCard__content > * {
   flex: 0 0 auto;
 }
 
 /* המרווח נקבע רק על ידי ה-gap, ללא מרג'ינים כפולים */
-.kuCard > *,
-.kuCard .gold-rule {
+.kuCard__content > *,
+.kuCard__content .gold-rule {
   margin: 0;
 }
 
