@@ -37,7 +37,7 @@ export default function Gate1() {
           </aside>
 
           <div className="grid-2">
-            <article className="card card--pad">
+            <article className="card card--pad kuCard">
               <h3 className="card-title">{ku.title}</h3>
               <span className="gold-rule gold-rule--sm" aria-hidden="true" />
               <p>{ku.lead}</p>
@@ -49,7 +49,7 @@ export default function Gate1() {
                   </div>
                 ))}
               </div>
-              <p style={{ marginTop: '16px' }}>{ku.closing}</p>
+              <p>{ku.closing}</p>
             </article>
 
             <article className="card card--pad">

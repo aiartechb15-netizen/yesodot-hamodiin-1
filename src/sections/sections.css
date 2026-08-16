@@ -197,10 +197,24 @@
   margin-bottom: 4px;
 }
 
+/* כרטיס "בין ידיעה להבנה" — רצף אחיד מלמעלה למטה, ללא חללים מיותרים */
+.kuCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 16px;
+}
+
+/* המרווח נקבע רק על ידי ה-gap, ללא מרג'ינים כפולים */
+.kuCard > *,
+.kuCard .gold-rule {
+  margin: 0;
+}
+
 .layers {
   display: grid;
-  gap: 12px;
-  margin-top: 14px;
+  gap: 0; /* ההפרדה בין השורות נוצרת מה-padding ומהקו המפריד */
+  margin: 0;
 }
 
 .layer {
@@ -210,6 +224,11 @@
   align-items: baseline;
   padding: 14px 0;
   border-bottom: 1px solid var(--border);
+}
+
+/* השורה הראשונה מתחילה מיד אחרי הטקסט שמעליה */
+.layer:first-child {
+  padding-top: 0;
 }
 
 .layer__term {
