@@ -1,9 +1,11 @@
 .kflow {
   display: flex;
   align-items: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 10px;
   list-style: none;
+  padding: 0;
 }
 
 .kflow__node {
@@ -59,9 +61,6 @@
   background: var(--teal);
 }
 .kflow__circle--2 {
-  background: var(--navy-secondary);
-}
-.kflow__circle--3 {
   background: var(--navy);
 }
 

@@ -22,7 +22,7 @@ function Arrow() {
 }
 
 /** מידע ← ידע ← הבנה: שורה אחת ממורכזת, החצים יושבים בין העיגולים. */
-export function KnowledgeFlowMini({ steps = knowledgeFlow.steps.slice(0, 3) }) {
+export function KnowledgeFlowMini({ steps = knowledgeFlow.steps }) {
   return (
     <ol className="kmini" aria-label="ממידע לידע ולהבנה">
       {steps.map((s, i) => (
