@@ -5,7 +5,15 @@ import './ExpandCards.css'
 /**
  * רשת כרטיסים נפתחים. כל כרטיס נפתח בלחיצה (ולא בהובר) ומסומן כ"נצפה".
  */
-export default function ExpandCards({ items, columns = 3, showProgress = false, progressLabel, completedMessage }) {
+export default function ExpandCards({
+  items,
+  columns = 3,
+  showProgress = false,
+  progressLabel,
+  completedMessage,
+  // autoHeight: כל כרטיס בגובה התוכן שלו — פתיחת אחד אינה מותחת את שכנו
+  autoHeight = false,
+}) {
   const uid = useId()
   const [open, setOpen] = useState([])
   const [visited, setVisited] = useState([])
@@ -32,7 +40,7 @@ export default function ExpandCards({ items, columns = 3, showProgress = false, 
         </div>
       ) : null}
 
-      <ul className={`xcards__grid xcards__grid--${columns}`}>
+      <ul className={`xcards__grid xcards__grid--${columns}${autoHeight ? ' xcards__grid--auto' : ''}`}>
         {items.map((item) => {
           const isOpen = open.includes(item.id)
           const isVisited = visited.includes(item.id)

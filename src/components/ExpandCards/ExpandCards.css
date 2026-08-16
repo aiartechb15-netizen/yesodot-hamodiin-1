@@ -48,6 +48,15 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
+/* גובה עצמאי לכל כרטיס: פתיחת כרטיס אחד אינה מותחת את זה שלידו */
+.xcards__grid--auto {
+  align-items: start;
+}
+
+.xcards__grid--auto .xcard {
+  height: auto;
+}
+
 .xcard {
   height: 100%;
   display: flex;
