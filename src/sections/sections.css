@@ -197,15 +197,21 @@
   margin-bottom: 4px;
 }
 
-/* כל אחד משני הכרטיסים בגובה התוכן שלו — בלי מתיחה לגובה אחיד */
+/* כל אחד משני הכרטיסים בגובה התוכן שלו — בלי מתיחה לגובה אחיד.
+   שניהם מתחילים באותו קו עליון, ומסתיימים כל אחד לפי התוכן שלו. */
 .kuPair {
+  /* הרשת והרספונסיביות מגיעות מ-.grid-2; כאן רק מבטלים את המתיחה לגובה אחיד */
+  grid-auto-rows: auto;
   align-items: start;
+  align-content: start;
 }
 
 .kuPair > .card {
-  height: auto;
-  min-height: 0;
   align-self: start;
+  height: fit-content;
+  min-height: 0;
+  max-height: none;
+  flex: none;
 }
 
 /* כרטיס "בין ידיעה להבנה" — רצף אחיד מלמעלה למטה, ללא חללים מיותרים */
