@@ -1,6 +1,6 @@
-import ImagePlaceholder from '../components/ImagePlaceholder/ImagePlaceholder'
 import { KnowledgeFlowMini } from '../components/KnowledgeFlow/KnowledgeFlow'
 import { chapterOpening } from '../data/chapter1'
+import openingImage from '../assets/images/מהו מודיעין תמונה 1.png'
 import './sections.css'
 
 export default function ChapterOpening() {
@@ -41,7 +41,7 @@ export default function ChapterOpening() {
           </div>
 
           <div className="open__media">
-            <ImagePlaceholder label={chapterOpening.image} motif={chapterOpening.imageMotif} ratio="3 / 4" />
+            <img className="open__img" src={openingImage} alt={chapterOpening.image} />
           </div>
         </div>
 

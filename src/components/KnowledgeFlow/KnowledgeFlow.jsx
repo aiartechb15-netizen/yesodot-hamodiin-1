@@ -21,16 +21,32 @@ function Arrow() {
   )
 }
 
+/** מידע ← ידע ← הבנה: שורה אחת ממורכזת, החצים יושבים בין העיגולים. */
 export function KnowledgeFlowMini({ steps = knowledgeFlow.steps.slice(0, 3) }) {
   return (
-    <ol className="kflow kflow--mini" aria-label="ממידע לידע ולהערכה">
+    <ol className="kmini" aria-label="ממידע לידע ולהבנה">
       {steps.map((s, i) => (
-        <li className="kflow__node" key={s.id}>
-          <span className={`kflow__circle kflow__circle--${i}`} aria-hidden="true">
-            <Icon name={s.icon} size={28} />
+        <li className="kmini__item" key={s.id}>
+          <span className="kmini__node">
+            <span className={`kmini__circle kmini__circle--${i}`} aria-hidden="true">
+              <Icon name={s.icon} size={28} />
+            </span>
+            <span className="kmini__label">{s.title}</span>
           </span>
-          <span className="kflow__label">{s.title}</span>
-          {i < steps.length - 1 ? <Arrow /> : null}
+          {i < steps.length - 1 ? (
+            <span className="kmini__arrow" aria-hidden="true">
+              <svg viewBox="0 0 44 12" width="44" height="12" focusable="false">
+                <path
+                  d="M42 6H4M11 1.5 4 6l7 4.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+          ) : null}
         </li>
       ))}
     </ol>
