@@ -197,29 +197,29 @@
   margin-bottom: 4px;
 }
 
-/* כל אחד משני הכרטיסים בגובה התוכן שלו — בלי מתיחה לגובה אחיד.
-   שניהם מתחילים באותו קו עליון, ומסתיימים כל אחד לפי התוכן שלו. */
+/* שני הכרטיסים בגובה זהה: אותו קו עליון ואותו קו תחתון */
 .kuPair {
-  /* הרשת והרספונסיביות מגיעות מ-.grid-2; כאן רק מבטלים את המתיחה לגובה אחיד */
-  grid-auto-rows: auto;
-  align-items: start;
-  align-content: start;
+  align-items: stretch;
 }
 
 .kuPair > .card {
-  align-self: start;
-  height: fit-content;
-  min-height: 0;
-  max-height: none;
-  flex: none;
+  align-self: stretch;
+  height: auto;
 }
 
-/* כרטיס "בין ידיעה להבנה" — רצף אחיד מלמעלה למטה, ללא חללים מיותרים */
+/* כרטיס "בין ידיעה להבנה" — התוכן נצמד לראש הכרטיס ברצף צפוף.
+   flex-start בלבד: אין space-between ואין margin-top: auto,
+   כך ששטח ריק (אם יש) נשאר רק מתחת לכל התוכן. */
 .kuCard {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 16px;
+  gap: 12px;
+}
+
+/* .layers לא נמתח לגובה שנותר — הוא נשאר בגובה התוכן שלו */
+.kuCard > * {
+  flex: 0 0 auto;
 }
 
 /* המרווח נקבע רק על ידי ה-gap, ללא מרג'ינים כפולים */
