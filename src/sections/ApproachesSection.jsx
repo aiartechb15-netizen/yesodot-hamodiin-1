@@ -32,7 +32,7 @@ export default function ApproachesSection() {
             {choosingApproach.intro}
           </p>
 
-          <ExpandCards items={choosingApproach.factors} columns={2} autoHeight />
+          <ExpandCards items={choosingApproach.factors} columns={2} uniformHeight />
 
           <aside className="callout" style={{ marginTop: '30px' }}>
             <span className="callout__label">{choosingApproach.callout.label}</span>

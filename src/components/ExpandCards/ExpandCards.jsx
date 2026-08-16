@@ -11,8 +11,8 @@ export default function ExpandCards({
   showProgress = false,
   progressLabel,
   completedMessage,
-  // autoHeight: כל כרטיס בגובה התוכן שלו — פתיחת אחד אינה מותחת את שכנו
-  autoHeight = false,
+  // uniformHeight: כל הכרטיסים בגובה זהה — גם בין השורות, לפי הכרטיס הגבוה ביותר
+  uniformHeight = false,
 }) {
   const uid = useId()
   const [open, setOpen] = useState([])
@@ -40,7 +40,7 @@ export default function ExpandCards({
         </div>
       ) : null}
 
-      <ul className={`xcards__grid xcards__grid--${columns}${autoHeight ? ' xcards__grid--auto' : ''}`}>
+      <ul className={`xcards__grid xcards__grid--${columns}${uniformHeight ? ' xcards__grid--uniform' : ''}`}>
         {items.map((item) => {
           const isOpen = open.includes(item.id)
           const isVisited = visited.includes(item.id)
