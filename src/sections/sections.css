@@ -37,10 +37,12 @@
   border-top: 1px solid var(--border);
 }
 
+/* התמונה גוללת יחד עם התוכן — ללא sticky, ללא גלילה פנימית */
 .open__media {
   align-self: start;
-  position: sticky;
-  top: calc(var(--header-h) + 28px);
+  position: static;
+  height: auto;
+  overflow: visible;
 }
 
 /* התצלום ממלא את המסגרת; אותו radius ומסגרת של האזור הקודם */
@@ -491,8 +493,5 @@
   .layer {
     grid-template-columns: 1fr;
     gap: 4px;
-  }
-  .open__media {
-    position: static;
   }
 }
