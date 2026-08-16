@@ -37,12 +37,16 @@
   border-top: 1px solid var(--border);
 }
 
-/* התמונה גוללת יחד עם התוכן — ללא sticky, ללא גלילה פנימית */
+/* עמודה שמאלית: תמונה + כרטיס ההנחיות, ברוחב זהה ובמרווח אחיד.
+   גוללת יחד עם התוכן — ללא sticky, ללא גלילה פנימית. */
 .open__media {
   align-self: start;
   position: static;
   height: auto;
   overflow: visible;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 
 /* התצלום ממלא את המסגרת; אותו radius ומסגרת של האזור הקודם */

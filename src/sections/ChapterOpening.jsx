@@ -34,14 +34,16 @@ export default function ChapterOpening() {
               </div>
             </div>
 
-            <aside className="callout callout--teal open__meta">
+          </div>
+
+          {/* עמודה שמאלית: התמונה ומתחתיה כרטיס ההנחיות */}
+          <div className="open__media">
+            <img className="open__img" src={openingImage} alt={chapterOpening.image} />
+
+            <aside className="callout callout--teal">
               <span className="callout__label">{chapterOpening.navigationTitle}</span>
               <p>{chapterOpening.navigation}</p>
             </aside>
-          </div>
-
-          <div className="open__media">
-            <img className="open__img" src={openingImage} alt={chapterOpening.image} />
           </div>
         </div>
 
