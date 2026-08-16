@@ -36,7 +36,7 @@ export default function Gate1() {
             <p>{ls.callout.text}</p>
           </aside>
 
-          <div className="grid-2">
+          <div className="grid-2 kuPair">
             <article className="card card--pad kuCard">
               <h3 className="card-title">{ku.title}</h3>
               <span className="gold-rule gold-rule--sm" aria-hidden="true" />

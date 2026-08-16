@@ -197,6 +197,17 @@
   margin-bottom: 4px;
 }
 
+/* כל אחד משני הכרטיסים בגובה התוכן שלו — בלי מתיחה לגובה אחיד */
+.kuPair {
+  align-items: start;
+}
+
+.kuPair > .card {
+  height: auto;
+  min-height: 0;
+  align-self: start;
+}
+
 /* כרטיס "בין ידיעה להבנה" — רצף אחיד מלמעלה למטה, ללא חללים מיותרים */
 .kuCard {
   display: flex;
