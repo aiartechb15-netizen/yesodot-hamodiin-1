@@ -37,16 +37,26 @@
   border-top: 1px solid var(--border);
 }
 
+/* שתי העמודות באותו גובה, כדי ששני הכרטיסים יסתיימו באותו קו */
+.open__split {
+  align-items: stretch;
+}
+
 /* עמודה שמאלית: תמונה + כרטיס ההנחיות, ברוחב זהה ובמרווח אחיד.
    גוללת יחד עם התוכן — ללא sticky, ללא גלילה פנימית. */
 .open__media {
-  align-self: start;
+  align-self: stretch;
   position: static;
   height: auto;
   overflow: visible;
   display: flex;
   flex-direction: column;
   gap: 22px;
+}
+
+/* הכרטיס נצמד לתחתית העמודה — היישור נוצר מעצמו, ללא גובה קשיח */
+.open__media .callout--teal {
+  margin-top: auto;
 }
 
 /* התצלום ממלא את המסגרת; אותו radius ומסגרת של האזור הקודם */

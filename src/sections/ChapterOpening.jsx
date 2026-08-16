@@ -7,7 +7,7 @@ export default function ChapterOpening() {
   return (
     <section className="section section--paper" id="chapter-open" aria-labelledby="chapter-open-title">
       <div className="container">
-        <div className="split split--wideText">
+        <div className="split split--wideText open__split">
           <div>
             <span className="kicker">פרק 1</span>
             <h2 className="section-title" id="chapter-open-title">
