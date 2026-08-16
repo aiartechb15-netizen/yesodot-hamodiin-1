@@ -1,28 +1,37 @@
-import { chapterMap } from '../data/chapter1'
+import Icon from '../components/Icons/Icons'
+import { chapterFocus } from '../data/chapter1'
 import './sections.css'
 
+// שלושת הרעיונות המרכזיים כמסלול אחד מתפתח — הסבר ויזואלי, ללא ניווט.
 export default function ChapterMap() {
   return (
-    <section className="section section--white" id="chapter-map" aria-labelledby="chapter-map-title">
+    <section className="section section--white" id="chapter-map" aria-labelledby="chapter-focus-title">
       <div className="container">
-        <h2 className="section-title" id="chapter-map-title">
-          {chapterMap.title}
+        <h2 className="section-title" id="chapter-focus-title">
+          {chapterFocus.title}
         </h2>
         <span className="gold-rule" aria-hidden="true" />
-        <p className="lead" style={{ maxWidth: '760px' }}>
-          {chapterMap.intro}
+        <p className="lead" style={{ maxWidth: '780px' }}>
+          {chapterFocus.intro}
         </p>
 
-        <div className="gates">
-          {chapterMap.gates.map((g) => (
-            <a className="gate" href={g.href} key={g.id}>
-              <span className="gate__num">{g.number}</span>
-              <h3 className="gate__title">{g.title}</h3>
-              <p className="gate__desc">{g.description}</p>
-              <span className="gate__go">מעבר לשער ←</span>
-            </a>
+        <ol className="journey">
+          <span className="journey__track" aria-hidden="true" />
+          {chapterFocus.steps.map((s, i) => (
+            <li className="journey__item" key={s.id}>
+              <span className={`journey__marker journey__marker--${i}`}>
+                <span className="journey__circle">
+                  <Icon name={s.icon} size={30} />
+                </span>
+                <span className="journey__num ltr-num" aria-hidden="true">
+                  {i + 1}
+                </span>
+              </span>
+              <h3 className="journey__title">{s.title}</h3>
+              <p className="journey__text">{s.description}</p>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   )

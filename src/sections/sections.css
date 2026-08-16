@@ -58,58 +58,115 @@
   border-radius: var(--radius);
 }
 
-/* ---------- מפת הפרק ---------- */
-.gates {
+/* ---------- מה נבין בפרק — מסלול בן שלוש תחנות ---------- */
+.journey {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-  margin-top: 34px;
+  gap: 30px;
+  margin: clamp(40px, 5vw, 60px) 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.gate {
+/* הקו המחבר עובר מאחורי העיגולים בגובה מרכזם */
+.journey__track {
+  position: absolute;
+  top: 44px;
+  inset-inline: 16%;
+  border-top: 2px dashed var(--border);
+}
+
+.journey__item {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  height: 100%;
-  padding: 28px 26px 30px;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-top: 3px solid var(--gold);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-card);
-  color: inherit;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  align-items: center;
+  text-align: center;
+  padding-inline: 10px;
+  transition: transform 0.25s ease;
 }
 
-.gate:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-card-hover);
-  text-decoration: none;
+.journey__item:hover {
+  transform: translateY(-4px);
 }
 
-.gate__num {
-  font-size: 13px;
+.journey__marker {
+  position: relative;
+  margin-bottom: 22px;
+}
+
+/* טבעת בצבע הרקע מנקה את הקו סביב כל עיגול */
+.journey__circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  color: var(--white);
+  box-shadow: 0 0 0 10px var(--white);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.journey__marker--0 .journey__circle {
+  background: #8fbcbb;
+}
+.journey__marker--1 .journey__circle {
+  background: var(--teal);
+}
+.journey__marker--2 .journey__circle {
+  background: var(--navy);
+}
+
+.journey__item:hover .journey__circle {
+  transform: scale(1.06);
+}
+
+.journey__num {
+  position: absolute;
+  top: -2px;
+  inset-inline-start: -2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 13.5px;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--teal);
+  border: 3px solid var(--white);
 }
 
-.gate__title {
-  font-size: 21px;
+.journey__title {
+  font-size: 19px;
+  line-height: 1.4;
+  color: var(--navy);
+  max-width: 260px;
 }
 
-.gate__desc {
-  color: var(--muted);
-  font-size: 16px;
+.journey__title::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin: 12px auto 14px;
+}
+
+.journey__text {
   margin: 0;
+  font-size: 15.5px;
+  color: var(--muted);
+  max-width: 290px;
+  transition: color 0.25s ease;
 }
 
-.gate__go {
-  margin-top: auto;
-  padding-top: 16px;
-  font-size: 14.5px;
-  font-weight: 700;
-  color: var(--navy-secondary);
+.journey__item:hover .journey__text {
+  color: #3b4757;
 }
 
 /* ---------- כותרות שער ---------- */
@@ -457,9 +514,14 @@
 
 /* ---------- responsive ---------- */
 @media (max-width: 1000px) {
-  .gates,
   .bigCards--3 {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .journey__title {
+    font-size: 17.5px;
+  }
+  .journey__track {
+    inset-inline: 20%;
   }
   .axes__list {
     grid-template-columns: repeat(3, 1fr);
@@ -480,12 +542,24 @@
 }
 
 @media (max-width: 760px) {
-  .gates,
   .bigCards--2,
   .bigCards--3,
   .sides,
   .next {
     grid-template-columns: 1fr;
+  }
+  /* המסלול הופך לטור אנכי, והקו המחבר עובר במרכז */
+  .journey {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+  .journey__track {
+    top: 44px;
+    bottom: 90px;
+    inset-inline: auto;
+    inset-inline-start: 50%;
+    border-top: 0;
+    border-inline-start: 2px dashed var(--border);
   }
   .axes__list {
     grid-template-columns: repeat(2, 1fr);
