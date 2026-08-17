@@ -100,8 +100,13 @@
   color: var(--teal);
 }
 
+/* הכותרת שומרת מקום לשתי שורות, כדי שכל הכרטיסים הסגורים יהיו באותו גובה
+   בין אם הכותרת בשורה אחת ובין אם בשתיים. הטקסט ממורכז בתוך השטח השמור. */
 .xcard__title {
+  display: flex;
+  align-items: center;
   flex: 1;
+  min-height: 47px;
   font-size: 16.5px;
   font-weight: 700;
   color: var(--navy);

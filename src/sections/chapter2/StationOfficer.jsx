@@ -22,7 +22,7 @@ function Timeline() {
               aria-controls={`${uid}-${c.id}`}
               onClick={() => setOpen(isOpen ? null : c.id)}
             >
-              {c.when ? <span className="tline__when">{c.when}</span> : null}
+              <span className="tline__when">{c.when}</span>
               <span className="tline__title">{c.title}</span>
             </button>
             <div id={`${uid}-${c.id}`} hidden={!isOpen}>
