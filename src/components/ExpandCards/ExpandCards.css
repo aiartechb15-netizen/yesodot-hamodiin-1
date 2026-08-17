@@ -165,6 +165,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  gap: 0; /* המרווח בין הכותרת לתוכן מגיע מה-padding, לא מ-gap */
   height: auto;
   min-height: 0;
   align-self: start;
@@ -190,12 +191,23 @@
   transform: rotate(180deg);
 }
 
+/* קיפול ללא hidden: השורה עוברת מ-0fr ל-1fr. כך הטקסט נשאר בפריסה
+   וניתן למדוד את גובהו הטבעי גם כשהכרטיס סגור. */
 .xcard__inlinePanel {
-  padding: 0 20px 22px;
+  display: grid;
+  grid-template-rows: 0fr;
+  padding-inline: 20px;
 }
 
-.xcard__inlinePanel[hidden] {
-  display: none;
+.xcard.is-open .xcard__inlinePanel {
+  grid-template-rows: 1fr;
+  padding-bottom: 22px;
+}
+
+/* השטח השמור לפי הטקסט הארוך ביותר נקבע ב-min-height מתוך הרכיב */
+.xcard__inlineInner {
+  overflow: hidden;
+  min-height: 0;
 }
 
 /* ---------- פאנל התוכן המשותף ---------- */

@@ -1,4 +1,4 @@
-import { useId, useState } from 'react'
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
 import Icon from '../Icons/Icons'
 import './ExpandCards.css'
 
@@ -38,6 +38,45 @@ export default function ExpandCards({
   const current = items.find((i) => i.id === active) || null
   const allDone = visited.length === items.length
 
+  /* וריאנט inline: כל הכרטיסים מקבלים את גובה התוכן הארוך ביותר.
+     הטקסטים נמדדים בפועל, כי מספר השורות משתנה עם רוחב הכרטיס —
+     ערך קבוע היה חותך תוכן במסך צר או מותיר חלל מיותר במסך רחב. */
+  const gridRef = useRef(null)
+  const textRefs = useRef([])
+  const titleRefs = useRef([])
+  const [reserve, setReserve] = useState({ title: 0, text: 0 })
+
+  const measure = useCallback(() => {
+    const maxOf = (list) => {
+      const hs = list.filter(Boolean).map((el) => el.scrollHeight)
+      return hs.length ? Math.max(...hs) : 0
+    }
+    const next = { title: maxOf(titleRefs.current), text: maxOf(textRefs.current) }
+    setReserve((prev) => (prev.title === next.title && prev.text === next.text ? prev : next))
+  }, [])
+
+  useLayoutEffect(() => {
+    if (!inline) return undefined
+    measure()
+    const grid = gridRef.current
+    if (!grid || typeof ResizeObserver === 'undefined') return undefined
+    const ro = new ResizeObserver(measure)
+    ro.observe(grid)
+    return () => ro.disconnect()
+  }, [inline, items, measure])
+
+  // גופנים שנטענים אחרי הרינדור משנים את גובה הטקסט — מודדים שוב
+  useEffect(() => {
+    if (!inline || !document.fonts) return undefined
+    let alive = true
+    document.fonts.ready.then(() => {
+      if (alive) measure()
+    })
+    return () => {
+      alive = false
+    }
+  }, [inline, measure])
+
   const progress = showProgress ? (
     <div className="xcards__progress" aria-live="polite">
       <span className="xcards__progressText">
@@ -51,13 +90,29 @@ export default function ExpandCards({
     </div>
   ) : null
 
-  const head = (item) => (
+  const head = (item, idx) => (
     <>
       <span className="xcard__icon">
         <Icon name={item.icon} size={24} />
       </span>
       <span className="xcard__body">
-        <span className="xcard__title">{item.title2 || item.title}</span>
+        <span
+          className="xcard__title"
+          style={inline && reserve.title ? { minHeight: `${reserve.title}px` } : undefined}
+        >
+          <span
+            className="xcard__titleText"
+            ref={
+              inline
+                ? (el) => {
+                    titleRefs.current[idx] = el
+                  }
+                : undefined
+            }
+          >
+            {item.title2 || item.title}
+          </span>
+        </span>
         <span className="xcard__rule" aria-hidden="true" />
       </span>
       <Icon name="chevron" size={20} className="xcard__chev" />
@@ -69,8 +124,8 @@ export default function ExpandCards({
       <div className="xcards xcards--inline">
         {progress}
 
-        <ul className={`xcards__grid xcards__grid--${columns}`}>
-          {items.map((item) => {
+        <ul className={`xcards__grid xcards__grid--${columns}`} ref={gridRef}>
+          {items.map((item, idx) => {
             const isOpen = open.includes(item.id)
             const isVisited = visited.includes(item.id)
             return (
@@ -83,10 +138,23 @@ export default function ExpandCards({
                     aria-controls={`${uid}-${item.id}`}
                     onClick={() => toggle(item.id)}
                   >
-                    {head(item)}
+                    {head(item, idx)}
                   </button>
-                  <div className="xcard__inlinePanel" id={`${uid}-${item.id}`} hidden={!isOpen}>
-                    <p className="xcards__panelText">{item.text}</p>
+                  <div className="xcard__inlinePanel" id={`${uid}-${item.id}`} aria-hidden={!isOpen}>
+                    <div
+                      className="xcard__inlineInner"
+                      /* השטח השמור חל רק על כרטיס פתוח, כדי שכרטיס סגור יישאר קומפקטי */
+                      style={isOpen && reserve.text ? { minHeight: `${reserve.text}px` } : undefined}
+                    >
+                      <p
+                        className="xcards__panelText"
+                        ref={(el) => {
+                          textRefs.current[idx] = el
+                        }}
+                      >
+                        {item.text}
+                      </p>
+                    </div>
                   </div>
                 </article>
               </li>
@@ -102,7 +170,7 @@ export default function ExpandCards({
       {progress}
 
       <ul className={`xcards__grid xcards__grid--${columns}`}>
-        {items.map((item) => {
+        {items.map((item, idx) => {
           const isActive = item.id === active
           const isVisited = visited.includes(item.id)
           return (
@@ -114,7 +182,7 @@ export default function ExpandCards({
                 aria-controls={panelId}
                 onClick={() => select(item.id)}
               >
-                {head(item)}
+                {head(item, idx)}
               </button>
             </li>
           )
