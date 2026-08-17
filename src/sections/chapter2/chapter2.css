@@ -217,6 +217,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 26px;
+  align-items: start;
   margin-top: 8px;
   padding: 34px 0 0;
   list-style: none;
@@ -300,16 +301,19 @@
 }
 
 /* ---------- תחנה 6 — תוצרים ---------- */
+/* כרטיסים נפתחים — כל אחד בגובה התוכן שלו, בלי מתיחה לגובה השכן */
 .products {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 22px;
+  align-items: start;
 }
 
 .product {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: auto;
+  min-height: 0;
   background: var(--white);
   border: 1px solid var(--border);
   border-top: 3px solid var(--teal);
@@ -452,10 +456,12 @@
 }
 
 /* ---------- תחנה 9 — עדשות ---------- */
+/* כרטיסים נפתחים — כל אחד בגובה התוכן שלו, בלי מתיחה לגובה השכן */
 .lenses {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  align-items: start;
 }
 
 .lens {
@@ -463,7 +469,8 @@
   flex-direction: column;
   gap: 12px;
   width: 100%;
-  height: 100%;
+  height: auto;
+  min-height: 0;
   padding: 26px 24px;
   background: var(--white);
   border: 1px solid var(--border);

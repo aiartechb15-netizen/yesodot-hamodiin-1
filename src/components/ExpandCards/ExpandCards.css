@@ -35,9 +35,12 @@
   font-weight: 600;
 }
 
+/* כרטיסים נפתחים: כל כרטיס בגובה התוכן שלו.
+   בלי המתיחה הזאת, פתיחת כרטיס אחד הייתה מגדילה את הכרטיסים שלידו. */
 .xcards__grid {
   display: grid;
   gap: 20px;
+  align-items: start;
 }
 
 .xcards__grid--3 {
@@ -48,24 +51,10 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
-/* גובה אחיד לכל הכרטיסים — גם בתוך השורה וגם בין השורות.
-   grid-auto-rows: 1fr משווה את כל השורות לגובה השורה הגבוהה ביותר. */
-.xcards__grid--uniform {
-  align-items: stretch;
-  grid-auto-rows: 1fr;
-}
-
-.xcards__grid--uniform > li {
-  display: flex;
-}
-
-.xcards__grid--uniform .xcard {
-  width: 100%;
-  height: 100%;
-}
-
 .xcard {
-  height: 100%;
+  height: auto;
+  min-height: 0;
+  align-self: start;
   display: flex;
   flex-direction: column;
   background: var(--white);
@@ -149,9 +138,5 @@
   .xcards__grid--3,
   .xcards__grid--2 {
     grid-template-columns: 1fr;
-  }
-  /* בעמודה אחת אין גריד לסדר — כל כרטיס חוזר לגובה התוכן שלו */
-  .xcards__grid--uniform {
-    grid-auto-rows: auto;
   }
 }
