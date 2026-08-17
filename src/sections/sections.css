@@ -488,6 +488,18 @@
   align-items: center;
 }
 
+/* התצלום ממלא את אותו מלבן שבו ישב ה-placeholder: אותו יחס, אותה מסגרת
+   ואותו radius. cover שומר על יחס הצדדים המקורי, ללא מתיחה. */
+.domain__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
 /* ---------- שיעור הבא ---------- */
 .next {
   display: grid;

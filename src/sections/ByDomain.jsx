@@ -1,6 +1,6 @@
 import Tabs from '../components/Tabs/Tabs'
-import ImagePlaceholder from '../components/ImagePlaceholder/ImagePlaceholder'
 import { byDomain } from '../data/chapter1'
+import domainImage from '../assets/images/מהו מודיעין תמונה 2.png'
 import './sections.css'
 
 export default function ByDomain() {
@@ -25,7 +25,7 @@ export default function ByDomain() {
                 <span className="gold-rule gold-rule--sm" aria-hidden="true" />
                 <p>{tab.text}</p>
               </div>
-              <ImagePlaceholder label={tab.image} motif="generic" ratio="4 / 3" />
+              <img className="domain__img" src={domainImage} alt={tab.image} />
             </div>
           )}
         />
