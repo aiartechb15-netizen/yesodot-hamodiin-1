@@ -44,7 +44,6 @@
 .quiz__scenario {
   background: var(--cream);
   border: 1px solid var(--border);
-  border-inline-start: 4px solid var(--navy-secondary);
   border-radius: var(--radius-sm);
   padding: 16px 20px;
   margin-bottom: 20px;
@@ -304,7 +303,6 @@
   padding: 14px 18px;
   background: var(--paper);
   border: 1px solid var(--border);
-  border-inline-start: 3px solid var(--gold);
   border-radius: var(--radius-sm);
   color: inherit;
   transition: border-color 0.18s ease, background-color 0.18s ease;

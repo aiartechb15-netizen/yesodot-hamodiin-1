@@ -319,7 +319,6 @@
   align-items: center;
   padding: 16px 20px;
   background: var(--cream);
-  border-inline-start: 3px solid var(--gold);
   border-radius: var(--radius-sm);
   font-size: 16.5px;
   color: var(--navy);

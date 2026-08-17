@@ -250,7 +250,6 @@ svg {
   position: relative;
   background: var(--white);
   border: 1px solid var(--border);
-  border-right: 4px solid var(--gold);
   border-radius: var(--radius);
   padding: 22px 26px;
   box-shadow: var(--shadow-sm);
@@ -266,7 +265,6 @@ svg {
 }
 
 .callout--teal {
-  border-right-color: var(--teal);
   background: var(--teal-soft);
 }
 
@@ -276,7 +274,6 @@ svg {
 
 .callout--example {
   background: var(--cream);
-  border-right-color: var(--navy-secondary);
 }
 
 .callout--example .callout__label {
