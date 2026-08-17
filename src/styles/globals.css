@@ -364,9 +364,6 @@ svg {
 
 /* ---------- responsive ---------- */
 @media (max-width: 1000px) {
-  :root {
-    --gutter: 28px;
-  }
   .grid-3 {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -374,7 +371,6 @@ svg {
 
 @media (max-width: 760px) {
   :root {
-    --gutter: 20px;
     --header-h: 72px;
   }
   .split,
