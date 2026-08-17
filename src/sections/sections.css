@@ -527,6 +527,24 @@
   margin-bottom: 26px;
 }
 
+/* ---------- "כיצד בוחרים גישה?" — ארבעת הכרטיסים בגובה זהה ----------
+   חריגה מקומית לאזור הזה בלבד: בשאר האתר כרטיס נפתח אינו מותח את שכניו.
+   grid-auto-rows: 1fr משווה גם בין שתי השורות, ולא רק בתוך השורה. */
+#choosing-approach .xcards__grid {
+  align-items: stretch;
+  grid-auto-rows: 1fr;
+}
+
+#choosing-approach .xcards__grid > li {
+  display: flex;
+}
+
+#choosing-approach .xcard {
+  width: 100%;
+  height: 100%;
+  align-self: stretch;
+}
+
 /* ---------- responsive ---------- */
 @media (max-width: 1000px) {
   .bigCards--3 {
@@ -575,5 +593,17 @@
   .layer {
     grid-template-columns: 1fr;
     gap: 4px;
+  }
+}
+
+/* 700px הוא הרוחב שבו הכרטיסים ב"כיצד בוחרים גישה?" נערמים לעמודה אחת.
+   בעמודה אחת אין סימטריה לשמור, ולכן הם חוזרים לגובה התוכן שלהם. */
+@media (max-width: 700px) {
+  #choosing-approach .xcards__grid {
+    grid-auto-rows: auto;
+    align-items: start;
+  }
+  #choosing-approach .xcard {
+    height: auto;
   }
 }
