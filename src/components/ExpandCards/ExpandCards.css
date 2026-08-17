@@ -149,6 +149,55 @@
   color: var(--teal);
 }
 
+/* ---------- וריאנט inline: כל כרטיס נפתח בתוך עצמו ----------
+   הרשת מיושרת ל-start וכל כרטיס בגובה התוכן שלו, ולכן פתיחת כרטיס
+   אחד אינה מותחת את הכרטיסים שלידו ואינה יוצרת בהם שטח לבן. */
+.xcards--inline .xcards__grid {
+  align-items: start;
+  grid-auto-rows: auto;
+}
+
+.xcards--inline .xcards__grid > li {
+  display: block;
+}
+
+.xcards--inline .xcard {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: auto;
+  min-height: 0;
+  align-self: start;
+  padding: 0;
+}
+
+.xcards--inline .xcard.is-open {
+  border-color: var(--gold-soft);
+}
+
+.xcard__btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 20px;
+  background: transparent;
+  border: 0;
+  text-align: start;
+}
+
+.xcard.is-open .xcard__chev {
+  transform: rotate(180deg);
+}
+
+.xcard__inlinePanel {
+  padding: 0 20px 22px;
+}
+
+.xcard__inlinePanel[hidden] {
+  display: none;
+}
+
 /* ---------- פאנל התוכן המשותף ---------- */
 .xcards__panel {
   margin-top: 22px;

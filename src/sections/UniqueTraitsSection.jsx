@@ -16,6 +16,7 @@ export default function UniqueTraitsSection() {
         <ExpandCards
           items={uniqueTraits.items}
           columns={3}
+          inline
           showProgress
           progressLabel={uniqueTraits.completeLabel}
           completedMessage={uniqueTraits.completedMessage}
