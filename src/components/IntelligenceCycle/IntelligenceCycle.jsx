@@ -5,18 +5,21 @@ import './IntelligenceCycle.css'
 
 const R = 148
 const C = 200
-// שלב 1 למעלה, והמשך נגד כיוון השעון — בהתאמה לכיוון הקריאה מימין לשמאל
-const ANGLES = [90, 180, 270, 0]
+// שלב 1 למעלה, והמשך עם כיוון השעון: 1 למעלה, 2 בימין, 3 למטה, 4 בשמאל
+const ANGLES = [90, 0, 270, 180]
 
 const pos = (deg) => {
   const rad = (deg * Math.PI) / 180
   return { x: C + R * Math.cos(rad), y: C - R * Math.sin(rad) }
 }
 
+/* הראש של החץ מצייר לכיוון +x, ו-rotate ב-SVG מסובב עם כיוון השעון.
+   הווקטור המשיק בכיוון השעון בנקודה deg הוא (sin, cos) בצירי המסך,
+   ולכן זווית הסיבוב היא atan2(cos, sin). */
 const arrowAt = (deg) => {
   const p = pos(deg)
   const rad = (deg * Math.PI) / 180
-  const rot = (Math.atan2(-Math.cos(rad), -Math.sin(rad)) * 180) / Math.PI
+  const rot = (Math.atan2(Math.cos(rad), Math.sin(rad)) * 180) / Math.PI
   return { ...p, rot }
 }
 
