@@ -35,12 +35,17 @@
   font-weight: 600;
 }
 
-/* כרטיסים נפתחים: כל כרטיס בגובה התוכן שלו.
-   בלי המתיחה הזאת, פתיחת כרטיס אחד הייתה מגדילה את הכרטיסים שלידו. */
+/* ---------- רשת כרטיסי הבחירה ----------
+   הכרטיסים אינם משנים גובה בלחיצה, ולכן grid-auto-rows: 1fr נותן
+   גובה זהה לכל הכרטיסים — גם בתוך השורה וגם בין השורות. */
 .xcards__grid {
   display: grid;
   gap: 20px;
-  align-items: start;
+  align-items: stretch;
+  grid-auto-rows: 1fr;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .xcards__grid--3 {
@@ -51,36 +56,35 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
-.xcard {
-  height: auto;
-  min-height: 0;
-  align-self: start;
+.xcards__grid > li {
   display: flex;
-  flex-direction: column;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-card);
-  transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
-.xcard:hover {
-  box-shadow: var(--shadow-card-hover);
-}
-
-.xcard.is-open {
-  border-color: var(--gold-soft);
-}
-
-.xcard__btn {
+/* ---------- כרטיס בחירה ---------- */
+.xcard {
   display: flex;
   align-items: center;
   gap: 12px;
   width: 100%;
+  height: 100%;
   padding: 20px;
-  background: transparent;
-  border: 0;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
   text-align: start;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+.xcard:hover {
+  border-color: var(--gold-soft);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* מצב נבחר — הדגשה עדינה בלבד, ללא שינוי גובה */
+.xcard.is-active {
+  border-color: var(--teal);
+  background: var(--teal-soft);
 }
 
 .xcard__icon {
@@ -93,6 +97,7 @@
   border-radius: 50%;
   background: var(--cream);
   color: var(--navy-secondary);
+  transition: background-color 0.18s ease, color 0.18s ease;
 }
 
 .xcard.is-visited .xcard__icon {
@@ -100,12 +105,22 @@
   color: var(--teal);
 }
 
-/* הכותרת שומרת מקום לשתי שורות, כדי שכל הכרטיסים הסגורים יהיו באותו גובה
-   בין אם הכותרת בשורה אחת ובין אם בשתיים. הטקסט ממורכז בתוך השטח השמור. */
+.xcard.is-active .xcard__icon {
+  background: var(--white);
+  color: var(--teal);
+}
+
+.xcard__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+/* שתי שורות שמורות לכותרת, כך שהקו הזהוב יושב באותו גובה בכל הכרטיסים */
 .xcard__title {
   display: flex;
   align-items: center;
-  flex: 1;
   min-height: 47px;
   font-size: 16.5px;
   font-weight: 700;
@@ -113,24 +128,93 @@
   line-height: 1.4;
 }
 
+.xcard__rule {
+  display: block;
+  width: 48px;
+  height: 2px;
+  margin-top: 10px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
 .xcard__chev {
   color: var(--muted);
   flex: none;
-  transition: transform 0.2s ease;
+  align-self: center;
+  transition: transform 0.2s ease, color 0.18s ease;
 }
 
-.xcard.is-open .xcard__chev {
+.xcard.is-active .xcard__chev {
   transform: rotate(180deg);
+  color: var(--teal);
 }
 
-.xcard__panel {
-  padding: 0 20px 22px;
+/* ---------- פאנל התוכן המשותף ---------- */
+.xcards__panel {
+  margin-top: 22px;
+  padding: 26px 28px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.xcards__panel[hidden] {
+  display: none;
+}
+
+.xcards__panelTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--fs-h3);
+  color: var(--navy);
+}
+
+.xcards__panelIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--teal-soft);
+  color: var(--teal);
+}
+
+.xcards__panel .gold-rule {
+  margin-block: 12px 14px;
+}
+
+.xcards__panelText {
+  margin: 0;
+  font-size: 16.5px;
   color: #3b4757;
-  font-size: 16px;
 }
 
-.xcard__panel .gold-rule {
-  margin-block: 0 14px;
+.xcards__panelInner {
+  animation: xcardsPanelIn 0.22s ease both;
+}
+
+@keyframes xcardsPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xcards__panelInner {
+    animation: none;
+  }
+  .xcard__chev {
+    transition: color 0.18s ease;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -143,5 +227,8 @@
   .xcards__grid--3,
   .xcards__grid--2 {
     grid-template-columns: 1fr;
+  }
+  .xcards__panel {
+    padding: 22px 20px;
   }
 }

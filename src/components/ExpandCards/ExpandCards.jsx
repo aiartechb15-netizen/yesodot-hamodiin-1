@@ -3,7 +3,9 @@ import Icon from '../Icons/Icons'
 import './ExpandCards.css'
 
 /**
- * רשת כרטיסים נפתחים. כל כרטיס נפתח בלחיצה (ולא בהובר) ומסומן כ"נצפה".
+ * כרטיסי בחירה בגובה אחיד קבוע + פאנל תוכן אחד משותף מתחתיהם.
+ * הכרטיסים אינם משנים גובה בלחיצה: הם כפתורי בחירה בלבד,
+ * וההסבר של הכרטיס הנבחר מוצג באזור המשותף שמתחת לרשת.
  */
 export default function ExpandCards({
   items,
@@ -13,14 +15,16 @@ export default function ExpandCards({
   completedMessage,
 }) {
   const uid = useId()
-  const [open, setOpen] = useState([])
+  const panelId = `${uid}-panel`
+  const [active, setActive] = useState(null)
   const [visited, setVisited] = useState([])
 
-  const toggle = (id) => {
+  const select = (id) => {
     setVisited((v) => (v.includes(id) ? v : [...v, id]))
-    setOpen((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]))
+    setActive((prev) => (prev === id ? null : id))
   }
 
+  const current = items.find((i) => i.id === active) || null
   const allDone = visited.length === items.length
 
   return (
@@ -40,33 +44,46 @@ export default function ExpandCards({
 
       <ul className={`xcards__grid xcards__grid--${columns}`}>
         {items.map((item) => {
-          const isOpen = open.includes(item.id)
+          const isActive = item.id === active
           const isVisited = visited.includes(item.id)
           return (
             <li key={item.id}>
-              <article className={`xcard${isOpen ? ' is-open' : ''}${isVisited ? ' is-visited' : ''}`}>
-                <button
-                  className="xcard__btn"
-                  type="button"
-                  aria-expanded={isOpen}
-                  aria-controls={`${uid}-${item.id}`}
-                  onClick={() => toggle(item.id)}
-                >
-                  <span className="xcard__icon">
-                    <Icon name={item.icon} size={24} />
-                  </span>
+              <button
+                className={`xcard${isActive ? ' is-active' : ''}${isVisited ? ' is-visited' : ''}`}
+                type="button"
+                aria-expanded={isActive}
+                aria-controls={panelId}
+                onClick={() => select(item.id)}
+              >
+                <span className="xcard__icon">
+                  <Icon name={item.icon} size={24} />
+                </span>
+                <span className="xcard__body">
                   <span className="xcard__title">{item.title2 || item.title}</span>
-                  <Icon name="chevron" size={20} className="xcard__chev" />
-                </button>
-                <div className="xcard__panel" id={`${uid}-${item.id}`} hidden={!isOpen}>
-                  <span className="gold-rule gold-rule--sm" aria-hidden="true" />
-                  <p>{item.text}</p>
-                </div>
-              </article>
+                  <span className="xcard__rule" aria-hidden="true" />
+                </span>
+                <Icon name="chevron" size={20} className="xcard__chev" />
+              </button>
             </li>
           )
         })}
       </ul>
+
+      <div className="xcards__panel" id={panelId} role="region" aria-live="polite" hidden={!current}>
+        {current ? (
+          /* key מאלץ הרכבה מחדש בכל החלפה, כדי שאנימציית המעבר תרוץ שוב */
+          <div className="xcards__panelInner" key={current.id}>
+            <h3 className="xcards__panelTitle">
+              <span className="xcards__panelIcon" aria-hidden="true">
+                <Icon name={current.icon} size={22} />
+              </span>
+              {current.title2 || current.title}
+            </h3>
+            <span className="gold-rule gold-rule--sm" aria-hidden="true" />
+            <p className="xcards__panelText">{current.text}</p>
+          </div>
+        ) : null}
+      </div>
     </div>
   )
 }
