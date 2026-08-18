@@ -217,23 +217,6 @@
 }
 
 /* סימן המפגש — חץ דו־כיווני זעיר שיושב על הקו המפריד */
-/* האתר כולו RTL, ולכן inset-inline-end של הצד הראשון הוא הקצה השמאלי
-   שלו — בדיוק המקום שבו עובר הקו המפריד */
-.meet__mark {
-  position: absolute;
-  top: 50%;
-  inset-inline-end: 0;
-  transform: translate(-50%, -50%);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: var(--paper);
-  color: var(--teal);
-}
-
 .meet__term {
   display: inline-flex;
   align-items: center;
@@ -267,11 +250,11 @@
 /* הרעיון המרכזי — משפט מוביל בין שני קווים דקים, ללא מסגרת */
 /* ה-takeaway של החלק: רקע קרם רך שנמוג בקצוות ופס זהב דק בראשו.
    ללא מסגרת וללא צל — מודגש, אבל לא כרטיס. */
-/* משפט מסכם — לא בלוק נפרד אלא סיומת של ההשוואה שמעליו.
-   ללא רקע, ללא מסגרת וללא ריפוד; רק רוחב מוגבל וקו זהב קטן. */
+/* משפט מסכם בתחתית האזור — ללא רקע, מסגרת או ריפוד; רוחב מוגבל,
+   קו זהב קצר מעליו ומרווח נדיב מסביב */
 .keyIdea {
   max-width: 720px;
-  margin: 22px auto clamp(30px, 3.2vw, 40px);
+  margin: clamp(46px, 5vw, 66px) auto 0;
   text-align: center;
 }
 
@@ -289,6 +272,7 @@
 
 /* שני הרבדים — עמודות פתוחות, קו דק במקום שתי מסגרות */
 .rails {
+  margin-top: clamp(40px, 4.4vw, 58px);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(28px, 3.4vw, 48px);
@@ -302,33 +286,6 @@
 .rail__title {
   font-size: var(--fs-h3);
   color: var(--navy);
-}
-
-/* תרשים זעיר — מקצה גולמי לקצה מעובד, בשורה אחת מתחת לכותרת */
-.flowMini {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 0 18px;
-}
-
-.flowMini__node {
-  font-size: 15.5px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-}
-
-.flowMini__node--from {
-  color: var(--muted);
-}
-
-.flowMini__node--to {
-  color: var(--teal);
-}
-
-.flowMini__arrow {
-  color: var(--gold);
-  flex: none;
 }
 
 .rail__lead {
@@ -666,12 +623,6 @@
     bottom: 0;
     width: auto;
     height: 1px;
-  }
-  .meet__mark {
-    top: auto;
-    bottom: 0;
-    inset-inline-end: 50%;
-    transform: translate(-50%, 50%);
   }
   .rails {
     grid-template-columns: 1fr;
