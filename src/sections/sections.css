@@ -626,8 +626,29 @@
 /* ---------- לפי תחום — קטלוג שורות ----------
    כל התחומים גלויים יחד. שורה לכל תחום, בגובה אחיד, מופרדות בקו דק.
    ללא כרטיסים וללא צללים. */
+/* הרשימה מימין, התצלום משמאל, בגובה זהה */
+.domains__layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(240px, 0.5fr);
+  align-items: stretch;
+  gap: clamp(24px, 3vw, 40px);
+  margin-top: clamp(26px, 3vw, 36px);
+}
+
+.domains__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
 .domains {
-  margin: clamp(26px, 3vw, 36px) 0 0;
+  display: grid;
+  grid-auto-rows: 1fr; /* גובה אחיד לכל השורות, גם כשהטקסט נשבר לשתי שורות */
+  margin: 0;
   padding: 0;
   list-style: none;
   border-top: 1px solid var(--border);
@@ -726,6 +747,13 @@
   }
   .ladder__panel {
     position: static;
+  }
+  .domains__layout {
+    grid-template-columns: 1fr;
+  }
+  .domains__img {
+    height: auto;
+    aspect-ratio: 16 / 10;
   }
   .domain {
     grid-template-columns: 26px 34px 1fr;
