@@ -174,86 +174,188 @@
   font-size: var(--fs-h3);
 }
 
-.sides {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-  margin-top: 16px;
+/* ---------- שער 1: מודיעין כמערכת לומדת ---------- */
+.lsys__title {
+  font-size: var(--fs-h3);
+  color: var(--navy);
 }
 
-.side {
-  padding: 18px 22px;
+.lsys__lead {
+  max-width: 900px;
+  font-size: 18px;
+}
+
+.lsys__meet {
+  margin: clamp(26px, 3vw, 34px) 0 14px;
+  font-weight: 600;
+  color: var(--navy-secondary);
+}
+
+/* המפגש — מסגרת אחת, שני הצדדים זה מול זה, מופרדים בקו דק */
+.meet {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  border-top: 3px solid var(--navy-secondary);
+  overflow: hidden;
 }
 
-.side--red {
-  border-top-color: #a03c32;
+.meet__side {
+  position: relative;
+  padding: clamp(22px, 2.4vw, 28px) clamp(22px, 2.4vw, 30px);
 }
 
-.side__term {
-  display: block;
+/* הקו המפריד יושב על גבול הצד הראשון, כדי שיימתח לגובה המלא */
+.meet__rule {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.meet__term {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--navy);
-  margin-bottom: 4px;
 }
 
-/* שני הכרטיסים בגובה זהה: אותו קו עליון ואותו קו תחתון */
-.kuPair {
-  align-items: stretch;
+.meet__dot {
+  width: 10px;
+  height: 10px;
+  flex: none;
+  border-radius: 50%;
 }
 
-.kuPair > .card {
-  align-self: stretch;
-  height: auto;
+.meet__side--red .meet__dot {
+  background: #a03c32;
 }
 
-/* כרטיס "בין ידיעה להבנה" — התוכן נצמד לראש הכרטיס ברצף צפוף.
-   flex-start בלבד: אין space-between ואין margin-top: auto,
-   כך ששטח ריק (אם יש) נשאר רק מתחת לכל התוכן. */
-.kuCard {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 12px;
+.meet__side--blue .meet__dot {
+  background: var(--navy-secondary);
 }
 
-/* .layers לא נמתח לגובה שנותר — הוא נשאר בגובה התוכן שלו */
-.kuCard > * {
-  flex: 0 0 auto;
-}
-
-/* המרווח נקבע רק על ידי ה-gap, ללא מרג'ינים כפולים */
-.kuCard > *,
-.kuCard .gold-rule {
+.meet__text {
   margin: 0;
+  color: #3b4757;
 }
 
-.layers {
-  display: grid;
-  gap: 0; /* ההפרדה בין השורות נוצרת מה-padding ומהקו המפריד */
-  margin: 0;
+/* הרעיון המרכזי — משפט מוביל בין שני קווים דקים, ללא מסגרת */
+.keyIdea {
+  margin: clamp(40px, 4.5vw, 60px) 0;
+  padding-block: clamp(28px, 3.2vw, 40px);
+  border-block: 1px solid var(--border);
+  text-align: center;
 }
 
-.layer {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 18px;
-  align-items: baseline;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-/* השורה הראשונה מתחילה מיד אחרי הטקסט שמעליה */
-.layer:first-child {
-  padding-top: 0;
-}
-
-.layer__term {
+.keyIdea__label {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 13px;
   font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+}
+
+.keyIdea__text {
+  max-width: 880px;
+  margin: 0 auto;
+  font-size: clamp(19px, 1.9vw, 24px);
+  line-height: 1.6;
+  color: var(--navy);
+}
+
+/* שני הרבדים — עמודות פתוחות, קו דק במקום שתי מסגרות */
+.rails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 3.4vw, 48px);
+}
+
+.rails > * + * {
+  padding-inline-start: clamp(28px, 3.4vw, 48px);
+  border-inline-start: 1px solid var(--border);
+}
+
+.rail__title {
+  font-size: var(--fs-h3);
+  color: var(--navy);
+}
+
+.rail__lead {
+  margin-bottom: 6px;
+}
+
+.rail__closing {
+  margin: 18px 0 0;
+}
+
+/* ידיעה -> הבנה: מעבר מגולמי למעובד, מסומן בצבע התווית */
+.steps2 {
+  display: grid;
+}
+
+.step2 {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: start;
+  padding-block: 16px;
+}
+
+.step2 + .step2 {
+  border-top: 1px solid var(--border);
+}
+
+.step2__chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 76px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.step2--from .step2__chip {
+  background: var(--cream);
   color: var(--navy-secondary);
+}
+
+.step2--to .step2__chip {
+  background: var(--teal-soft);
+  color: var(--teal);
+}
+
+.step2__text {
+  margin: 0;
+}
+
+/* הדוגמה — גוש מוטעם ברקע בלבד, ללא מסגרת */
+.inset {
+  margin-top: 20px;
+  padding: 20px 22px;
+  background: var(--cream);
+  border-radius: var(--radius);
+}
+
+.inset__label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--navy-secondary);
+}
+
+.inset p {
+  margin: 0;
 }
 
 /* ---------- שער 2 ---------- */
@@ -513,8 +615,30 @@
   }
 }
 
+@media (max-width: 860px) {
+  .meet {
+    grid-template-columns: 1fr;
+  }
+  .meet__rule {
+    inset-block: auto;
+    inset-inline: 0;
+    top: auto;
+    bottom: 0;
+    width: auto;
+    height: 1px;
+  }
+  .rails {
+    grid-template-columns: 1fr;
+  }
+  .rails > * + * {
+    padding-inline-start: 0;
+    border-inline-start: 0;
+    padding-top: clamp(26px, 4vw, 34px);
+    border-top: 1px solid var(--border);
+  }
+}
+
 @media (max-width: 760px) {
-  .sides,
   .next {
     grid-template-columns: 1fr;
   }
@@ -533,8 +657,8 @@
   .axes__list {
     grid-template-columns: repeat(2, 1fr);
   }
-  .layer {
+  .step2 {
     grid-template-columns: 1fr;
-    gap: 4px;
+    gap: 8px;
   }
 }
