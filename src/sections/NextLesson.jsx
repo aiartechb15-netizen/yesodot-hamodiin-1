@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import ImagePlaceholder from '../components/ImagePlaceholder/ImagePlaceholder'
 import { nextLesson } from '../data/chapter1'
+import nextImage from '../assets/images/מהו מודיעין תמונה 3.png'
 import './sections.css'
 
 export default function NextLesson() {
@@ -9,7 +9,7 @@ export default function NextLesson() {
       <div className="container">
         <div className="next">
           <div className="next__media">
-            <ImagePlaceholder label={nextLesson.image} motif={nextLesson.imageMotif} />
+            <img className="next__img" src={nextImage} alt={nextLesson.image} />
           </div>
           <div className="next__body">
             <span className="kicker">{nextLesson.kicker}</span>
