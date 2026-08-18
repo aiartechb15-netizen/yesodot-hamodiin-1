@@ -193,6 +193,7 @@
 
 /* המפגש — מסגרת אחת, שני הצדדים זה מול זה, מופרדים בקו דק */
 .meet {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   background: var(--white);
@@ -213,6 +214,24 @@
   inset-inline-end: 0;
   width: 1px;
   background: var(--border);
+}
+
+/* סימן המפגש — חץ דו־כיווני זעיר שיושב על הקו המפריד */
+/* האתר כולו RTL, ולכן inset-inline-end של הצד הראשון הוא הקצה השמאלי
+   שלו — בדיוק המקום שבו עובר הקו המפריד */
+.meet__mark {
+  position: absolute;
+  top: 50%;
+  inset-inline-end: 0;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--teal);
 }
 
 .meet__term {
@@ -246,11 +265,34 @@
 }
 
 /* הרעיון המרכזי — משפט מוביל בין שני קווים דקים, ללא מסגרת */
+/* ה-takeaway של החלק: רקע קרם רך שנמוג בקצוות ופס זהב דק בראשו.
+   ללא מסגרת וללא צל — מודגש, אבל לא כרטיס. */
 .keyIdea {
+  position: relative;
   margin: clamp(40px, 4.5vw, 60px) 0;
-  padding-block: clamp(28px, 3.2vw, 40px);
-  border-block: 1px solid var(--border);
+  padding: clamp(34px, 3.6vw, 46px) clamp(24px, 3vw, 40px) clamp(30px, 3.2vw, 40px);
+  border-radius: var(--radius);
+  background: linear-gradient(
+    90deg,
+    rgba(245, 240, 230, 0) 0%,
+    rgba(245, 240, 230, 0.85) 22%,
+    rgba(245, 240, 230, 0.85) 78%,
+    rgba(245, 240, 230, 0) 100%
+  );
   text-align: center;
+}
+
+/* פס הזהב הדק — צר מרוחב הגוש וממורכז */
+.keyIdea::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  width: 120px;
+  height: 3px;
+  margin-inline: auto;
+  border-radius: 0 0 3px 3px;
+  background: var(--gold);
 }
 
 .keyIdea__label {
@@ -287,6 +329,33 @@
   color: var(--navy);
 }
 
+/* תרשים זעיר — מקצה גולמי לקצה מעובד, בשורה אחת מתחת לכותרת */
+.flowMini {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 18px;
+}
+
+.flowMini__node {
+  font-size: 15.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.flowMini__node--from {
+  color: var(--muted);
+}
+
+.flowMini__node--to {
+  color: var(--teal);
+}
+
+.flowMini__arrow {
+  color: var(--gold);
+  flex: none;
+}
+
 .rail__lead {
   margin-bottom: 6px;
 }
@@ -315,21 +384,17 @@
 .step2__chip {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   min-width: 76px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 15px;
+  padding-top: 1px;
+  font-size: 16px;
   font-weight: 700;
 }
 
 .step2--from .step2__chip {
-  background: var(--cream);
   color: var(--navy-secondary);
 }
 
 .step2--to .step2__chip {
-  background: var(--teal-soft);
   color: var(--teal);
 }
 
@@ -626,6 +691,12 @@
     bottom: 0;
     width: auto;
     height: 1px;
+  }
+  .meet__mark {
+    top: auto;
+    bottom: 0;
+    inset-inline-end: 50%;
+    transform: translate(-50%, 50%);
   }
   .rails {
     grid-template-columns: 1fr;
