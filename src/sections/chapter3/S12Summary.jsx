@@ -9,7 +9,6 @@ export default function S12Summary() {
     <section className="section section--cream" id={sm.id} aria-labelledby="ch3-sum-title">
       <div className="container">
         <header className="s3head">
-          <span className="s3head__kicker">{sm.kicker}</span>
           <h2 className="section-title" id="ch3-sum-title">
             {sm.title}
           </h2>

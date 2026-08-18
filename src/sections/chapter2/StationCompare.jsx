@@ -7,7 +7,6 @@ export default function StationCompare() {
     <section className="section section--white" id={comparison.id} aria-labelledby="ch2-compare-title">
       <div className="container">
         <header className="st__head">
-          <span className="st__kicker">{comparison.kicker}</span>
           <h2 className="section-title" id="ch2-compare-title">
             {comparison.title}
           </h2>

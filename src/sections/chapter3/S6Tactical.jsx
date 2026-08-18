@@ -8,7 +8,6 @@ export default function S6Tactical() {
     <section className="section section--paper" id={tac.id} aria-labelledby="ch3-tac-title">
       <div className="container">
         <header className="s3head">
-          <span className="s3head__kicker">{tac.kicker}</span>
           <h2 className="section-title" id="ch3-tac-title">
             {tac.title}
           </h2>

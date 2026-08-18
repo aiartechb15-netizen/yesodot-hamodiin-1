@@ -50,7 +50,6 @@ export default function StationStrategic() {
     <section className="section section--white" id={strategic.id} aria-labelledby="ch2-strategic-title">
       <div className="container">
         <header className="st__head">
-          <span className="st__kicker">{strategic.kicker}</span>
           <h2 className="section-title" id="ch2-strategic-title">
             {strategic.title}
           </h2>

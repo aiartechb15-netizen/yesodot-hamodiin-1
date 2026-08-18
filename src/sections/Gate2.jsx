@@ -35,9 +35,6 @@ export default function Gate2() {
     <section className="section section--white" id="gate-2" aria-labelledby="gate-2-title">
       <div className="container">
         <header className="gateHead">
-          <span className="gateHead__num">
-            {gate2.number} — {gate2.title}
-          </span>
           <h2 className="section-title" id="gate-2-title">
             {gate2.headline}
           </h2>

@@ -7,7 +7,6 @@ export default function S5Design() {
     <section className="section section--white" id={design.id} aria-labelledby="ch3-design-title">
       <div className="container">
         <header className="s3head">
-          <span className="s3head__kicker">{design.kicker}</span>
           <h2 className="section-title" id="ch3-design-title">
             {design.title}
           </h2>

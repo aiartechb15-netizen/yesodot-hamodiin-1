@@ -11,7 +11,6 @@ export default function S9Research() {
     <section className="section section--white" id={rs.id} aria-labelledby="ch3-rs-title">
       <div className="container">
         <header className="s3head">
-          <span className="s3head__kicker">{rs.kicker}</span>
           <h2 className="section-title" id="ch3-rs-title">
             {rs.title}
           </h2>

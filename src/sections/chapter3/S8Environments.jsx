@@ -8,7 +8,6 @@ export default function S8Environments() {
     <section className="section section--cream" id={env.id} aria-labelledby="ch3-env-title">
       <div className="container">
         <header className="s3head">
-          <span className="s3head__kicker">{env.kicker}</span>
           <h2 className="section-title" id="ch3-env-title">
             {env.title}
           </h2>

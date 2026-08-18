@@ -7,7 +7,6 @@ export default function StationBinders() {
     <section className="section section--white" id={binders.id} aria-labelledby="ch2-binders-title">
       <div className="container">
         <header className="st__head">
-          <span className="st__kicker">{binders.kicker}</span>
           <h2 className="section-title" id="ch2-binders-title">
             {binders.title}
           </h2>

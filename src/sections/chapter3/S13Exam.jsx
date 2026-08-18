@@ -7,7 +7,6 @@ export default function S13Exam() {
     <section className="section section--paper" id={exam.id} aria-labelledby="ch3-exam-title">
       <div className="container">
         <header className="s3head" style={{ textAlign: 'center' }}>
-          <span className="s3head__kicker">{exam.kicker}</span>
           <h2 className="section-title" id="ch3-exam-title">
             {exam.title}
           </h2>

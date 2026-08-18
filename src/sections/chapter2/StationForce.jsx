@@ -15,7 +15,6 @@ export default function StationForce() {
     <section className="section section--paper" id={fb.id} aria-labelledby="ch2-force-title">
       <div className="container">
         <header className="st__head">
-          <span className="st__kicker">{fb.kicker}</span>
           <h2 className="section-title" id="ch2-force-title">
             {fb.title}
           </h2>

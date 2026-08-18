@@ -7,9 +7,6 @@ export default function Gate3() {
     <section className="section section--paper" id="gate-3" aria-labelledby="gate-3-title">
       <div className="container">
         <header className="gateHead">
-          <span className="gateHead__num">
-            {gate3.number} — {gate3.title}
-          </span>
           <h2 className="section-title" id="gate-3-title">
             {gate3.headline}
           </h2>

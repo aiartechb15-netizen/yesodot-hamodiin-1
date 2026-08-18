@@ -7,7 +7,6 @@ export default function StationExam() {
     <section className="section section--paper" id={exam.id} aria-labelledby="ch2-exam-title">
       <div className="container">
         <header className="st__head">
-          <span className="st__kicker">{exam.kicker}</span>
           <h2 className="section-title section-title--center" id="ch2-exam-title">
             {exam.title}
           </h2>

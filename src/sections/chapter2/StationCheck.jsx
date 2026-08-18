@@ -7,7 +7,6 @@ export default function StationCheck() {
     <section className="section section--cream" id={quickCheck.id} aria-labelledby="ch2-check-title">
       <div className="container">
         <header className="st__head">
-          <span className="st__kicker">{quickCheck.kicker}</span>
           <h2 className="section-title" id="ch2-check-title">
             {quickCheck.title}
           </h2>

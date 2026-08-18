@@ -28,7 +28,6 @@ export default function S2Levels() {
     <section className="section section--paper" id={levels.id} aria-labelledby="ch3-levels-title">
       <div className="container">
         <header className="s3head">
-          <span className="s3head__kicker">{levels.kicker}</span>
           <h2 className="section-title" id="ch3-levels-title">
             {levels.title}
           </h2>

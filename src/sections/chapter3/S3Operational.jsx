@@ -8,7 +8,6 @@ export default function S3Operational() {
     <section className="section section--white" id={op.id} aria-labelledby="ch3-op-title">
       <div className="container">
         <header className="s3head">
-          <span className="s3head__kicker">{op.kicker}</span>
           <h2 className="section-title" id="ch3-op-title">
             {op.title}
           </h2>

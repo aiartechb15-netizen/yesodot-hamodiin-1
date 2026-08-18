@@ -8,7 +8,6 @@ export default function S10Targets() {
     <section className="section section--paper" id={tg.id} aria-labelledby="ch3-tg-title">
       <div className="container">
         <header className="s3head">
-          <span className="s3head__kicker">{tg.kicker}</span>
           <h2 className="section-title" id="ch3-tg-title">
             {tg.title}
           </h2>

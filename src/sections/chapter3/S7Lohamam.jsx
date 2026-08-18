@@ -25,7 +25,6 @@ export default function S7Lohamam() {
     <section className="section section--white" id={lm.id} aria-labelledby="ch3-lm-title">
       <div className="container">
         <header className="s3head">
-          <span className="s3head__kicker">{lm.kicker}</span>
           <h2 className="section-title" id="ch3-lm-title">
             {lm.title}
           </h2>

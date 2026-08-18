@@ -7,7 +7,6 @@ export default function StationLevels() {
     <section className="section section--paper" id={levelsMap.id} aria-labelledby="ch2-levels-title">
       <div className="container">
         <header className="st__head">
-          <span className="st__kicker">{levelsMap.kicker}</span>
           <h2 className="section-title" id="ch2-levels-title">
             {levelsMap.title}
           </h2>

@@ -50,7 +50,6 @@ export default function StationResearch() {
     <section className="section section--cream" id={sr.id} aria-labelledby="ch2-research-title">
       <div className="container">
         <header className="st__head">
-          <span className="st__kicker">{sr.kicker}</span>
           <h2 className="section-title" id="ch2-research-title">
             {sr.title}
           </h2>
