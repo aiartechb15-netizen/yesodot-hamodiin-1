@@ -1,3 +1,4 @@
+import Icon from '../components/Icons/Icons'
 import { gate1 } from '../data/chapter1'
 import './sections.css'
 
@@ -20,7 +21,7 @@ export default function Gate1() {
         <span className="gold-rule gold-rule--sm" aria-hidden="true" />
         <p className="lsys__lead">{ls.paragraph}</p>
 
-        {/* 2. המפגש — מלבן אחד המחולק לשני חצאים שווים, ללא חצים וללא אייקון */}
+        {/* 2. המפגש — מלבן אחד המחולק לשני חצאים שווים */}
         <p className="lsys__meet">{ls.meetingLead}</p>
         <div className="meet">
           {ls.sides.map((s, i) => (
@@ -35,29 +36,35 @@ export default function Gate1() {
           ))}
         </div>
 
-        {/* 3. שתי עמודות מאוזנות, מופרדות בקו דק */}
+        {/* 3. שני אזורי תוכן מקבילים — אותו רוחב, אותו גובה, אותם מרווחים */}
         <div className="rails">
-          <article>
+          <article className="rail">
             <h3 className="rail__title">{ku.title}</h3>
             <span className="gold-rule gold-rule--sm" aria-hidden="true" />
             <p className="rail__lead">{ku.lead}</p>
 
-            <div className="steps2">
+            <ol className="proc">
               {ku.layers.map((l, i) => (
-                <div className={`step2 step2--${i === 0 ? 'from' : 'to'}`} key={l.term}>
-                  <span className="step2__chip">{l.term}</span>
-                  <p className="step2__text">{l.text}</p>
-                </div>
+                <li className={`proc__step proc__step--${i}`} key={l.term}>
+                  <span className="proc__marker" aria-hidden="true">
+                    <span className="proc__dot" />
+                  </span>
+                  <span className="proc__icon" aria-hidden="true">
+                    <Icon name={l.icon} size={18} />
+                  </span>
+                  <div className="proc__body">
+                    <h4 className="proc__term">{l.term}</h4>
+                    <p className="proc__text">{l.text}</p>
+                  </div>
+                </li>
               ))}
-            </div>
-
-            <p className="rail__closing">{ku.closing}</p>
+            </ol>
           </article>
 
-          <article>
+          <article className="rail">
             <h3 className="rail__title">{ik.title}</h3>
             <span className="gold-rule gold-rule--sm" aria-hidden="true" />
-            <p>{ik.paragraph}</p>
+            <p className="rail__lead">{ik.paragraph}</p>
 
             <div className="inset">
               <span className="inset__label">{ik.example.label}</span>
@@ -66,11 +73,11 @@ export default function Gate1() {
           </article>
         </div>
 
-        {/* 4. משפט מסכם — בתחתית האזור, אחרי שתי העמודות */}
-        <blockquote className="keyIdea">
-          <span className="gold-rule gold-rule--sm gold-rule--center" aria-hidden="true" />
+        {/* 4. משפט מסכם — קו דק עם הדגשה זהובה במרכזו, ומתחתיו המשפט */}
+        <div className="keyIdea">
+          <span className="keyIdea__rule" aria-hidden="true" />
           <p className="keyIdea__text">{ls.callout.text}</p>
-        </blockquote>
+        </div>
       </div>
     </section>
   )

@@ -247,40 +247,24 @@
   color: #3b4757;
 }
 
-/* הרעיון המרכזי — משפט מוביל בין שני קווים דקים, ללא מסגרת */
-/* ה-takeaway של החלק: רקע קרם רך שנמוג בקצוות ופס זהב דק בראשו.
-   ללא מסגרת וללא צל — מודגש, אבל לא כרטיס. */
-/* משפט מסכם בתחתית האזור — ללא רקע, מסגרת או ריפוד; רוחב מוגבל,
-   קו זהב קצר מעליו ומרווח נדיב מסביב */
-.keyIdea {
-  max-width: 720px;
-  margin: clamp(46px, 5vw, 66px) auto 0;
-  text-align: center;
-}
-
-.keyIdea .gold-rule {
-  margin-block: 0 14px;
-}
-
-.keyIdea__text {
-  margin: 0;
-  font-size: 18.5px;
-  font-weight: 600;
-  line-height: 1.65;
-  color: var(--navy);
-}
-
-/* שני הרבדים — עמודות פתוחות, קו דק במקום שתי מסגרות */
+/* שני אזורי תוכן מקבילים — גריד סימטרי, אותו רוחב ואותו גובה */
 .rails {
-  margin-top: clamp(40px, 4.4vw, 58px);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(28px, 3.4vw, 48px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: clamp(22px, 2.4vw, 32px);
+  margin-top: clamp(40px, 4.4vw, 58px);
 }
 
-.rails > * + * {
-  padding-inline-start: clamp(28px, 3.4vw, 48px);
-  border-inline-start: 1px solid var(--border);
+/* מסגרת עדינה מאוד: רקע כמעט לבן, קו בז' דק, ללא צל */
+.rail {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: clamp(26px, 2.8vw, 36px);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
 .rail__title {
@@ -288,58 +272,134 @@
   color: var(--navy);
 }
 
+/* אותו מרווח בשני הצדדים, כדי שהטקסט יתחיל באותו גובה */
+.rail .gold-rule {
+  margin-block: 14px 18px;
+}
+
 .rail__lead {
-  margin-bottom: 6px;
-}
-
-.rail__closing {
-  margin: 18px 0 0;
-}
-
-/* ידיעה -> הבנה: מעבר מגולמי למעובד, מסומן בצבע התווית */
-.steps2 {
-  display: grid;
-}
-
-.step2 {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 16px;
-  align-items: start;
-  padding-block: 16px;
-}
-
-.step2 + .step2 {
-  border-top: 1px solid var(--border);
-}
-
-.step2__chip {
-  display: inline-flex;
-  align-items: center;
-  min-width: 76px;
-  padding-top: 1px;
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.step2--from .step2__chip {
-  color: var(--navy-secondary);
-}
-
-.step2--to .step2__chip {
-  color: var(--teal);
-}
-
-.step2__text {
   margin: 0;
 }
 
-/* הדוגמה — גוש מוטעם ברקע בלבד, ללא מסגרת */
+/* ---------- תהליך אנכי: ידיעה, הבנה, הכוונה ---------- */
+.proc {
+  margin: clamp(22px, 2.4vw, 30px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.proc__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 15px 34px 1fr;
+  align-items: start;
+  gap: 14px;
+  padding-block: clamp(16px, 1.8vw, 20px);
+}
+
+.proc__step + .proc__step {
+  border-top: 1px solid var(--border);
+}
+
+.proc__step:first-child {
+  padding-top: 0;
+}
+
+.proc__step:last-child {
+  padding-bottom: 0;
+}
+
+/* עמודת הסימון — נקודה קטנה, ומתחתיה קו אנכי דק שמחבר לשלב הבא */
+.proc__marker {
+  position: relative;
+  display: block;
+  height: 34px;
+}
+
+.proc__dot {
+  position: absolute;
+  top: 13px;
+  inset-inline-start: 4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.proc__step--0 .proc__dot {
+  background: #a03c32;
+}
+
+.proc__step--1 .proc__dot {
+  background: var(--gold);
+}
+
+.proc__step--2 .proc__dot {
+  background: var(--teal);
+}
+
+.proc__step:not(:last-child) .proc__marker::after {
+  content: '';
+  position: absolute;
+  top: 26px;
+  bottom: calc(-1 * clamp(16px, 1.8vw, 20px));
+  inset-inline-start: 7px;
+  width: 1px;
+  background: var(--border);
+}
+
+/* אייקון line-art במסגרת עגולה קטנה ועדינה */
+.proc__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--navy-secondary);
+}
+
+.proc__term {
+  font-size: 16.5px;
+  margin-bottom: 4px;
+}
+
+.proc__step--0 .proc__term {
+  color: #8f3830;
+}
+
+.proc__step--1 .proc__term {
+  color: #8a6f1f;
+}
+
+.proc__step--2 .proc__term {
+  color: var(--teal);
+}
+
+.proc__text {
+  margin: 0;
+  color: #3b4757;
+}
+
+/* ---------- אזור הדוגמה ---------- */
 .inset {
-  margin-top: 20px;
-  padding: 20px 22px;
+  position: relative;
+  margin-top: auto;
+  padding: clamp(20px, 2.2vw, 24px);
   background: var(--cream);
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
+}
+
+/* סימון טורקיז קטן בפינה העליונה */
+.inset::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  inset-inline-start: clamp(20px, 2.2vw, 24px);
+  width: 26px;
+  height: 3px;
+  border-radius: 0 0 2px 2px;
+  background: var(--teal);
 }
 
 .inset__label {
@@ -353,6 +413,40 @@
 
 .inset p {
   margin: 0;
+}
+
+/* משפט מסכם — קו דק לרוחב, הדגשה זהובה קצרה במרכזו, ומתחתיו המשפט */
+.keyIdea {
+  margin-top: clamp(46px, 5vw, 66px);
+  text-align: center;
+}
+
+.keyIdea__rule {
+  position: relative;
+  display: block;
+  height: 1px;
+  background: var(--border);
+}
+
+.keyIdea__rule::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--gold);
+}
+
+.keyIdea__text {
+  max-width: 720px;
+  margin: clamp(26px, 3vw, 34px) auto 0;
+  font-size: 18.5px;
+  font-weight: 600;
+  line-height: 1.65;
+  color: var(--navy);
 }
 
 /* ---------- שער 2 ---------- */
@@ -626,12 +720,6 @@
   }
   .rails {
     grid-template-columns: 1fr;
-  }
-  .rails > * + * {
-    padding-inline-start: 0;
-    border-inline-start: 0;
-    padding-top: clamp(26px, 4vw, 34px);
-    border-top: 1px solid var(--border);
   }
 }
 
