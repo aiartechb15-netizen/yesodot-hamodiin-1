@@ -52,7 +52,7 @@ export default function S7Lohamam() {
 
           <div className="grid-2">
             <article>
-              <h3 className="topic__title">כיצד זה עובד?</h3>
+              <h3 className="openBlock__title">כיצד זה עובד?</h3>
               <span className="gold-rule gold-rule--sm" aria-hidden="true" />
               <p>{lm.body}</p>
             </article>

@@ -15,10 +15,10 @@ export default function S5Design() {
         </header>
 
         <div className="s3blocks">
-          <div className="topics topics--2">
+          <div className="openGrid openGrid--2">
             {design.blocks.map((b) => (
               <article key={b.id}>
-                <h3 className="topic__title">{b.title}</h3>
+                <h3 className="openBlock__title">{b.title}</h3>
                 <span className="gold-rule gold-rule--sm" aria-hidden="true" />
                 <p>{b.text}</p>
               </article>

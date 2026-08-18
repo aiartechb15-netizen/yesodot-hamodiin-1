@@ -29,9 +29,11 @@
   border-color: var(--border);
 }
 
-/* אזור התמונה בראש הכרטיס — גובה זהה בשלושת הכרטיסים */
+/* מסגרת התמונה — רוחב וגובה זהים בשלושת הכרטיסים, ללא תלות
+   ביחס הצדדים של קובץ המקור. היחס נקבע כאן ולא על התמונה עצמה. */
 .topic__media {
-  aspect-ratio: 4 / 3;
+  width: 100%;
+  aspect-ratio: 16 / 11;
   overflow: hidden;
   border-radius: var(--radius-sm);
   background: var(--cream);
@@ -41,6 +43,10 @@
   display: block;
   width: 100%;
   height: 100%;
+  max-height: none;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
   object-fit: cover;
   object-position: center;
   /* מונע ריכוך של התצלום בהקטנה */

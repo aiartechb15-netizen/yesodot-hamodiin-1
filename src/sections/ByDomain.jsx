@@ -21,7 +21,7 @@ export default function ByDomain() {
           renderPanel={(tab) => (
             <div className="domain__panel">
               <div>
-                <h3 className="topic__title">{tab.title}</h3>
+                <h3 className="openBlock__title">{tab.title}</h3>
                 <span className="gold-rule gold-rule--sm" aria-hidden="true" />
                 <p>{tab.text}</p>
               </div>

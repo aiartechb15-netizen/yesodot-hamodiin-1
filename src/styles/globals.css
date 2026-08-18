@@ -248,26 +248,26 @@ svg {
 /* ---------- בלוקי תוכן פתוחים ----------
    כותרת, קו זהב וטקסט — ללא מסגרת, רקע או צל. משמשים במקום כרטיס
    באזורים שבהם הכרטיס היה עטיפה ויזואלית בלבד; ההפרדה נעשית בקו דק. */
-.topics {
+.openGrid {
   display: grid;
   gap: clamp(24px, 3vw, 40px);
   margin-top: clamp(26px, 3vw, 38px);
 }
 
-.topics--2 {
+.openGrid--2 {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.topics--3 {
+.openGrid--3 {
   grid-template-columns: repeat(3, 1fr);
 }
 
-.topics > * + * {
+.openGrid > * + * {
   padding-inline-start: clamp(24px, 3vw, 40px);
   border-inline-start: 1px solid var(--border);
 }
 
-.topic__icon {
+.openBlock__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -275,12 +275,12 @@ svg {
   margin-bottom: 12px;
 }
 
-.topic__title {
+.openBlock__title {
   font-size: var(--fs-h3);
   color: var(--navy);
 }
 
-.topic__example {
+.openBlock__example {
   color: var(--muted);
   font-size: 16px;
 }
@@ -423,11 +423,11 @@ svg {
   .grid-2 {
     gap: 20px;
   }
-  .topics--2,
-  .topics--3 {
+  .openGrid--2,
+  .openGrid--3 {
     grid-template-columns: 1fr;
   }
-  .topics > * + * {
+  .openGrid > * + * {
     padding-inline-start: 0;
     border-inline-start: 0;
     padding-top: 24px;

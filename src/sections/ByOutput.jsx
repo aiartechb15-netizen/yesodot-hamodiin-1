@@ -11,16 +11,16 @@ export default function ByOutput() {
         </h2>
         <span className="gold-rule" aria-hidden="true" />
 
-        <div className="topics topics--3">
+        <div className="openGrid openGrid--3">
           {byOutput.items.map((item) => (
             <article key={item.id}>
-              <span className="topic__icon" aria-hidden="true">
+              <span className="openBlock__icon" aria-hidden="true">
                 <Icon name={item.icon} size={26} />
               </span>
-              <h3 className="topic__title">{item.title}</h3>
+              <h3 className="openBlock__title">{item.title}</h3>
               <span className="gold-rule gold-rule--sm" aria-hidden="true" />
               <p>{item.text}</p>
-              <p className="topic__example">
+              <p className="openBlock__example">
                 <span className="term">{item.exampleLabel}: </span>
                 {item.example}
               </p>

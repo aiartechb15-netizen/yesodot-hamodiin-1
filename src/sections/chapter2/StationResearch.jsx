@@ -59,10 +59,10 @@ export default function StationResearch() {
         </header>
 
         <div className="st__blocks">
-          <div className="topics topics--2">
+          <div className="openGrid openGrid--2">
             {sr.rows.map((r) => (
               <article key={r.id}>
-                <h3 className="topic__title">{r.label}</h3>
+                <h3 className="openBlock__title">{r.label}</h3>
                 <span className="gold-rule gold-rule--sm" aria-hidden="true" />
                 <p>{r.text}</p>
               </article>
@@ -70,7 +70,7 @@ export default function StationResearch() {
           </div>
 
           <div>
-            <h3 className="topic__title">{sr.examineTitle}</h3>
+            <h3 className="openBlock__title">{sr.examineTitle}</h3>
             <span className="gold-rule gold-rule--sm" aria-hidden="true" />
             <ul className="examine">
               {sr.examine.map((e) => (
