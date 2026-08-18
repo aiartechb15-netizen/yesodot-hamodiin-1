@@ -59,18 +59,18 @@ export default function StationResearch() {
         </header>
 
         <div className="st__blocks">
-          <div className="grid-2">
+          <div className="topics topics--2">
             {sr.rows.map((r) => (
-              <article className="card card--pad" key={r.id}>
-                <h3 className="card-title">{r.label}</h3>
+              <article key={r.id}>
+                <h3 className="topic__title">{r.label}</h3>
                 <span className="gold-rule gold-rule--sm" aria-hidden="true" />
                 <p>{r.text}</p>
               </article>
             ))}
           </div>
 
-          <div className="card card--pad">
-            <h3 className="card-title">{sr.examineTitle}</h3>
+          <div>
+            <h3 className="topic__title">{sr.examineTitle}</h3>
             <span className="gold-rule gold-rule--sm" aria-hidden="true" />
             <ul className="examine">
               {sr.examine.map((e) => (

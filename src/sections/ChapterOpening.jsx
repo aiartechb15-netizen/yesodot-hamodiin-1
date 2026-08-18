@@ -19,13 +19,13 @@ export default function ChapterOpening() {
               <p key={i}>{p}</p>
             ))}
 
-            <div className="open__meta card card--pad">
-              <h3 className="card-title">{chapterOpening.purposeTitle}</h3>
+            <div className="open__meta">
+              <h3 className="topic__title">{chapterOpening.purposeTitle}</h3>
               <span className="gold-rule gold-rule--sm" aria-hidden="true" />
               <p>{chapterOpening.purpose}</p>
 
               <div className="open__outcomes">
-                <h3 className="card-title">{chapterOpening.outcomesTitle}</h3>
+                <h3 className="topic__title">{chapterOpening.outcomesTitle}</h3>
                 <ul className="open__list">
                   {chapterOpening.outcomes.map((o) => (
                     <li key={o}>{o}</li>

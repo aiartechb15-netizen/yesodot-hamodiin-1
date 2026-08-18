@@ -51,8 +51,8 @@ export default function S7Lohamam() {
           </ol>
 
           <div className="grid-2">
-            <article className="card card--pad">
-              <h3 className="card-title">כיצד זה עובד?</h3>
+            <article>
+              <h3 className="topic__title">כיצד זה עובד?</h3>
               <span className="gold-rule gold-rule--sm" aria-hidden="true" />
               <p>{lm.body}</p>
             </article>

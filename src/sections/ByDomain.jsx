@@ -20,8 +20,8 @@ export default function ByDomain() {
           ariaLabel={byDomain.title}
           renderPanel={(tab) => (
             <div className="domain__panel">
-              <div className="card card--pad">
-                <h3 className="card-title">{tab.title}</h3>
+              <div>
+                <h3 className="topic__title">{tab.title}</h3>
                 <span className="gold-rule gold-rule--sm" aria-hidden="true" />
                 <p>{tab.text}</p>
               </div>
