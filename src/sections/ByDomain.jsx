@@ -1,6 +1,5 @@
-import Tabs from '../components/Tabs/Tabs'
+import Icon from '../components/Icons/Icons'
 import { byDomain } from '../data/chapter1'
-import domainImage from '../assets/images/מהו מודיעין תמונה 2.png'
 import './sections.css'
 
 export default function ByDomain() {
@@ -11,24 +10,23 @@ export default function ByDomain() {
           {byDomain.title}
         </h2>
         <span className="gold-rule" aria-hidden="true" />
-        <p className="lead" style={{ marginBottom: '26px' }}>
-          {byDomain.intro}
-        </p>
+        <p className="lead">{byDomain.intro}</p>
 
-        <Tabs
-          tabs={byDomain.domains}
-          ariaLabel={byDomain.title}
-          renderPanel={(tab) => (
-            <div className="domain__panel">
-              <div>
-                <h3 className="openBlock__title">{tab.title}</h3>
-                <span className="gold-rule gold-rule--sm" aria-hidden="true" />
-                <p>{tab.text}</p>
-              </div>
-              <img className="domain__img" src={domainImage} alt={tab.image} />
-            </div>
-          )}
-        />
+        {/* קטלוג התחומים — כל התחומים גלויים בבת אחת, שורה לכל תחום */}
+        <ol className="domains">
+          {byDomain.domains.map((d, i) => (
+            <li className="domain" key={d.id}>
+              <span className="domain__num ltr-num" aria-hidden="true">
+                {i + 1}
+              </span>
+              <span className="domain__icon" aria-hidden="true">
+                <Icon name={d.icon} size={20} />
+              </span>
+              <h3 className="domain__title">{d.title}</h3>
+              <p className="domain__text">{d.text}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   )

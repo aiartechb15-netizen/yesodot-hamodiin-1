@@ -623,24 +623,54 @@
   top: calc(var(--header-h) + 24px);
 }
 
-/* ---------- לפי תחום ---------- */
-.domain__panel {
-  display: grid;
-  grid-template-columns: 1fr 0.85fr;
-  gap: 28px;
-  align-items: center;
+/* ---------- לפי תחום — קטלוג שורות ----------
+   כל התחומים גלויים יחד. שורה לכל תחום, בגובה אחיד, מופרדות בקו דק.
+   ללא כרטיסים וללא צללים. */
+.domains {
+  margin: clamp(26px, 3vw, 36px) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
 }
 
-/* התצלום ממלא את אותו מלבן שבו ישב ה-placeholder: אותו יחס, אותה מסגרת
-   ואותו radius. cover שומר על יחס הצדדים המקורי, ללא מתיחה. */
-.domain__img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  object-position: center;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+.domain {
+  display: grid;
+  grid-template-columns: 26px 34px minmax(150px, 210px) 1fr;
+  align-items: center;
+  gap: clamp(16px, 1.8vw, 26px);
+  min-height: 84px;
+  padding-block: clamp(16px, 1.8vw, 22px);
+  border-bottom: 1px solid var(--border);
+}
+
+.domain__num {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+  text-align: center;
+}
+
+.domain__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--teal-soft);
+  color: var(--teal);
+}
+
+.domain__title {
+  font-size: 17.5px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.domain__text {
+  margin: 0;
+  color: #3b4757;
 }
 
 /* ---------- שיעור הבא ---------- */
@@ -697,8 +727,12 @@
   .ladder__panel {
     position: static;
   }
-  .domain__panel {
-    grid-template-columns: 1fr;
+  .domain {
+    grid-template-columns: 26px 34px 1fr;
+    row-gap: 8px;
+  }
+  .domain__text {
+    grid-column: 3 / -1;
   }
 }
 
