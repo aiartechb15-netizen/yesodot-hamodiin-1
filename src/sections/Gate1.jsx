@@ -85,9 +85,8 @@ export default function Gate1() {
           ))}
         </div>
 
-        {/* הרעיון המרכזי — ה-takeaway של החלק */}
+        {/* הרעיון המרכזי — statement באמצע העמוד: המשפט לבדו */}
         <blockquote className="keyIdea">
-          <span className="keyIdea__label">{ls.callout.label}</span>
           <p className="keyIdea__text">{ls.callout.text}</p>
         </blockquote>
 
