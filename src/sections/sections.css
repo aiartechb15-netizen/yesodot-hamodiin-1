@@ -583,13 +583,18 @@
   color: var(--white);
 }
 
-.ladder__step {
-  display: inline-flex;
+.ladder__btn .ladder__step {
+  display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   width: 26px;
   height: 26px;
   flex: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  text-align: center;
   border-radius: 50%;
   background: var(--cream);
   color: var(--navy);
