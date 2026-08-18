@@ -1,3 +1,17 @@
+/* עוטף משותף לכל הסרטונים באתר — ממרכז את הנגן במרכז אזור התוכן,
+   ללא תלות בכיוון הכתיבה וללא מרג'ינים ידניים */
+.videoWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.videoWrap > .video {
+  width: min(100%, 900px);
+  margin-inline: auto;
+}
+
 .video {
   margin: 0;
 }

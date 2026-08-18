@@ -17,7 +17,7 @@ export default function S4Context() {
         </header>
 
         <div className="s3blocks">
-          <div style={{ maxWidth: '900px' }}>
+          <div className="videoWrap">
             <VideoPlaceholder video={ctx.video} />
           </div>
 

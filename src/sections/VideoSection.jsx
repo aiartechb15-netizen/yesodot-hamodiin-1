@@ -9,7 +9,7 @@ export default function VideoSection({ video, title, background = 'section--crea
           {title || video.title}
         </h2>
         <span className="gold-rule" aria-hidden="true" />
-        <div style={{ maxWidth: '900px' }}>
+        <div className="videoWrap">
           <VideoPlaceholder video={video} />
         </div>
       </div>

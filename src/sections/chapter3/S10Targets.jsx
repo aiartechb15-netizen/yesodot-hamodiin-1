@@ -16,7 +16,7 @@ export default function S10Targets() {
         </header>
 
         <div className="s3blocks">
-          <div style={{ maxWidth: '900px' }}>
+          <div className="videoWrap">
             <VideoPlaceholder video={tg.video} />
           </div>
 

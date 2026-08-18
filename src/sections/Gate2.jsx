@@ -47,7 +47,7 @@ export default function Gate2() {
           </p>
         </header>
 
-        <div style={{ maxWidth: '900px' }}>
+        <div className="videoWrap">
           <VideoPlaceholder video={videos.history} />
         </div>
 

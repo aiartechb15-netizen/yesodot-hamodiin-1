@@ -108,10 +108,9 @@ svg {
 
 /* ---------- layout ---------- */
 .container {
-  width: 100%;
+  width: calc(100% - var(--gutter) * 2);
   max-width: var(--page-max);
   margin-inline: auto;
-  padding-inline: var(--gutter);
 }
 
 .section {
@@ -406,6 +405,12 @@ svg {
 @media (max-width: 1000px) {
   .grid-3 {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --gutter: 16px;
   }
 }
 

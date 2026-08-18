@@ -25,10 +25,10 @@
   --radius: 10px;
   --radius-lg: 14px;
   --header-h: 88px;
-  /* רוחב אחיד לכל אזורי התוכן באתר; השוליים הפנימיים נגזרים מרוחב המסך:
-     40px בדסקטופ רחב, ~30px בטאבלט, 16px במובייל */
-  --page-max: 1400px;
-  --gutter: clamp(16px, 3vw, 40px);
+  /* מערכת יישור אחת לכל האתר: אותו רוחב מרבי ואותם שוליים בכל עמוד.
+     40px מכל צד בדסקטופ, 16px במסך צר. */
+  --page-max: 1500px;
+  --gutter: 40px;
 
   /* typography */
   --font: 'Assistant', 'Heebo', 'Segoe UI', 'Arial Hebrew', Arial, sans-serif;
