@@ -12,7 +12,6 @@ export default function MultiSelect({
   scenarioLabel,
   scenario,
   checkLabel = 'בדיקה',
-  retryLabel = 'ניסיון נוסף',
   correctLabel = 'תשובה נכונה',
   partialLabel = 'תשובה חלקית',
   incorrectLabel = 'לא מדויק',
@@ -38,11 +37,6 @@ export default function MultiSelect({
     setChecked(true)
     if (onResult) onResult(allCorrect)
     window.requestAnimationFrame(() => feedbackRef.current?.focus())
-  }
-
-  const reset = () => {
-    setChecked(false)
-    setPicked([])
   }
 
   return (
@@ -107,11 +101,7 @@ export default function MultiSelect({
           <button className="btn btn--sm" type="button" disabled={!picked.length} onClick={check}>
             {checkLabel}
           </button>
-        ) : (
-          <button className="btn btn--ghost btn--sm" type="button" onClick={reset}>
-            {retryLabel}
-          </button>
-        )}
+        ) : null}
       </div>
     </div>
   )

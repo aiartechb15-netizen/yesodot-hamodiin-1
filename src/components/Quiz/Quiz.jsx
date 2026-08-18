@@ -3,8 +3,6 @@ import Icon from '../Icons/Icons'
 import { quiz as chapter1Quiz } from '../../data/chapter1'
 import './Quiz.css'
 
-const MAX_ATTEMPTS = 2
-
 function emptyAnswer(q) {
   if (q.type === 'single') return null
   return {}
@@ -36,7 +34,6 @@ export default function Quiz({ data = chapter1Quiz }) {
   const questions = quiz.questions
   const [index, setIndex] = useState(0)
   const [answer, setAnswer] = useState(() => emptyAnswer(questions[0]))
-  const [attempts, setAttempts] = useState(0)
   const [checked, setChecked] = useState(false)
   const [results, setResults] = useState({})
   const [done, setDone] = useState(false)
@@ -44,8 +41,9 @@ export default function Quiz({ data = chapter1Quiz }) {
 
   const q = questions[index]
   const evaluation = useMemo(() => evaluate(q, answer), [q, answer])
-  const revealed = checked && !evaluation.allCorrect && attempts >= MAX_ATTEMPTS
-  const resolved = checked && (evaluation.allCorrect || revealed)
+  /* ניסיון אחד לכל שאלה: מיד אחרי הבדיקה נחשפת התשובה והשאלה ננעלת */
+  const revealed = checked && !evaluation.allCorrect
+  const resolved = checked
 
   const goNext = () => {
     setResults((prev) => ({
@@ -59,24 +57,17 @@ export default function Quiz({ data = chapter1Quiz }) {
     const next = questions[index + 1]
     setIndex(index + 1)
     setAnswer(emptyAnswer(next))
-    setAttempts(0)
     setChecked(false)
   }
 
   const onCheck = () => {
-    setAttempts((a) => a + 1)
     setChecked(true)
     window.requestAnimationFrame(() => feedbackRef.current?.focus())
-  }
-
-  const onRetry = () => {
-    setChecked(false)
   }
 
   const restart = () => {
     setIndex(0)
     setAnswer(emptyAnswer(questions[0]))
-    setAttempts(0)
     setChecked(false)
     setResults({})
     setDone(false)
@@ -228,19 +219,11 @@ export default function Quiz({ data = chapter1Quiz }) {
           <button className="btn" type="button" disabled={!canCheck} onClick={onCheck}>
             {L.check}
           </button>
-        ) : resolved ? (
+        ) : (
           <button className="btn" type="button" onClick={goNext}>
             {index === questions.length - 1 ? L.finish : L.next}
           </button>
-        ) : (
-          <button className="btn btn--ghost" type="button" onClick={onRetry}>
-            {L.retry}
-          </button>
         )}
-        <span className="quiz__attempts small muted">
-          ניסיון <span className="ltr-num">{Math.min(attempts || 1, MAX_ATTEMPTS)}</span> מתוך{' '}
-          <span className="ltr-num">{MAX_ATTEMPTS}</span>
-        </span>
       </div>
     </div>
   )

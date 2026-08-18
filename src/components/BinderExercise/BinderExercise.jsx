@@ -61,11 +61,6 @@ export default function BinderExercise() {
               {isCorrect ? binders.correctLabel : binders.incorrectLabel}
             </span>
             <p>{binders.explanation}</p>
-            {!isCorrect ? (
-              <button className="btn btn--ghost btn--sm" type="button" onClick={() => setPicked(null)}>
-                {binders.retry}
-              </button>
-            ) : null}
           </div>
         ) : null}
       </div>

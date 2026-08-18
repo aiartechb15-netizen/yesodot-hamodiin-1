@@ -46,12 +46,6 @@ export default function SortExercise({ terms, categories, hint, explanation, onR
     window.requestAnimationFrame(() => feedbackRef.current?.focus())
   }
 
-  const reset = () => {
-    setChecked(false)
-    setPlacement({})
-    setSelected(null)
-  }
-
   return (
     <div className="sortx">
       <p className="sortx__hint small muted">{hint}</p>
@@ -161,11 +155,7 @@ export default function SortExercise({ terms, categories, hint, explanation, onR
           <button className="btn btn--sm" type="button" disabled={!placedAll} onClick={check}>
             בדיקה
           </button>
-        ) : (
-          <button className="btn btn--ghost btn--sm" type="button" onClick={reset}>
-            מיון מחדש
-          </button>
-        )}
+        ) : null}
       </div>
     </div>
   )

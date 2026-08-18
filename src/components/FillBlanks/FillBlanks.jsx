@@ -99,18 +99,7 @@ export default function FillBlanks({ bank, bankLabel, sentences, hint, onResult 
           <button className="btn btn--sm" type="button" disabled={!answeredAll} onClick={check}>
             בדיקה
           </button>
-        ) : (
-          <button
-            className="btn btn--ghost btn--sm"
-            type="button"
-            onClick={() => {
-              setChecked(false)
-              setValues({})
-            }}
-          >
-            ניסיון נוסף
-          </button>
-        )}
+        ) : null}
       </div>
     </div>
   )
