@@ -45,9 +45,6 @@ export default function Gate1() {
             <ol className="proc">
               {ku.layers.map((l, i) => (
                 <li className={`proc__step proc__step--${i}`} key={l.term}>
-                  <span className="proc__marker" aria-hidden="true">
-                    <span className="proc__dot" />
-                  </span>
                   <span className="proc__icon" aria-hidden="true">
                     <Icon name={l.icon} size={18} />
                   </span>

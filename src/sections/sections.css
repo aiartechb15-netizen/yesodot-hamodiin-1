@@ -282,7 +282,7 @@
 .proc__step {
   position: relative;
   display: grid;
-  grid-template-columns: 15px 34px 1fr;
+  grid-template-columns: 34px 1fr;
   align-items: start;
   gap: 14px;
   padding-block: clamp(16px, 1.8vw, 20px);
@@ -298,44 +298,6 @@
 
 .proc__step:last-child {
   padding-bottom: 0;
-}
-
-/* עמודת הסימון — נקודה קטנה, ומתחתיה קו אנכי דק שמחבר לשלב הבא */
-.proc__marker {
-  position: relative;
-  display: block;
-  height: 34px;
-}
-
-.proc__dot {
-  position: absolute;
-  top: 13px;
-  inset-inline-start: 4px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-}
-
-.proc__step--0 .proc__dot {
-  background: #a03c32;
-}
-
-.proc__step--1 .proc__dot {
-  background: var(--gold);
-}
-
-.proc__step--2 .proc__dot {
-  background: var(--teal);
-}
-
-.proc__step:not(:last-child) .proc__marker::after {
-  content: '';
-  position: absolute;
-  top: 26px;
-  bottom: calc(-1 * clamp(16px, 1.8vw, 20px));
-  inset-inline-start: 7px;
-  width: 1px;
-  background: var(--border);
 }
 
 /* אייקון line-art במסגרת עגולה קטנה ועדינה */
@@ -379,18 +341,6 @@
   padding: clamp(20px, 2.2vw, 24px);
   background: var(--cream);
   border-radius: var(--radius-sm);
-}
-
-/* סימון טורקיז קטן בפינה העליונה */
-.inset::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  inset-inline-start: clamp(20px, 2.2vw, 24px);
-  width: 26px;
-  height: 3px;
-  border-radius: 0 0 2px 2px;
-  background: var(--teal);
 }
 
 .inset__label {
