@@ -8,6 +8,7 @@
 }
 
 .st__hint {
+  max-width: 820px;
   margin-top: 6px;
   font-size: 14.5px;
   color: var(--muted);
@@ -398,8 +399,11 @@
   background: var(--cream);
 }
 
-.step__num {
-  display: inline-flex;
+.step .step__num {
+  display: flex;
+  flex-shrink: 0;
+  line-height: 1;
+  text-align: center;
   align-items: center;
   justify-content: center;
   width: 34px;
@@ -426,7 +430,9 @@
   transform: rotate(180deg);
 }
 
+/* מיושר מתחת לכותרת השלב, כדי שהקשר לשורה שמעליו יהיה ברור */
 .step__text {
+  max-width: 900px;
   margin: 0;
   padding: 0 72px 18px;
   color: #3b4757;
@@ -493,13 +499,16 @@
   background: var(--white);
 }
 
-.lens__num {
+.lens .lens__num {
   position: absolute;
   top: -6px;
   inset-inline-start: -6px;
   width: 22px;
   height: 22px;
-  display: inline-flex;
+  display: flex;
+  flex-shrink: 0;
+  line-height: 1;
+  text-align: center;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
@@ -550,7 +559,9 @@
   margin-top: 12px;
 }
 
+/* רוחב שורה נוח לקריאה */
 .examine li {
+  max-width: 900px;
   position: relative;
   padding-inline-start: 28px;
   color: #3b4757;
