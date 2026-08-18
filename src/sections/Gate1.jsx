@@ -85,8 +85,9 @@ export default function Gate1() {
           ))}
         </div>
 
-        {/* הרעיון המרכזי — statement באמצע העמוד: המשפט לבדו */}
+        {/* משפט מסכם של ההשוואה — נמשך ישירות מהמפגש, ללא בלוק נפרד */}
         <blockquote className="keyIdea">
+          <span className="gold-rule gold-rule--sm gold-rule--center" aria-hidden="true" />
           <p className="keyIdea__text">{ls.callout.text}</p>
         </blockquote>
 
