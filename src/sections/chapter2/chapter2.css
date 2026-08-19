@@ -31,23 +31,25 @@
   scroll-margin-top: var(--header-h);
 }
 
-/* רקע דקורטיבי: שכבות נייר ארכיון וקווי מפה — ללא טקסט */
+/* תצלום פתיחה דקורטיבי — ללא טקסט */
 .ch2hero__art {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
-/* האיור יושב בצד שמאל הפנוי; הטקסט בצד ימין */
-.ch2hero__art svg {
+/* התצלום ממלא את השטח השמאלי; הטקסט בצד ימין */
+.ch2hero__artImg {
   position: absolute;
-  left: -2%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: min(58%, 720px);
-  height: auto;
-  color: var(--navy-secondary);
-  opacity: 0.16;
+  left: 0;
+  top: 0;
+  width: min(52%, 780px);
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  /* דעיכה רכה בקצה הפנימי — במקום קו חיתוך חד מול רקע הקרם */
+  -webkit-mask-image: linear-gradient(to right, #000 0 82%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 0 82%, transparent 100%);
 }
 
 .ch2hero__inner {
@@ -594,11 +596,18 @@
     margin-inline: 0;
     padding-block: 48px;
   }
-  .ch2hero__art svg {
-    left: auto;
-    right: -18%;
-    opacity: 0.08;
-    width: 88%;
+  .ch2hero {
+    display: block;
+  }
+  .ch2hero__art {
+    position: relative;
+    inset: auto;
+    height: 210px;
+  }
+  .ch2hero__artImg {
+    width: 100%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0 72%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0 72%, transparent 100%);
   }
   .split2 {
     grid-template-columns: 1fr;
