@@ -126,159 +126,229 @@
 }
 
 /* ---------- תחנה 4 — קמ״ן וקברניט ---------- */
-.split2 {
+/* שני טורים פתוחים על רקע העמוד, מופרדים בקו אנכי דק בלבד */
+.duo {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: stretch;
-  gap: 0;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-card);
-  overflow: hidden;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(26px, 4vw, 56px);
+  align-items: start;
 }
 
-.split2__side {
-  padding: 30px 28px;
+.duo__side + .duo__side {
+  border-inline-start: 1px solid var(--border);
+  padding-inline-start: clamp(26px, 4vw, 56px);
 }
 
-.split2__side--a {
-  background: var(--paper);
-}
-
-.split2__divider {
-  width: 1px;
-  background: var(--border);
-  position: relative;
-}
-
-.split2__vs {
-  position: absolute;
-  top: 50%;
-  inset-inline-start: 50%;
-  transform: translate(50%, -50%);
-  width: 42px;
-  height: 42px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: var(--gold);
-  color: var(--navy);
-  font-size: 12.5px;
-  font-weight: 700;
-}
-
-.split2__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--cream);
+.duo__icon {
+  display: block;
+  margin-bottom: 12px;
   color: var(--navy-secondary);
-  margin-bottom: 14px;
 }
 
-.split2__side--b .split2__icon {
-  background: var(--teal-soft);
+.duo__side + .duo__side .duo__icon {
   color: var(--teal);
 }
 
-.split2__title {
+.duo__title {
   font-size: var(--fs-h3);
+  margin-bottom: 10px;
 }
 
-/* ציר זמן — מקרי בוחן */
-.tline {
-  position: relative;
+.duo__text {
+  max-width: 46ch;
+  margin: 0;
+  color: #3b4757;
+}
+
+/* מסר מרכזי — משפט ברוחב העמוד עם פס זהב בצד, ללא כרטיס */
+.keyMsg {
+  border-inline-start: 3px solid var(--gold);
+  padding-inline-start: clamp(16px, 2vw, 24px);
+}
+
+.keyMsg__label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--gold);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.keyMsg__text {
+  max-width: 68ch;
+  margin: 0;
+  color: var(--navy);
+  font-size: clamp(18px, 1.7vw, 22px);
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+/* שתי סכנות — שתי כותרות פתוחות, וההסבר נפתח מתחת לשתיהן */
+.dangers {
+  margin-top: 18px;
+}
+
+.dangers__cols {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 26px;
-  align-items: start;
-  margin-top: 8px;
-  padding: 34px 0 0;
-  list-style: none;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 3vw, 44px);
 }
 
-.tline::before {
+.dangers__col {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.dangers__btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 0 0 12px;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--navy-70);
+  text-align: start;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.dangers__btn:hover,
+.dangers__btn.is-open {
+  color: var(--navy);
+  border-color: var(--gold);
+}
+
+.dangers__name {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* סימן + קטן, שהופך ל־− כשההסבר פתוח */
+.dangers__sign {
+  position: relative;
+  width: 13px;
+  height: 13px;
+  margin-inline-start: auto;
+  flex-shrink: 0;
+}
+
+.dangers__sign::before,
+.dangers__sign::after {
   content: '';
   position: absolute;
-  top: 15px;
-  inset-inline: 6%;
-  border-top: 1px dashed var(--border);
-}
-
-.tline__item {
-  position: relative;
-}
-
-.tline__dot {
-  position: absolute;
-  top: -34px;
-  inset-inline-start: 50%;
-  transform: translateX(50%);
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
+  inset-inline: 0;
+  top: 6px;
+  height: 1.5px;
   background: var(--gold);
-  border: 3px solid var(--paper);
+}
+
+.dangers__sign::after {
+  transform: rotate(90deg);
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.dangers__btn.is-open .dangers__sign::after {
+  transform: rotate(0deg);
+  opacity: 0;
+}
+
+.dangers__panel {
+  margin-top: 18px;
+}
+
+.dangers__text {
+  max-width: 74ch;
+  margin: 0;
+  color: #3b4757;
+}
+
+/* מקרי בוחן — ציר זמן אופקי; רק הכותרת והקו מודגשים */
+.tline {
+  margin-top: 22px;
+}
+
+.tline__track {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2.5vw, 30px);
+}
+
+.tline__link {
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--border);
 }
 
 .tline__btn {
-  width: 100%;
-  padding: 20px 22px;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-card);
-  text-align: start;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  display: grid;
+  justify-items: center;
+  flex: 0 1 auto;
+  padding: 0;
+  background: none;
+  border: 0;
+  text-align: center;
 }
 
-.tline__btn:hover {
-  border-color: var(--gold);
-  box-shadow: var(--shadow-card-hover);
-}
-
-.tline__btn.is-open {
-  border-color: var(--gold);
-}
-
-/* שורת השנה נשמרת גם כשאין שנה, כדי שכל הכרטיסים הסגורים יהיו באותו גובה */
+/* שורת השנה נשמרת גם כשאין שנה, כדי שכל הכותרות יישבו על אותו קו */
 .tline__when {
-  display: block;
-  min-height: 1.8em;
+  min-height: 1.6em;
+  color: var(--teal);
   font-size: 12.5px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: var(--teal);
-  margin-bottom: 4px;
 }
 
 .tline__title {
-  display: block;
-  font-size: 18px;
-  font-weight: 700;
+  color: var(--navy-70);
+  font-size: clamp(16px, 1.5vw, 19px);
+  font-weight: 500;
+  line-height: 1.35;
+  transition: color 0.18s ease;
+}
+
+.tline__btn:hover .tline__title {
   color: var(--navy);
 }
 
+.tline__btn.is-active .tline__title {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.tline__rule {
+  width: 0;
+  height: 2px;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: var(--gold);
+  transition: width 0.18s ease;
+}
+
+.tline__btn.is-active .tline__rule {
+  width: 38px;
+}
+
+.tline__panel {
+  margin-top: clamp(22px, 3vw, 32px);
+  padding-top: clamp(18px, 2.5vw, 26px);
+  border-top: 1px solid var(--border);
+}
+
 .tline__text {
-  margin: 12px 0 0;
+  max-width: 74ch;
+  margin: 0;
   color: #3b4757;
-  font-size: 15.5px;
 }
 
 .tline__tag {
   display: inline-block;
   margin-top: 12px;
+  color: var(--navy-secondary);
   font-size: 12.5px;
   font-weight: 700;
-  color: var(--navy-secondary);
-  background: var(--cream);
-  border-radius: 999px;
-  padding: 4px 12px;
 }
 
 /* ---------- תחנה 6 — תוצרים ---------- */
@@ -605,25 +675,31 @@
     -webkit-mask-image: linear-gradient(to bottom, #000 0 72%, transparent 100%);
     mask-image: linear-gradient(to bottom, #000 0 72%, transparent 100%);
   }
-  .split2 {
+  .duo,
+  .dangers__cols {
     grid-template-columns: 1fr;
   }
-  .split2__divider {
-    width: auto;
-    height: 1px;
+  .duo__side + .duo__side {
+    border-inline-start: 0;
+    padding-inline-start: 0;
+    border-top: 1px solid var(--border);
+    padding-top: clamp(22px, 4vw, 30px);
   }
-  .split2__vs {
-    inset-inline-start: 50%;
-    transform: translate(50%, -50%);
+  .tline__track {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
   }
-  .tline {
-    grid-template-columns: 1fr;
-  }
-  .tline::before {
+  .tline__link {
     display: none;
   }
-  .tline__dot {
-    display: none;
+  .tline__btn {
+    justify-items: start;
+    text-align: start;
+  }
+  .tline__btn:not(:first-of-type) {
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
   }
   .step__text {
     padding-inline: 22px;
