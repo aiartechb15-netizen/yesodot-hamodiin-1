@@ -19,7 +19,7 @@
 }
 
 .kb__centerText {
-  font-family: var(--font);
+  font-family: var(--font-heading);
   font-size: 21px;
   font-weight: 700;
   fill: var(--white);

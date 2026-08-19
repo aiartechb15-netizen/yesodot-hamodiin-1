@@ -19,7 +19,7 @@
 }
 
 .cycle__ringTitle {
-  font-family: var(--font);
+  font-family: var(--font-heading);
   font-size: 22px;
   font-weight: 700;
   fill: var(--navy);

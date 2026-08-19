@@ -8,6 +8,7 @@
 }
 
 html {
+  font-family: var(--font-primary);
   /* גלילה חלקה לעוגנים בתוך אותו עמוד בלבד; מעבר בין עמודים מבוטל ב-ScrollToTop */
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-h) + 16px);
@@ -32,7 +33,7 @@ body {
   margin: 0;
   background-color: var(--paper);
   color: var(--text);
-  font-family: var(--font);
+  font-family: var(--font-primary);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   direction: rtl;
@@ -54,6 +55,15 @@ body::before {
 #root {
   position: relative;
   z-index: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
 }
 
 h1,
@@ -88,6 +98,12 @@ button {
   font: inherit;
   color: inherit;
   cursor: pointer;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
 }
 
 ul {

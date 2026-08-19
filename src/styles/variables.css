@@ -30,8 +30,12 @@
   --page-max: 1500px;
   --gutter: 40px;
 
-  /* typography */
-  --font: 'Assistant', 'Heebo', 'Segoe UI', 'Arial Hebrew', Arial, sans-serif;
+  /* typography — מערכת של משפחה אחת בלבד לכל האתר.
+     --font-heading מפנה ל---font-primary: אין צורך בפונט כותרות נפרד,
+     והמשתנה קיים כדי שאפשר יהיה להחליף כותרות בנקודה אחת בעתיד.
+     אין --font-accent: לא נמצא תפקיד שמצדיק משפחה שלישית. */
+  --font-primary: 'Assistant', 'Heebo', 'Segoe UI', 'Arial Hebrew', Arial, sans-serif;
+  --font-heading: var(--font-primary);
   --fs-hero: clamp(40px, 5.4vw, 68px);
   --fs-h2: clamp(26px, 2.6vw, 38px);
   --fs-h3: clamp(20px, 1.7vw, 25px);
