@@ -94,11 +94,14 @@
   grid-row: 4;
 }
 
-.pyr__btn .pyr__index {
+.pyr__index {
   grid-row: 2;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  line-height: 1;
+  text-align: center;
   width: 42px;
   height: 42px;
   flex: none;
@@ -108,8 +111,6 @@
   color: var(--navy);
   font-size: 12px;
   font-weight: 700;
-  line-height: 1;
-  text-align: center;
   transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
 }
 

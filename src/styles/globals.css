@@ -411,10 +411,12 @@ svg {
   border: 0;
 }
 
+/* בידוד דו-כיווני למספרים בתוך טקסט עברי.
+   בלי display משלו: העיגולים הממוספרים באתר מגדירים inline-flex + מרכוז
+   באותה ספציפיות, ו-display כאן היה דורס אותם ומוציא את הספרה מהמרכז. */
 .ltr-num {
   direction: ltr;
   unicode-bidi: isolate;
-  display: inline-block;
 }
 
 /* ---------- responsive ---------- */
