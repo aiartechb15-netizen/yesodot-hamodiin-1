@@ -43,7 +43,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: min(52%, 780px);
+  width: 50%;
   height: 100%;
   object-fit: cover;
   object-position: center;
@@ -94,14 +94,8 @@
   margin-bottom: 30px;
 }
 
-.ch2hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-}
-
 .ch2hero__meta {
-  margin-top: 34px;
+  margin-top: 4px;
   padding-top: 22px;
   border-top: 1px solid var(--border);
   max-width: 560px;
