@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import Icon from '../../components/Icons/Icons'
 import { officerAndLeader as ol } from '../../data/chapter2'
 import './chapter2.css'
@@ -6,12 +7,15 @@ import './chapter2.css'
    הגליף מצייר אותו: עיגול טורקיז (הקמ״ן) ועיגול כחול (הקברניט),
    וכל מה שמשתנה בין המצבים הוא המרחק ביניהם. */
 const GLYPH = {
-  far: { a: 8, b: 64, link: { x1: 19, x2: 53, cls: 'dglyph__link--broken' } },
-  right: { a: 24, b: 48, link: { x1: 31, x2: 41, cls: 'dglyph__link--good' } },
-  close: { a: 31, b: 41, link: null },
+  far: { a: 9, b: 63, link: { x1: 21, x2: 51, cls: 'dglyph__link--broken' } },
+  right: { a: 24, b: 48, link: { x1: 32, x2: 40, cls: 'dglyph__link--good' } },
+  close: { a: 32, b: 40, link: null },
 }
 
-function DistanceGlyph({ state, size = 72 }) {
+/** רוחב הגליף על הציר; במקומות משניים מועבר size קטן יותר. */
+const GLYPH_W = 68
+
+function DistanceGlyph({ state, size = GLYPH_W }) {
   const g = GLYPH[state] || GLYPH.far
   return (
     <svg
@@ -25,8 +29,8 @@ function DistanceGlyph({ state, size = 72 }) {
       {g.link ? (
         <line className={`dglyph__link ${g.link.cls}`} x1={g.link.x1} y1="11" x2={g.link.x2} y2="11" />
       ) : null}
-      <circle className="dglyph__dot dglyph__dot--b" cx={g.b} cy="11" r="6" />
-      <circle className="dglyph__dot dglyph__dot--a" cx={g.a} cy="11" r="6" />
+      <circle className="dglyph__dot dglyph__dot--b" cx={g.b} cy="11" r="7" />
+      <circle className="dglyph__dot dglyph__dot--a" cx={g.a} cy="11" r="7" />
     </svg>
   )
 }
@@ -65,46 +69,56 @@ function Viewpoints() {
   )
 }
 
-/** שתי הסכנות כשני קצוות של אותו ציר; באמצע — הנקודה הנכונה, מסומנת בזהב. */
-function Poles() {
+/* שתי הסכנות כציר מסומן אחד: שם הסכנה יושב על כל קצה, באמצע סימון
+   המרחק הנכון, ומתחת לכל קצה ההסבר שלו. הכול בגריד אחד, כדי שבמסך
+   צר אפשר יהיה לפרוש את אותם חלקים לסדר אנכי קריא. */
+function Scale() {
+  const side = (i) => (i === 0 ? 'a' : 'b')
+
   return (
-    <div className="of__poles">
-      {ol.dangers.map((d) => (
-        <article className="of__pole" key={d.id}>
-          <div className="of__poleHead">
+    <div className="of__scale">
+      {ol.dangers.map((d, i) => (
+        <Fragment key={d.id}>
+          {i > 0 ? (
+            <>
+              <span className="of__track of__track--b" aria-hidden="true" />
+              <span className="of__mid" aria-hidden="true">
+                <DistanceGlyph state="right" />
+              </span>
+              <span className="of__track of__track--a" aria-hidden="true" />
+            </>
+          ) : null}
+          <h4 className={`of__end of__end--${side(i)}`}>
             <DistanceGlyph state={stateOf(d.id)} />
-            <h4 className="of__poleTitle">{d.title}</h4>
-          </div>
-          <p className="of__poleText">{d.text}</p>
-        </article>
+            <span className="of__endName">{d.title}</span>
+          </h4>
+        </Fragment>
       ))}
-      {/* אמצע הציר — המרחק הנכון, כפי שנוסח במסר המרכזי שמעל */}
-      <span className="of__mid" aria-hidden="true">
-        <span className="of__midMark">
-          <DistanceGlyph state="right" />
-        </span>
-      </span>
+
+      {ol.dangers.map((d, i) => (
+        <p className={`of__note of__note--${side(i)}`} key={d.id}>
+          {d.text}
+        </p>
+      ))}
+      <span className="of__noteDiv" aria-hidden="true" />
     </div>
   )
 }
 
-/** מקרי בוחן — ציר זמן אנכי; כל מקרה נושא את תווית הסכנה שהוא מדגים. */
+/** מקרי בוחן — שני מקרים זה לצד זה, כל אחד נושא את הסכנה שהוא מדגים. */
 function Cases() {
   return (
     <ol className="of__cases">
       {ol.cases.map((c) => (
         <li className="of__case" key={c.id}>
-          <span className="of__caseMark" aria-hidden="true" />
-          <div className="of__caseHead">
-            <h4 className="of__caseTitle">
-              {c.when ? <span className="of__caseWhen ltr-num">{c.when}</span> : null}
-              {c.title}
-            </h4>
-            <span className="of__caseTag">
-              <DistanceGlyph state={dangerState(c.danger)} size={40} />
-              {c.danger}
-            </span>
-          </div>
+          <span className="of__caseKicker">
+            <DistanceGlyph state={dangerState(c.danger)} size={34} />
+            {c.danger}
+          </span>
+          <h4 className="of__caseTitle">
+            {c.when ? <span className="of__caseWhen ltr-num">{c.when}</span> : null}
+            {c.title}
+          </h4>
           <p className="of__caseText">{c.text}</p>
         </li>
       ))}
@@ -141,7 +155,7 @@ export default function StationOfficer() {
             {ol.dangersTitle}
           </h3>
           <span className="gold-rule gold-rule--sm gold-rule--center" aria-hidden="true" />
-          <Poles />
+          <Scale />
         </section>
 
         <section className="of__block" aria-labelledby="ch2-officer-cases">

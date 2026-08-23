@@ -319,141 +319,141 @@
   stroke-width: 2;
 }
 
-/* שתי הסכנות — אותו ציר, שני קצוות. באמצע יהלום הזהב: המרחק הנכון */
-.of__poles {
+/* שתי הסכנות — ציר אחד עם שני קצוות מסומנים. הכול גריד יחיד:
+   שורה עליונה = הציר עצמו, שורה שנייה = ההסבר מתחת לכל קצה. */
+.of__scale {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  max-width: 1000px;
-  margin-top: clamp(26px, 3vw, 36px);
-  margin-inline: auto;
+  grid-template-columns: auto minmax(20px, 1fr) auto minmax(20px, 1fr) auto;
+  align-items: center;
+  max-width: 920px;
+  margin: clamp(26px, 3vw, 36px) auto 0;
+  column-gap: clamp(12px, 1.6vw, 20px);
 }
 
-.of__pole {
-  position: relative;
+/* שם הסכנה יושב על הקצה; בקצה השני הסדר מתהפך כדי שהגליף יפנה החוצה */
+.of__end {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   grid-row: 1;
-  padding-top: 26px;
-  border-top: 1px solid var(--border);
+  margin: 0;
+  font-size: clamp(19px, 1.8vw, 22px);
 }
 
-/* סימני קצה לציר: הקו נגמר בדיוק בשני המצבים הקיצוניים */
-.of__pole::before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  width: 1px;
-  height: 10px;
+.of__end--a {
+  grid-column: 1;
+}
+
+.of__end--b {
+  grid-column: 5;
+  flex-direction: row-reverse;
+}
+
+.of__endName {
+  white-space: nowrap;
+}
+
+.of__track {
+  grid-row: 1;
+  height: 2px;
+  border-radius: 2px;
   background: var(--border);
 }
 
-.of__pole:first-of-type::before {
-  inset-inline-start: 0;
-}
-
-.of__pole:last-of-type::before {
-  inset-inline-end: 0;
-}
-
-.of__pole:first-of-type {
-  grid-column: 1;
-  padding-inline-end: clamp(24px, 3.4vw, 48px);
-}
-
-.of__pole:last-of-type {
-  grid-column: 3;
-  padding-inline-start: clamp(24px, 3.4vw, 48px);
-}
-
-.of__poleHead {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-top: 14px;
-}
-
-.of__poleTitle {
-  font-size: 20px;
-}
-
-.of__poleText {
-  max-width: 42ch;
-  margin: 10px 0 0;
-  color: #3b4757;
-}
-
-/* אמצע הציר: הגליף השלישי — שני הצדדים במרחק הנכון, מחוברים בזהב */
-.of__mid {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  /* בלי המתיחה הזו רקע הסימון היה מכסה את הקו האנכי שמתחתיו */
-  align-items: flex-start;
-  grid-row: 1;
+.of__track--a {
   grid-column: 2;
 }
 
-.of__midMark {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  /* ממרכז את הגליף על קו הציר, ומסתיר את הקו שמאחוריו */
-  margin-top: -11px;
-  padding-inline: 12px;
-  background: var(--paper);
+.of__track--b {
+  grid-column: 4;
 }
 
-.of__mid::before {
+/* אמצע הציר — המרחק הנכון, מסומן בזהב מתחת לגליף */
+.of__mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  grid-row: 1;
+  grid-column: 3;
+}
+
+.of__mid::after {
   content: '';
-  position: absolute;
-  top: 16px;
-  bottom: 0;
-  inset-inline-start: calc(50% - 0.5px);
+  width: 44px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--gold);
+}
+
+/* ההסברים יושבים כל אחד מתחת לקצה שלו, מופרדים בקו דק במרכז */
+.of__note {
+  grid-row: 2;
+  margin: clamp(18px, 2.2vw, 26px) 0 0;
+  color: #3b4757;
+}
+
+.of__note--a {
+  grid-column: 1 / 3;
+  padding-inline-end: clamp(14px, 2vw, 26px);
+}
+
+.of__note--b {
+  grid-column: 4 / 6;
+  padding-inline-start: clamp(14px, 2vw, 26px);
+}
+
+.of__noteDiv {
+  grid-row: 2;
+  grid-column: 3;
+  justify-self: center;
   width: 1px;
+  height: 100%;
+  margin-top: clamp(18px, 2.2vw, 26px);
   background: var(--border);
 }
 
-/* מקרי בוחן — ציר זמן אנכי שממשיך ישירות את שתי הסכנות */
+/* מקרי בוחן — שני מקרים זה לצד זה, באותה גיאומטריה של שתי הסכנות */
 .of__cases {
-  max-width: 860px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 920px;
   margin: clamp(26px, 3vw, 36px) auto 0;
   padding: 0;
   list-style: none;
 }
 
 .of__case {
-  position: relative;
-  padding-inline-start: 30px;
-  padding-bottom: clamp(26px, 3vw, 36px);
-  border-inline-start: 1px solid var(--border);
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+
+.of__case:first-child {
+  padding-inline-end: clamp(24px, 3.4vw, 48px);
 }
 
 .of__case:last-child {
-  padding-bottom: 0;
+  padding-inline-start: clamp(24px, 3.4vw, 48px);
+  border-inline-start: 1px solid var(--border);
 }
 
-.of__caseMark {
-  position: absolute;
-  inset-inline-start: -6px;
-  top: 8px;
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  border: 2px solid var(--teal);
-  background: var(--paper);
-}
-
-.of__caseHead {
+/* תווית הסכנה שהמקרה מדגים — קישור חוזר לציר שמעליו */
+.of__caseKicker {
   display: flex;
   align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
+  gap: 8px;
+  color: var(--navy-secondary);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
 }
 
 .of__caseTitle {
   display: flex;
   align-items: baseline;
   gap: 12px;
-  font-size: 20px;
+  margin-top: 8px;
+  font-size: 21px;
 }
 
 .of__caseWhen {
@@ -463,22 +463,9 @@
   letter-spacing: 0.08em;
 }
 
-.of__caseTag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 13px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  color: var(--navy-secondary);
-  font-size: 13px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
 .of__caseText {
-  max-width: 70ch;
-  margin: 0;
+  max-width: 42ch;
+  margin: 10px 0 0;
   color: #3b4757;
 }
 
@@ -854,44 +841,53 @@
     grid-template-columns: 1fr;
     gap: clamp(24px, 5vw, 32px);
   }
-  .of__poles {
+  /* תחנה 4 — הציר נפרש לסדר אנכי: קצה, ההסבר שלו, סימון האמצע, וכן הלאה */
+  .of__scale {
     grid-template-columns: 1fr;
+    max-width: none;
   }
-  .of__pole:first-of-type,
-  .of__pole:last-of-type {
+  .of__end,
+  .of__note,
+  .of__mid {
     grid-column: 1;
-    padding-inline: 0;
   }
-  .of__pole::before {
-    display: none;
-  }
-  .of__pole:first-of-type {
+  .of__end--a {
     grid-row: 1;
   }
-  .of__pole:last-of-type {
-    grid-row: 3;
-    padding-top: clamp(24px, 5vw, 30px);
-    border-top: 0;
+  .of__note--a {
+    grid-row: 2;
+    padding-inline: 0;
   }
   .of__mid {
-    grid-row: 2;
-    grid-column: 1;
+    grid-row: 3;
     margin-top: clamp(24px, 5vw, 30px);
+    padding-top: clamp(24px, 5vw, 30px);
+    border-top: 1px solid var(--border);
+    align-self: stretch;
   }
-  .of__midMark {
-    margin-top: 0;
+  .of__end--b {
+    grid-row: 4;
+    margin-top: clamp(24px, 5vw, 30px);
+    flex-direction: row;
   }
-  /* במסך צר הציר מתהפך: הקו אופקי והגליף יושב על מרכזו */
-  .of__mid::before {
-    top: 50%;
-    bottom: auto;
-    inset-inline: 0;
-    width: auto;
-    height: 1px;
+  .of__note--b {
+    grid-row: 5;
+    padding-inline: 0;
   }
-  /* הזזה קטנה פנימה כדי שסימון ציר הזמן לא ייגע בקצה המסך */
+  .of__track,
+  .of__noteDiv {
+    display: none;
+  }
   .of__cases {
-    margin-inline-start: 6px;
+    grid-template-columns: 1fr;
+  }
+  .of__case:first-child,
+  .of__case:last-child {
+    padding-inline: 0;
+  }
+  .of__case:last-child {
+    margin-top: clamp(22px, 4vw, 28px);
+    border-inline-start: 0;
   }
   /* תחנה 7 — התצלום עובר מעל התוכן, והמסלול מתחתיו */
   .fbuild {
