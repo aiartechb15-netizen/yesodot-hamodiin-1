@@ -1,14 +1,14 @@
 .idcard {
   background: var(--white);
   border: 1px solid var(--border);
-  border-top: 3px solid var(--navy);
   border-radius: var(--radius);
   box-shadow: var(--shadow-card);
   padding: 28px 30px 30px;
 }
 
+/* פס ההדגשה נשאר רק בווריאנט הטורקיז; בווריאנט הכחול המסגרת אחידה בכל הצדדים */
 .idcard--teal {
-  border-top-color: var(--teal);
+  border-top: 3px solid var(--teal);
 }
 
 .idcard__title {
