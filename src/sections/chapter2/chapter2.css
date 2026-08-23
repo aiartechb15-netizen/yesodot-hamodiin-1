@@ -562,85 +562,101 @@
 }
 
 /* ---------- תחנה 7 — בניין כוח ---------- */
-.steps {
+/* חמישה שלבים כתהליך אחד: מסלול אנכי שמתחיל בימין, בלי מסגרות ובלי צל.
+   קו דק אחד עובר מאחורי המספרים ומחבר בין השלבים. */
+.fsteps {
+  --fnum: 46px;
+  --frail: clamp(20px, 2.4vw, 30px);
   display: grid;
-  gap: 12px;
+  max-width: 880px;
+  margin-top: clamp(30px, 3.5vw, 44px);
   padding: 0;
   list-style: none;
 }
 
-.step {
+.fstep {
+  position: relative;
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 16px;
-  width: 100%;
-  padding: 18px 22px;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  text-align: start;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  grid-template-columns: var(--fnum) 1fr;
+  gap: var(--frail);
+  padding-bottom: clamp(34px, 4vw, 54px);
 }
 
-.step:hover {
-  border-color: var(--gold);
+/* מקטע הקו שמחבר את השלב לשלב שאחריו; באחרון אין המשך */
+.fstep::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  inset-inline-start: calc(var(--fnum) / 2 - 0.5px);
+  width: 1px;
+  background: var(--border);
 }
 
-.step.is-open {
-  box-shadow: var(--shadow-card);
+.fstep:last-child {
+  padding-bottom: 0;
 }
 
-.step.is-highlight {
-  border-inline-start: 4px solid var(--gold);
-  background: var(--cream);
+.fstep:last-child::before {
+  display: none;
 }
 
-.step .step__num {
+/* רקע העמוד מסתיר את הקו מאחורי המספר, כך שהוא יושב עליו */
+.fstep__num {
+  position: relative;
+  z-index: 1;
   display: flex;
-  flex-shrink: 0;
-  line-height: 1;
-  text-align: center;
   align-items: center;
   justify-content: center;
+  width: var(--fnum);
+  height: var(--fnum);
   padding: 0;
-  width: 34px;
-  height: 34px;
+  border: 1px solid var(--border);
   border-radius: 50%;
-  background: var(--navy);
-  color: var(--white);
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.step__label {
-  font-size: 17px;
-  font-weight: 700;
+  background: var(--paper);
   color: var(--navy);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1;
 }
 
-.step__chev {
-  color: var(--muted);
-  transition: transform 0.2s ease;
+.fstep__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* מיישר את מרכז הכותרת למרכז המספר */
+  min-height: var(--fnum);
+  font-size: clamp(19px, 1.8vw, 23px);
 }
 
-.step.is-open .step__chev {
-  transform: rotate(180deg);
+.fstep__icon {
+  display: inline-flex;
+  flex: none;
+  color: var(--teal);
 }
 
-/* מיושר מתחת לכותרת השלב, כדי שהקשר לשורה שמעליו יהיה ברור */
-.step__text {
-  max-width: 900px;
-  margin: 0;
-  padding: 0 72px 18px;
+.fstep__text {
+  max-width: 66ch;
+  margin: 4px 0 0;
   color: #3b4757;
 }
 
-.steps__actions {
-  margin-top: 18px;
+/* השלב האחרון — האתגר: רקע קרם עדין וקו זהב בצד הקריאה, ללא מסגרת וללא צל */
+.fstep--mark .fstep__num {
+  border-color: var(--gold);
+}
+
+.fstep--mark .fstep__text {
+  max-width: 62ch;
+  margin-top: 10px;
+  padding: 16px 22px;
+  border-inline-start: 2px solid var(--gold);
+  background: var(--cream);
+}
+
+.fsteps__actions {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+  margin-top: clamp(30px, 3.5vw, 44px);
 }
 
 /* ---------- תחנה 9 — עדשות ---------- */
@@ -857,7 +873,15 @@
   .of__cases {
     margin-inline-start: 6px;
   }
-  .step__text {
-    padding-inline: 22px;
+  /* תחנה 7 — מסלול צר יותר במסך קטן */
+  .fsteps {
+    --fnum: 40px;
+    --frail: 16px;
+  }
+  .fstep__num {
+    font-size: 17px;
+  }
+  .fstep--mark .fstep__text {
+    padding: 14px 16px;
   }
 }
