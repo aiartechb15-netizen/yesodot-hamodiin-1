@@ -1,30 +1,30 @@
-/* Hero — קומפוזיציה אחת רציפה: התצלום כרקע של כל האזור, הטקסט יושב בשטח הריק שבצד ימין. */
+/* מסך פתיחה מלא: שתי מחציות — תצלום העין בשמאל, ובימין שם הקורס,
+   קו זהב וכפתור בלבד. ה-Hero ממלא בדיוק את יתרת המסך שמתחת ל-Header,
+   כך שכרטיסי הפרקים נמצאים מיד מתחת לקו הקיפול ואינם נראים בטעינה. */
 .hero {
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-height: 610px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  min-height: calc(100vh - var(--header-h));
+  /* svh מודד את המסך כשסרגלי הדפדפן במובייל גלויים — בלי חיתוך תוכן */
+  min-height: calc(100svh - var(--header-h));
   background-color: var(--cream);
-  background-image: url('../../assets/images/תמונה.png');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  border-bottom: 1px solid var(--border);
   scroll-margin-top: var(--header-h);
 }
 
-/* בלוק התוכן יושב בשטח הבהיר, מעט שמאלה ממרכזו של הצד הימני */
-.hero__textInner {
-  width: 40%;
-  max-width: 620px;
-  /* inline-start ב-RTL הוא צד ימין — מרחק מהקצה הימני של ה-Hero */
-  margin-inline-start: 15%;
+/* אזור הכותרת — ממורכז אנכית ואופקית במחצית הימנית */
+.hero__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(28px, 4vw, 60px);
   text-align: center;
 }
 
-/* שתי המילים בשורה אחת — הגודל מותאם כדי שייכנסו בנוחות ברוחב הבלוק */
+/* שורה אחת בדסקטופ; המינימום נשמר נמוך מספיק כדי שגם במסך צר לא תישבר */
 .hero__title {
-  font-size: clamp(38px, 5.2vw, 76px);
+  font-size: clamp(34px, 4.4vw, 62px);
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -32,76 +32,66 @@
   white-space: nowrap;
 }
 
-/* קו זהב עם נקודה במרכזו:  —— ● —— */
-.hero__rule {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-block: 30px 26px;
+.hero .hero__rule {
+  margin-block: clamp(20px, 2.4vw, 30px) clamp(26px, 3vw, 38px);
 }
 
-.hero__ruleLine {
-  display: block;
-  width: 74px;
-  height: 2px;
-  background: var(--gold);
-  border-radius: 2px;
-}
-
-.hero__ruleDot {
-  display: block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--gold);
-}
-
-/* תת-כותרת */
-.hero__tagline {
-  font-size: clamp(20px, 1.9vw, 26px);
-  font-weight: 700;
-  line-height: 1.4;
-  color: var(--navy);
-  margin-bottom: 16px;
-}
-
-/* שתי שורות ההסבר */
-.hero__lead {
-  font-size: clamp(17px, 1.35vw, 19px);
-  line-height: 1.95;
-  color: #3b4757;
-  margin-bottom: 34px;
-}
-
-/* ספציפיות גבוהה מ-.btn הגלובלי, כדי שה-padding הנדיב ייכנס לתוקף */
 .hero .hero__cta {
-  min-width: 250px;
-  padding: 18px 46px;
-  font-size: 18px;
+  padding: 16px 40px;
 }
 
-@media (max-width: 1100px) {
-  .hero__textInner {
-    width: 46%;
-    margin-inline-start: 8%;
-  }
+/* התצלום ממלא את המחצית השמאלית; cover חותך בלבד ואינו מותח,
+   ו-object-position שומר את מרכז העין בתוך הפריים. */
+.hero__art {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 14% center;
+}
+
+/* דעיכה רכה אל האזור הבהיר, כדי שלא ייווצר קצה חד בין התצלום לטקסט */
+.hero__art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to right, transparent 70%, var(--cream) 100%),
+    linear-gradient(to top, transparent 92%, var(--cream) 100%),
+    linear-gradient(to bottom, transparent 92%, var(--cream) 100%),
+    /* דעיכה קלה גם בקצה השמאלי, כדי שהחיתוך שם יימוג ולא ייראה כקו */
+    linear-gradient(to left, transparent 95%, var(--cream) 100%);
 }
 
 @media (max-width: 860px) {
+  /* גם במובייל זהו מסך פתיחה שלם: התצלום למעלה, הכותרת והכפתור
+     ממורכזים ביתרת הגובה. min-height ולא height, כדי שתוכן גבוה
+     מהמסך יימשך למטה במקום להיחתך. */
   .hero {
-    min-height: 0;
-    padding-block: 56px 64px;
-    /* בצד ימין של התצלום יש שטח קרם נקי — עליו יושב הטקסט במסך צר */
-    background-position: right center;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
   }
-  .hero__textInner {
-    width: 100%;
-    max-width: none;
-    margin-inline: auto;
-    padding-inline: var(--gutter);
+  .hero__art {
+    order: -1;
+    /* חלק יחסי מגובה המסך, כדי שהתצלום לא ייראה כפס דק */
+    height: clamp(240px, 42vh, 380px);
   }
-  .hero__ruleLine {
-    width: 58px;
+  .hero__img {
+    object-position: 18% center;
+  }
+  /* הדעיכה החזקה עוברת לקצה התחתון — הצד שפונה עכשיו לכותרת */
+  .hero__art::after {
+    background:
+      linear-gradient(to bottom, transparent 72%, var(--cream) 100%),
+      linear-gradient(to right, transparent 94%, var(--cream) 100%);
+  }
+  .hero__panel {
+    padding-block: clamp(36px, 8vw, 56px);
   }
 }

@@ -1,3 +1,11 @@
+/* אזור הפרקים — יעד הגלילה של "התחלת הקורס".
+   scroll-margin-top: 0 מבטל את ערך ברירת המחדל של .section, כך שרק
+   ה-scroll-padding הגלובלי חל והאזור נעצר בדיוק מתחת ל-Header. */
+#topics {
+  scroll-margin-top: 0;
+  padding-top: clamp(76px, 8vw, 120px);
+}
+
 .topics {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
