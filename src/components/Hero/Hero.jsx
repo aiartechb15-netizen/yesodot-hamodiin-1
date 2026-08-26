@@ -1,28 +1,26 @@
 import { hero } from '../../data/chapter1'
-import eyeImage from '../../assets/images/תמונת מסך עין.png'
+import openerImage from '../../assets/images/Frame 1 (2).png'
 import './Hero.css'
 
-/** הכפתור אינו מנווט לפרק אלא גולל לאזור הפרקים שמתחת ל-Hero.
+/** הכפתור אינו מנווט לפרק אלא גולל לאזור הפרקים שמתחת למסך הפתיחה.
     עוגן ולא onClick, כדי שהגלילה תשתמש ב-scroll-behavior הגלובלי
     ותכבד אוטומטית prefers-reduced-motion. */
 const TOPICS_ANCHOR = '#topics'
 
-/* מסך פתיחה: תצלום בצד שמאל, ובצד ימין רק שם הקורס, קו זהב וכפתור. */
+/* מסך הפתיחה הוא תצלום העיצוב עצמו: הכותרת, הטקסט והכפתור מודפסים
+   בתוכו. הכפתור שבתצלום מקבל שכבת קישור שקופה מעליו, שיושבת באחוזים
+   מתוך המסגרת ולכן נשארת מדויקת בכל רזולוציה. */
 export default function Hero() {
   return (
     <section className="hero" id="hero" aria-labelledby="hero-title">
-      <div className="hero__panel">
-        <h1 className="hero__title" id="hero-title">
-          {hero.title}
-        </h1>
-        <span className="gold-rule gold-rule--center hero__rule" aria-hidden="true" />
-        <a className="btn hero__cta" href={TOPICS_ANCHOR}>
-          {hero.cta}
-        </a>
-      </div>
+      {/* הכותרת מודפסת בתצלום; כאן היא קיימת לקוראי מסך ולמבנה המסמך בלבד */}
+      <h1 className="sr-only" id="hero-title">
+        {hero.title}
+      </h1>
 
-      <div className="hero__art" aria-hidden="true">
-        <img className="hero__img" src={eyeImage} alt="" />
+      <div className="hero__frame">
+        <img className="hero__img" src={openerImage} alt="" />
+        <a className="hero__cta" href={TOPICS_ANCHOR} aria-label={hero.cta} />
       </div>
     </section>
   )

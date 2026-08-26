@@ -1,97 +1,91 @@
-/* מסך פתיחה מלא: שתי מחציות — תצלום העין בשמאל, ובימין שם הקורס,
-   קו זהב וכפתור בלבד. ה-Hero ממלא בדיוק את יתרת המסך שמתחת ל-Header,
-   כך שכרטיסי הפרקים נמצאים מיד מתחת לקו הקיפול ואינם נראים בטעינה. */
+/* מסך פתיחה — תצלום העיצוב ממלא את המסך הראשון כולו.
+   המסגרת מחושבת בעצמה לפי יחס התמונה (במקום להסתמך רק על object-fit),
+   כדי ששכבת הלחיצה שבתוכה תישאר בדיוק מעל הכפתור המודפס בתצלום. */
 .hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: stretch;
-  min-height: calc(100vh - var(--header-h));
-  /* svh מודד את המסך כשסרגלי הדפדפן במובייל גלויים — בלי חיתוך תוכן */
-  min-height: calc(100svh - var(--header-h));
-  background-color: var(--cream);
-  scroll-margin-top: var(--header-h);
-}
-
-/* אזור הכותרת — ממורכז אנכית ואופקית במחצית הימנית */
-.hero__panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(28px, 4vw, 60px);
-  text-align: center;
-}
-
-/* שורה אחת בדסקטופ; המינימום נשמר נמוך מספיק כדי שגם במסך צר לא תישבר */
-.hero__title {
-  font-size: clamp(34px, 4.4vw, 62px);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  color: var(--navy);
-  white-space: nowrap;
-}
-
-.hero .hero__rule {
-  margin-block: clamp(20px, 2.4vw, 30px) clamp(26px, 3vw, 38px);
-}
-
-.hero .hero__cta {
-  padding: 16px 40px;
-}
-
-/* התצלום ממלא את המחצית השמאלית; cover חותך בלבד ואינו מותח,
-   ו-object-position שומר את מרכז העין בתוך הפריים. */
-.hero__art {
+  --hero-ratio: 1.7211;
   position: relative;
+  container-type: size;
+  width: 100%;
+  height: 100vh;
+  /* svh מודד את המסך כשסרגלי הדפדפן במובייל גלויים — בלי חיתוך תוכן */
+  height: 100svh;
   overflow: hidden;
 }
 
+/* גיבוי מטושטש של אותה תמונה, ממלא את מה שנשאר כשיחס המסך שונה
+   מיחס התמונה. כך אין שוליים לבנים באף רזולוציה. */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../../assets/images/Frame 1 (2).png') center / cover no-repeat;
+  filter: blur(28px) saturate(0.92);
+  transform: scale(1.12);
+}
+
+/* ברירת המחדל (מסכי דסקטופ): המסגרת מכסה את כל האזור.
+   max() שקול ל-object-fit: cover, אבל כאן גם שכבת הלחיצה נסחפת יחד
+   עם התמונה ולכן נשארת מיושרת.
+   העיגון לימין במקום למרכז: כשיש חיתוך אופקי הוא נלקח כולו מצד
+   התיק, כך שהכותרת והכפתור שבצד ימין לעולם אינם נחתכים. */
+.hero__frame {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 100%;
+  width: max(100cqw, calc(100cqh * var(--hero-ratio)));
+  height: max(100cqh, calc(100cqw / var(--hero-ratio)));
+}
+
+/* object-fit כאן הוא רשת ביטחון: אם דפדפן אינו תומך ביחידות container
+   המסגרת נשארת 100%/100%, והתמונה עדיין לא תתעוות */
 .hero__img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 14% center;
-}
-
-/* דעיכה רכה אל האזור הבהיר, כדי שלא ייווצר קצה חד בין התצלום לטקסט */
-.hero__art::after {
-  content: '';
-  position: absolute;
-  inset: 0;
+  /* התמונה דקורטיבית: בלי זה היא עלולה לחטוף את הלחיצה מהשכבה שמעליה */
   pointer-events: none;
-  background:
-    linear-gradient(to right, transparent 70%, var(--cream) 100%),
-    linear-gradient(to top, transparent 92%, var(--cream) 100%),
-    linear-gradient(to bottom, transparent 92%, var(--cream) 100%),
-    /* דעיכה קלה גם בקצה השמאלי, כדי שהחיתוך שם יימוג ולא ייראה כקו */
-    linear-gradient(to left, transparent 95%, var(--cream) 100%);
 }
 
-@media (max-width: 860px) {
-  /* גם במובייל זהו מסך פתיחה שלם: התצלום למעלה, הכותרת והכפתור
-     ממורכזים ביתרת הגובה. min-height ולא height, כדי שתוכן גבוה
-     מהמסך יימשך למטה במקום להיחתך. */
+/* שכבת הלחיצה — שקופה לחלוטין, בדיוק בגודל ובמיקום של הכפתור
+   שבתצלום (1002,465 ברוחב 168 וגובה 56, בתוך 1234x717).
+   left/top פיזיים בכוונה, כדי שכיוון ה-RTL לא יהפוך אותם. */
+.hero__cta {
+  position: absolute;
+  left: 81.2%;
+  top: 64.85%;
+  width: 13.61%;
+  height: 7.81%;
+  background: none;
+  border: 0;
+}
+
+/* מתחת ליחס 1.55 — טאבלטים ומובייל. כיסוי מלא היה מוחק את הכותרת,
+   והכנסת כל התמונה הייתה מקטינה אותה לרצועה בלתי קריאה. לכן המסגרת
+   מוגדלת כך שהחלק הימני של העיצוב — הכותרת, הטקסט והכפתור — ממלא את
+   הרוחב בגודל קריא, והשאר נחתך מצד התיק. מה שנשאר מעל ומתחת מתמלא
+   בגיבוי המטושטש, כך שאין שוליים לבנים. */
+@media (max-aspect-ratio: 155 / 100) {
   .hero {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
+    --hero-reveal: 0.58;
   }
-  .hero__art {
-    order: -1;
-    /* חלק יחסי מגובה המסך, כדי שהתצלום לא ייראה כפס דק */
-    height: clamp(240px, 42vh, 380px);
+  .hero__frame {
+    width: min(calc(100cqw / var(--hero-reveal)), calc(100cqh * var(--hero-ratio)));
+    height: min(calc(100cqw / var(--hero-reveal) / var(--hero-ratio)), 100cqh);
   }
-  .hero__img {
-    object-position: 18% center;
-  }
-  /* הדעיכה החזקה עוברת לקצה התחתון — הצד שפונה עכשיו לכותרת */
-  .hero__art::after {
-    background:
-      linear-gradient(to bottom, transparent 72%, var(--cream) 100%),
-      linear-gradient(to right, transparent 94%, var(--cream) 100%);
-  }
-  .hero__panel {
-    padding-block: clamp(36px, 8vw, 56px);
-  }
+}
+
+/* מסך הפתיחה הוא המסך המלא של האתר, ולכן ה-Header אינו מוצג מעליו.
+   הכלל ממוקד בעמוד הבית בלבד — ‎.hero‎ אינו קיים בשאר העמודים —
+   ואינו נוגע בקומפוננטת ה-Header עצמה. */
+body:has(.hero) .hdr {
+  display: none;
+}
+
+/* בלי Header, העוגן אינו צריך לשמור מקום בראש המסך */
+html:has(.hero) {
+  scroll-padding-top: 24px;
 }
