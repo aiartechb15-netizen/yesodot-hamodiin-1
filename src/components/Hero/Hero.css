@@ -6,9 +6,10 @@
   position: relative;
   container-type: size;
   width: 100%;
-  height: 100vh;
+  /* יתרת המסך שמתחת ל-Header, כך שכל העיצוב נכנס במסך הראשון */
+  height: calc(100vh - var(--header-h));
   /* svh מודד את המסך כשסרגלי הדפדפן במובייל גלויים — בלי חיתוך תוכן */
-  height: 100svh;
+  height: calc(100svh - var(--header-h));
   overflow: hidden;
 }
 
@@ -76,16 +77,4 @@
     width: min(calc(100cqw / var(--hero-reveal)), calc(100cqh * var(--hero-ratio)));
     height: min(calc(100cqw / var(--hero-reveal) / var(--hero-ratio)), 100cqh);
   }
-}
-
-/* מסך הפתיחה הוא המסך המלא של האתר, ולכן ה-Header אינו מוצג מעליו.
-   הכלל ממוקד בעמוד הבית בלבד — ‎.hero‎ אינו קיים בשאר העמודים —
-   ואינו נוגע בקומפוננטת ה-Header עצמה. */
-body:has(.hero) .hdr {
-  display: none;
-}
-
-/* בלי Header, העוגן אינו צריך לשמור מקום בראש המסך */
-html:has(.hero) {
-  scroll-padding-top: 24px;
 }
