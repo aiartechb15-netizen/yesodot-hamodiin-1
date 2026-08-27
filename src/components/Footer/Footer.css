@@ -37,9 +37,18 @@
 
 .ftr__credits {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  /* במסך צר השורה נשברת כיחידה שלמה, ולא באמצע השם */
+  flex-wrap: wrap;
+}
+
+.ftr__creditsSep {
+  width: 1px;
+  height: 15px;
+  flex: none;
+  background: rgba(255, 255, 255, 0.28);
 }
 
 .ftr__creditsTitle {
@@ -51,6 +60,7 @@
 .ftr__creditsName {
   color: rgba(255, 255, 255, 0.55);
   font-size: 13.5px;
+  white-space: nowrap;
 }
 
 @media (max-width: 620px) {
@@ -60,6 +70,6 @@
     gap: 20px;
   }
   .ftr__credits {
-    align-items: flex-start;
+    justify-content: flex-start;
   }
 }

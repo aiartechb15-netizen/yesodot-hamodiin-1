@@ -33,10 +33,13 @@ export default function Hero() {
 
     event.preventDefault()
 
-    // אותו קיזוז שה-scroll-padding הגלובלי נותן לעוגנים, כדי שהכותרת
-    // של אזור הפרקים לא תיחבא מתחת ל-Header
+    // אותו קיזוז שהדפדפן נותן לעוגנים: scroll-padding של העמוד ועוד
+    // ה-scroll-margin של היעד. בלי החיבור הזה הגלילה נעצרת 16px מוקדם
+    // מדי, ורצועה מתחתית מסך הפתיחה נשארת גלויה מתחת ל-Header
     const styles = getComputedStyle(document.documentElement)
-    const offset = parseFloat(styles.scrollPaddingTop) || 0
+    const offset =
+      (parseFloat(styles.scrollPaddingTop) || 0) +
+      (parseFloat(getComputedStyle(target).scrollMarginTop) || 0)
     const start = window.scrollY
     const end = Math.min(
       target.getBoundingClientRect().top + start - offset,

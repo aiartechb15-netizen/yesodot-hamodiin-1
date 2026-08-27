@@ -2,15 +2,15 @@
    הגובה הוא יתרת המסך אחרי שניהם, כך שבמסך דסקטופ רגיל נראים
    שלושתם יחד — Header, הכרטיסים ותחילת ה-Footer — בלי גלילה. */
 #topics {
-  /* הגובה הנמדד של ה-Footer, ועוד הקיזוז שהעוגן מותיר מתחת ל-Header.
-     שניהם כמשתנים ולא כמספרי קסם בתוך ה-calc, כדי שיהיה ברור מה
-     מנוכה מגובה המסך ולמה */
+  /* הגובה הנמדד של ה-Footer, כמשתנה ולא כמספר קסם בתוך ה-calc, כדי
+     שיהיה ברור מה מנוכה מגובה המסך ולמה. הרצועה משלימה בדיוק את
+     המסך: בלי זה הגלילה נעצרת מוקדם מדי ורצועה מתחתית מסך הפתיחה
+     נשארת גלויה מתחת ל-Header */
   --footer-h: 132px;
-  --anchor-gap: 16px;
   display: flex;
   align-items: center;
-  min-height: calc(100vh - var(--header-h) - var(--footer-h) - var(--anchor-gap));
-  min-height: calc(100svh - var(--header-h) - var(--footer-h) - var(--anchor-gap));
+  min-height: calc(100vh - var(--header-h) - var(--footer-h));
+  min-height: calc(100svh - var(--header-h) - var(--footer-h));
   /* אסימטרי בכוונה: המרווח התחתון גדול מהעליון, ולכן הכרטיסים יושבים
      מעל אמצע הרצועה ולא בדיוק במרכזה */
   padding-block: clamp(24px, 4vh, 56px) clamp(72px, 13vh, 150px);

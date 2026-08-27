@@ -14,8 +14,10 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* שורה אחת: כותרת, מפריד אנכי עדין, ואחריו שם היוצרת */}
         <div className="ftr__credits">
           <span className="ftr__creditsTitle">{footer.credits.title}</span>
+          <span className="ftr__creditsSep" aria-hidden="true" />
           <span className="ftr__creditsName">{footer.credits.text}</span>
         </div>
       </div>
