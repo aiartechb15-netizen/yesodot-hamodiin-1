@@ -1,15 +1,19 @@
-/* מסך בחירת הפרקים — מסך בפני עצמו, בגובה מסך מלא, ובו שלושת
-   הכרטיסים בלבד, ממורכזים אנכית ואופקית. ה-Footer מגיע רק אחריו.
-   scroll-margin-top: 0 מבטל את ערך ברירת המחדל של .section, כך שרק
-   ה-scroll-padding הגלובלי חל והמסך נעצר בדיוק מתחת ל-Header. */
+/* מסך בחירת הפרקים — הרצועה שבין ה-Header ל-Footer, ולא מסך מלא.
+   הגובה הוא יתרת המסך אחרי שניהם, כך שבמסך דסקטופ רגיל נראים
+   שלושתם יחד — Header, הכרטיסים ותחילת ה-Footer — בלי גלילה. */
 #topics {
+  /* הגובה הנמדד של ה-Footer, ועוד הקיזוז שהעוגן מותיר מתחת ל-Header.
+     שניהם כמשתנים ולא כמספרי קסם בתוך ה-calc, כדי שיהיה ברור מה
+     מנוכה מגובה המסך ולמה */
+  --footer-h: 132px;
+  --anchor-gap: 16px;
   display: flex;
   align-items: center;
-  min-height: 100vh;
-  min-height: 100svh;
-  padding-block: clamp(40px, 5vw, 72px);
-  /* מבטל את ה-16px שה-scroll-padding הגלובלי מוסיף, כך שהמסך נעצר
-     צמוד ל-Header ולא נשארת רצועה ממסך הפתיחה מעליו */
+  min-height: calc(100vh - var(--header-h) - var(--footer-h) - var(--anchor-gap));
+  min-height: calc(100svh - var(--header-h) - var(--footer-h) - var(--anchor-gap));
+  /* אסימטרי בכוונה: המרווח התחתון גדול מהעליון, ולכן הכרטיסים יושבים
+     מעל אמצע הרצועה ולא בדיוק במרכזה */
+  padding-block: clamp(24px, 4vh, 56px) clamp(72px, 13vh, 150px);
   scroll-margin-top: -16px;
 }
 
@@ -27,12 +31,15 @@
   align-items: stretch;
 }
 
-/* גובה קבוע ולא יחס-צדדים: שלושת הכרטיסים יוצאים זהים לחלוטין
-   בכל רוחב מסך, בלי הפרשי עיגול של פיקסל בודד */
+/* גובה נגזר מהרצועה ולא קבוע: שלושת הכרטיסים יוצאים זהים לחלוטין
+   בכל רוחב מסך, וגדלים יחד עם המסך כך שהרצועה מתמלאת ולא נשארת ריקה.
+   58vh-165px הוא כשבעים אחוז מגובה הרצועה הפנוי (100svh פחות
+   ה-Header, ה-Footer וה-padding) — היתרה היא המרווחים מלמעלה
+   ומלמטה. היחס נשאר לרוחב בכל רוחב מסך דסקטופ. */
 .topic {
   position: relative;
   display: block;
-  height: clamp(255px, 28vh, 300px);
+  height: clamp(255px, calc(58vh - 165px), 470px);
   overflow: hidden;
   background: var(--cream);
   border: 1px solid var(--border);
@@ -115,30 +122,20 @@
   font-size: clamp(20px, 1.5vw, 24px);
 }
 
+/* הפס הזהוב הוא כעת סוגר הכרטיס ולא מפריד לפני CTA, ולכן אין לו
+   שוליים תחתונים שידחפו את גוש הטקסט מעלה מהמרכז */
 .topic__body .gold-rule--sm {
-  margin-block: 12px 14px;
-}
-
-.topic__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14.5px;
-  font-weight: 700;
-  color: var(--teal);
-}
-
-.topic__arrow {
-  transition: transform 0.2s ease;
-}
-
-.topic:hover .topic__arrow {
-  transform: translateX(-4px);
+  margin-block: 12px 0;
 }
 
 @media (max-width: 1000px) {
   .topics {
     grid-template-columns: repeat(2, 1fr);
+  }
+  /* בשתי עמודות הכרטיסים נערמים לשתי שורות, ולכן הגובה נגזר מהרוחב
+     ולא מהמסך — אחרת שתי שורות של כרטיס גבוה דוחפות את ה-Footer מטה */
+  .topic {
+    height: clamp(230px, 34vw, 320px);
   }
 }
 
