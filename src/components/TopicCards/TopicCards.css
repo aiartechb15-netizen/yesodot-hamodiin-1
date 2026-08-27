@@ -1,15 +1,30 @@
-/* אזור הפרקים — יעד הגלילה של "התחלת הקורס".
+/* מסך בחירת הפרקים — מסך בפני עצמו, בגובה מסך מלא, ובו שלושת
+   הכרטיסים בלבד, ממורכזים אנכית ואופקית. ה-Footer מגיע רק אחריו.
    scroll-margin-top: 0 מבטל את ערך ברירת המחדל של .section, כך שרק
-   ה-scroll-padding הגלובלי חל והאזור נעצר בדיוק מתחת ל-Header. */
+   ה-scroll-padding הגלובלי חל והמסך נעצר בדיוק מתחת ל-Header. */
 #topics {
-  scroll-margin-top: 0;
-  padding-top: clamp(76px, 8vw, 120px);
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-block: clamp(40px, 5vw, 72px);
+  /* מבטל את ה-16px שה-scroll-padding הגלובלי מוסיף, כך שהמסך נעצר
+     צמוד ל-Header ולא נשארת רצועה ממסך הפתיחה מעליו */
+  scroll-margin-top: -16px;
+}
+
+/* שוליים סימטריים שנעצרים ב-5 ס"מ, כדי שהכרטיסים ינצלו את רוחב המסך */
+#topics .container {
+  width: 100%;
+  max-width: none;
+  padding-inline: clamp(16px, 5vw, 5cm);
 }
 
 .topics {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: clamp(20px, 2vw, 36px);
+  align-items: stretch;
 }
 
 .topic {
