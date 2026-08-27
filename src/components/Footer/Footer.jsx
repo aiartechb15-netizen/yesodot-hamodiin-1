@@ -1,11 +1,8 @@
-import { useState } from 'react'
 import Icon from '../Icons/Icons'
 import { footer } from '../../data/chapter1'
 import './Footer.css'
 
 export default function Footer() {
-  const [open, setOpen] = useState(false)
-
   return (
     <footer className="ftr">
       <div className="container ftr__inner">
@@ -17,30 +14,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <nav className="ftr__nav" aria-label="קישורים">
-          <ul className="ftr__links">
-            {footer.links.map((l) => (
-              <li key={l.label}>
-                <a href={l.href}>{l.label}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-
-      <div className="container ftr__credits">
-        <button
-          className="ftr__creditsBtn"
-          type="button"
-          aria-expanded={open}
-          aria-controls="ftr-credits-panel"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <Icon name="chevron" size={18} className={open ? 'is-open' : ''} />
-          <span>{footer.credits.title}</span>
-        </button>
-        <div id="ftr-credits-panel" className="ftr__creditsPanel" hidden={!open}>
-          <p>{footer.credits.text}</p>
+        <div className="ftr__credits">
+          <span className="ftr__creditsTitle">{footer.credits.title}</span>
+          <span className="ftr__creditsName">{footer.credits.text}</span>
         </div>
       </div>
     </footer>

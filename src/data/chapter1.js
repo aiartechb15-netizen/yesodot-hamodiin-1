@@ -887,14 +887,9 @@ export const nextLesson = {
 export const footer = {
   title: 'יסודות המודיעין',
   tagline: 'קורס מתוקשב — רמות ותכליות המודיעין',
-  links: [
-    { label: 'צור קשר', href: '#' },
-    { label: 'מדיניות פרטיות', href: '#' },
-    { label: 'תנאי שימוש', href: '#' },
-  ],
   credits: {
     title: 'קרדיטים',
-    text: 'שמות ותפקידים יוזנו בהמשך',
+    text: 'יוצרת האתר הודיה בן גיגי',
   },
 }
 
