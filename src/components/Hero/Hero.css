@@ -78,39 +78,3 @@
     height: min(calc(100cqw / var(--hero-reveal) / var(--hero-ratio)), 100cqh);
   }
 }
-
-/* ---------- המעבר בלחיצה על "התחלת הקורס" ---------- */
-/* מסך הפתיחה דוהה ועולה מעט, ומיד אחריו הכרטיסים נכנסים מלמטה.
-   הגלילה עצמה מתבצעת כשמסך הפתיחה כבר שקוף, ולכן אינה נראית כגלילה.
-   אורכי האנימציה חייבים להתאים ל-EXIT_MS ו-ENTER_MS ב-Hero.jsx. */
-.hero--exit {
-  animation: heroExit 420ms ease both;
-}
-
-@keyframes heroExit {
-  to {
-    opacity: 0;
-    transform: translateY(-24px);
-  }
-}
-
-/* מסך הפרקים הוא השכן של מסך הפתיחה, ולכן אפשר להגיע אליו בבורר
-   אחים בלי לגעת בקומפוננטה או בעיצוב שלו */
-.hero--handoff ~ #topics .topics {
-  animation: topicsEnter 520ms ease both;
-}
-
-@keyframes topicsEnter {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-}
-
-/* העדפת תנועה מופחתת — המעבר מבוטל, והמסך מתחלף מיידית */
-@media (prefers-reduced-motion: reduce) {
-  .hero--exit,
-  .hero--handoff ~ #topics .topics {
-    animation: none;
-  }
-}

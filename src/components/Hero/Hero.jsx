@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { hero } from '../../data/chapter1'
 import openerImage from '../../assets/images/Frame 1 (2).png'
 import './Hero.css'
@@ -9,19 +9,20 @@ import './Hero.css'
 const TOPICS_ANCHOR = '#topics'
 const TOPICS_ID = 'topics'
 
-/* אורכי המעבר; חייבים להתאים לערכים ב-Hero.css */
-const EXIT_MS = 420
-const ENTER_MS = 520
+/* אורך הגלילה. ארוך מברירת המחדל של הדפדפן בכוונה: המסך הראשון גבוה,
+   וגלילה מהירה מדי נקראת כקפיצה במקום כמעבר. */
+const SCROLL_MS = 900
+
+/* ease-in-out — יציאה רכה מהמנוחה, האטה רכה ביעד */
+const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2)
 
 /* מסך הפתיחה הוא תצלום העיצוב עצמו: הכותרת, הטקסט והכפתור מודפסים
    בתוכו. הכפתור שבתצלום מקבל שכבת קישור שקופה מעליו, שיושבת באחוזים
    מתוך המסגרת ולכן נשארת מדויקת בכל רזולוציה. */
 export default function Hero() {
-  // idle → exit (מסך הפתיחה דוהה ועולה) → enter (הכרטיסים נכנסים) → idle
-  const [phase, setPhase] = useState('idle')
-  const timers = useRef([])
+  const frame = useRef(0)
 
-  useEffect(() => () => timers.current.forEach(clearTimeout), [])
+  useEffect(() => () => cancelAnimationFrame(frame.current), [])
 
   const startCourse = (event) => {
     const target = document.getElementById(TOPICS_ID)
@@ -31,26 +32,39 @@ export default function Hero() {
     if (!target || reducedMotion) return
 
     event.preventDefault()
-    setPhase('exit')
 
-    // הגלילה מתבצעת כשמסך הפתיחה כבר שקוף, ולכן אינה נראית כגלילה
-    timers.current.push(
-      setTimeout(() => {
-        // 'instant' ולא 'auto': auto מציית ל-scroll-behavior: smooth הגלובלי,
-        // וזה היה הופך את הקפיצה לגלילה נראית לעין
-        target.scrollIntoView({ behavior: 'instant', block: 'start' })
-        window.history.replaceState(null, '', TOPICS_ANCHOR)
-        setPhase('enter')
-      }, EXIT_MS),
+    // אותו קיזוז שה-scroll-padding הגלובלי נותן לעוגנים, כדי שהכותרת
+    // של אזור הפרקים לא תיחבא מתחת ל-Header
+    const styles = getComputedStyle(document.documentElement)
+    const offset = parseFloat(styles.scrollPaddingTop) || 0
+    const start = window.scrollY
+    const end = Math.min(
+      target.getBoundingClientRect().top + start - offset,
+      document.documentElement.scrollHeight - window.innerHeight,
     )
 
-    timers.current.push(setTimeout(() => setPhase('idle'), EXIT_MS + ENTER_MS))
+    cancelAnimationFrame(frame.current)
+    let t0 = null
+
+    const step = (now) => {
+      if (t0 === null) t0 = now
+      const progress = Math.min((now - t0) / SCROLL_MS, 1)
+      // 'instant' ולא ברירת המחדל: בלעדיו כל פריים היה נכנס לגלילה
+      // חלקה משלו בגלל scroll-behavior: smooth הגלובלי, והשתיים היו
+      // נאבקות זו בזו
+      window.scrollTo({ top: start + (end - start) * ease(progress), behavior: 'instant' })
+      if (progress < 1) {
+        frame.current = requestAnimationFrame(step)
+      } else {
+        window.history.replaceState(null, '', TOPICS_ANCHOR)
+      }
+    }
+
+    frame.current = requestAnimationFrame(step)
   }
 
-  const phaseClass = phase === 'exit' ? ' hero--exit' : phase === 'enter' ? ' hero--handoff' : ''
-
   return (
-    <section className={`hero${phaseClass}`} id="hero" aria-labelledby="hero-title">
+    <section className="hero" id="hero" aria-labelledby="hero-title">
       {/* הכותרת מודפסת בתצלום; כאן היא קיימת לקוראי מסך ולמבנה המסמך בלבד */}
       <h1 className="sr-only" id="hero-title">
         {hero.title}
