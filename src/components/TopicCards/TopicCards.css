@@ -27,14 +27,17 @@
   align-items: stretch;
 }
 
+/* גובה קבוע ולא יחס-צדדים: שלושת הכרטיסים יוצאים זהים לחלוטין
+   בכל רוחב מסך, בלי הפרשי עיגול של פיקסל בודד */
 .topic {
+  position: relative;
   display: block;
-  height: 100%;
-  background: var(--white);
+  height: clamp(255px, 28vh, 300px);
+  overflow: hidden;
+  background: var(--cream);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
-  padding: 14px 14px 26px;
   color: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
@@ -52,48 +55,85 @@
   border-color: var(--border);
 }
 
-/* מסגרת התמונה — רוחב וגובה זהים בשלושת הכרטיסים, ללא תלות
-   ביחס הצדדים של קובץ המקור. היחס נקבע כאן ולא על התמונה עצמה. */
-.topic__media {
-  width: 100%;
-  aspect-ratio: 16 / 11;
-  overflow: hidden;
-  border-radius: var(--radius-sm);
-  background: var(--cream);
-}
-
+/* התצלום ממלא את הכרטיס כולו. object-position מוסט ימינה בתוך
+   התצלום, כך שמרכז התמונה נופל באזור השמאלי — החלק שאינו מכוסה */
 .topic__img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
-  max-height: none;
-  min-height: 0;
-  margin: 0;
-  padding: 0;
   object-fit: cover;
-  object-position: center;
-  /* מונע ריכוך של התצלום בהקטנה */
-  image-rendering: auto;
-  transition: transform 0.3s ease;
+  object-position: 70% 50%;
+  transition: transform 0.4s ease;
 }
 
 .topic:hover .topic__img {
-  transform: scale(1.02);
+  transform: scale(1.04);
 }
 
+/* המסך הקרמי — נפתח מהקצה הימני ונמוג אל תוך התצלום.
+   רדיאלי ולא ליניארי, כדי שהמפגש בין הטקסט לתמונה יהיה רך ולא קו.
+   251 248 241 הוא --paper; הוא נכתב כרכיבים כדי לשלוט בשקיפות. */
+.topic__veil {
+  --veil: 251 248 241;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    72% 145% at 100% 50%,
+    rgb(var(--veil) / 1) 0%,
+    rgb(var(--veil) / 0.99) 42%,
+    rgb(var(--veil) / 0.86) 58%,
+    rgb(var(--veil) / 0.46) 74%,
+    rgb(var(--veil) / 0.12) 88%,
+    rgb(var(--veil) / 0) 100%
+  );
+}
+
+/* padding-inline: התחלה (ימין) לטקסט, סוף (שמאל) שומר את מחצית
+   הכרטיס פנויה לתצלום */
 .topic__body {
-  text-align: center;
-  padding-top: 20px;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-inline: clamp(20px, 2.2vw, 30px) 42%;
+  text-align: right;
+}
+
+.topic__kicker {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--gold);
 }
 
 .topic__title {
-  font-size: 22px;
+  margin-top: 6px;
+  font-size: clamp(20px, 1.5vw, 24px);
 }
 
-.topic__caption {
-  display: block;
-  font-size: 13.5px;
-  color: var(--muted);
+.topic__body .gold-rule--sm {
+  margin-block: 12px 14px;
+}
+
+.topic__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.topic__arrow {
+  transition: transform 0.2s ease;
+}
+
+.topic:hover .topic__arrow {
+  transform: translateX(-4px);
 }
 
 @media (max-width: 1000px) {
@@ -105,6 +145,12 @@
 @media (max-width: 760px) {
   .topics {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 18px;
+  }
+  .topic {
+    height: clamp(178px, 46vw, 230px);
+  }
+  .topic__body {
+    padding-inline: 22px 44%;
   }
 }
