@@ -3,7 +3,7 @@ import { hero } from '../../data/chapter1'
 import openerImage from '../../assets/images/Frame 1 (2).png'
 import './Hero.css'
 
-/** הכפתור מוביל לאזור הפרקים שמתחת למסך הפתיחה. הוא נשאר עוגן אמיתי,
+/** החץ מוביל לאזור הפרקים שמתחת למסך הפתיחה. הוא נשאר עוגן אמיתי,
     כדי שיעבוד גם בלי JS, בפתיחה בלשונית חדשה, וכשהמשתמש ביקש
     להפחית תנועה. */
 const TOPICS_ANCHOR = '#topics'
@@ -16,9 +16,8 @@ const SCROLL_MS = 900
 /* ease-in-out — יציאה רכה מהמנוחה, האטה רכה ביעד */
 const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2)
 
-/* מסך הפתיחה הוא תצלום העיצוב עצמו: הכותרת, הטקסט והכפתור מודפסים
-   בתוכו. הכפתור שבתצלום מקבל שכבת קישור שקופה מעליו, שיושבת באחוזים
-   מתוך המסגרת ולכן נשארת מדויקת בכל רזולוציה. */
+/* מסך הפתיחה הוא תצלום העיצוב עצמו: הכותרת והטקסט מודפסים בתוכו.
+   ההמשך אל הפרקים נעשה בחץ שבתחתית המסך — רמז ולא קריאה לפעולה. */
 export default function Hero() {
   const frame = useRef(0)
 
@@ -75,8 +74,22 @@ export default function Hero() {
 
       <div className="hero__frame">
         <img className="hero__img" src={openerImage} alt="" />
-        <a className="hero__cta" href={TOPICS_ANCHOR} aria-label={hero.cta} onClick={startCourse} />
       </div>
+
+      {/* רמז להמשך: חץ בתחתית המסך, מחוץ למסגרת התמונה כדי שיישאר
+          במרכז המסך ובמרחק קבוע מתחתיתו בכל רזולוציה */}
+      <a className="hero__down" href={TOPICS_ANCHOR} aria-label={hero.cta} onClick={startCourse}>
+        <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path
+            d="m6 9.5 6 6 6-6"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </a>
     </section>
   )
 }
