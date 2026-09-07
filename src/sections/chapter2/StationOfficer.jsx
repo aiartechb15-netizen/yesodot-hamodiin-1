@@ -141,14 +141,6 @@ export default function StationOfficer() {
         <Viewpoints />
       </div>
 
-      {/* המסר המרכזי — פס לרוחב העמוד, ציר האמצע שכל השאר נמדד ביחס אליו */}
-      <div className="of__banner">
-        <div className="container">
-          <span className="of__bannerLabel">{ol.callout.label}</span>
-          <p className="of__bannerText">{ol.callout.text}</p>
-        </div>
-      </div>
-
       <div className="container of__tail">
         <section className="of__block" aria-labelledby="ch2-officer-dangers">
           <h3 className="of__blockTitle" id="ch2-officer-dangers">

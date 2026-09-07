@@ -129,7 +129,7 @@
 
 /* ---------- תחנה 4 — הקמ״ן והקברניט ---------- */
 /* כל התחנה בנויה סביב משתנה אחד: המרחק בין השניים.
-   פתיח מרוכז ← פיצול לשתי נקודות מבט ← פס המסר המרכזי ← שני קצוות הציר ← מקרי בוחן. */
+   פתיח מרוכז ← פיצול לשתי נקודות מבט ← שני קצוות הציר ← מקרי בוחן. */
 
 .of__head {
   text-align: center;
@@ -252,36 +252,11 @@
   color: var(--ink-soft);
 }
 
-/* ---- המסר המרכזי — פס כהה לרוחב העמוד ---- */
-.of__banner {
-  margin-block: clamp(46px, 6vw, 78px);
-  padding-block: clamp(40px, 5vw, 62px);
-  background: var(--navy);
-  text-align: center;
-}
-
-.of__bannerLabel {
-  display: block;
-  margin-bottom: 14px;
-  color: var(--gold);
-  font-size: 14.5px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-}
-
-.of__bannerText {
-  max-width: 26ch;
-  margin-inline: auto;
-  color: var(--white);
-  font-size: clamp(23px, 2.3vw, 32px);
-  font-weight: 700;
-  line-height: 1.5;
-}
-
 /* ---- שני הקצוות ומקרי הבוחן ---- */
 .of__tail {
   display: grid;
   gap: clamp(46px, 6vw, 76px);
+  margin-top: clamp(46px, 6vw, 76px);
 }
 
 .of__blockTitle {
