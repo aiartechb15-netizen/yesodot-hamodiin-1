@@ -60,7 +60,7 @@
 
 .acc__panelInner {
   padding: 0 22px 22px;
-  color: #3b4757;
+  color: var(--ink-soft);
   border-inline-start: 0;
 }
 

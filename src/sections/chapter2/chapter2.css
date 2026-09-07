@@ -90,7 +90,7 @@
 
 .ch2hero__text-body {
   font-size: 17.5px;
-  color: #3b4757;
+  color: var(--ink-soft);
   margin-bottom: 30px;
 }
 
@@ -106,7 +106,7 @@
   font-size: 12.5px;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: var(--teal);
+  color: var(--teal-ink);
   margin-bottom: 6px;
 }
 
@@ -247,7 +247,7 @@
 .of__sideText {
   max-width: 44ch;
   margin: 0;
-  color: #3b4757;
+  color: var(--ink-soft);
 }
 
 /* ---- המסר המרכזי — פס כהה לרוחב העמוד ---- */
@@ -390,7 +390,7 @@
 .of__note {
   grid-row: 2;
   margin: clamp(18px, 2.2vw, 26px) 0 0;
-  color: #3b4757;
+  color: var(--ink-soft);
 }
 
 .of__note--a {
@@ -457,7 +457,7 @@
 }
 
 .of__caseWhen {
-  color: var(--teal);
+  color: var(--teal-ink);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -466,7 +466,7 @@
 .of__caseText {
   max-width: 42ch;
   margin: 10px 0 0;
-  color: #3b4757;
+  color: var(--ink-soft);
 }
 
 /* ---------- תחנה 6 — תוצרים ---------- */
@@ -515,7 +515,7 @@
 .product__cue {
   font-size: 13.5px;
   font-weight: 700;
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 .product__icon {
@@ -536,7 +536,7 @@
 }
 
 .product__text {
-  color: #3b4757;
+  color: var(--ink-soft);
   margin: 0;
 }
 
@@ -663,7 +663,7 @@
 .fstep__text {
   max-width: 56ch;
   margin: 4px 0 0;
-  color: #3b4757;
+  color: var(--ink-soft);
 }
 
 /* ---------- תחנה 9 — עדשות ---------- */
@@ -749,7 +749,7 @@
 .lens__body {
   display: flex;
   flex-direction: column;
-  color: #3b4757;
+  color: var(--ink-soft);
   font-size: 15.5px;
 }
 
@@ -771,7 +771,7 @@
   padding-top: 10px;
   font-size: 13.5px;
   font-weight: 700;
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 /* ---------- תחנה 9 — מה בוחנים ---------- */
@@ -786,7 +786,7 @@
   max-width: 900px;
   position: relative;
   padding-inline-start: 28px;
-  color: #3b4757;
+  color: var(--ink-soft);
 }
 
 .examine li::before {

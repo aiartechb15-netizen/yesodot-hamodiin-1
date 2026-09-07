@@ -104,8 +104,8 @@
 }
 
 .quiz__opt.is-wrong {
-  background: rgba(160, 60, 50, 0.07);
-  border-bottom-color: #a03c32;
+  background: var(--danger-soft);
+  border-bottom-color: var(--danger);
 }
 
 .quiz__hint {
@@ -166,14 +166,14 @@
 }
 
 .quiz__chip.is-wrong {
-  background: rgba(160, 60, 50, 0.08);
-  border-color: #a03c32;
+  background: var(--danger-soft);
+  border-color: var(--danger);
 }
 
 .quiz__stmtFeedback {
   margin: 12px 0 0;
   font-size: 15px;
-  color: #3b4757;
+  color: var(--ink-soft);
   border-top: 1px dashed var(--border);
   padding-top: 10px;
 }
@@ -191,8 +191,8 @@
 }
 
 .quiz__feedback.is-wrong {
-  border-color: #a03c32;
-  background: rgba(160, 60, 50, 0.07);
+  border-color: var(--danger);
+  background: var(--danger-soft);
 }
 
 .quiz__feedbackTitle {
@@ -205,7 +205,7 @@
 }
 
 .quiz__feedback.is-wrong .quiz__feedbackTitle {
-  color: #a03c32;
+  color: var(--danger);
 }
 
 .quiz__feedback p {
@@ -267,7 +267,7 @@
 }
 
 .quiz__topic.is-weak .quiz__topicMeter span {
-  background: #a03c32;
+  background: var(--danger);
 }
 
 .quiz__topicLevel {

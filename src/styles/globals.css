@@ -37,7 +37,7 @@ body {
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   direction: rtl;
-  text-align: right;
+  text-align: start;
   overflow-x: hidden;
 }
 
@@ -73,24 +73,65 @@ h4 {
   margin: 0;
   font-weight: 700;
   color: var(--navy);
-  line-height: 1.25;
+  line-height: var(--lh-heading);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+  font-weight: 800;
+  line-height: var(--lh-tight);
   letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+}
+
+/* h4 בגופן הגוף ולא בגופן הכותרות — הוא כותרת משנה בתוך פסקה,
+   ובגודל הזה הסנס הגיאומטרי נקרא ככותרת ולא כטקסט */
+h4 {
+  font-size: var(--fs-h4);
+  font-family: var(--font-body);
 }
 
 p {
   margin: 0 0 1em;
+  /* אורך שורה הוא הפרמטר החשוב ביותר לקריאוּת. אל תבטלו את זה
+     כדי "למלא את הרוחב" — יש .wide לחריגים אמיתיים. */
+  max-width: 68ch;
 }
 
 p:last-child {
   margin-bottom: 0;
 }
 
+/* טקסט ממורכז מאבד את המרכוז ברגע שיש לו max-width, ולכן מקבל
+   שוליים אוטומטיים שמחזירים אותו למרכז המכל */
+[style*='text-align: center'] > p,
+.text-center p,
+.section-title--center + * p {
+  margin-inline: auto;
+}
+
+/* חריג מפורש לכלל 68ch — לטקסט שהוא חלק ממבנה ולא מפסקה קריאה */
+.wide {
+  max-width: none;
+}
+
 a {
   color: var(--navy-secondary);
   text-decoration: none;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
 }
 
 a:hover {
+  color: var(--navy);
   text-decoration: underline;
 }
 
@@ -154,6 +195,34 @@ svg {
   color: var(--teal-light);
 }
 
+/* היפוך צבעי הטקסט על רקע נייבי. הגוונים הכהים (--teal-ink, --gold-ink)
+   נועדו לרקע בהיר וכהים מדי כאן, ולכן חוזרים ל---teal-light. */
+.section--navy h1,
+.section--navy h2,
+.section--navy h3,
+.section--navy h4 {
+  color: var(--white);
+}
+
+.section--navy p,
+.section--navy li,
+.section--navy .lead {
+  color: var(--teal-light);
+}
+
+.section--navy .muted {
+  color: rgba(198, 225, 224, 0.72);
+}
+
+.section--navy a:not(.btn) {
+  color: var(--teal-light);
+}
+
+.section--navy .kicker,
+.section--navy .callout--teal .callout__label {
+  color: var(--teal-light);
+}
+
 /* העוגנים נעצרים מתחת ל-Header בלבד */
 .chapterPage .section,
 .chapterPage .ch2hero,
@@ -190,13 +259,16 @@ svg {
 }
 
 /* ---------- typography helpers ---------- */
+/* התווית הקטנה מעל הכותרת — הסימן המזהה של המערכת.
+   בטורקיז הכהה ולא ב---teal: בגודל הזה --teal נכשל בניגודיות AA. */
 .kicker {
-  font-size: 13px;
+  display: block;
+  font-size: var(--fs-xs);
   font-weight: 700;
   letter-spacing: 0.14em;
-  color: var(--teal);
+  color: var(--teal-ink);
   text-transform: none;
-  margin-bottom: 10px;
+  margin-bottom: var(--s-3);
 }
 
 .section-title {
@@ -207,13 +279,14 @@ svg {
   text-align: center;
 }
 
+/* הקו הזהב הקצר מתחת לכותרת — 46×3 פיקסלים, לא יותר */
 .gold-rule {
   display: block;
-  width: 74px;
+  width: 46px;
   height: 3px;
   background: var(--gold);
   border-radius: 2px;
-  margin-block: 18px 22px;
+  margin-block: var(--s-4) var(--s-5);
 }
 
 .gold-rule--center {
@@ -221,14 +294,16 @@ svg {
 }
 
 .gold-rule--sm {
-  width: 48px;
+  width: 46px;
   height: 2px;
-  margin-block: 12px 14px;
+  margin-block: var(--s-3) var(--s-4);
 }
 
 .lead {
-  font-size: 18px;
+  font-size: var(--fs-lead);
+  line-height: 1.62;
   color: var(--text);
+  max-width: 62ch;
 }
 
 .muted {
@@ -244,16 +319,57 @@ svg {
   color: var(--navy-secondary);
 }
 
+/* ---------- תבליטים ----------
+   ריבוע זהב מעוגל קלות, אף פעם לא bullet של הדפדפן */
+.bullets {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--s-3);
+  max-width: 68ch;
+}
+
+.bullets li {
+  position: relative;
+  padding-inline-start: var(--s-5);
+}
+
+.bullets li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.72em;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--gold);
+}
+
+.bullets--teal li::before {
+  background: var(--teal);
+}
+
+/* ---------- טבלה ----------
+   נגללת אופקית בתוך המסגרת שלה, כדי שהעמוד עצמו לא ייגלל לרוחב */
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-card);
+}
+
 /* ---------- cards ---------- */
+/* לבן · גבול בז׳ · רדיוס 14px · צל עדין · ריפוד 24px. זה הכל. */
 .card {
   background: var(--white);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
 }
 
 .card--pad {
-  padding: 26px 28px;
+  padding: var(--s-5);
 }
 
 .card-title {
@@ -306,25 +422,27 @@ svg {
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 22px 26px;
+  padding: var(--s-5);
   box-shadow: var(--shadow-sm);
 }
 
+/* תווית עילית זעירה בזהב הכהה — הזהב עצמו נכשל בניגודיות בגודל הזה */
 .callout__label {
-  display: inline-block;
-  font-size: 13px;
+  display: block;
+  font-size: var(--fs-xs);
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: var(--gold);
-  margin-bottom: 8px;
+  color: var(--gold-ink);
+  margin-bottom: var(--s-2);
 }
 
 .callout--teal {
   background: var(--teal-soft);
+  border-color: rgba(23, 152, 154, 0.24);
 }
 
 .callout--teal .callout__label {
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 .callout--example {
@@ -335,20 +453,27 @@ svg {
   color: var(--navy-secondary);
 }
 
+/* בתוך סקשן קרם ה"דוגמה" הייתה נעלמת ברקע — היא מתהפכת ללבן */
+.section--cream .callout--example {
+  background: var(--white);
+}
+
 /* ---------- buttons ---------- */
+/* יעד מגע 44px מינימום בכל הווריאנטים */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 15px 34px;
+  gap: var(--s-2);
+  min-height: 44px;
+  padding: var(--s-3) var(--s-6);
   border: 1px solid var(--navy);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius);
   background: var(--navy);
   color: var(--white);
   font-weight: 700;
-  font-size: 17px;
-  transition: background-color 0.18s ease, transform 0.18s ease;
+  font-size: var(--fs-body);
+  transition: background-color var(--dur) var(--ease), transform var(--dur-fast) var(--ease);
 }
 
 .btn:hover {
@@ -367,13 +492,39 @@ svg {
 }
 
 .btn--ghost:hover {
-  background: rgba(7, 26, 45, 0.06);
+  background: var(--navy-06);
   color: var(--navy);
 }
 
+/* קטן בריפוד ובגופן, אבל לא ביעד המגע — 44px נשמר */
 .btn--sm {
-  padding: 10px 22px;
-  font-size: 15px;
+  padding: var(--s-2) var(--s-5);
+  font-size: var(--fs-small);
+}
+
+/* על רקע נייבי: לבן מלא, או רפאים עם גבול טורקיז שקוף */
+.btn--onNavy {
+  background: var(--white);
+  border-color: var(--white);
+  color: var(--navy);
+}
+
+.btn--onNavy:hover {
+  background: var(--teal-light);
+  border-color: var(--teal-light);
+  color: var(--navy);
+}
+
+.btn--ghostOnNavy {
+  background: transparent;
+  border-color: rgba(198, 225, 224, 0.35);
+  color: var(--teal-light);
+}
+
+.btn--ghostOnNavy:hover {
+  background: rgba(198, 225, 224, 0.12);
+  border-color: rgba(198, 225, 224, 0.5);
+  color: var(--white);
 }
 
 .btn[disabled] {
@@ -384,7 +535,7 @@ svg {
 /* ---------- misc ---------- */
 .skip-link {
   position: absolute;
-  right: 16px;
+  inset-inline-start: 16px;
   top: -80px;
   z-index: 200;
   background: var(--white);

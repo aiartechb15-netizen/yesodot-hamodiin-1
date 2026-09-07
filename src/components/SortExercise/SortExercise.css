@@ -144,12 +144,12 @@
 }
 
 .sortx__placedChip.is-wrong {
-  background: rgba(160, 60, 50, 0.08);
-  border-color: #a03c32;
+  background: var(--danger-soft);
+  border-color: var(--danger);
 }
 
 .sortx__placedChip.is-wrong svg {
-  color: #a03c32;
+  color: var(--danger);
 }
 
 .sortx__feedbackWrap:focus {
@@ -165,8 +165,8 @@
 }
 
 .sortx__feedback.is-wrong {
-  border-color: #a03c32;
-  background: rgba(160, 60, 50, 0.07);
+  border-color: var(--danger);
+  background: var(--danger-soft);
 }
 
 .sortx__feedbackTitle {
@@ -179,7 +179,7 @@
 }
 
 .sortx__feedback.is-wrong .sortx__feedbackTitle {
-  color: #a03c32;
+  color: var(--danger);
 }
 
 .sortx__feedback p {
@@ -191,7 +191,7 @@
   padding-top: 10px;
   border-top: 1px dashed var(--border);
   font-size: 15px;
-  color: #3b4757;
+  color: var(--ink-soft);
 }
 
 .sortx__actions {

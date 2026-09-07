@@ -251,7 +251,7 @@
 .xcards__panelText {
   margin: 0;
   font-size: 16.5px;
-  color: #3b4757;
+  color: var(--ink-soft);
 }
 
 .xcards__panelInner {

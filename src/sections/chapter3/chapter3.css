@@ -68,8 +68,8 @@
 }
 
 .ch3hero .btn:hover {
-  background: #d3b45c;
-  border-color: #d3b45c;
+  background: var(--gold-lift);
+  border-color: var(--gold-lift);
 }
 
 /* מה נלמד בפרק */
@@ -228,7 +228,7 @@
 .lvls__tag {
   font-size: 12px;
   font-weight: 700;
-  color: var(--teal);
+  color: var(--teal-ink);
   background: var(--teal-soft);
   border-radius: 999px;
   padding: 3px 10px;
@@ -371,7 +371,7 @@
 }
 
 .flow3__circle--0 {
-  background: #8fbcbb;
+  background: var(--teal-smoke);
 }
 .flow3__circle--1 {
   background: var(--teal);
@@ -498,7 +498,7 @@
 }
 
 .abbr__text {
-  color: #3b4757;
+  color: var(--ink-soft);
   font-size: 15.5px;
 }
 
@@ -506,7 +506,7 @@
   margin-top: auto;
   font-size: 13.5px;
   font-weight: 700;
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 /* ---------- מודיעין למטרות (תחנה 10) ---------- */
@@ -617,7 +617,7 @@
 }
 
 .t3 tbody td {
-  color: #3b4757;
+  color: var(--ink-soft);
 }
 
 .t3 tbody tr:last-child th,
@@ -664,7 +664,7 @@
 .t3card__val {
   display: block;
   font-size: 15.5px;
-  color: #3b4757;
+  color: var(--ink-soft);
 }
 
 /* ---------- responsive ---------- */

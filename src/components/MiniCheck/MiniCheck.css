@@ -89,8 +89,8 @@
 }
 
 .mcheck__opt.is-wrong {
-  background: rgba(160, 60, 50, 0.07);
-  border-color: #a03c32;
+  background: var(--danger-soft);
+  border-color: var(--danger);
 }
 
 .mcheck__feedbackWrap:focus {
@@ -106,8 +106,8 @@
 }
 
 .mcheck__feedback.is-wrong {
-  border-color: #a03c32;
-  background: rgba(160, 60, 50, 0.07);
+  border-color: var(--danger);
+  background: var(--danger-soft);
 }
 
 .mcheck__feedback p {
@@ -125,7 +125,7 @@
 }
 
 .mcheck__feedback.is-wrong .mcheck__feedbackTitle {
-  color: #a03c32;
+  color: var(--danger);
 }
 
 .mcheck__actions {

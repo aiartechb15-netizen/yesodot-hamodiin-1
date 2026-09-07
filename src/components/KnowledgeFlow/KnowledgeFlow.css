@@ -55,7 +55,7 @@
 }
 
 .kflow__circle--0 {
-  background: #8fbcbb;
+  background: var(--teal-smoke);
 }
 .kflow__circle--1 {
   background: var(--teal);
@@ -120,7 +120,7 @@
 }
 
 .kmini__circle--0 {
-  background: #8fbcbb;
+  background: var(--teal-smoke);
 }
 .kmini__circle--1 {
   background: var(--teal);

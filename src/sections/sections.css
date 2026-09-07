@@ -13,7 +13,7 @@
   position: relative;
   padding-inline-start: 30px;
   font-size: 16.5px;
-  color: #3b4757;
+  color: var(--ink-soft);
 }
 
 .open__list li::before {
@@ -116,7 +116,7 @@
   font-size: clamp(38px, 4vw, 52px);
   font-weight: 700;
   line-height: 1;
-  color: var(--gold);
+  color: var(--gold-ink);
   letter-spacing: 0.02em;
 }
 
@@ -226,7 +226,7 @@
 }
 
 .meet__side--red .meet__dot {
-  background: #a03c32;
+  background: var(--danger);
 }
 
 .meet__side--blue .meet__dot {
@@ -235,7 +235,7 @@
 
 .meet__text {
   margin: 0;
-  color: #3b4757;
+  color: var(--ink-soft);
 }
 
 /* שני אזורי תוכן מקבילים — גריד סימטרי, אותו רוחב ואותו גובה */
@@ -318,20 +318,20 @@
 }
 
 .proc__step--0 .proc__term {
-  color: #8f3830;
+  color: var(--danger);
 }
 
 .proc__step--1 .proc__term {
-  color: #8a6f1f;
+  color: var(--gold-ink);
 }
 
 .proc__step--2 .proc__term {
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 .proc__text {
   margin: 0;
-  color: #3b4757;
+  color: var(--ink-soft);
 }
 
 /* ---------- אזור הדוגמה ---------- */
@@ -617,7 +617,7 @@
 .domain__num {
   font-size: 13px;
   font-weight: 700;
-  color: var(--gold);
+  color: var(--gold-ink);
   text-align: center;
 }
 
@@ -641,7 +641,7 @@
 
 .domain__text {
   margin: 0;
-  color: #3b4757;
+  color: var(--ink-soft);
 }
 
 /* ---------- שיעור הבא ---------- */

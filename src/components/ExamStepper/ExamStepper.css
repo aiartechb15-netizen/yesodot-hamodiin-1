@@ -23,7 +23,7 @@
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 .exam__count {
@@ -135,8 +135,8 @@
 }
 
 .exam__opt.is-wrong {
-  background: rgba(160, 60, 50, 0.07);
-  border-color: #a03c32;
+  background: var(--danger-soft);
+  border-color: var(--danger);
 }
 
 .exam__match {
@@ -156,7 +156,7 @@
 }
 
 .exam__matchRow.is-wrong {
-  border-color: #a03c32;
+  border-color: var(--danger);
 }
 
 .exam__matchText {
@@ -192,8 +192,8 @@
 }
 
 .exam__feedback.is-wrong {
-  border-color: #a03c32;
-  background: rgba(160, 60, 50, 0.07);
+  border-color: var(--danger);
+  background: var(--danger-soft);
 }
 
 .exam__feedbackTitle {
@@ -206,7 +206,7 @@
 }
 
 .exam__feedback.is-wrong .exam__feedbackTitle {
-  color: #a03c32;
+  color: var(--danger);
 }
 
 .exam__feedback p {

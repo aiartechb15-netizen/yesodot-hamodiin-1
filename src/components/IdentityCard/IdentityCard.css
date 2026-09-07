@@ -60,7 +60,7 @@
 
 .idcard__text {
   margin: 0;
-  color: #3b4757;
+  color: var(--ink-soft);
 }
 
 .idcard__questions {

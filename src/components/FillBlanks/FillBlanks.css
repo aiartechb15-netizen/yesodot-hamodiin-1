@@ -10,7 +10,7 @@
   font-size: 12.5px;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: var(--teal);
+  color: var(--teal-ink);
   margin-bottom: 10px;
 }
 
@@ -59,8 +59,8 @@
 }
 
 .fill__item.is-wrong {
-  border-color: #a03c32;
-  background: rgba(160, 60, 50, 0.05);
+  border-color: var(--danger);
+  background: var(--danger-soft);
 }
 
 .fill__num {
@@ -83,7 +83,7 @@
 .fill__sentence {
   margin: 0;
   line-height: 2.1;
-  color: #3b4757;
+  color: var(--ink-soft);
 }
 
 .fill__slot {
@@ -130,8 +130,8 @@
 }
 
 .fill__feedback.is-wrong {
-  border-color: #a03c32;
-  background: rgba(160, 60, 50, 0.07);
+  border-color: var(--danger);
+  background: var(--danger-soft);
 }
 
 .fill__feedbackTitle {
@@ -144,7 +144,7 @@
 }
 
 .fill__feedback.is-wrong .fill__feedbackTitle {
-  color: #a03c32;
+  color: var(--danger);
 }
 
 .fill__feedback p {

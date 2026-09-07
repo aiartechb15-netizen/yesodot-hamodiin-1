@@ -2,7 +2,7 @@
   overflow-x: auto;
   background: var(--white);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
 }
 
@@ -15,21 +15,21 @@
 
 .cmp__table th,
 .cmp__table td {
-  padding: 16px 20px;
+  padding: var(--s-4) var(--s-5);
   text-align: start;
   vertical-align: top;
   border-bottom: 1px solid var(--border);
 }
 
+/* שורת הכותרת בקרם ובגופן הכותרות — הנייבי היה משטח רביעי בטבלה
+   שכבר יושבת על כרטיס לבן */
 .cmp__table thead th {
-  background: var(--navy);
-  color: var(--white);
-  font-size: 16.5px;
-  border-bottom: 0;
-}
-
-.cmp__table thead th:first-child {
-  background: var(--navy-secondary);
+  background: var(--cream);
+  color: var(--navy);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--fs-body);
+  border-bottom: 1px solid var(--border);
 }
 
 .cmp__corner {
@@ -44,7 +44,7 @@
 }
 
 .cmp__table tbody td {
-  color: #3b4757;
+  color: var(--ink-soft);
 }
 
 .cmp__table tbody tr:last-child th,
