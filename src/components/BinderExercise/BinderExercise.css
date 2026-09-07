@@ -79,19 +79,19 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   margin-bottom: 16px;
   border-radius: 50%;
   background: var(--navy);
   color: var(--white);
   font-weight: 700;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .binder__text {
   padding-inline: 20px;
-  font-size: 15.5px;
+  font-size: 17.5px;
   line-height: 1.65;
   color: var(--ink-soft);
 }
@@ -153,7 +153,7 @@
 
 .binders__feedback p {
   margin: 0 0 12px;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .binders__feedback p:last-child {

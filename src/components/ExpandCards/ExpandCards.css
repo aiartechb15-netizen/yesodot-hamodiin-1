@@ -7,7 +7,7 @@
 }
 
 .xcards__progressText {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--navy-secondary);
 }
@@ -30,7 +30,7 @@
 }
 
 .xcards__done {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--teal);
   font-weight: 600;
 }
@@ -121,8 +121,8 @@
 .xcard__title {
   display: flex;
   align-items: center;
-  min-height: 47px;
-  font-size: 16.5px;
+  min-height: 52px;
+  font-size: 18.5px;
   font-weight: 700;
   color: var(--navy);
   line-height: 1.4;
@@ -250,7 +250,7 @@
 
 .xcards__panelText {
   margin: 0;
-  font-size: 16.5px;
+  font-size: 18.5px;
   color: var(--ink-soft);
 }
 

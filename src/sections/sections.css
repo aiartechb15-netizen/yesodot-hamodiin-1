@@ -12,7 +12,7 @@
 .open__list li {
   position: relative;
   padding-inline-start: 30px;
-  font-size: 16.5px;
+  font-size: 18.5px;
   color: var(--ink-soft);
 }
 
@@ -94,7 +94,7 @@
 
 .lsys__lead {
   max-width: 900px;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .lsys__meet {
@@ -134,7 +134,7 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 8px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--navy);
 }
@@ -234,7 +234,7 @@
 }
 
 .proc__term {
-  font-size: 16.5px;
+  font-size: 18.5px;
   margin-bottom: 4px;
 }
 
@@ -267,7 +267,7 @@
 .inset__label {
   display: block;
   margin-bottom: 8px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--navy-secondary);
@@ -305,7 +305,7 @@
 .keyIdea__text {
   max-width: 720px;
   margin: clamp(26px, 3vw, 34px) auto 0;
-  font-size: 18.5px;
+  font-size: 20.5px;
   font-weight: 600;
   line-height: 1.65;
   color: var(--navy);
@@ -318,7 +318,7 @@
 }
 
 .reflect__q {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   color: var(--navy);
   margin-bottom: 14px;
@@ -329,7 +329,7 @@
   min-height: 130px;
   padding: 14px 16px;
   font: inherit;
-  font-size: 16px;
+  font-size: 18px;
   color: var(--text);
   background: var(--white);
   border: 1px solid var(--border);
@@ -340,7 +340,7 @@
 .reflect__saved {
   display: block;
   margin-top: 8px;
-  font-size: 14px;
+  font-size: 16px;
   color: var(--teal);
 }
 
@@ -397,14 +397,14 @@
   line-height: 1;
   text-align: center;
   flex-shrink: 0;
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
   flex: none;
   margin: 0;
   border-radius: 50%;
   background: var(--cream);
   color: var(--navy);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
 }
 
@@ -414,7 +414,7 @@
 
 .ladder__name {
   font-weight: 700;
-  font-size: 16.5px;
+  font-size: 18.5px;
 }
 
 .ladder__arrow {
@@ -471,7 +471,7 @@
 }
 
 .domain__num {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--gold-ink);
   text-align: center;
@@ -490,7 +490,7 @@
 }
 
 .domain__title {
-  font-size: 17.5px;
+  font-size: 19.5px;
   font-weight: 700;
   color: var(--navy);
 }

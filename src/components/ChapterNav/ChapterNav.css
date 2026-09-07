@@ -43,14 +43,14 @@
 .chnav__title {
   flex: 1;
   font-family: var(--font-heading);
-  font-size: 12.5px;
+  font-size: 14.5px;
   font-weight: 700;
   letter-spacing: 0.12em;
   color: var(--teal-ink);
 }
 
 .chnav__count {
-  font-size: 12.5px;
+  font-size: 14.5px;
   font-weight: 700;
   color: var(--muted);
 }
@@ -77,12 +77,12 @@
 .chnav__link {
   position: relative;
   display: grid;
-  grid-template-columns: 18px minmax(0, 1fr);
+  grid-template-columns: 20px minmax(0, 1fr);
   align-items: baseline;
   gap: 8px;
   padding-block: 7px;
   padding-inline-end: 6px;
-  font-size: 14.5px;
+  font-size: 16.5px;
   line-height: 1.42;
   color: var(--ink-soft);
   transition: color var(--dur) var(--ease);
@@ -133,7 +133,7 @@
 }
 
 .chnav__num {
-  font-size: 11.5px;
+  font-size: 13.5px;
   font-weight: 700;
   color: var(--muted);
   text-align: start;
@@ -185,14 +185,14 @@
   }
 
   .chnav__toggleKicker {
-    font-size: 11.5px;
+    font-size: 13.5px;
     font-weight: 700;
     letter-spacing: 0.1em;
     color: var(--teal-ink);
   }
 
   .chnav__toggleCurrent {
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 700;
     color: var(--navy);
     /* שם מקטע ארוך נחתך ולא שובר את גובה הפס */
@@ -204,7 +204,7 @@
   .chnav__toggleCount {
     margin-inline-start: auto;
     flex: none;
-    font-size: 12.5px;
+    font-size: 14.5px;
     font-weight: 700;
     color: var(--muted);
   }
@@ -269,6 +269,6 @@
   /* במגירה יש מקום — הפריטים גדולים יותר ליעד מגע נוח */
   .chnav__link {
     padding-block: 10px;
-    font-size: 15.5px;
+    font-size: 17.5px;
   }
 }

@@ -7,7 +7,7 @@
 
 .fill__bankLabel {
   display: block;
-  font-size: 12.5px;
+  font-size: 14.5px;
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--teal-ink);
@@ -25,7 +25,7 @@
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: 999px;
-  font-size: 14.5px;
+  font-size: 16.5px;
   font-weight: 600;
   color: var(--navy);
 }
@@ -71,12 +71,12 @@
   line-height: 1;
   text-align: center;
   flex-shrink: 0;
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: var(--cream);
   color: var(--navy);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
 }
 
@@ -93,7 +93,7 @@
 
 .fill__select {
   font: inherit;
-  font-size: 15.5px;
+  font-size: 17.5px;
   font-weight: 600;
   color: var(--navy);
   padding: 5px 10px;
@@ -112,7 +112,7 @@
 .fill__answer {
   grid-column: 2;
   margin: 8px 0 0;
-  font-size: 14.5px;
+  font-size: 16.5px;
   color: var(--muted);
 }
 

@@ -10,7 +10,7 @@
 .st__hint {
   max-width: 820px;
   margin-top: 6px;
-  font-size: 14.5px;
+  font-size: 16.5px;
   color: var(--muted);
 }
 
@@ -67,7 +67,7 @@
 
 .ch2hero__badge {
   display: inline-block;
-  font-size: 12.5px;
+  font-size: 14.5px;
   font-weight: 700;
   letter-spacing: 0.14em;
   color: var(--navy-secondary);
@@ -79,19 +79,19 @@
 }
 
 .ch2hero__title {
-  font-size: clamp(34px, 4.4vw, 56px);
+  font-size: clamp(36px, 4.4vw, 56px);
   line-height: 1.1;
 }
 
 .ch2hero__message {
-  font-size: clamp(19px, 1.8vw, 24px);
+  font-size: clamp(21px, 1.8vw, 26px);
   font-weight: 700;
   color: var(--navy-secondary);
   margin-bottom: 16px;
 }
 
 .ch2hero__text-body {
-  font-size: 17.5px;
+  font-size: 19.5px;
   color: var(--ink-soft);
   margin-bottom: 30px;
 }
@@ -105,7 +105,7 @@
 
 .ch2hero__metaLabel {
   display: block;
-  font-size: 12.5px;
+  font-size: 14.5px;
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--teal-ink);
@@ -113,7 +113,7 @@
 }
 
 .ch2hero__metaText {
-  font-size: 15.5px;
+  font-size: 17.5px;
   color: var(--muted);
   margin: 0;
 }
@@ -123,7 +123,7 @@
 }
 
 .ch2hero__structure {
-  font-size: 14.5px;
+  font-size: 16.5px;
   line-height: 1.9;
 }
 
@@ -264,7 +264,7 @@
   display: block;
   margin-bottom: 14px;
   color: var(--gold);
-  font-size: 12.5px;
+  font-size: 14.5px;
   font-weight: 700;
   letter-spacing: 0.12em;
 }
@@ -273,7 +273,7 @@
   max-width: 26ch;
   margin-inline: auto;
   color: var(--white);
-  font-size: clamp(21px, 2.3vw, 30px);
+  font-size: clamp(23px, 2.3vw, 32px);
   font-weight: 700;
   line-height: 1.5;
 }
@@ -339,7 +339,7 @@
   gap: 12px;
   grid-row: 1;
   margin: 0;
-  font-size: clamp(19px, 1.8vw, 22px);
+  font-size: clamp(21px, 1.8vw, 24px);
 }
 
 .of__end--a {
@@ -445,7 +445,7 @@
   align-items: center;
   gap: 8px;
   color: var(--navy-secondary);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.06em;
 }
@@ -455,12 +455,12 @@
   align-items: baseline;
   gap: 12px;
   margin-top: 8px;
-  font-size: 21px;
+  font-size: 23px;
 }
 
 .of__caseWhen {
   color: var(--teal-ink);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.08em;
 }
@@ -515,7 +515,7 @@
 }
 
 .product__cue {
-  font-size: 13.5px;
+  font-size: 15.5px;
   font-weight: 700;
   color: var(--teal-ink);
 }
@@ -532,7 +532,7 @@
 }
 
 .product__title {
-  font-size: 21px;
+  font-size: 23px;
   color: var(--navy);
   font-weight: 700;
 }
@@ -545,7 +545,7 @@
 .product__link {
   display: inline-block;
   margin-top: 14px;
-  font-size: 14.5px;
+  font-size: 16.5px;
   font-weight: 700;
   color: var(--navy-secondary);
 }
@@ -640,7 +640,7 @@
   border-radius: 50%;
   background: var(--paper);
   color: var(--navy);
-  font-size: 19px;
+  font-size: 21px;
   font-weight: 700;
   line-height: 1;
   text-align: center;
@@ -652,7 +652,7 @@
   gap: 10px;
   /* מיישר את מרכז הכותרת למרכז המספר */
   min-height: var(--fnum);
-  font-size: clamp(19px, 1.7vw, 22px);
+  font-size: clamp(21px, 1.7vw, 24px);
 }
 
 .fstep__icon {
@@ -726,8 +726,8 @@
   position: absolute;
   top: -6px;
   inset-inline-start: -6px;
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   display: flex;
   flex-shrink: 0;
   line-height: 1;
@@ -738,12 +738,12 @@
   border-radius: 50%;
   background: var(--gold);
   color: var(--navy);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
 }
 
 .lens__title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--navy);
 }
@@ -752,7 +752,7 @@
   display: flex;
   flex-direction: column;
   color: var(--ink-soft);
-  font-size: 15.5px;
+  font-size: 17.5px;
 }
 
 .lens__body[hidden] {
@@ -764,14 +764,14 @@
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px dashed var(--border);
-  font-size: 14.5px;
+  font-size: 16.5px;
   color: var(--muted);
 }
 
 .lens__more {
   margin-top: auto;
   padding-top: 10px;
-  font-size: 13.5px;
+  font-size: 15.5px;
   font-weight: 700;
   color: var(--teal-ink);
 }
@@ -917,6 +917,6 @@
     --frail: 16px;
   }
   .fstep__num {
-    font-size: 17px;
+    font-size: 19px;
   }
 }
