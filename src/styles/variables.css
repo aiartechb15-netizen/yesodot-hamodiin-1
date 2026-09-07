@@ -30,11 +30,12 @@
   --page-max: 1500px;
   --gutter: 40px;
 
-  /* typography — מערכת של משפחה אחת בלבד לכל האתר.
+  /* typography — מערכת של משפחה אחת בלבד לכל האתר: Frank Ruhl Libre,
+     סריף עברי. נטען מ-Google Fonts ב-index.html (משקלים 300–900).
      --font-heading מפנה ל---font-primary: אין צורך בפונט כותרות נפרד,
      והמשתנה קיים כדי שאפשר יהיה להחליף כותרות בנקודה אחת בעתיד.
      אין --font-accent: לא נמצא תפקיד שמצדיק משפחה שלישית. */
-  --font-primary: 'Assistant', 'Heebo', 'Segoe UI', 'Arial Hebrew', Arial, sans-serif;
+  --font-primary: 'Frank Ruhl Libre', 'David Libre', 'Frank Ruehl CLM', 'Times New Roman', serif;
   --font-heading: var(--font-primary);
   --fs-hero: clamp(40px, 5.4vw, 68px);
   --fs-h2: clamp(26px, 2.6vw, 38px);
