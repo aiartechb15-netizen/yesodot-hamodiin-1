@@ -1,4 +1,4 @@
-import { chapter3Meta, levels, opener } from '../../data/chapter3'
+import { chapter3Meta, opener, operational } from '../../data/chapter3'
 import './chapter3.css'
 
 const S = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.2, strokeLinecap: 'round', strokeLinejoin: 'round' }
@@ -24,48 +24,27 @@ function OperationArt() {
 
 export default function S1Opener() {
   return (
-    <>
-      <section className="ch3hero" id={opener.id} aria-labelledby="ch3-title">
-        <OperationArt />
-        <div className="ch3hero__inner container">
-          <div className="ch3hero__text">
-            <span className="ch3hero__badge">{chapter3Meta.number}</span>
-            <h1 className="ch3hero__title" id="ch3-title">
-              {chapter3Meta.title}
-            </h1>
-            <span className="gold-rule" aria-hidden="true" />
-            <div className="ch3hero__intro">
-              {chapter3Meta.intro.map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
-            </div>
-            <div className="ch3hero__actions">
-              <a className="btn" href={`#${levels.id}`}>
-                {chapter3Meta.cta}
-              </a>
-            </div>
+    <section className="ch3hero" id={opener.id} aria-labelledby="ch3-title">
+      <OperationArt />
+      <div className="ch3hero__inner container">
+        <div className="ch3hero__text">
+          <span className="ch3hero__badge">{chapter3Meta.number}</span>
+          <h1 className="ch3hero__title" id="ch3-title">
+            {chapter3Meta.title}
+          </h1>
+          <span className="gold-rule" aria-hidden="true" />
+          <div className="ch3hero__intro">
+            {chapter3Meta.intro.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+          </div>
+          <div className="ch3hero__actions">
+            <a className="btn" href={`#${operational.id}`}>
+              {chapter3Meta.cta}
+            </a>
           </div>
         </div>
-      </section>
-
-      <section className="syl" aria-labelledby="ch3-syllabus-title">
-        <div className="container">
-          <h2 className="syl__title" id="ch3-syllabus-title">
-            {chapter3Meta.syllabusTitle}
-          </h2>
-          <span className="gold-rule gold-rule--sm" aria-hidden="true" />
-          <ul className="syl__list">
-            {chapter3Meta.syllabus.map((s, i) => (
-              <li key={s.label}>
-                <a className="syl__item" href={s.to}>
-                  <span className="syl__num ltr-num">{i + 1}</span>
-                  <span className="syl__label">{s.label}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-    </>
+      </div>
+    </section>
   )
 }

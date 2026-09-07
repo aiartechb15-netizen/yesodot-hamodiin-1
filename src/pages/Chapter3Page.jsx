@@ -2,7 +2,6 @@ import NextChapter from '../components/NextChapter/NextChapter'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
 import S1Opener from '../sections/chapter3/S1Opener'
-import S2Levels from '../sections/chapter3/S2Levels'
 import S3Operational from '../sections/chapter3/S3Operational'
 import S4Context from '../sections/chapter3/S4Context'
 import S5Design from '../sections/chapter3/S5Design'
@@ -17,7 +16,7 @@ import S13Exam from '../sections/chapter3/S13Exam'
 
 import { nextChapter } from '../data/chapter3'
 
-// עמוד פרק 3 — "מודיעין אופרטיבי וטקטי" — שלוש עשרה תחנות.
+// עמוד פרק 3 — "מודיעין אופרטיבי וטקטי" — שתים עשרה תחנות.
 export default function Chapter3Page() {
   useDocumentTitle('יסודות המודיעין — פרק 3: מודיעין אופרטיבי וטקטי')
 
@@ -25,7 +24,6 @@ export default function Chapter3Page() {
     <>
       <main id="main" className="chapterPage">
         <S1Opener />
-        <S2Levels />
         <S3Operational />
         <S4Context />
         <S5Design />

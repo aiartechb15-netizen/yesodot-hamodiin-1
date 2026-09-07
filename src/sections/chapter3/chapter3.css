@@ -72,65 +72,6 @@
   border-color: var(--gold-lift);
 }
 
-/* מה נלמד בפרק */
-.syl {
-  background: var(--cream);
-  border-bottom: 1px solid var(--border);
-  padding-block: clamp(40px, 5vw, 64px);
-}
-
-.syl__title {
-  font-size: var(--fs-h3);
-}
-
-.syl__list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px 22px;
-  margin-top: 22px;
-}
-
-.syl__item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  color: inherit;
-  transition: border-color 0.16s ease, transform 0.16s ease;
-}
-
-.syl__item:hover {
-  text-decoration: none;
-  border-color: var(--gold);
-  transform: translateX(-3px);
-}
-
-.syl__num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  line-height: 1;
-  text-align: center;
-  width: 26px;
-  height: 26px;
-  flex: none;
-  border-radius: 50%;
-  background: var(--navy);
-  color: var(--white);
-  font-size: 12.5px;
-  font-weight: 700;
-}
-
-.syl__label {
-  font-weight: 600;
-  color: var(--navy);
-  font-size: 15.5px;
-}
-
 /* ---------- כותרות תחנה ---------- */
 .s3head {
   margin-bottom: clamp(24px, 3vw, 38px);
@@ -150,106 +91,6 @@
   margin-top: 6px;
   font-size: 14.5px;
   color: var(--muted);
-}
-
-/* ---------- רמות המודיעין (תחנה 2) ---------- */
-.lvls {
-  display: grid;
-  grid-template-columns: minmax(300px, 1fr) 1fr;
-  gap: clamp(24px, 4vw, 50px);
-  align-items: start;
-}
-
-.lvls__list {
-  display: grid;
-  gap: 10px;
-  padding: 0;
-  list-style: none;
-}
-
-.lvls__btn {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 14px;
-  width: 100%;
-  padding: 16px 20px;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  text-align: start;
-  transition: border-color 0.18s ease, background-color 0.18s ease;
-}
-
-.lvls__btn:hover {
-  border-color: var(--gold);
-}
-
-.lvls__btn.is-focus {
-  border-inline-start: 4px solid var(--teal);
-}
-
-.lvls__btn.is-active {
-  background: var(--navy);
-  border-color: var(--navy);
-}
-
-.lvls__num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  line-height: 1;
-  text-align: center;
-  flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--cream);
-  color: var(--navy);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.lvls__btn.is-active .lvls__num {
-  background: var(--gold);
-}
-
-.lvls__name {
-  font-weight: 700;
-  font-size: 16.5px;
-  color: var(--navy);
-}
-
-.lvls__btn.is-active .lvls__name {
-  color: var(--white);
-}
-
-.lvls__tag {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--teal-ink);
-  background: var(--teal-soft);
-  border-radius: 999px;
-  padding: 3px 10px;
-  white-space: nowrap;
-}
-
-.lvls__btn.is-active .lvls__tag {
-  background: rgba(255, 255, 255, 0.14);
-  color: var(--teal-light);
-}
-
-.lvls__arrow {
-  display: flex;
-  justify-content: center;
-  color: var(--muted);
-  padding-block: 2px;
-}
-
-.lvls__panel {
-  position: sticky;
-  top: calc(var(--header-h) + 74px);
 }
 
 /* ---------- צרכנים / גורמים ---------- */
@@ -676,12 +517,6 @@
   .tiles--5 {
     grid-template-columns: repeat(3, 1fr);
   }
-  .lvls {
-    grid-template-columns: 1fr;
-  }
-  .lvls__panel {
-    position: static;
-  }
 }
 
 @media (max-width: 860px) {
@@ -693,9 +528,6 @@
     right: -20%;
     opacity: 0.5;
     width: 90%;
-  }
-  .syl__list {
-    grid-template-columns: 1fr;
   }
   .envs {
     grid-template-columns: 1fr;
