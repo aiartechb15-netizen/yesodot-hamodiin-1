@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-import { chapterOpening } from '../data/chapter1'
+import { chapterCover, chapterOpening } from '../data/chapter1'
 import coverImage from '../assets/images/תמונה מסך פתיחה מהו מודיעין.png'
 import './ChapterCover.css'
 
@@ -75,12 +75,27 @@ export default function ChapterCover() {
       style={{ '--cover-img': `url(${coverImage})` }}
     >
       <div className="cover__inner">
+        <span className="cover__eyebrow">{chapterCover.eyebrow}</span>
         <h1 className="cover__title" id="chapter-cover-title">
           {chapterOpening.title}
         </h1>
         {/* קו הזהב הוא סימן ולא מפריד תוכן, ולכן span ולא hr */}
         <span className="cover__rule" aria-hidden="true" />
+        <p className="cover__tagline">{chapterCover.tagline}</p>
       </div>
+
+      {/* סימון ההתקדמות בקורס. ה-dir יושב על הספרות בלבד ולא על ה-p:
+          על ה-p הוא היה הופך גם את ה-inline-start של המיקום, והסימון
+          היה קופץ לצד שמאל של המסך. לקורא המסך נמסר משפט מלא. */}
+      <p className="cover__step">
+        <span className="sr-only">
+          {`פרק ${chapterCover.step.current} מתוך ${chapterCover.step.total}`}
+        </span>
+        <span className="cover__stepDigits" dir="ltr" aria-hidden="true">
+          <span className="cover__stepCurrent">{chapterCover.step.current}</span>
+          {` / ${chapterCover.step.total}`}
+        </span>
+      </p>
 
       <a
         className="cover__down"
@@ -100,6 +115,7 @@ export default function ChapterCover() {
             />
           </svg>
         </span>
+        <span className="cover__downLabel">{chapterCover.scrollLabel}</span>
       </a>
     </section>
   )

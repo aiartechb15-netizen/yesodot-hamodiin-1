@@ -89,6 +89,16 @@ export const chapterOpening = {
   imageMotif: 'desk',
 }
 
+/* מסך הפתיחה של הפרק. הכיתובים כאן הם מסגור של המסך ואינם מן המסמך,
+   ולכן הם יושבים בנפרד מ-chapterOpening ולא בתוכו. */
+export const chapterCover = {
+  eyebrow: 'פרק 1',
+  tagline: 'מבט מעמיק לעולם שמאחורי התמונה המלאה',
+  /* מספר הפרק מתוך שלושת פרקי הקורס — סימון התקדמות, לא ניווט */
+  step: { current: '01', total: '03' },
+  scrollLabel: 'גללו להמשך',
+}
+
 export const videos = {
   intro: {
     id: 'video-intro',
