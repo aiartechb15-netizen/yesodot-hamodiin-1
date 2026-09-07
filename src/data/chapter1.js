@@ -89,33 +89,6 @@ export const chapterOpening = {
   imageMotif: 'desk',
 }
 
-// שלושת הרעיונות המרכזיים של הפרק — תצוגה ויזואלית, לא ניווט
-export const chapterFocus = {
-  title: 'מה נלמד בפרק?',
-  intro:
-    'שלושה רעיונות מרכזיים ילוו אותנו לאורך הפרק ויעזרו לבנות בהדרגה את התמונה המלאה של עולם המודיעין.',
-  steps: [
-    {
-      id: 'focus-1',
-      number: '01',
-      title: 'להבין מהו מודיעין',
-      description: 'מידע, ידע, הבנה וגישות למחקר.',
-    },
-    {
-      id: 'focus-2',
-      number: '02',
-      title: 'להבין איך המודיעין התפתח',
-      description: 'מהמעבר אל ההווה, דרך השתנות הצרכים והדרכים לייצר ידע.',
-    },
-    {
-      id: 'focus-3',
-      number: '03',
-      title: 'להבין איך עולם המודיעין בנוי ופועל',
-      description: 'רמות, תכליות, מעגל המודיעין והתהליך הפעילותי.',
-    },
-  ],
-}
-
 export const videos = {
   intro: {
     id: 'video-intro',
@@ -193,34 +166,6 @@ export const gate1 = {
   },
 }
 
-export const knowledgeFlow = {
-  title: 'מידע ← ידע ← הבנה',
-  intro: 'לחצו על כל שלב כדי לראות מה מתרחש בו.',
-  steps: [
-    {
-      id: 'kf-1',
-      title: 'מידע',
-      icon: 'file',
-      short: 'נתונים אובייקטיביים',
-      text: 'מידע כולל נתונים אובייקטיביים, כגון כמויות, מיקומים, תצפיות והאזנות.',
-    },
-    {
-      id: 'kf-2',
-      title: 'ידע',
-      icon: 'book',
-      short: 'מידע שנותח וקיבל הקשר',
-      text: 'ידע נוצר כאשר מנתחים את המידע, מפרשים אותו, מפעילים שיקול דעת מקצועי וממקמים אותו בהקשר שבו נאסף.',
-    },
-    {
-      id: 'kf-3',
-      title: 'הבנה',
-      icon: 'link',
-      short: 'משמעות וקשרים',
-      text: 'הבנה היא עיבוד הנתונים בתוך הקשר: לא די לדעת עובדות, יש להבין את משמעותן, לחבר ביניהן ולזהות תהליכים ומגמות.',
-    },
-  ],
-}
-
 export const approaches = {
   title: 'גישות לבירור המציאות במחקר מודיעיני',
   intro:
@@ -296,45 +241,6 @@ export const choosingApproach = {
   },
 }
 
-export const knowledgeBodies = {
-  title: 'מודיעין וגופים נוספים היוצרים ידע',
-  intro:
-    'המודיעין משיק לתחומים נוספים העוסקים ביצירת ידע, ניתוח מידע והפקת תובנות. שיתוף פעולה ביניהם עשוי להעשיר את התמונה, אך לכל גוף ייעוד, אחריות ותוצרים שונים.',
-  center: 'מודיעין',
-  nodes: [
-    {
-      id: 'academia',
-      title: 'אקדמיה',
-      icon: 'book',
-      text: 'מפתחת ידע תאורטי להרחבת ההבנה האוניברסלית, ללא תלות הכרחית בצורך מעשי מיידי.',
-    },
-    {
-      id: 'press',
-      title: 'עיתונות חוקרת',
-      icon: 'news',
-      text: 'עשויה להגיע לגילויים משמעותיים ולהשפיע על מקבלי החלטות, אך אינה נושאת באחריות לשימוש שנעשה במידע.',
-    },
-    {
-      id: 'civil',
-      title: 'קהילות אזרחיות',
-      icon: 'people',
-      text: 'בעולם הדיגיטלי אזרחים משתתפים באיסוף ובניתוח מידע גלוי; דוגמה לכך היא כמות המידע הגלוי שנוצרה סביב הלחימה באוקראינה.',
-    },
-    {
-      id: 'business',
-      title: 'מודיעין עסקי',
-      icon: 'chart',
-      text: 'מפיק ידע לצורכי תחרות כלכלית, להבנת מגמות שוק, מהלכי מתחרים ואיומים כלכליים.',
-    },
-    {
-      id: 'institutes',
-      title: 'מכוני מחקר',
-      icon: 'building',
-      text: 'פועלים בין ידע תאורטי למחקר יישומי ומנתחים סוגיות למדיניות, אך לא תמיד קשורים ישירות למקבלי ההחלטות.',
-    },
-  ],
-}
-
 export const uniqueTraits = {
   title: 'מה מייחד את עבודת המודיעין?',
   intro: 'לחצו על כל מאפיין כדי לפתוח את ההסבר.',
@@ -402,23 +308,6 @@ export const gate2 = {
     placeholder: 'כתבו כאן את התשובה שלכם…',
     saved: 'התשובה נשמרה במכשיר שלכם.',
   },
-}
-
-/* ------------------------------- שער 3 ------------------------------- */
-
-export const gate3 = {
-  number: 'שער 3',
-  title: 'מבנה ופעילות המודיעין',
-  headline: 'המודיעין השלם',
-  paragraph:
-    'אפשר לחלק את תחום המודיעין בדרכים שונות, לפי הצורך והתרומה הנדרשת ממנו. בפרק זה נכיר חמישה צירי מיון משלימים: ייעוד, רמה, תפוקה, תהליך ותחום. צירים אלה אינם מתחרים זה בזה — אותו תוצר מודיעיני יכול להשתייך לכמה קטגוריות במקביל.',
-  axes: [
-    { id: 'axis-purpose', title: 'לפי ייעוד', href: '#by-purpose', icon: 'target' },
-    { id: 'axis-level', title: 'לפי רמה', href: '#by-level', icon: 'ladder' },
-    { id: 'axis-output', title: 'לפי תפוקה', href: '#by-output', icon: 'file' },
-    { id: 'axis-process', title: 'לפי תהליך', href: '#by-process', icon: 'cycle' },
-    { id: 'axis-domain', title: 'לפי תחום', href: '#by-domain', icon: 'grid' },
-  ],
 }
 
 export const byPurpose = {
@@ -896,23 +785,19 @@ export const footer = {
 // תחנות הפרק — משמשות את סרגל הניווט (שם התחנה + מיקום + הקודם/הבא)
 export const railSections = [
   { id: 'chapter-open', label: 'פתיחת הפרק', station: 1 },
-  { id: 'chapter-map', label: 'מה נלמד בפרק', station: 2 },
-  { id: 'video-intro', label: 'סרטון פתיחה', station: 3 },
-  { id: 'gate-1', label: 'שער 1 — מבוא ויסודות', station: 4 },
-  { id: 'knowledge-flow', label: 'מידע, ידע והבנה', station: 5 },
-  { id: 'approaches', label: 'גישות מחקר', station: 6 },
-  { id: 'choosing-approach', label: 'בחירת גישה', station: 7 },
-  { id: 'knowledge-bodies', label: 'גופים יוצרי ידע', station: 8 },
-  { id: 'unique-traits', label: 'ייחוד עבודת המודיעין', station: 9 },
-  { id: 'gate-2', label: 'שער 2 — התפתחות היסטורית', station: 10 },
-  { id: 'gate-3', label: 'שער 3 — המודיעין השלם', station: 11 },
-  { id: 'by-purpose', label: 'לפי ייעוד', station: 12 },
-  { id: 'by-level', label: 'לפי רמה', station: 13 },
-  { id: 'by-output', label: 'לפי תפוקה', station: 14 },
-  { id: 'by-process', label: 'מעגל המודיעין', station: 15 },
-  { id: 'by-domain', label: 'לפי תחום', station: 16 },
-  { id: 'quiz', label: 'תרגול מסכם', station: 17 },
-  { id: 'next-lesson', label: 'סיום הפרק', station: 18 },
+  { id: 'video-intro', label: 'סרטון פתיחה', station: 2 },
+  { id: 'gate-1', label: 'שער 1 — מבוא ויסודות', station: 3 },
+  { id: 'approaches', label: 'גישות מחקר', station: 4 },
+  { id: 'choosing-approach', label: 'בחירת גישה', station: 5 },
+  { id: 'unique-traits', label: 'ייחוד עבודת המודיעין', station: 6 },
+  { id: 'gate-2', label: 'שער 2 — התפתחות היסטורית', station: 7 },
+  { id: 'by-purpose', label: 'לפי ייעוד', station: 8 },
+  { id: 'by-level', label: 'לפי רמה', station: 9 },
+  { id: 'by-output', label: 'לפי תפוקה', station: 10 },
+  { id: 'by-process', label: 'מעגל המודיעין', station: 11 },
+  { id: 'by-domain', label: 'לפי תחום', station: 12 },
+  { id: 'quiz', label: 'תרגול מסכם', station: 13 },
+  { id: 'next-lesson', label: 'סיום הפרק', station: 14 },
 ]
 
 export const chapterNavLabels = {

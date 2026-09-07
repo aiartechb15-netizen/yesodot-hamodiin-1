@@ -34,12 +34,6 @@
   border-top: 1px solid var(--border);
 }
 
-.open__flow {
-  margin-top: 40px;
-  padding-top: 34px;
-  border-top: 1px solid var(--border);
-}
-
 /* שתי העמודות באותו גובה, כדי ששני הכרטיסים יסתיימו באותו קו */
 .open__split {
   align-items: stretch;
@@ -73,82 +67,6 @@
   object-position: center;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-}
-
-/* ---------- מה נלמד בפרק — שלושה כרטיסים אופקיים ---------- */
-.ideas {
-  display: grid;
-  grid-auto-rows: 1fr; /* גובה זהה לכל הכרטיסים */
-  gap: 22px;
-  margin: clamp(34px, 4vw, 48px) 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.ideas__card {
-  display: grid;
-  grid-template-columns: minmax(110px, 132px) 1fr;
-  align-items: stretch;
-  gap: 30px;
-  padding: 30px 34px;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.ideas__card:hover {
-  border-color: var(--gold-soft);
-  box-shadow: var(--shadow-card);
-}
-
-/* עמודת המספר — מספר זהב גדול וקו זהב קצר מתחתיו */
-.ideas__num {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-}
-
-.ideas__digits {
-  font-size: clamp(38px, 4vw, 52px);
-  font-weight: 700;
-  line-height: 1;
-  color: var(--gold-ink);
-  letter-spacing: 0.02em;
-}
-
-.ideas__numRule {
-  display: block;
-  width: 46px;
-  height: 3px;
-  background: var(--gold);
-  border-radius: 2px;
-}
-
-/* קו אנכי דק בין אזור המספר לטקסט (inline-start בעברית הוא הצד הפונה למספר) */
-.ideas__body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
-  padding-inline-start: 30px;
-  border-inline-start: 1px solid var(--gold-soft);
-  text-align: start;
-}
-
-.ideas__title {
-  font-size: clamp(19px, 1.7vw, 23px);
-  color: var(--navy);
-  line-height: 1.35;
-}
-
-.ideas__text {
-  margin: 0;
-  font-size: 16.5px;
-  color: var(--muted);
 }
 
 /* ---------- כותרות שער ---------- */
@@ -423,71 +341,6 @@
   color: var(--teal);
 }
 
-/* ---------- צירי המיון ---------- */
-.axes {
-  position: relative;
-  margin-top: 40px;
-}
-
-.axes__line {
-  position: absolute;
-  top: 27px;
-  inset-inline: 40px;
-  height: 0;
-  border-top: 1px dashed var(--border);
-}
-
-.axes__list {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
-}
-
-.axis {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  text-align: center;
-  color: inherit;
-  padding-bottom: 6px;
-}
-
-.axis:hover {
-  text-decoration: none;
-}
-
-.axis__dot {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: var(--white);
-  border: 1px solid var(--border);
-  color: var(--navy-secondary);
-  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
-}
-
-.axis:hover .axis__dot {
-  background: var(--navy);
-  border-color: var(--navy);
-  color: var(--white);
-}
-
-.axis__title {
-  font-weight: 700;
-  color: var(--navy);
-  font-size: 16.5px;
-}
-
-.axis__index {
-  font-size: 12.5px;
-  color: var(--muted);
-}
-
 /* ---------- סולם הרמות ---------- */
 .ladder {
   display: grid;
@@ -687,13 +540,6 @@
 
 /* ---------- responsive ---------- */
 @media (max-width: 1000px) {
-  .axes__list {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
-  }
-  .axes__line {
-    display: none;
-  }
   .ladder {
     grid-template-columns: 1fr;
   }
@@ -736,21 +582,6 @@
 @media (max-width: 760px) {
   .next {
     grid-template-columns: 1fr;
-  }
-  /* הכרטיסים נשארים אופקיים; המספר מתכווץ והמרווחים מתהדקים */
-  .ideas__card {
-    grid-template-columns: 78px 1fr;
-    gap: 18px;
-    padding: 24px 20px;
-  }
-  .ideas__body {
-    padding-inline-start: 18px;
-  }
-  .ideas__text {
-    font-size: 15.5px;
-  }
-  .axes__list {
-    grid-template-columns: repeat(2, 1fr);
   }
   .step2 {
     grid-template-columns: 1fr;

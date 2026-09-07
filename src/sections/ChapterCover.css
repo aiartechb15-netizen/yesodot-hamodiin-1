@@ -1,0 +1,123 @@
+/* מסך פתיחה לפרק — תצלום מלא מסך שהכותרת חיה מעליו כטקסט HTML.
+   התמונה מגיעה כ---cover-img מה-JSX, כדי ש-Vite ינהל את נתיב הנכס. */
+.cover {
+  position: relative;
+  /* יתרת המסך שמתחת ל-Header הדביק. min-height ולא height — כך אין
+     גלילה פנימית אם הכותרת גולשת בזום גבוה או במסך נמוך במיוחד */
+  min-height: calc(100vh - var(--header-h));
+  /* svh מודד את המסך כשסרגלי הדפדפן במובייל גלויים */
+  min-height: calc(100svh - var(--header-h));
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  /* עוגן שנעצר בדיוק מתחת ל-Header, בלי הרווח של שאר הסקשנים */
+  scroll-margin-top: var(--header-h);
+
+  background-image: var(--cover-img);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* צבע מתחת לתמונה: מונע הבזק שוליים לבנים לפני שהיא נטענת */
+  background-color: var(--navy);
+}
+
+/* שכבת כהות עדינה — מספיקה לקריאוּת הכותרת הלבנה, ולא מספיקה כדי
+   לכבות את הנוף. מעט חזקה יותר במרכז ובתחתית, שם יושבים הכותרת והחץ. */
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 26, 45, 0.24) 0%,
+    rgba(7, 26, 45, 0.38) 52%,
+    rgba(7, 26, 45, 0.46) 100%
+  );
+  pointer-events: none;
+}
+
+.cover__inner {
+  position: relative;
+  width: calc(100% - var(--gutter) * 2);
+  max-width: var(--page-max);
+  text-align: center;
+  /* מרווח מהחץ שבתחתית, כדי שהכותרת תישאר במרכז האופטי */
+  padding-block: var(--s-6);
+}
+
+.cover__title {
+  margin: 0;
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: var(--fs-hero);
+  font-weight: 800;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.01em;
+  /* צל רך ורחב במקום קו מתאר: שומר על קריאוּת מעל השמיים הבהירים
+     ומעל הסלע הכהה, בלי להיראות כטקסט "מודבק" */
+  text-shadow:
+    0 1px 2px rgba(7, 26, 45, 0.45),
+    0 4px 24px rgba(7, 26, 45, 0.5);
+}
+
+/* חץ הגלילה — רמז להמשך, לא קריאה לפעולה: בלי מסגרת, בלי רקע ובלי
+   טקסט. שטח הלחיצה מעט גדול מהחץ עצמו, ומכאן ה-padding. */
+.cover__down {
+  position: absolute;
+  bottom: clamp(20px, 4vh, 38px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  padding: 8px;
+  color: var(--white);
+  line-height: 0;
+  cursor: pointer;
+  opacity: 0.86;
+  filter: drop-shadow(0 1px 6px rgba(7, 26, 45, 0.55));
+  animation: coverDown 3.4s ease-in-out infinite;
+}
+
+.cover__down:hover {
+  opacity: 1;
+}
+
+/* התנועה קטנה ואיטית בכוונה: רמז, לא הנפשה שמושכת את העין */
+@keyframes coverDown {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 7px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cover__down {
+    animation: none;
+  }
+}
+
+/* מתחת ליחס 1.55 — טאבלט ומובייל. כאן cover חותך לרוחב, ומרכוז היה
+   מוציא את החייל (שיושב בשליש השמאלי של התצלום) מחוץ למסגרת. הזזת
+   נקודת המיקום שמאלה מחזירה אותו פנימה יחד עם חלק מהנוף. */
+@media (max-aspect-ratio: 155 / 100) {
+  .cover {
+    background-position: 30% center;
+  }
+}
+
+@media (max-aspect-ratio: 1 / 1) {
+  .cover {
+    background-position: 16% center;
+  }
+}
+
+/* מסכי טלפון לאורך — החלון על התמונה צר מהחייל עצמו, ולכן כל אחוז
+   מעל אפס היה חותך אותו. עיגון לקצה השמאלי שומר על הדמות שלמה,
+   והחיתוך נלקח כולו מצד הנוף. */
+@media (max-aspect-ratio: 4 / 5) {
+  .cover {
+    background-position: 12% center;
+  }
+}

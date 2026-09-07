@@ -1,4 +1,3 @@
-import { KnowledgeFlowMini } from '../components/KnowledgeFlow/KnowledgeFlow'
 import { chapterOpening } from '../data/chapter1'
 import openingImage from '../assets/images/מהו מודיעין תמונה 1.png'
 import './sections.css'
@@ -45,10 +44,6 @@ export default function ChapterOpening() {
               <p>{chapterOpening.navigation}</p>
             </aside>
           </div>
-        </div>
-
-        <div className="open__flow">
-          <KnowledgeFlowMini />
         </div>
       </div>
     </section>
