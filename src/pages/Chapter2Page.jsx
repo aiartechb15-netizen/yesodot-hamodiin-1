@@ -8,7 +8,6 @@ import StationOfficer from '../sections/chapter2/StationOfficer'
 import StationCheck from '../sections/chapter2/StationCheck'
 import StationStrategic from '../sections/chapter2/StationStrategic'
 import StationForce from '../sections/chapter2/StationForce'
-import StationBinders from '../sections/chapter2/StationBinders'
 import StationResearch from '../sections/chapter2/StationResearch'
 import StationCompare from '../sections/chapter2/StationCompare'
 import StationExam from '../sections/chapter2/StationExam'
@@ -29,7 +28,6 @@ export default function Chapter2Page() {
           <StationCheck />
           <StationStrategic />
           <StationForce />
-          <StationBinders />
           <StationResearch />
           <StationCompare />
           <StationExam />

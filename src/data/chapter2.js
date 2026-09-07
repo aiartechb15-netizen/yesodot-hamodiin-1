@@ -13,7 +13,7 @@ export const chapter2Meta = {
   goal: 'בסיום הפרק הלומד יוכל להבחין בין מודיעין לאומי, מודיעין אסטרטגי, מודיעין לבניין כוח והמחקר האסטרטגי; לזהות את הצרכנים והמטרות של כל אחד; ולהבין את היחסים הרצויים בין קצין המודיעין למקבל ההחלטות.',
   structureLabel: 'מבנה הפרק',
   structure:
-    'פתיח ← מודיעין לאומי ← קמ״ן וקברניט ← בדיקת הבנה ← מודיעין אסטרטגי ← בניין כוח ← תרגול הקלסרים ← המחקר האסטרטגי ← השוואה ← מבחן מסכם',
+    'פתיח ← מודיעין לאומי ← קמ״ן וקברניט ← בדיקת הבנה ← מודיעין אסטרטגי ← בניין כוח ← המחקר האסטרטגי ← השוואה ← מבחן מסכם',
 }
 
 /* ---------------- תחנה 1 — פתיח לפרק ---------------- */
@@ -102,10 +102,6 @@ export const officerAndLeader = {
       text: 'מקבל החלטות בתוך עולם רחב יותר של שיקולים: אידיאולוגיה, מדיניות, השפעה על הסביבה וניסיון מעשי.',
     },
   ],
-  callout: {
-    label: 'מסר מרכזי',
-    text: 'מודיעין אפקטיבי דורש קרבה בין קציני המודיעין למקבל ההחלטות — אך לא קרבה גדולה מדי.',
-  },
   dangersTitle: 'שתי סכנות',
   dangersHint: 'לחצו על כל סכנה כדי לפתוח את ההסבר.',
   dangers: [
@@ -227,24 +223,6 @@ export const strategic = {
       text: 'האם לפתוח בתקיפות אוויריות? מתי להכניס כוחות קרקעיים? אילו כוחות להפעיל בכל שלב?',
     },
   ],
-  productsTitle: 'שני תוצרים מרכזיים',
-  productsHint: 'לחצו על תוצר כדי לפתוח אותו.',
-  products: [
-    {
-      id: 'force-building',
-      title: 'מודיעין לבניין כוח',
-      icon: 'ladder',
-      text: 'איך צריך להכין את צה״ל לעתיד.',
-      linkLabel: 'להרחבה בתחנה הבאה',
-      linkTo: '#ch2-force',
-    },
-    {
-      id: 'force-employment',
-      title: 'תפיסת הפעלת כוח',
-      icon: 'cycle',
-      text: 'איך נכון להפעיל את הכוח הקיים בזירת המלחמה.',
-    },
-  ],
   questionsTitle: 'שאלות לדוגמה',
   questionsHint: 'לחצו על כרטיס כדי לחשוף את השאלה.',
   questions: [
@@ -298,48 +276,6 @@ export const forceBuilding = {
   ],
   revealAll: 'לחשיפת כל השלבים',
   nextStep: 'לשלב הבא',
-}
-
-/* ---------------- תחנה 8 — תרגול הקלסרים ---------------- */
-
-export const binders = {
-  id: 'ch2-binders',
-  station: 8,
-  kicker: 'תחנה 8',
-  navLabel: 'תרגול הקלסרים',
-  title: 'תרגול הקלסרים',
-  situationLabel: 'הסיטואציה',
-  situation:
-    'אתם קציני מודיעין המשתתפים בדיון על בניין הכוח של צה״ל לעשר השנים הקרובות. איזה מידע הכי רלוונטי לדיון?',
-  hint: 'בחרו קלסר אחד. המשוב ייפתח רק אחרי הבחירה.',
-  options: [
-    {
-      id: 'a',
-      letter: 'א',
-      text: 'מידע על כוח אויב שנמצא עכשיו ליד גבול עזה: מיקום, מסלול תנועה ותחמושת.',
-    },
-    {
-      id: 'b',
-      letter: 'ב',
-      text: 'דו״ח המשווה בין הפיתוחים הטכנולוגיים של האויב לבין היכולות שישראל צריכה לפתח בהתאם.',
-    },
-    {
-      id: 'c',
-      letter: 'ג',
-      text: 'תחקיר של פעילות מבצעית שהתרחשה אתמול בצפון הגדה.',
-    },
-    {
-      id: 'd',
-      letter: 'ד',
-      text: 'מידע היסטורי על תורת הלחימה הסובייטית משנות ה־70.',
-    },
-  ],
-  correctId: 'b',
-  correctLabel: 'תשובה נכונה',
-  incorrectLabel: 'לא מדויק',
-  explanation:
-    'ב — מודיעין לבניין כוח מבוסס על בחינת מגמות ויכולות עתידיות כדי לתכנן את הכוח הצה״לי לאורך זמן.',
-  retry: 'בחירה מחדש',
 }
 
 /* ---------------- תחנה 9 — המחקר האסטרטגי ---------------- */
@@ -704,7 +640,6 @@ export const stations = [
   { id: quickCheck.id, label: quickCheck.navLabel, station: 5 },
   { id: strategic.id, label: strategic.navLabel, station: 6 },
   { id: forceBuilding.id, label: forceBuilding.navLabel, station: 7 },
-  { id: binders.id, label: binders.navLabel, station: 8 },
   { id: strategicResearch.id, label: strategicResearch.navLabel, station: 9 },
   { id: comparison.id, label: comparison.navLabel, station: 10 },
   { id: exam.id, label: exam.navLabel, station: 11 },
