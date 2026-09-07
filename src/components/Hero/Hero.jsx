@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { hero } from '../../data/chapter1'
-import openerImage from '../../assets/images/Frame 1 (2).png'
+import openerImage from '../../assets/images/מסך פתיחה סופי.png'
 import './Hero.css'
 
 /** החץ מוביל לאזור הפרקים שמתחת למסך הפתיחה. הוא נשאר עוגן אמיתי,
@@ -16,8 +16,9 @@ const SCROLL_MS = 900
 /* ease-in-out — יציאה רכה מהמנוחה, האטה רכה ביעד */
 const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2)
 
-/* מסך הפתיחה הוא תצלום העיצוב עצמו: הכותרת והטקסט מודפסים בתוכו.
-   ההמשך אל הפרקים נעשה בחץ שבתחתית המסך — רמז ולא קריאה לפעולה. */
+/* מסך הפתיחה הוא תצלום העיצוב עצמו: הכותרת, כותרת המשנה וחץ ההמשך
+   מודפסים בתוכו. לכן אין כאן כותרת גלויה ואין חץ מצויר — רק אזור
+   לחיץ שקוף מעל החץ שבתמונה. */
 export default function Hero() {
   const frame = useRef(0)
 
@@ -67,29 +68,18 @@ export default function Hero() {
 
   return (
     <section className="hero" id="hero" aria-labelledby="hero-title">
-      {/* הכותרת מודפסת בתצלום; כאן היא קיימת לקוראי מסך ולמבנה המסמך בלבד */}
+      {/* הכותרת וכותרת המשנה מודפסות בתצלום; כאן הן קיימות לקוראי
+          מסך ולמבנה המסמך בלבד, ולכן אינן מוצגות פעמיים */}
       <h1 className="sr-only" id="hero-title">
         {hero.title}
       </h1>
+      <p className="sr-only">{hero.lead}</p>
 
-      <div className="hero__frame">
-        <img className="hero__img" src={openerImage} alt="" />
-      </div>
+      <img className="hero__img" src={openerImage} alt="" />
 
-      {/* רמז להמשך: חץ בתחתית המסך, מחוץ למסגרת התמונה כדי שיישאר
-          במרכז המסך ובמרחק קבוע מתחתיתו בכל רזולוציה */}
-      <a className="hero__down" href={TOPICS_ANCHOR} aria-label={hero.cta} onClick={startCourse}>
-        <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path
-            d="m6 9.5 6 6 6-6"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </a>
+      {/* החץ עצמו מצויר בתצלום; זהו שטח הלחיצה שמעליו — שקוף, ברוחב
+          ובגובה שמכסים את מקומו בכל יחס מסך */}
+      <a className="hero__down" href={TOPICS_ANCHOR} aria-label={hero.cta} onClick={startCourse} />
     </section>
   )
 }
