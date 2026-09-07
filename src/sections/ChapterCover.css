@@ -1,6 +1,12 @@
 /* מסך פתיחה לפרק — תצלום מלא מסך שהכותרת חיה מעליו כטקסט HTML.
    התמונה מגיעה כ---cover-img מה-JSX, כדי ש-Vite ינהל את נתיב הנכס. */
 .cover {
+  /* הזהב של מסך הפתיחה — טיפה חם ובהיר מ---gold, שנקבע לרקעים
+     בהירים. על תצלום השקיעה הגוון הזה נקרא כזהב ולא כחרדל. */
+  --cover-gold: #c9a552;
+  /* לבן-שמנת ולא לבן טהור: על נוף חם, לבן מלא נקרא כקר וכתלוש */
+  --cover-ink: #f7f3e8;
+
   position: relative;
   /* יתרת המסך שמתחת ל-Header הדביק. min-height ולא height — כך אין
      גלילה פנימית אם הכותרת גולשת בזום גבוה או במסך נמוך במיוחד */
@@ -9,6 +15,9 @@
   min-height: calc(100svh - var(--header-h));
   display: grid;
   place-items: center;
+  /* מרים את הכותרת מעט מעל המרכז האנכי. מרכז גאומטרי מדויק נקרא
+     כנמוך מדי, ומשאיר את החץ צמוד לטקסט במקום להיות רמז נפרד. */
+  padding-bottom: clamp(52px, 9vh, 112px);
   overflow: hidden;
   /* עוגן שנעצר בדיוק מתחת ל-Header, בלי הרווח של שאר הסקשנים */
   scroll-margin-top: var(--header-h);
@@ -41,60 +50,146 @@
   width: calc(100% - var(--gutter) * 2);
   max-width: var(--page-max);
   text-align: center;
-  /* מרווח מהחץ שבתחתית, כדי שהכותרת תישאר במרכז האופטי */
-  padding-block: var(--s-6);
 }
 
 .cover__title {
   margin: 0;
-  color: var(--white);
+  color: var(--cover-ink);
   font-family: var(--font-heading);
-  font-size: var(--fs-hero);
-  font-weight: 800;
+  /* דסקטופ: 64px ומטפס עד 72px במסכים רחבים */
+  font-size: clamp(64px, 4.6vw, 72px);
+  font-weight: 700;
   line-height: var(--lh-tight);
   letter-spacing: -0.01em;
+  /* שורה אחת כל עוד הרוחב מאפשר. הכותרת קצרה, וגם ב-320px היא
+     נכנסת בגודל המובייל שלמטה. */
+  white-space: nowrap;
   /* צל רך ורחב במקום קו מתאר: שומר על קריאוּת מעל השמיים הבהירים
      ומעל הסלע הכהה, בלי להיראות כטקסט "מודבק" */
-  text-shadow:
-    0 1px 2px rgba(7, 26, 45, 0.45),
-    0 4px 24px rgba(7, 26, 45, 0.5);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
 }
 
-/* חץ הגלילה — רמז להמשך, לא קריאה לפעולה: בלי מסגרת, בלי רקע ובלי
-   טקסט. שטח הלחיצה מעט גדול מהחץ עצמו, ומכאן ה-padding. */
+/* קו זהב קצר מתחת לכותרת — סימן מותג, לא מפריד. אורכו קבוע בכוונה:
+   קו שמתארך עם הכותרת נקרא כקישוט, קו קצר נקרא כחתימה. */
+.cover__rule {
+  display: block;
+  width: 48px;
+  height: 2px;
+  margin: 18px auto 0;
+  background: var(--cover-gold);
+  border: 0;
+}
+
+/* כניסה: הופעה ועלייה קצרה. 700ms — מורגש כרך, לא כהצגה. */
+@keyframes coverRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.cover__title,
+.cover__rule {
+  animation: coverRise 700ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* הקו נכנס מעט אחרי הכותרת — קריאה אחת בשני מהלכים ולא קפיצה אחת */
+.cover__rule {
+  animation-delay: 140ms;
+}
+
+/* חץ הגלילה — רמז להמשך, לא קריאה לפעולה. העוגן עצמו רק ממקם ומרכז;
+   כל העיצוב והתנועה יושבים על העיגול והחץ שבתוכו, כך ששום שתי
+   אנימציות אינן נאבקות על אותו transform. */
 .cover__down {
   position: absolute;
-  bottom: clamp(20px, 4vh, 38px);
+  bottom: clamp(32px, 4.4vh, 40px);
   left: 50%;
   transform: translateX(-50%);
   display: block;
-  padding: 8px;
-  color: var(--white);
   line-height: 0;
-  cursor: pointer;
-  opacity: 0.86;
-  filter: drop-shadow(0 1px 6px rgba(7, 26, 45, 0.55));
-  animation: coverDown 3.4s ease-in-out infinite;
+  color: var(--cover-ink);
 }
 
-.cover__down:hover {
-  opacity: 1;
+.cover__downCircle {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    color 220ms ease;
 }
 
-/* התנועה קטנה ואיטית בכוונה: רמז, לא הנפשה שמושכת את העין */
-@keyframes coverDown {
+/* התנועה יושבת על החץ עצמו ולא על העיגול, כדי שהרמת ה-hover
+   תוכל לפעול על העיגול בלי להתנגש בה */
+.cover__down svg {
+  display: block;
+  animation: coverBob 3.4s ease-in-out infinite;
+}
+
+/* תנועה קטנה ואיטית בכוונה: רמז, לא הנפשה שמושכת את העין */
+@keyframes coverBob {
   0%,
   100% {
-    transform: translate(-50%, 0);
+    transform: translateY(0);
   }
   50% {
-    transform: translate(-50%, 7px);
+    transform: translateY(6px);
   }
+}
+
+.cover__down:hover .cover__downCircle,
+.cover__down:focus-visible .cover__downCircle {
+  transform: translateY(-4px);
+  border-color: var(--cover-gold);
+  background: rgba(201, 165, 82, 0.12);
+  color: var(--cover-gold);
+}
+
+/* טבעת הפוקוס יושבת על העיגול, לא על תיבת העוגן הריבועית */
+.cover__down:focus-visible {
+  outline: none;
+}
+
+.cover__down:focus-visible .cover__downCircle {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cover__down {
+  .cover__title,
+  .cover__rule,
+  .cover__down svg {
     animation: none;
+  }
+  .cover__downCircle {
+    transition: none;
+  }
+}
+
+/* טאבלט */
+@media (max-width: 1024px) {
+  .cover__title {
+    font-size: 52px;
+  }
+}
+
+/* מובייל — 38px ב-320px, 44px מ-420px ומעלה */
+@media (max-width: 640px) {
+  .cover__title {
+    font-size: clamp(38px, 10.5vw, 44px);
   }
 }
 

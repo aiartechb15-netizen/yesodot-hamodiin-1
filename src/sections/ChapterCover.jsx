@@ -78,6 +78,8 @@ export default function ChapterCover() {
         <h1 className="cover__title" id="chapter-cover-title">
           {chapterOpening.title}
         </h1>
+        {/* קו הזהב הוא סימן ולא מפריד תוכן, ולכן span ולא hr */}
+        <span className="cover__rule" aria-hidden="true" />
       </div>
 
       <a
@@ -86,16 +88,18 @@ export default function ChapterCover() {
         aria-label="גלילה לתוכן הפרק"
         onClick={scrollToNext}
       >
-        <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path
-            d="m6 9.5 6 6 6-6"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        <span className="cover__downCircle">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path
+              d="m6 9.5 6 6 6-6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
       </a>
     </section>
   )
