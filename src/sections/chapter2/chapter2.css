@@ -471,85 +471,6 @@
   color: var(--ink-soft);
 }
 
-/* ---------- תחנה 6 — תוצרים ---------- */
-/* כרטיסים נפתחים — כל אחד בגובה התוכן שלו, בלי מתיחה לגובה השכן */
-.products {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 22px;
-  align-items: start;
-}
-
-.product {
-  display: flex;
-  flex-direction: column;
-  height: auto;
-  min-height: 0;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-top: 3px solid var(--teal);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-card);
-  overflow: hidden;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-
-.product:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-card-hover);
-}
-
-.product__btn {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 100%;
-  padding: 30px 28px 22px;
-  background: transparent;
-  border: 0;
-  text-align: start;
-}
-
-.product__panel {
-  padding: 0 28px 28px;
-}
-
-.product__cue {
-  font-size: 15.5px;
-  font-weight: 700;
-  color: var(--teal-ink);
-}
-
-.product__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: var(--teal-soft);
-  color: var(--teal);
-}
-
-.product__title {
-  font-size: 23px;
-  color: var(--navy);
-  font-weight: 700;
-}
-
-.product__text {
-  color: var(--ink-soft);
-  margin: 0;
-}
-
-.product__link {
-  display: inline-block;
-  margin-top: 14px;
-  font-size: 16.5px;
-  font-weight: 700;
-  color: var(--navy-secondary);
-}
-
 /* ---------- תחנה 7 — בניין כוח ---------- */
 /* קומפוזיציה אחת: מסלול השלבים בימין ותצלום בשמאל.
    התצלום נמסך אל רקע העמוד בשלושה גרדיאנטים, ולכן אין לו קצה חד
@@ -807,9 +728,6 @@
   .lenses {
     grid-template-columns: 1fr;
   }
-  .products {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 860px) {
@@ -922,15 +840,11 @@
 }
 
 /* ---------- מקטע בפריסה פתוחה ----------
-   התוכן אינו יושב בכרטיסייה אלא ישירות על העמוד, ולכן הוא זקוק
-   לרוחב קריאה משלו: עמודה של כ-1100px, ממורכזת בשטח שנשאר לצד
-   תפריט הצד. הריפוד האופקי הוא ה---gutter הרגיל, כדי שהשוליים
-   במסכים צרים יישארו זהים לשאר האתר. */
-.st--open .container {
-  max-width: 1100px;
-}
+   התוכן אינו יושב בכרטיסייה אלא ישירות על העמוד. הרוחב שלו הוא
+   המידה האחידה של עמודי הפרקים (--ch-max), ולא מידה מקומית: כך
+   שורות ההסבר והשאלות מתיישרות עם שאר המקטעים בפרק.
 
-/* הכותרת הראשית, כותרת המשנה והתוכן חולקים את אותו קו ימין —
+   הכותרת הראשית, כותרת המשנה והתוכן חולקים את אותו קו ימין —
    ה-header לא מוסיף הזחה משלו */
 .st--open .st__head {
   margin-bottom: clamp(20px, 2.4vw, 30px);
