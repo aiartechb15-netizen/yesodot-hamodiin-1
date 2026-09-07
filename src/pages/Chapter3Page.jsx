@@ -1,3 +1,4 @@
+import ChapterLayout from '../components/ChapterLayout/ChapterLayout'
 import NextChapter from '../components/NextChapter/NextChapter'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
@@ -14,7 +15,7 @@ import S11Relations from '../sections/chapter3/S11Relations'
 import S12Summary from '../sections/chapter3/S12Summary'
 import S13Exam from '../sections/chapter3/S13Exam'
 
-import { nextChapter } from '../data/chapter3'
+import { nextChapter, stations } from '../data/chapter3'
 
 // עמוד פרק 3 — "מודיעין אופרטיבי וטקטי" — שתים עשרה תחנות.
 export default function Chapter3Page() {
@@ -23,19 +24,21 @@ export default function Chapter3Page() {
   return (
     <>
       <main id="main" className="chapterPage">
-        <S1Opener />
-        <S3Operational />
-        <S4Context />
-        <S5Design />
-        <S6Tactical />
-        <S7Lohamam />
-        <S8Environments />
-        <S9Research />
-        <S10Targets />
-        <S11Relations />
-        <S12Summary />
-        <S13Exam />
-        <NextChapter {...nextChapter} />
+        <ChapterLayout sections={stations} label="ניווט בין תחנות פרק 3">
+          <S1Opener />
+          <S3Operational />
+          <S4Context />
+          <S5Design />
+          <S6Tactical />
+          <S7Lohamam />
+          <S8Environments />
+          <S9Research />
+          <S10Targets />
+          <S11Relations />
+          <S12Summary />
+          <S13Exam />
+          <NextChapter {...nextChapter} />
+        </ChapterLayout>
       </main>
     </>
   )

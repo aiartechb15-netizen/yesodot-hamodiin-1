@@ -1,3 +1,4 @@
+import ChapterLayout from '../components/ChapterLayout/ChapterLayout'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
 import ChapterCover from '../sections/ChapterCover'
@@ -15,7 +16,7 @@ import ByDomain from '../sections/ByDomain'
 import QuizSection from '../sections/QuizSection'
 import NextLesson from '../sections/NextLesson'
 
-import { videos } from '../data/chapter1'
+import { railSections, videos } from '../data/chapter1'
 
 // עמוד פרק 1 — "מהו מודיעין?" — כל תוכן הפרק והאינטראקציות.
 export default function ChapterPage() {
@@ -25,19 +26,21 @@ export default function ChapterPage() {
     <>
       <main id="main" className="chapterPage">
         <ChapterCover />
-        <ChapterOpening />
-        <VideoSection video={videos.intro} />
-        <Gate1 />
-        <ApproachesSection />
-        <UniqueTraitsSection />
-        <Gate2 />
-        <ByPurpose />
-        <ByLevel />
-        <ByOutput />
-        <CycleSection />
-        <ByDomain />
-        <QuizSection />
-        <NextLesson />
+        <ChapterLayout sections={railSections} label="ניווט בין מקטעי פרק 1">
+          <ChapterOpening />
+          <VideoSection video={videos.intro} />
+          <Gate1 />
+          <ApproachesSection />
+          <UniqueTraitsSection />
+          <Gate2 />
+          <ByPurpose />
+          <ByLevel />
+          <ByOutput />
+          <CycleSection />
+          <ByDomain />
+          <QuizSection />
+          <NextLesson />
+        </ChapterLayout>
       </main>
     </>
   )

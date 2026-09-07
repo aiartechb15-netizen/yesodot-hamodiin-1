@@ -8,6 +8,10 @@
      נשארת גלויה מתחת ל-Header */
   --footer-h: 132px;
   display: flex;
+  /* בשורה ולא בעמודה: הרצועה כאן משלימה את המסך בין ה-Header ל-Footer
+     ואינה מסך מלא, ולכן היא מצהירה על הכיוון שלה במקום לרשת את
+     ברירת המחדל של .section */
+  flex-direction: row;
   align-items: center;
   min-height: calc(100vh - var(--header-h) - var(--footer-h));
   min-height: calc(100svh - var(--header-h) - var(--footer-h));
@@ -15,13 +19,6 @@
      מעל אמצע הרצועה ולא בדיוק במרכזה */
   padding-block: clamp(24px, 4vh, 56px) clamp(72px, 13vh, 150px);
   scroll-margin-top: -16px;
-}
-
-/* שוליים סימטריים שנעצרים ב-5 ס"מ, כדי שהכרטיסים ינצלו את רוחב המסך */
-#topics .container {
-  width: 100%;
-  max-width: none;
-  padding-inline: clamp(16px, 5vw, 5cm);
 }
 
 .topics {

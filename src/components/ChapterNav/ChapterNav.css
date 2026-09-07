@@ -1,0 +1,274 @@
+/* ---------- תפריט הצד של הפרק ----------
+   רכיב אחד לשלושת הפרקים. בדסקטופ — עמודה קבועה בצד ימין שנשארת
+   דביקה בזמן גלילה; במסך צר — פס פתיחה דביק ומגירה נפתחת, כדי שלא
+   ייגזל רוחב קבוע מהתוכן.
+   השפה החזותית היא קווים ולא קופסאות: קו אנכי דק לאורך הרשימה,
+   ופס טורקיז קצר שמסמן את המקטע הנוכחי. */
+
+.chnav {
+  /* רקע הנייר של העמוד — התפריט הוא רצועת ממשק, לא כרטיס */
+  background: var(--paper);
+  /* הקו היחיד שמפריד בין התפריט לתוכן */
+  border-inline-end: 1px solid var(--border);
+}
+
+/* פס הפתיחה והכפתורים שלו קיימים רק במסכים צרים */
+.chnav__bar,
+.chnav__scrim,
+.chnav__close {
+  display: none;
+}
+
+.chnav__panel {
+  position: sticky;
+  top: calc(var(--header-h) + 20px);
+  /* גובה מרבי = החלון פחות ה-Header, כך שרשימה ארוכה נגללת בתוך
+     עצמה ולעולם לא נחתכת */
+  max-height: calc(100vh - var(--header-h) - 40px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 22px 20px 26px;
+}
+
+/* ---------- כותרת התפריט ---------- */
+.chnav__head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.chnav__title {
+  flex: 1;
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--teal-ink);
+}
+
+.chnav__count {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* ---------- הרשימה ---------- */
+.chnav__list {
+  position: relative;
+  display: grid;
+  /* מרווח לקו האנכי שרץ לאורך הרשימה */
+  padding-inline-start: 14px;
+}
+
+/* הקו הרציף — הציר שעליו יושב סימן המקטע הנוכחי */
+.chnav__list::before {
+  content: '';
+  position: absolute;
+  inset-block: 3px;
+  inset-inline-start: 0;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--border);
+}
+
+.chnav__link {
+  position: relative;
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 8px;
+  padding-block: 7px;
+  padding-inline-end: 6px;
+  font-size: 14.5px;
+  line-height: 1.42;
+  color: var(--ink-soft);
+  transition: color var(--dur) var(--ease);
+}
+
+/* פס הסימון — יושב בדיוק על הקו האנכי של הרשימה */
+.chnav__link::before {
+  content: '';
+  position: absolute;
+  inset-block: 3px;
+  inset-inline-start: -14px;
+  width: 2px;
+  border-radius: 2px;
+  background: transparent;
+  transition: background-color var(--dur) var(--ease);
+}
+
+.chnav__link:hover {
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.chnav__link:hover::before {
+  background: var(--gold-soft);
+}
+
+/* מקטעים שכבר נקראו — סימון זהוב עדין מאוד על הציר */
+.chnav__link.is-done::before {
+  background: var(--gold-soft);
+}
+
+.chnav__link.is-active {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+/* המצב הפעיל: פס טורקיז מלא ורחב במעט מהקו עצמו */
+.chnav__link.is-active::before {
+  inset-block: 1px;
+  inset-inline-start: -14px;
+  width: 3px;
+  background: var(--teal);
+}
+
+.chnav__link:focus-visible {
+  outline-offset: 1px;
+  border-radius: var(--radius-sm);
+}
+
+.chnav__num {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--muted);
+  text-align: start;
+}
+
+.chnav__link.is-active .chnav__num {
+  color: var(--gold-ink);
+}
+
+/* ---------- מסכים צרים — פס דביק ומגירה ---------- */
+@media (max-width: 1079px) {
+  .chnav {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 90;
+    border-inline-end: 0;
+    border-block-end: 1px solid var(--border);
+  }
+
+  .chnav__bar {
+    display: block;
+    width: 100%;
+    max-width: var(--page-max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .chnav__toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: var(--chnav-bar-h);
+    padding: 0;
+    background: transparent;
+    border: 0;
+    text-align: start;
+  }
+
+  .chnav__toggleIcon {
+    flex: none;
+    color: var(--teal);
+  }
+
+  .chnav__toggleText {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .chnav__toggleKicker {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--teal-ink);
+  }
+
+  .chnav__toggleCurrent {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    /* שם מקטע ארוך נחתך ולא שובר את גובה הפס */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .chnav__toggleCount {
+    margin-inline-start: auto;
+    flex: none;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  /* המגירה והכיסוי מתחילים מתחת ל-Header: הוא נשאר גלוי ובר-שימוש,
+     וכותרת המגירה עם כפתור הסגירה אינה מוסתרת מאחוריו */
+  .chnav__scrim {
+    display: block;
+    position: fixed;
+    inset: var(--header-h) 0 0;
+    z-index: 120;
+    background: rgba(7, 26, 45, 0.42);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur) var(--ease);
+  }
+
+  .chnav__scrim.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .chnav__panel {
+    position: fixed;
+    top: var(--header-h);
+    bottom: 0;
+    inset-inline-start: 0;
+    z-index: 130;
+    width: min(330px, 86vw);
+    max-height: none;
+    padding: 20px 20px 32px;
+    background: var(--white);
+    box-shadow: var(--shadow-pop);
+    /* האתר כולו RTL: המגירה יוצאת מהקצה הימני ולכן מוסתרת ימינה */
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform var(--dur-slow) var(--ease), visibility var(--dur-slow);
+  }
+
+  .chnav__panel.is-open {
+    transform: none;
+    visibility: visible;
+  }
+
+  .chnav__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    margin: -6px -6px -6px 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    color: var(--muted);
+  }
+
+  .chnav__close:hover {
+    color: var(--navy);
+  }
+
+  /* במגירה יש מקום — הפריטים גדולים יותר ליעד מגע נוח */
+  .chnav__link {
+    padding-block: 10px;
+    font-size: 15.5px;
+  }
+}

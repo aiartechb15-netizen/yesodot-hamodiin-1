@@ -1,5 +1,8 @@
+/* ממורכז כמו שאר תרגילי הפרק (Quiz, ExamStepper): ברוחב המכל
+   החדש, תרגיל צמוד לקצה היה משאיר חצי מסך ריק לצדו */
 .mcheck {
-  max-width: 760px;
+  max-width: 860px;
+  margin-inline: auto;
   overflow: hidden;
 }
 

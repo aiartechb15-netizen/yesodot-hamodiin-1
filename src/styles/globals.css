@@ -164,16 +164,38 @@ svg {
 }
 
 /* ---------- layout ---------- */
+/* המכל היחיד של האתר. כל עמוד וכל סקשן משתמשים בו — אין רוחב מרבי
+   מקומי ואין ריפוד נוסף בעטיפות פנימיות. */
 .container {
-  width: calc(100% - var(--gutter) * 2);
+  width: 100%;
   max-width: var(--page-max);
   margin-inline: auto;
+  padding-inline: var(--gutter);
 }
 
+/* מכל בתוך מכל אינו מוסיף ריפוד שני */
+.container .container {
+  max-width: none;
+  padding-inline: 0;
+}
+
+/* כל סקשן תוכן הוא מסך למידה בפני עצמו ולא בלוק שנגמר באמצע המסך:
+   הגובה המזערי הוא יתרת המסך שמתחת ל-Header הדביק, והתוכן ממורכז
+   אנכית בתוכו. min-height ולא height — סקשן עמוס גדל מעבר למסך,
+   בלי חיתוך וללא גלילה פנימית. הריפוד נשאר הרווח המזערי בקצוות. */
 .section {
   position: relative;
   padding-block: var(--section-y);
-  scroll-margin-top: calc(var(--header-h) + 16px);
+  /* אין כאן scroll-margin: עצירת העוגנים מוגדרת פעם אחת בלבד,
+     ב-scroll-padding-top של html. שני המנגנונים מצטברים, וכששניהם
+     היו פעילים העוגן נעצר כ-100px מוקדם מדי. */
+  min-height: calc(100vh - var(--header-h));
+  /* svh מודד את המסך כשסרגלי הדפדפן במובייל גלויים — בלי חיתוך תוכן */
+  min-height: calc(100svh - var(--header-h));
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .section--white {
@@ -223,12 +245,15 @@ svg {
   color: var(--teal-light);
 }
 
-/* העוגנים נעצרים מתחת ל-Header בלבד */
-.chapterPage .section,
-.chapterPage .ch2hero,
-.chapterPage .ch3hero,
-.chapterPage .syl {
-  scroll-margin-top: calc(var(--header-h) + 16px);
+/* במסך צר יושב פס תפריט הפרק מתחת ל-Header, והעוגן צריך לעצור גם
+   מתחתיו. בדסקטופ התפריט הוא עמודה ואינו גוזל גובה. */
+@media (max-width: 1079px) {
+  .chapterPage .section,
+  .chapterPage .cover,
+  .chapterPage .ch2hero,
+  .chapterPage .ch3hero {
+    scroll-margin-top: var(--chnav-bar-h);
+  }
 }
 
 .split {
@@ -574,12 +599,6 @@ svg {
 @media (max-width: 1000px) {
   .grid-3 {
     grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  :root {
-    --gutter: 16px;
   }
 }
 

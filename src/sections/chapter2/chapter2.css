@@ -24,11 +24,13 @@
   position: relative;
   display: flex;
   align-items: center;
-  min-height: 520px;
+  /* מסך פתיחה מלא, כמו מסכי הפתיחה של שאר הפרקים: יתרת המסך שמתחת
+     ל-Header. min-height — הטקסט גדל מעבר לכך במסכים נמוכים */
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
   background: var(--cream);
   border-bottom: 1px solid var(--border);
   overflow: hidden;
-  scroll-margin-top: var(--header-h);
 }
 
 /* תצלום פתיחה דקורטיבי — ללא טקסט */

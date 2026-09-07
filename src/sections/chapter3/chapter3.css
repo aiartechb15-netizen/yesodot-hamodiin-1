@@ -1,10 +1,16 @@
 /* ---------- פתיח ---------- */
 .ch3hero {
   position: relative;
+  /* מסך פתיחה מלא, כמו מסכי הפתיחה של שאר הפרקים: יתרת המסך שמתחת
+     ל-Header, והטקסט ממורכז אנכית בתוכו */
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background: var(--navy);
   color: var(--teal-light);
   overflow: hidden;
-  scroll-margin-top: var(--header-h);
 }
 
 /* רקע דקורטיבי: קווי מערכה ורשת תכנון — ללא טקסט */
