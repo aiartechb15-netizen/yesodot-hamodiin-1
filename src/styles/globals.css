@@ -636,3 +636,36 @@ svg {
     border-top: 1px solid var(--border);
   }
 }
+
+/* ---------- מסך הפתיחה של תוכן הפרק ---------- */
+/* המסך שמופיע מיד אחרי מסך הפתיחה של הפרק: פסקת הפתיחה, מטרת הפרק
+   ומבנהו. רקע שמנת ואיורי הרקע של האתר; אין כאן כרטיסים, מסגרות או
+   קווים מפרידים — רק טקסט, כדי שהמעבר מהתצלום יהיה שקט. */
+.chIntro__lead p,
+p.chIntro__lead {
+  font-size: clamp(19px, 1.5vw, 22px);
+  line-height: 1.75;
+  color: var(--text);
+  max-width: 68ch;
+}
+
+.chIntro__block {
+  margin-top: clamp(30px, 3.4vw, 46px);
+}
+
+.chIntro__block p {
+  margin-top: 14px;
+  font-size: clamp(18px, 1.35vw, 20.5px);
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+/* שורת מבנה הפרק — רצף תחנות עם חיצים. line-height נדיב, כי היא
+   נשברת לכמה שורות וכל שבירה היא מעבר בין שלבים */
+.chIntro__structure {
+  line-height: 1.95;
+}
+
+.chIntro__actions {
+  margin-top: clamp(30px, 3.4vw, 44px);
+}

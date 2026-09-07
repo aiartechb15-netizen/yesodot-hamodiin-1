@@ -17,6 +17,13 @@ export const chapter3Meta = {
   cta: 'מתחילים',
 }
 
+/* מסך הפתיחה של הפרק — מספר הפרק, שמו והשורה הקצרה שמתחתיו */
+export const chapterCover = {
+  eyebrow: chapter3Meta.number,
+  step: { current: '03', total: '03' },
+  scrollLabel: 'גללו להמשך',
+}
+
 /* ---------------- תחנה 1 — פתיח ---------------- */
 
 export const opener = {

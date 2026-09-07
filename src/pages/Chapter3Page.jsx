@@ -1,4 +1,6 @@
 import ChapterLayout from '../components/ChapterLayout/ChapterLayout'
+import ChapterCover from '../sections/ChapterCover'
+import coverImage from '../assets/images/תמונה פרק 3.png'
 import NextChapter from '../components/NextChapter/NextChapter'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
@@ -15,7 +17,7 @@ import S11Relations from '../sections/chapter3/S11Relations'
 import S12Summary from '../sections/chapter3/S12Summary'
 import S13Exam from '../sections/chapter3/S13Exam'
 
-import { nextChapter, stations } from '../data/chapter3'
+import { chapter3Meta, chapterCover, nextChapter, opener, stations } from '../data/chapter3'
 
 // עמוד פרק 3 — "מודיעין אופרטיבי וטקטי" — שתים עשרה תחנות.
 export default function Chapter3Page() {
@@ -24,6 +26,17 @@ export default function Chapter3Page() {
   return (
     <>
       <main id="main" className="chapterPage">
+        <ChapterCover
+          image={coverImage}
+          eyebrow={chapterCover.eyebrow}
+          title={chapter3Meta.title}
+          tagline={chapter3Meta.subtitle}
+          step={chapterCover.step}
+          scrollLabel={chapterCover.scrollLabel}
+          nextId={opener.id}
+          titleId="ch3-cover-title"
+          focus={{ narrow: '38% center', portrait: '30% center' }}
+        />
         <ChapterLayout sections={stations} label="ניווט בין תחנות פרק 3">
           <S1Opener />
           <S3Operational />

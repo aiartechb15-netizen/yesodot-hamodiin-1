@@ -1,4 +1,5 @@
 import ChapterLayout from '../components/ChapterLayout/ChapterLayout'
+import coverImage from '../assets/images/תמונה מסך פתיחה מהו מודיעין.png'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
 import ChapterCover from '../sections/ChapterCover'
@@ -16,7 +17,7 @@ import ByDomain from '../sections/ByDomain'
 import QuizSection from '../sections/QuizSection'
 import NextLesson from '../sections/NextLesson'
 
-import { railSections, videos } from '../data/chapter1'
+import { chapterCover, chapterOpening, railSections, videos } from '../data/chapter1'
 
 // עמוד פרק 1 — "מהו מודיעין?" — כל תוכן הפרק והאינטראקציות.
 export default function ChapterPage() {
@@ -25,7 +26,15 @@ export default function ChapterPage() {
   return (
     <>
       <main id="main" className="chapterPage">
-        <ChapterCover />
+        <ChapterCover
+          image={coverImage}
+          eyebrow={chapterCover.eyebrow}
+          title={chapterOpening.title}
+          tagline={chapterCover.tagline}
+          step={chapterCover.step}
+          scrollLabel={chapterCover.scrollLabel}
+          nextId="chapter-open"
+        />
         <ChapterLayout sections={railSections} label="ניווט בין מקטעי פרק 1">
           <ChapterOpening />
           <VideoSection video={videos.intro} />

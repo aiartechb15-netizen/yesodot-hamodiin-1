@@ -22,7 +22,7 @@
 
   background-image: var(--cover-img);
   background-size: cover;
-  background-position: center;
+  background-position: var(--cover-pos, center);
   background-repeat: no-repeat;
   /* צבע מתחת לתמונה: מונע הבזק שוליים לבנים לפני שהיא נטענת */
   background-color: var(--navy);
@@ -75,8 +75,8 @@
   font-weight: 700;
   line-height: var(--lh-tight);
   letter-spacing: -0.01em;
-  /* שורה אחת כל עוד הרוחב מאפשר. הכותרת קצרה, וגם ב-320px היא
-     נכנסת בגודל המובייל שלמטה. */
+  /* שורה אחת כל עוד הרוחב מאפשר; במסך צר היא נשברת (ראו למטה),
+     כי שמות הפרקים 2 ו-3 ארוכים ובשורה אחת הם נחתכים בקצוות. */
   white-space: nowrap;
   /* צל רך ורחב במקום קו מתאר: שומר על קריאוּת מעל השמיים הבהירים
      ומעל הסלע הכהה, בלי להיראות כטקסט "מודבק" */
@@ -299,9 +299,17 @@
 }
 
 /* מובייל — 38px ב-320px, 44px מ-420px ומעלה */
+@media (max-width: 900px) {
+  /* מכאן ומטה הכותרת נשברת לשתי שורות במקום להיחתך */
+  .cover__title {
+    white-space: normal;
+    text-wrap: balance;
+  }
+}
+
 @media (max-width: 640px) {
   .cover__title {
-    font-size: clamp(38px, 10.5vw, 44px);
+    font-size: clamp(34px, 9vw, 44px);
   }
   .cover__eyebrow {
     margin-bottom: 10px;
@@ -327,13 +335,13 @@
    נקודת המיקום שמאלה מחזירה אותו פנימה יחד עם חלק מהנוף. */
 @media (max-aspect-ratio: 155 / 100) {
   .cover {
-    background-position: 30% center;
+    background-position: var(--cover-pos-narrow, 30% center);
   }
 }
 
 @media (max-aspect-ratio: 1 / 1) {
   .cover {
-    background-position: 16% center;
+    background-position: var(--cover-pos-square, var(--cover-pos-narrow, 16% center));
   }
 }
 
@@ -342,6 +350,6 @@
    והחיתוך נלקח כולו מצד הנוף. */
 @media (max-aspect-ratio: 4 / 5) {
   .cover {
-    background-position: 12% center;
+    background-position: var(--cover-pos-portrait, var(--cover-pos-narrow, 12% center));
   }
 }

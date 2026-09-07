@@ -1,13 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-import { chapterCover, chapterOpening } from '../data/chapter1'
-import coverImage from '../assets/images/תמונה מסך פתיחה מהו מודיעין.png'
 import './ChapterCover.css'
-
-/* היעד של החץ הוא הסקשן הראשון של תוכן הפרק. עוגן אמיתי ולא כפתור,
-   כדי שהגלילה תעבוד גם בלי JS ובפתיחה בלשונית חדשה. */
-const NEXT_ANCHOR = '#chapter-open'
-const NEXT_ID = 'chapter-open'
 
 /* אורך הגלילה. ארוך מברירת המחדל של הדפדפן בכוונה: מסך הפתיחה גבוה,
    וגלילה מהירה מדי נקראת כקפיצה במקום כמעבר. */
@@ -16,10 +9,29 @@ const SCROLL_MS = 900
 /* ease-in-out — יציאה רכה מהמנוחה, האטה רכה ביעד */
 const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2)
 
-/* מסך הפתיחה של הפרק: תצלום מלא מסך, הכותרת בלבד מעליו, וחץ בתחתית.
-   הכותרת היא טקסט HTML חי ולא חלק מהתמונה — לשם קריאוּת, נגישות
-   וחיפוש. */
-export default function ChapterCover() {
+/**
+ * מסך הפתיחה של פרק: תצלום מלא מסך, ומעליו מספר הפרק, שמו, משפט
+ * הפתיחה, סימון ההתקדמות וחץ גלילה — ותו לא. תוכן הפרק מתחיל במסך
+ * שאחריו. הכותרות הן טקסט HTML חי ולא חלק מהתמונה, לשם קריאוּת,
+ * נגישות וחיפוש.
+ *
+ * אותו רכיב משמש את שלושת הפרקים; מה שמשתנה הוא ה-props.
+ * focus קובע את נקודת החיתוך של התצלום ביחסי מסך שונים, כי בכל
+ * תצלום הנושא יושב במקום אחר.
+ */
+export default function ChapterCover({
+  image,
+  eyebrow,
+  title,
+  tagline,
+  step,
+  scrollLabel,
+  nextId,
+  titleId = 'chapter-cover-title',
+  focus = {},
+}) {
+  const NEXT_ID = nextId
+  const NEXT_ANCHOR = `#${nextId}`
   const frame = useRef(0)
 
   useEffect(() => () => cancelAnimationFrame(frame.current), [])
@@ -71,29 +83,33 @@ export default function ChapterCover() {
     <section
       className="cover"
       id="chapter-cover"
-      aria-labelledby="chapter-cover-title"
-      style={{ '--cover-img': `url(${coverImage})` }}
+      aria-labelledby={titleId}
+      style={{
+        '--cover-img': `url(${image})`,
+        ...(focus.wide ? { '--cover-pos': focus.wide } : null),
+        ...(focus.narrow ? { '--cover-pos-narrow': focus.narrow } : null),
+        ...(focus.square ? { '--cover-pos-square': focus.square } : null),
+        ...(focus.portrait ? { '--cover-pos-portrait': focus.portrait } : null),
+      }}
     >
       <div className="cover__inner">
-        <span className="cover__eyebrow">{chapterCover.eyebrow}</span>
-        <h1 className="cover__title" id="chapter-cover-title">
-          {chapterOpening.title}
+        <span className="cover__eyebrow">{eyebrow}</span>
+        <h1 className="cover__title" id={titleId}>
+          {title}
         </h1>
         {/* קו הזהב הוא סימן ולא מפריד תוכן, ולכן span ולא hr */}
         <span className="cover__rule" aria-hidden="true" />
-        <p className="cover__tagline">{chapterCover.tagline}</p>
+        <p className="cover__tagline">{tagline}</p>
       </div>
 
       {/* סימון ההתקדמות בקורס. ה-dir יושב על הספרות בלבד ולא על ה-p:
           על ה-p הוא היה הופך גם את ה-inline-start של המיקום, והסימון
           היה קופץ לצד שמאל של המסך. לקורא המסך נמסר משפט מלא. */}
       <p className="cover__step">
-        <span className="sr-only">
-          {`פרק ${chapterCover.step.current} מתוך ${chapterCover.step.total}`}
-        </span>
+        <span className="sr-only">{`פרק ${step.current} מתוך ${step.total}`}</span>
         <span className="cover__stepDigits" dir="ltr" aria-hidden="true">
-          <span className="cover__stepCurrent">{chapterCover.step.current}</span>
-          {` / ${chapterCover.step.total}`}
+          <span className="cover__stepCurrent">{step.current}</span>
+          {` / ${step.total}`}
         </span>
       </p>
 
@@ -115,7 +131,7 @@ export default function ChapterCover() {
             />
           </svg>
         </span>
-        <span className="cover__downLabel">{chapterCover.scrollLabel}</span>
+        <span className="cover__downLabel">{scrollLabel}</span>
       </a>
     </section>
   )

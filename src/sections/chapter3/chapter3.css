@@ -1,82 +1,4 @@
-/* ---------- פתיח ---------- */
-.ch3hero {
-  position: relative;
-  /* מסך פתיחה מלא, כמו מסכי הפתיחה של שאר הפרקים: יתרת המסך שמתחת
-     ל-Header, והטקסט ממורכז אנכית בתוכו */
-  min-height: calc(100vh - var(--header-h));
-  min-height: calc(100svh - var(--header-h));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: var(--navy);
-  color: var(--teal-light);
-  overflow: hidden;
-}
 
-/* רקע דקורטיבי: קווי מערכה ורשת תכנון — ללא טקסט */
-.ch3hero__art {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.22;
-}
-
-.ch3hero__art svg {
-  position: absolute;
-  left: -6%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: min(62%, 760px);
-  height: auto;
-  color: var(--teal-light);
-}
-
-.ch3hero__inner {
-  position: relative;
-  padding-block: clamp(56px, 7vw, 92px);
-}
-
-.ch3hero__text {
-  width: min(52%, 640px);
-}
-
-.ch3hero__badge {
-  display: inline-block;
-  font-size: 14.5px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: var(--gold);
-  border: 1px solid rgba(196, 163, 71, 0.5);
-  border-radius: 999px;
-  padding: 6px 16px;
-  margin-bottom: 18px;
-}
-
-.ch3hero__title {
-  color: var(--white);
-  font-size: clamp(34px, 4.2vw, 52px);
-  line-height: 1.12;
-}
-
-.ch3hero__intro p {
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 19px;
-}
-
-.ch3hero__actions {
-  margin-top: 30px;
-}
-
-.ch3hero .btn {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: var(--navy);
-}
-
-.ch3hero .btn:hover {
-  background: var(--gold-lift);
-  border-color: var(--gold-lift);
-}
 
 /* ---------- כותרות תחנה ---------- */
 .s3head {
@@ -526,15 +448,7 @@
 }
 
 @media (max-width: 860px) {
-  .ch3hero__text {
-    width: 100%;
-  }
-  .ch3hero__art svg {
-    left: auto;
-    right: -20%;
-    opacity: 0.5;
-    width: 90%;
-  }
+
   .envs {
     grid-template-columns: 1fr;
   }
