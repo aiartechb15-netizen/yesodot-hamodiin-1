@@ -2,11 +2,13 @@ import ResearchApproaches from '../components/ResearchApproaches/ResearchApproac
 import ExpandCards from '../components/ExpandCards/ExpandCards'
 import { approaches, choosingApproach } from '../data/chapter1'
 import './sections.css'
+import BackgroundDecor from '../components/BackgroundDecor/BackgroundDecor'
 
 export default function ApproachesSection() {
   return (
     <>
       <section className="section section--white" id="approaches" aria-labelledby="approaches-title">
+        <BackgroundDecor variant="grid" />
         <div className="container">
           <h2 className="section-title" id="approaches-title">
             {approaches.title}
@@ -23,6 +25,7 @@ export default function ApproachesSection() {
       </section>
 
       <section className="section section--paper" id="choosing-approach" aria-labelledby="choosing-title">
+        <BackgroundDecor variant="topo" />
         <div className="container">
           <h2 className="section-title" id="choosing-title">
             {choosingApproach.title}

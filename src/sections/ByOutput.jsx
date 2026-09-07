@@ -1,10 +1,12 @@
 import Icon from '../components/Icons/Icons'
 import { byOutput } from '../data/chapter1'
 import './sections.css'
+import BackgroundDecor from '../components/BackgroundDecor/BackgroundDecor'
 
 export default function ByOutput() {
   return (
     <section className="section section--white" id="by-output" aria-labelledby="by-output-title">
+      <BackgroundDecor variant="grid" />
       <div className="container">
         <h2 className="section-title" id="by-output-title">
           {byOutput.title}

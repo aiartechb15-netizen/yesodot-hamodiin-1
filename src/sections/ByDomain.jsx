@@ -2,10 +2,12 @@ import Icon from '../components/Icons/Icons'
 import { byDomain } from '../data/chapter1'
 import domainImage from '../assets/images/מהו מודיעין תמונה 2.png'
 import './sections.css'
+import BackgroundDecor from '../components/BackgroundDecor/BackgroundDecor'
 
 export default function ByDomain() {
   return (
     <section className="section section--white" id="by-domain" aria-labelledby="by-domain-title">
+      <BackgroundDecor variant="globe" />
       <div className="container">
         <h2 className="section-title" id="by-domain-title">
           {byDomain.title}

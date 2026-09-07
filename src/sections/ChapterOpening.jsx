@@ -1,10 +1,12 @@
 import { chapterOpening } from '../data/chapter1'
 import openingImage from '../assets/images/תמונה פרק 1 חדשה.png'
 import './sections.css'
+import BackgroundDecor from '../components/BackgroundDecor/BackgroundDecor'
 
 export default function ChapterOpening() {
   return (
     <section className="section section--paper" id="chapter-open" aria-labelledby="chapter-open-title">
+      <BackgroundDecor variant="grid" />
       <div className="container open__container">
         <div className="split split--wideText open__split">
           <div>

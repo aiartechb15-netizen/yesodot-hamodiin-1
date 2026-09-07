@@ -1,0 +1,144 @@
+/* שכבת הרקע הדקורטיבית של מקטעי התוכן.
+
+   הכללים שהיא חייבת לקיים, בסדר הזה:
+   1. אינה נוגעת בתוכן — z-index שלילי משאיר אותה מעל רקע המקטע
+      ומתחת לכל טקסט, תמונה, סרטון או רכיב אינטראקטיבי, בלי לגעת
+      בשכבות של אף רכיב קיים.
+   2. אינה לחיצה — pointer-events: none על השכבה כולה.
+   3. אינה יוצרת גלילה — overflow: hidden חותך כל איור שחורג מהמקטע,
+      וזה גם מה שמאפשר לאיורים "להיחתך" בקצה המסך בכוונה. */
+.dec {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  /* הדיו של האיורים: כחול-אפור בהיר. השקיפות עצמה יושבת על כל איור
+     בנפרד (5%–10%), כדי שאיור גדול יהיה עדין יותר מאיור קטן. */
+  color: #56718f;
+}
+
+/* z-index שלילי "בורח" כלפי מעלה אל הקשר הערימה הקרוב, ושם הוא
+   יורד מתחת לרקע של המקטע ונעלם. isolation: isolate הופך את המקטע
+   עצמו להקשר ערימה, ולכן השכבה נשארת בדיוק במקום הנכון: מעל רקע
+   המקטע, מתחת לכל תוכן. הכלל חל רק על מקטעים שיש בהם שכבת רקע. */
+:where(section, div):has(> .dec) {
+  isolation: isolate;
+}
+
+/* דפדפן ללא :has — במקום להעלות את המקטע, מעלים את התוכן שמעל השכבה */
+@supports not selector(:has(*)) {
+  .dec {
+    z-index: 0;
+  }
+  .dec ~ * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.dec__piece {
+  position: absolute;
+  line-height: 0;
+}
+
+.dec__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  stroke: currentColor;
+  /* קו דק ואחיד בכל הגדלים: vector-effect שומר על עובי הקו גם כשה-SVG
+     נמתח, אחרת האיורים הגדולים היו נראים שמנים מהקטנים */
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  fill: none;
+}
+
+/* נקודות הזהב — ההדגשה היחידה בצבע, ובמשורה */
+.dec__dot {
+  fill: var(--gold);
+  stroke: none;
+  opacity: 0.55;
+}
+
+/* ---------- גדלים ושקיפות ---------- */
+/* איור גדול = שקוף יותר. ככל שהשטח גדול, כך העין רגישה לו יותר. */
+.dec__piece--lg {
+  width: clamp(240px, 26vw, 420px);
+  opacity: 0.055;
+}
+
+.dec__piece--md {
+  width: clamp(170px, 17vw, 280px);
+  opacity: 0.075;
+}
+
+.dec__piece--sm {
+  width: clamp(110px, 11vw, 170px);
+  opacity: 0.1;
+}
+
+/* ---------- מיקומים ---------- */
+/* האיורים יושבים בפסי הריפוד של המקטע ובקצה ה-end שלו — הצד שבו
+   שורות הטקסט נגמרות בעמוד RTL. חלקם חורג מהמקטע ונחתך; ה-overflow
+   של .dec סוגר את החריגה, ולכן אין גלילה אופקית.
+   ה-translate מוציא כל איור כמחציתו אל מחוץ למסגרת, כדי שמה שנשאר
+   בפנים יישאר בשוליים ולא ייכנס אל מתחת לתוכן. */
+.dec__piece--top-end {
+  top: 0;
+  inset-inline-end: 0;
+  transform: translate(var(--dec-out-end), -46%);
+}
+
+.dec__piece--bottom-end {
+  bottom: 0;
+  inset-inline-end: 0;
+  transform: translate(var(--dec-out-end), 62%);
+}
+
+.dec__piece--bottom-start {
+  bottom: 0;
+  inset-inline-start: 0;
+  transform: translate(var(--dec-out-start), 52%);
+}
+
+/* כיוון ההזזה החוצה תלוי בכיוון העמוד */
+.dec {
+  --dec-out-end: -42%;
+  --dec-out-start: 42%;
+}
+
+[dir='ltr'] .dec {
+  --dec-out-end: 42%;
+  --dec-out-start: -42%;
+}
+
+/* ---------- מסכים קטנים ---------- */
+/* טאבלט: האיור הגדול יורד. במקטע צר הוא היה נכנס אל מאחורי הטקסט
+   במקום להישאר בשוליים. */
+@media (max-width: 1024px) {
+  .dec__piece--lg {
+    width: clamp(200px, 24vw, 260px);
+  }
+}
+
+@media (max-width: 760px) {
+  .dec__piece--lg {
+    display: none;
+  }
+  .dec__piece--md {
+    width: 150px;
+    opacity: 0.07;
+  }
+  .dec__piece--sm {
+    width: 104px;
+    opacity: 0.09;
+  }
+}
+
+/* טלפון: נשאר איור אחד קטן בפינה, כרמז ולא כתבנית */
+@media (max-width: 520px) {
+  .dec__piece--md {
+    display: none;
+  }
+}

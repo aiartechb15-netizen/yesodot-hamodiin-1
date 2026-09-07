@@ -1,12 +1,14 @@
 import Icon from '../components/Icons/Icons'
 import { gate1 } from '../data/chapter1'
 import './sections.css'
+import BackgroundDecor from '../components/BackgroundDecor/BackgroundDecor'
 
 export default function Gate1() {
   const { learningSystem: ls, knowingVsUnderstanding: ku, infoVsKnowledge: ik } = gate1
 
   return (
     <section className="section section--paper" id="gate-1" aria-labelledby="gate-1-title">
+      <BackgroundDecor variant="globe" />
       <div className="container">
         <header className="gateHead">
           <h2 className="section-title" id="gate-1-title">

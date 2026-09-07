@@ -2,6 +2,7 @@ import Icon from '../../components/Icons/Icons'
 import { forceBuilding as fb } from '../../data/chapter2'
 import forceImage from '../../assets/images/modiin_force_building_visual.png'
 import './chapter2.css'
+import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 
 /* חמשת השלבים הם תהליך אחד רציף, ולכן כולם גלויים תמיד:
    מסלול אנכי שמתחיל בימין — מספר, כותרת, ומתחתיהם ההסבר.
@@ -10,6 +11,7 @@ import './chapter2.css'
 export default function StationForce() {
   return (
     <section className="section section--paper" id={fb.id} aria-labelledby="ch2-force-title">
+      <BackgroundDecor variant="globe" />
       <div className="container fbuild">
         <div className="fbuild__main">
           <header className="st__head">

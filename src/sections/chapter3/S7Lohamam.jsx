@@ -1,6 +1,7 @@
 import Icon from '../../components/Icons/Icons'
 import { lohamam as lm } from '../../data/chapter3'
 import './chapter3.css'
+import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 
 function Arrow() {
   // חץ בכיוון הקריאה בעברית (ימין → שמאל)
@@ -23,6 +24,7 @@ function Arrow() {
 export default function S7Lohamam() {
   return (
     <section className="section section--white" id={lm.id} aria-labelledby="ch3-lm-title">
+      <BackgroundDecor variant="topo" />
       <div className="container">
         <header className="s3head">
           <h2 className="section-title" id="ch3-lm-title">

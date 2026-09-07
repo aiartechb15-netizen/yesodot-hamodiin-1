@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { topicCards } from '../../data/chapter1'
 import './TopicCards.css'
+import BackgroundDecor from '../BackgroundDecor/BackgroundDecor'
 
 /* שלוש הכניסות לקורס. כל כרטיס הוא תצלום שממלא אותו לרוחבו ולגובהו,
    ומעליו מסך קרמי שנפתח מימין — שם יושב הטקסט. אין אזור לבן נפרד
@@ -10,6 +11,7 @@ import './TopicCards.css'
 export default function TopicCards() {
   return (
     <section className="section section--white" id="topics" aria-label="פרקי הקורס">
+      <BackgroundDecor variant="globe" />
       <div className="container">
         <ul className="topics">
           {topicCards.map((card) => {

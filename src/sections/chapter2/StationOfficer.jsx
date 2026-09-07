@@ -2,6 +2,7 @@ import { Fragment, useId, useState } from 'react'
 import Icon from '../../components/Icons/Icons'
 import { officerAndLeader as ol } from '../../data/chapter2'
 import './chapter2.css'
+import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 
 /* כל התחנה עוסקת במשתנה אחד — המרחק בין הקמ״ן לקברניט.
    הגליף מצייר אותו: עיגול טורקיז (הקמ״ן) ועיגול כחול (הקברניט),
@@ -240,6 +241,7 @@ export default function StationOfficer() {
 
   return (
     <section className="section section--paper" id={ol.id} aria-labelledby="ch2-officer-title">
+      <BackgroundDecor variant="grid" />
       <div className="container">
         <header className="of__head">
           <h2 className="section-title section-title--center" id="ch2-officer-title">

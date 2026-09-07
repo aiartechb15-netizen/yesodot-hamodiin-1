@@ -2,6 +2,7 @@ import { useId, useState } from 'react'
 import Icon from '../../components/Icons/Icons'
 import { research as rs } from '../../data/chapter3'
 import './chapter3.css'
+import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 
 export default function S9Research() {
   const uid = useId()
@@ -9,6 +10,7 @@ export default function S9Research() {
 
   return (
     <section className="section section--white" id={rs.id} aria-labelledby="ch3-rs-title">
+      <BackgroundDecor variant="grid" />
       <div className="container">
         <header className="s3head">
           <h2 className="section-title" id="ch3-rs-title">

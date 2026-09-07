@@ -2,10 +2,12 @@ import { Link } from 'react-router-dom'
 import { nextLesson } from '../data/chapter1'
 import nextImage from '../assets/images/מהו מודיעין תמונה 3.png'
 import './sections.css'
+import BackgroundDecor from '../components/BackgroundDecor/BackgroundDecor'
 
 export default function NextLesson() {
   return (
     <section className="section section--white" id="next-lesson" aria-labelledby="next-lesson-title">
+      <BackgroundDecor variant="topo" />
       <div className="container">
         <div className="next">
           <div className="next__media">

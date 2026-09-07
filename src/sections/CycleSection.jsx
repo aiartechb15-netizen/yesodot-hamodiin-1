@@ -1,10 +1,12 @@
 import IntelligenceCycle from '../components/IntelligenceCycle/IntelligenceCycle'
 import { intelligenceCycle } from '../data/chapter1'
 import './sections.css'
+import BackgroundDecor from '../components/BackgroundDecor/BackgroundDecor'
 
 export default function CycleSection() {
   return (
     <section className="section section--cream" id="by-process" aria-labelledby="by-process-title">
+      <BackgroundDecor variant="satellite" />
       <div className="container">
         <h2 className="section-title" id="by-process-title">
           {intelligenceCycle.title}

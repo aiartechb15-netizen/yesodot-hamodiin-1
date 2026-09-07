@@ -2,10 +2,12 @@ import Icon from '../../components/Icons/Icons'
 import ExpandCards from '../../components/ExpandCards/ExpandCards'
 import { operational as op } from '../../data/chapter3'
 import './chapter3.css'
+import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 
 export default function S3Operational() {
   return (
     <section className="section section--white" id={op.id} aria-labelledby="ch3-op-title">
+      <BackgroundDecor variant="topo" />
       <div className="container">
         <header className="s3head">
           <h2 className="section-title" id="ch3-op-title">

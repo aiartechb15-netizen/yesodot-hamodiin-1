@@ -1,10 +1,12 @@
 import IdentityCard from '../../components/IdentityCard/IdentityCard'
 import { strategic } from '../../data/chapter2'
 import './chapter2.css'
+import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 
 export default function StationStrategic() {
   return (
     <section className="section section--white" id={strategic.id} aria-labelledby="ch2-strategic-title">
+      <BackgroundDecor variant="satellite" />
       <div className="container">
         <header className="st__head">
           <h2 className="section-title" id="ch2-strategic-title">

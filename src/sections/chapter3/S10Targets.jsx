@@ -2,10 +2,12 @@ import VideoPlaceholder from '../../components/VideoPlaceholder/VideoPlaceholder
 import ScenarioPicker from '../../components/ScenarioPicker/ScenarioPicker'
 import { targets as tg } from '../../data/chapter3'
 import './chapter3.css'
+import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 
 export default function S10Targets() {
   return (
     <section className="section section--paper" id={tg.id} aria-labelledby="ch3-tg-title">
+      <BackgroundDecor variant="satellite" />
       <div className="container">
         <header className="s3head">
           <h2 className="section-title" id="ch3-tg-title">

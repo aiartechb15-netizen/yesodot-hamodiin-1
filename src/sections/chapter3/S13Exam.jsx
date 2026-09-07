@@ -1,10 +1,12 @@
 import ExamStepper from '../../components/ExamStepper/ExamStepper'
 import { exam } from '../../data/chapter3'
 import './chapter3.css'
+import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 
 export default function S13Exam() {
   return (
     <section className="section section--paper" id={exam.id} aria-labelledby="ch3-exam-title">
+      <BackgroundDecor variant="grid" />
       <div className="container">
         <header className="s3head" style={{ textAlign: 'center' }}>
           <h2 className="section-title" id="ch3-exam-title">

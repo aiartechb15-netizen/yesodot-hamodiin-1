@@ -2,10 +2,12 @@ import IdentityCard from '../../components/IdentityCard/IdentityCard'
 import ExpandCards from '../../components/ExpandCards/ExpandCards'
 import { tactical as tac } from '../../data/chapter3'
 import './chapter3.css'
+import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 
 export default function S6Tactical() {
   return (
     <section className="section section--paper" id={tac.id} aria-labelledby="ch3-tac-title">
+      <BackgroundDecor variant="satellite" />
       <div className="container">
         <header className="s3head">
           <h2 className="section-title" id="ch3-tac-title">

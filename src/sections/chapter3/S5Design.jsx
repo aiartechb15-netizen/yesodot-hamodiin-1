@@ -1,10 +1,12 @@
 import FillBlanks from '../../components/FillBlanks/FillBlanks'
 import { design } from '../../data/chapter3'
 import './chapter3.css'
+import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 
 export default function S5Design() {
   return (
     <section className="section section--white" id={design.id} aria-labelledby="ch3-design-title">
+      <BackgroundDecor variant="grid" />
       <div className="container">
         <header className="s3head">
           <h2 className="section-title" id="ch3-design-title">
