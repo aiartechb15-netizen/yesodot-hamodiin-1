@@ -1,11 +1,11 @@
 import { chapterOpening } from '../data/chapter1'
-import openingImage from '../assets/images/מהו מודיעין תמונה 1.png'
+import openingImage from '../assets/images/תמונה פרק 1 חדשה.png'
 import './sections.css'
 
 export default function ChapterOpening() {
   return (
     <section className="section section--paper" id="chapter-open" aria-labelledby="chapter-open-title">
-      <div className="container">
+      <div className="container open__container">
         <div className="split split--wideText open__split">
           <div>
             {/* "מטרת הפרק" היא הכותרת הראשונה של הסקשן, ולכן היא נושאת
