@@ -1,0 +1,952 @@
+/* ============================================================================
+   מערכת עיצוב — "פרק 1" · קובץ אחד, עצמאי, מוכן להדבקה
+   ----------------------------------------------------------------------------
+   שכבה חזותית בלבד. אין כאן תוכן, אין לוגיקה, אין תלות בספרייה כלשהי.
+   כל המחלקות מקודמות ב-lx- כדי שלא יתנגשו בקוד קיים באתר.
+
+   דרישות מהעמוד המארח:
+     <html lang="he" dir="rtl">
+   ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700;800;900&display=swap');
+
+/* ============================================================
+   1. טוקנים — מקור האמת היחיד לצבע, טיפוגרפיה, מרווח ומוֹשן
+   שלושה צבעים בלבד: נייבי · טורקיז · זהב. אין צבע רביעי.
+   הבחנה נוספת נעשית בשקיפות, במשקל גופן או בקו מפריד.
+   ============================================================ */
+
+:root {
+  /* ---- ליבת הפלטה ---- */
+  --lx-navy: #071a2d;            /* סמכות — כותרות, header/footer, כפתור ראשי */
+  --lx-navy-secondary: #123955;  /* טון רך — לינקים, hover, מונחים */
+  --lx-teal: #17989a;            /* אינטראקציה ונכונות — אייקונים, גבולות, פוקוס */
+  --lx-teal-light: #c6e1e0;      /* טקסט על רקע נייבי בלבד */
+  --lx-gold: #c4a347;            /* הדגשה נדירה — קו זהב, מותג, תוויות */
+  --lx-cream: #f5f0e6;           /* רקע חלופי, דוגמאות */
+  --lx-paper: #fbf8f1;           /* רקע ברירת מחדל */
+  --lx-white: #ffffff;           /* משטח מוגבה — כרטיסים */
+  --lx-text: #172436;            /* טקסט גוף */
+  --lx-muted: #6c716f;           /* טקסט משני */
+  --lx-border: #ded9cf;          /* גבול בגוון נייר — לא אפור! */
+
+  /* ---- סמנטי ---- */
+  --lx-danger: #a03c32;
+  --lx-danger-soft: rgba(160, 60, 50, 0.08);
+  --lx-success: var(--lx-teal);   /* הצלחה = טורקיז. אין ירוק בפלטה */
+  --lx-success-soft: rgba(23, 152, 154, 0.12);
+  --lx-ink-soft: #3b4757;
+  --lx-gold-ink: #7c6426;         /* זהב קריא לטקסט קטן — AA גם על קרם */
+  --lx-teal-ink: #0f6f71;         /* טורקיז קריא לטקסט קטן על רקע בהיר */
+  --lx-teal-smoke: #8fbcbb;       /* קווי חיבור/זרימה דקורטיביים */
+
+  /* ---- נגזרים ---- */
+  --lx-navy-70: rgba(7, 26, 45, 0.7);
+  --lx-navy-06: rgba(7, 26, 45, 0.06);
+  --lx-navy-12: rgba(7, 26, 45, 0.12);
+  --lx-gold-soft: rgba(196, 163, 71, 0.28);
+  --lx-teal-soft: rgba(23, 152, 154, 0.12);
+
+  /* צללים בנייבי שקוף — לעולם לא בשחור */
+  --lx-shadow-sm: 0 1px 2px rgba(7, 26, 45, 0.05);
+  --lx-shadow-card: 0 2px 10px rgba(7, 26, 45, 0.06), 0 1px 2px rgba(7, 26, 45, 0.04);
+  --lx-shadow-card-hover: 0 10px 28px rgba(7, 26, 45, 0.1), 0 2px 6px rgba(7, 26, 45, 0.05);
+  --lx-shadow-pop: 0 18px 48px rgba(7, 26, 45, 0.16), 0 4px 12px rgba(7, 26, 45, 0.08);
+
+  /* ---- טיפוגרפיה ----
+     Rubik — סנס גיאומטרי, כותרות בלבד.
+     Assistant — סנס הומניסטי, גוף וממשק. */
+  --lx-font-display: 'Rubik', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --lx-font-body: 'Assistant', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  --lx-fs-display: clamp(2.35rem, 6.2vw, 3.9rem);
+  --lx-fs-h1: clamp(1.95rem, 4.6vw, 3rem);
+  --lx-fs-h2: clamp(1.55rem, 3.2vw, 2.15rem);
+  --lx-fs-h3: clamp(1.2rem, 2.2vw, 1.4rem);
+  --lx-fs-h4: 1.0625rem;
+  --lx-fs-lead: clamp(1.075rem, 1.9vw, 1.25rem);
+  --lx-fs-body: 1.0625rem;
+  --lx-fs-sm: 0.9375rem;
+  --lx-fs-xs: 0.8125rem;
+
+  /* גובה שורה מהודק — לעברית x-height גבוה */
+  --lx-lh-tight: 1.22;
+  --lx-lh-heading: 1.3;
+  --lx-lh-body: 1.72;
+
+  /* ---- ריווח, בסיס 8px ---- */
+  --lx-s-1: 4px;
+  --lx-s-2: 8px;
+  --lx-s-3: 12px;
+  --lx-s-4: 16px;
+  --lx-s-5: 24px;
+  --lx-s-6: 32px;
+  --lx-s-7: 48px;
+  --lx-s-8: 64px;
+  --lx-s-9: 96px;
+
+  --lx-section-y: clamp(56px, 8vw, 104px);
+  --lx-wrap: 1120px;
+  --lx-wrap-narrow: 720px;   /* פחות מ-80 תווים לשורה */
+
+  /* ---- רדיוס ---- */
+  --lx-r-sm: 4px;
+  --lx-r-md: 8px;
+  --lx-r-lg: 14px;
+  --lx-r-pill: 999px;
+
+  /* ---- מוֹשן ---- */
+  --lx-dur-fast: 130ms;
+  --lx-dur: 200ms;
+  --lx-dur-slow: 320ms;
+  --lx-ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+
+  /* ---- כרומטיקה של הכרום ---- */
+  --lx-header-h: 64px;
+  --lx-rail-h: 52px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --lx-dur-fast: 1ms;
+    --lx-dur: 1ms;
+    --lx-dur-slow: 1ms;
+  }
+}
+
+/* ============================================================
+   2. בסיס
+   ============================================================ */
+
+html {
+  scroll-behavior: smooth;
+  /* כדי שעוגן לא ייחתך מתחת ל-header ולסרגל הדביקים */
+  scroll-padding-top: calc(var(--lx-header-h) + var(--lx-rail-h) + 16px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  font-family: var(--lx-font-body);
+  font-size: var(--lx-fs-body);
+  line-height: var(--lx-lh-body);
+  color: var(--lx-text);
+  background: var(--lx-paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* מרקם נייר — עדין מאוד. נותן תחושת מסמך ולא אפליקציה.
+   אם זה מתנגש ברקע קיים באתר — אפשר להסיר, זה הפריט היחיד שאינו קריטי. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='0.045'/></svg>");
+}
+
+/* ============================================================
+   3. טיפוגרפיה
+   ============================================================ */
+
+.lx h1, .lx h2, .lx h3, .lx h4, .lx h5,
+.lx-h1, .lx-h2, .lx-h3, .lx-h4 {
+  font-family: var(--lx-font-display);
+  color: var(--lx-navy);
+  line-height: var(--lx-lh-heading);
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.lx h1, .lx-h1 {
+  font-size: var(--lx-fs-h1);
+  line-height: var(--lx-lh-tight);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.lx h2, .lx-h2 { font-size: var(--lx-fs-h2); font-weight: 700; }
+.lx h3, .lx-h3 { font-size: var(--lx-fs-h3); font-weight: 700; }
+.lx h4, .lx-h4 { font-size: var(--lx-fs-h4); font-weight: 700; font-family: var(--lx-font-body); }
+
+/* אורך שורה — הפרמטר החשוב ביותר לקריאוּת. אל תבטלו אותו. */
+.lx p { max-width: 68ch; }
+
+.lx-lead {
+  font-size: var(--lx-fs-lead);
+  line-height: 1.62;
+  color: var(--lx-text);
+  max-width: 62ch;
+}
+
+.lx-muted { color: var(--lx-muted); }
+.lx-small { font-size: var(--lx-fs-sm); }
+.lx-wide  { max-width: none; }
+
+/* מונח מקצועי בתוך טקסט רץ */
+.lx-term { color: var(--lx-navy-secondary); font-weight: 700; }
+
+/* תווית קטנה מעל כותרת — הסימן המזהה של המערכת */
+.lx-kicker {
+  display: block;
+  font-size: var(--lx-fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--lx-teal-ink);
+  margin-bottom: var(--lx-s-3);
+}
+
+/* הקו הזהב הקצר מתחת לכותרת — 46×3 פיקסלים, לא יותר */
+.lx-rule-gold {
+  width: 46px;
+  height: 3px;
+  background: var(--lx-gold);
+  border: 0;
+  margin: var(--lx-s-4) 0 var(--lx-s-5);
+  border-radius: 2px;
+}
+
+.lx a {
+  color: var(--lx-navy-secondary);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.lx a:hover { color: var(--lx-navy); }
+
+/* מספרים וראשי תיבות לטיניים נשארים LTR בתוך טקסט עברי */
+.lx-ltr { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+
+/* ============================================================
+   4. נגישות — פוקוס אחיד בכל האתר
+   ============================================================ */
+
+.lx :focus-visible,
+.lx-focus:focus-visible {
+  outline: 3px solid var(--lx-teal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.lx-sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.lx-skip-link {
+  position: absolute;
+  inset-inline-start: var(--lx-s-4);
+  top: -60px;
+  z-index: 200;
+  background: var(--lx-navy);
+  color: var(--lx-white);
+  padding: var(--lx-s-3) var(--lx-s-5);
+  border-radius: 0 0 var(--lx-r-md) var(--lx-r-md);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top var(--lx-dur) var(--lx-ease);
+}
+.lx-skip-link:focus { top: 0; color: var(--lx-white); }
+
+/* ============================================================
+   5. מבנה — עטיפה וסקשנים
+   כל העמוד הוא רצף של .lx-section, כל אחד עם גוון רקע משלו.
+   ============================================================ */
+
+.lx-wrap {
+  width: min(100% - 2 * var(--lx-s-5), var(--lx-wrap));
+  margin-inline: auto;
+}
+.lx-wrap--narrow { width: min(100% - 2 * var(--lx-s-5), var(--lx-wrap-narrow)); }
+
+.lx-section { padding-block: var(--lx-section-y); position: relative; }
+.lx-section--tight { padding-block: clamp(40px, 5vw, 64px); }
+
+.lx-section--paper { background: var(--lx-paper); }
+.lx-section--white { background: var(--lx-white); border-block: 1px solid var(--lx-border); }
+.lx-section--cream { background: var(--lx-cream); border-block: 1px solid var(--lx-border); }
+.lx-section--navy  { background: var(--lx-navy); }
+
+/* היפוך צבעי טקסט על רקע נייבי */
+.lx-section--navy p,
+.lx-section--navy li,
+.lx-section--navy .lx-lead { color: var(--lx-teal-light); }
+.lx-section--navy h1,
+.lx-section--navy h2,
+.lx-section--navy h3,
+.lx-section--navy h4 { color: var(--lx-white); }
+.lx-section--navy .lx-muted { color: rgba(198, 225, 224, 0.72); }
+.lx-section--navy a:not(.lx-btn) { color: var(--lx-teal-light); }
+/* על נייבי חוזרים ל---lx-teal הבהיר: --lx-teal-ink כהה מדי שם */
+.lx-section--navy .lx-kicker,
+.lx-section--navy .lx-callout--teal .lx-callout__label { color: var(--lx-teal-light); }
+
+/* כותרת סקשן אחידה: kicker ← כותרת ← קו זהב ← תקציר */
+.lx-head { margin-bottom: var(--lx-s-6); }
+
+/* ============================================================
+   6. כרטיס והערת צד
+   ============================================================ */
+
+.lx-card {
+  background: var(--lx-white);
+  border: 1px solid var(--lx-border);
+  border-radius: var(--lx-r-lg);
+  box-shadow: var(--lx-shadow-card);
+  padding: var(--lx-s-5);
+}
+
+.lx-callout {
+  background: var(--lx-white);
+  border: 1px solid var(--lx-border);
+  border-radius: var(--lx-r-md);
+  box-shadow: var(--lx-shadow-sm);
+  padding: var(--lx-s-5);
+  margin-block: var(--lx-s-5);
+}
+
+.lx-callout__label {
+  display: block;
+  font-size: var(--lx-fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--lx-gold-ink);
+  margin-bottom: var(--lx-s-2);
+}
+
+/* וריאנט "תובנה / נקודה מרכזית" */
+.lx-callout--teal {
+  background: var(--lx-teal-soft);
+  border-color: rgba(23, 152, 154, 0.24);
+}
+.lx-callout--teal .lx-callout__label { color: var(--lx-teal-ink); }
+
+/* וריאנט "דוגמה מהשטח" */
+.lx-callout--example {
+  background: var(--lx-cream);
+  border-color: var(--lx-border);
+}
+.lx-callout--example .lx-callout__label { color: var(--lx-navy-secondary); }
+.lx-section--cream .lx-callout--example { background: var(--lx-white); }
+
+/* ============================================================
+   7. כפתורים — יעד מגע 44px מינימום
+   ============================================================ */
+
+.lx-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lx-s-2);
+  min-height: 44px;
+  padding: var(--lx-s-3) var(--lx-s-5);
+  border: 1px solid transparent;
+  border-radius: var(--lx-r-md);
+  background: var(--lx-navy);
+  color: var(--lx-white);
+  font-weight: 600;
+  font-size: var(--lx-fs-sm);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--lx-dur) var(--lx-ease), transform var(--lx-dur-fast) var(--lx-ease);
+}
+.lx-btn:hover  { background: var(--lx-navy-secondary); color: var(--lx-white); }
+.lx-btn:active { transform: translateY(1px); }
+.lx-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.lx-btn:disabled:hover { background: var(--lx-navy); }
+
+.lx-btn--secondary {
+  background: transparent;
+  color: var(--lx-navy);
+  border-color: var(--lx-border);
+}
+.lx-btn--secondary:hover { background: var(--lx-navy-06); color: var(--lx-navy); }
+.lx-btn--secondary:disabled:hover { background: transparent; }
+
+.lx-btn--onNavy { background: var(--lx-white); color: var(--lx-navy); }
+.lx-btn--onNavy:hover { background: var(--lx-teal-light); color: var(--lx-navy); }
+
+.lx-btn--ghostOnNavy {
+  background: transparent;
+  color: var(--lx-teal-light);
+  border-color: rgba(198, 225, 224, 0.35);
+}
+.lx-btn--ghostOnNavy:hover { background: rgba(198, 225, 224, 0.12); color: var(--lx-white); }
+
+.lx-btn--lg { min-height: 52px; padding-inline: var(--lx-s-6); font-size: var(--lx-fs-body); }
+
+/* ============================================================
+   8. רשימות, רשתות, טבלאות
+   ============================================================ */
+
+/* תבליט מרובע זהב — לא עיגול, לא bullet של הדפדפן */
+.lx-bullets {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--lx-s-3);
+  max-width: 68ch;
+}
+.lx-bullets li { position: relative; padding-inline-start: var(--lx-s-5); }
+.lx-bullets li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.72em;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--lx-gold);
+}
+.lx-bullets--teal li::before { background: var(--lx-teal); }
+
+.lx-hr {
+  border: 0;
+  border-top: 1px solid var(--lx-border);
+  margin-block: var(--lx-s-6);
+}
+
+.lx-grid { display: grid; gap: var(--lx-s-5); }
+.lx-grid--2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.lx-grid--3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.lx-grid--4 { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+
+.lx-tableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--lx-border);
+  border-radius: var(--lx-r-lg);
+  background: var(--lx-white);
+  box-shadow: var(--lx-shadow-card);
+}
+.lx-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+  font-size: var(--lx-fs-sm);
+}
+.lx-table th,
+.lx-table td {
+  text-align: start;              /* לוגי — לא right */
+  padding: var(--lx-s-4);
+  border-bottom: 1px solid var(--lx-border);
+  vertical-align: top;
+}
+.lx-table thead th {
+  background: var(--lx-cream);
+  color: var(--lx-navy);
+  font-family: var(--lx-font-display);
+  font-weight: 700;
+  font-size: var(--lx-fs-body);
+}
+.lx-table tbody tr:last-child td { border-bottom: 0; }
+.lx-table tbody th {
+  font-weight: 700;
+  color: var(--lx-navy-secondary);
+  background: rgba(245, 240, 230, 0.5);
+}
+
+/* ============================================================
+   9. Header דביק
+   ============================================================ */
+
+.lx-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--lx-navy);
+  color: var(--lx-white);
+}
+.lx-header__inner {
+  min-height: var(--lx-header-h);
+  display: flex;
+  align-items: center;
+  gap: var(--lx-s-5);
+  flex-wrap: wrap;
+}
+
+.lx-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lx-s-3);
+  text-decoration: none;
+  color: var(--lx-white);
+  padding-block: var(--lx-s-3);
+  margin-inline-end: auto;
+}
+.lx-brand:hover { color: var(--lx-white); }
+
+/* סימן המותג — שלושה קווי זהב בעובי יורד. בלי לוגו חיצוני. */
+.lx-brand__mark {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  background:
+    linear-gradient(var(--lx-gold), var(--lx-gold)) top    right / 22px 4px no-repeat,
+    linear-gradient(var(--lx-gold), var(--lx-gold)) center right / 15px 3px no-repeat,
+    linear-gradient(var(--lx-gold), var(--lx-gold)) bottom right / 9px  2px no-repeat;
+}
+.lx-brand__text { display: flex; flex-direction: column; line-height: 1.15; }
+.lx-brand__name {
+  font-family: var(--lx-font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--lx-gold);
+  letter-spacing: 0.01em;
+}
+.lx-brand__sub { font-size: var(--lx-fs-xs); color: rgba(198, 225, 224, 0.75); }
+
+.lx-nav { display: flex; align-items: center; gap: var(--lx-s-2); flex-wrap: wrap; }
+.lx-nav__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lx-s-2);
+  min-height: 44px;
+  padding: var(--lx-s-2) var(--lx-s-4);
+  border-radius: var(--lx-r-md);
+  color: var(--lx-teal-light);
+  text-decoration: none;
+  font-size: var(--lx-fs-sm);
+  font-weight: 600;
+  transition: background var(--lx-dur) var(--lx-ease), color var(--lx-dur) var(--lx-ease);
+}
+.lx-nav__link:hover { background: rgba(198, 225, 224, 0.12); color: var(--lx-white); }
+.lx-nav__link[aria-current='page'] { color: var(--lx-gold); background: rgba(196, 163, 71, 0.12); }
+.lx-nav__num { font-variant-numeric: tabular-nums; color: var(--lx-gold); font-weight: 700; }
+
+/* ============================================================
+   10. פתיח פרק (Hero) — נייבי, שני טורים, תמונה בצד
+   ============================================================ */
+
+.lx-hero {
+  background: var(--lx-navy);
+  color: var(--lx-teal-light);
+  padding-block: clamp(48px, 7vw, 88px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* פס סימון דק בראש הפתיח — רמז ל"תיק", לא עיטור */
+.lx-hero::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  height: 3px;
+  background: linear-gradient(to left, var(--lx-gold) 0 92px, rgba(196, 163, 71, 0.22) 92px 100%);
+}
+
+.lx-hero__inner {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .lx-hero__inner { grid-template-columns: 1fr; }
+  .lx-hero__media { order: -1; }   /* בנייד התמונה עולה למעלה */
+}
+
+.lx-hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--lx-s-3);
+  font-size: var(--lx-fs-sm);
+  color: rgba(198, 225, 224, 0.82);
+  margin-bottom: var(--lx-s-4);
+  max-width: none;
+}
+.lx-hero__num {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--lx-r-sm);
+  background: var(--lx-gold);
+  color: var(--lx-navy);
+  font-family: var(--lx-font-display);
+  font-weight: 900;
+  font-size: 1.05rem;
+  font-variant-numeric: tabular-nums;
+}
+.lx-hero__dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: rgba(198, 225, 224, 0.45);
+}
+
+.lx-hero h1 { color: var(--lx-white); }
+
+.lx-hero__subtitle {
+  font-family: var(--lx-font-display);
+  font-size: var(--lx-fs-h3);
+  color: var(--lx-gold);
+  font-weight: 400;       /* משקל רגיל — הזהב כבר מספיק בולט */
+  margin-top: var(--lx-s-2);
+}
+
+.lx-hero .lx-rule-gold { margin-block: var(--lx-s-5); }
+.lx-hero .lx-lead { color: var(--lx-teal-light); }
+
+/* "בסיום הפרק תוכלו" — תוצאות הלמידה, מופרדות בקו */
+.lx-hero__outcomes {
+  margin-top: var(--lx-s-6);
+  border-top: 1px solid rgba(198, 225, 224, 0.2);
+  padding-top: var(--lx-s-5);
+}
+.lx-hero__outcomesTitle {
+  font-family: var(--lx-font-body);
+  font-size: var(--lx-fs-xs);
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--lx-gold);
+  margin-bottom: var(--lx-s-3);
+}
+.lx-hero__outcomes ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--lx-s-2);
+  max-width: 62ch;
+}
+.lx-hero__outcomes li {
+  position: relative;
+  padding-inline-start: var(--lx-s-5);
+  font-size: var(--lx-fs-sm);
+  color: var(--lx-teal-light);
+  line-height: 1.55;
+}
+.lx-hero__outcomes li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.62em;
+  width: 6px; height: 6px;
+  border-radius: 1px;
+  background: var(--lx-teal-smoke);
+}
+.lx-hero__cta { margin-top: var(--lx-s-6); }
+
+/* ============================================================
+   11. סרגל התקדמות דביק — יושב מתחת ל-header
+   ============================================================ */
+
+.lx-rail {
+  position: sticky;
+  top: var(--lx-header-h);
+  z-index: 90;
+  background: rgba(251, 248, 241, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--lx-border);
+}
+
+/* פס מילוי דק שמראה אחוז גלילה */
+.lx-rail__fill {
+  position: absolute;
+  inset-block-end: -1px;
+  inset-inline-start: 0;
+  height: 2px;
+  background: var(--lx-teal);
+  transition: inline-size 90ms linear;
+}
+
+.lx-rail__inner {
+  min-height: var(--lx-rail-h);
+  display: flex;
+  align-items: center;
+  gap: var(--lx-s-5);
+}
+
+.lx-rail__position {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  margin: 0;
+  max-width: none;
+  padding-inline-end: var(--lx-s-4);
+  border-inline-end: 1px solid var(--lx-border);
+}
+.lx-rail__step {
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--lx-teal-ink);
+  font-weight: 700;
+}
+.lx-rail__current {
+  font-size: var(--lx-fs-xs);
+  font-weight: 600;
+  color: var(--lx-navy);
+  white-space: nowrap;
+  max-width: 20ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lx-rail__nav { overflow-x: auto; scrollbar-width: thin; }
+.lx-rail__nav::-webkit-scrollbar { height: 3px; }
+.lx-rail__nav::-webkit-scrollbar-thumb { background: var(--lx-border); border-radius: 2px; }
+.lx-rail__nav ul {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex;
+  gap: var(--lx-s-2);
+}
+
+.lx-rail__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lx-s-2);
+  white-space: nowrap;
+  font-size: var(--lx-fs-xs);
+  font-weight: 500;
+  color: var(--lx-muted);
+  text-decoration: none;
+  padding: var(--lx-s-2) var(--lx-s-3);
+  border: 1px solid transparent;
+  border-radius: var(--lx-r-pill);
+  transition: color var(--lx-dur) var(--lx-ease), background var(--lx-dur) var(--lx-ease);
+}
+.lx-rail__chip:hover { color: var(--lx-navy); background: var(--lx-navy-06); }
+.lx-rail__chip.is-active {
+  color: var(--lx-navy);
+  background: var(--lx-white);
+  border-color: var(--lx-navy-secondary);
+  font-weight: 700;
+}
+.lx-rail__chipNum { font-variant-numeric: tabular-nums; color: var(--lx-teal-ink); font-weight: 700; }
+
+@media (max-width: 720px) {
+  .lx-rail__position { display: none; }
+}
+
+/* ============================================================
+   12. מפת העמוד — "שערים" (כרטיסי ניווט על נייבי)
+   ============================================================ */
+
+.lx-gates {
+  list-style: none;
+  padding: 0;
+  margin-block: var(--lx-s-7) 0;
+  display: grid;
+  gap: var(--lx-s-5);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.lx-gates > li { display: flex; }
+
+.lx-gate {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lx-s-3);
+  padding: var(--lx-s-6) var(--lx-s-5) var(--lx-s-5);
+  background: var(--lx-navy-secondary);
+  border: 1px solid var(--lx-gold-soft);
+  border-inline-start: 4px solid var(--lx-gold);   /* "משקוף" הדלת */
+  border-radius: var(--lx-r-lg);
+  text-decoration: none;
+  transition: transform var(--lx-dur) var(--lx-ease),
+              border-color var(--lx-dur) var(--lx-ease),
+              box-shadow var(--lx-dur) var(--lx-ease);
+}
+.lx-gate:hover {
+  transform: translateY(-3px);
+  border-color: var(--lx-gold);
+  box-shadow: var(--lx-shadow-pop);
+}
+
+.lx-gate__num {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lx-s-2);
+  align-self: flex-start;
+  font-size: var(--lx-fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--lx-gold);
+  border: 1px solid var(--lx-gold-soft);
+  border-radius: var(--lx-r-pill);
+  padding: 2px 12px;
+  min-block-size: 26px;
+}
+.lx-section--navy .lx-gate__title {
+  font-family: var(--lx-font-display);
+  font-size: var(--lx-fs-h3);
+  font-weight: 700;
+  color: var(--lx-white);
+  margin: 0;
+}
+.lx-section--navy .lx-gate__text {
+  color: var(--lx-teal-light);
+  font-size: var(--lx-fs-sm);
+  margin: 0;
+  max-width: none;
+}
+.lx-gate__cue {
+  margin-block-start: auto;
+  padding-block-start: var(--lx-s-4);
+  border-top: 1px solid var(--lx-gold-soft);
+  font-size: var(--lx-fs-sm);
+  font-weight: 700;
+  color: var(--lx-gold);
+  display: flex;
+  align-items: center;
+  gap: var(--lx-s-2);
+  min-block-size: 44px;
+}
+
+/* ============================================================
+   13. בלוק משנה בתוך סקשן — תווית קטנה + h3 + פסקאות
+   ============================================================ */
+
+.lx-block { margin-block-start: var(--lx-s-8); }
+.lx-block:first-of-type { margin-block-start: 0; }
+.lx-block > * + * { margin-block-start: var(--lx-s-4); }
+
+.lx-block__kicker {
+  display: block;
+  font-size: var(--lx-fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--lx-teal-ink);
+  margin-bottom: var(--lx-s-2);
+}
+.lx-block__title { margin-bottom: var(--lx-s-3); }
+.lx-block__kicker + .lx-block__title { margin-block-start: 0; }
+
+/* ערימה פשוטה — מרווח אנכי אחיד בין ילדים */
+.lx-stack > * + * { margin-block-start: var(--lx-s-4); }
+
+/* זוג כרטיסים "מול" — שני צדדים של אותו רעיון */
+.lx-pole__label {
+  display: block;
+  font-family: var(--lx-font-display);
+  font-size: var(--lx-fs-h3);
+  color: var(--lx-navy);
+  margin-bottom: var(--lx-s-2);
+}
+.lx-pole__text { margin: 0; font-size: var(--lx-fs-sm); }
+
+/* כרטיס ממוספר */
+.lx-numCard { display: flex; flex-direction: column; gap: var(--lx-s-2); }
+.lx-numCard__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 34px;
+  block-size: 34px;
+  border-radius: var(--lx-r-pill);
+  background: var(--lx-teal-soft);
+  color: var(--lx-navy-secondary);
+  font-weight: 700;
+  font-size: var(--lx-fs-sm);
+  border: 1px solid var(--lx-gold-soft);
+}
+.lx-numCard__title {
+  font-family: var(--lx-font-display);
+  font-size: var(--lx-fs-h4);
+  font-weight: 700;
+  color: var(--lx-navy);
+  margin: 0;
+}
+.lx-numCard__text { margin: 0; font-size: var(--lx-fs-sm); }
+
+/* ============================================================
+   14. סיום — רשימת השלמות וניקוד, על רקע נייבי
+   ============================================================ */
+
+.lx-done {
+  list-style: none;
+  padding: 0;
+  margin-block: var(--lx-s-5) 0;
+  display: grid;
+  gap: var(--lx-s-2);
+  max-width: 620px;
+}
+.lx-done__item {
+  display: flex;
+  align-items: center;
+  gap: var(--lx-s-3);
+  padding: var(--lx-s-3) var(--lx-s-4);
+  border: 1px solid var(--lx-gold-soft);
+  border-radius: var(--lx-r-md);
+  min-block-size: 44px;
+}
+.lx-done__mark {
+  flex: none;
+  inline-size: 26px;
+  block-size: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--lx-r-pill);
+  border: 1px solid var(--lx-gold-soft);
+  color: var(--lx-teal-light);
+  font-weight: 700;
+  font-size: var(--lx-fs-sm);
+}
+.lx-done__item[data-done='true'] { border-color: var(--lx-gold); }
+.lx-done__item[data-done='true'] .lx-done__mark {
+  background: var(--lx-gold);
+  border-color: var(--lx-gold);
+  color: var(--lx-navy);
+}
+.lx-section--navy .lx-done__label { color: var(--lx-teal-light); flex: 1; margin: 0; }
+.lx-done__state {
+  font-size: var(--lx-fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--lx-gold);
+  white-space: nowrap;
+}
+.lx-done__item[data-done='false'] .lx-done__state { color: var(--lx-teal-light); }
+
+.lx-score {
+  margin-block-start: var(--lx-s-5);
+  padding: var(--lx-s-4) var(--lx-s-5);
+  border-inline-start: 4px solid var(--lx-gold);
+  border-radius: 0 var(--lx-r-md) var(--lx-r-md) 0;
+  background: var(--lx-navy-secondary);
+}
+.lx-section--navy .lx-score p { color: var(--lx-teal-light); margin: 0; }
+.lx-score__num {
+  font-family: var(--lx-font-display);
+  font-size: var(--lx-fs-h3);
+  font-weight: 700;
+  color: var(--lx-white);
+  margin-inline-end: var(--lx-s-2);
+}
+
+/* ============================================================
+   15. Footer
+   ============================================================ */
+
+.lx-footer { background: var(--lx-navy); color: var(--lx-teal-light); }
+.lx-footer__inner {
+  display: grid;
+  gap: var(--lx-s-6);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  padding-block: var(--lx-s-7);
+}
+.lx-footer h2 {
+  font-size: var(--lx-fs-xs);
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--lx-gold);
+  font-family: var(--lx-font-body);
+  margin-bottom: var(--lx-s-3);
+}
+.lx-footer ul { list-style: none; padding: 0; display: grid; gap: var(--lx-s-2); }
+.lx-footer a { color: var(--lx-teal-light); font-size: var(--lx-fs-sm); }
+.lx-footer a:hover { color: var(--lx-white); }
+.lx-footer__base {
+  border-top: 1px solid rgba(198, 225, 224, 0.18);
+  padding-block: var(--lx-s-4);
+}
