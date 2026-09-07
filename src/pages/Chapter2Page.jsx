@@ -2,7 +2,6 @@ import NextChapter from '../components/NextChapter/NextChapter'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
 import StationIntro from '../sections/chapter2/StationIntro'
-import StationLevels from '../sections/chapter2/StationLevels'
 import StationNational from '../sections/chapter2/StationNational'
 import StationOfficer from '../sections/chapter2/StationOfficer'
 import StationCheck from '../sections/chapter2/StationCheck'
@@ -15,7 +14,7 @@ import StationExam from '../sections/chapter2/StationExam'
 
 import { nextChapter } from '../data/chapter2'
 
-// עמוד פרק 2 — "מודיעין לאומי ואסטרטגי" — אחת עשרה תחנות.
+// עמוד פרק 2 — "מודיעין לאומי ואסטרטגי" — עשר תחנות.
 export default function Chapter2Page() {
   useDocumentTitle('יסודות המודיעין — פרק 2: מודיעין לאומי ואסטרטגי')
 
@@ -23,7 +22,6 @@ export default function Chapter2Page() {
     <>
       <main id="main" className="chapterPage">
         <StationIntro />
-        <StationLevels />
         <StationNational />
         <StationOfficer />
         <StationCheck />
