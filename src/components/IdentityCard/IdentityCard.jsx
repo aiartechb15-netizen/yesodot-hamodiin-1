@@ -5,15 +5,19 @@ import './IdentityCard.css'
 /**
  * "כרטיס זהות" — שפה גרפית אחידה לרמות המודיעין (תחנות 3 ו-6).
  * השורות מוצגות תמיד; השאלות לדוגמה נפתחות בלחיצה בלבד.
+ *
+ * layout='card' — הכרטיס הסגור: משטח לבן, מסגרת וצל.
+ * layout='open' — פריסה פתוחה: אותו תוכן ואותה התנהגות, בלי מעטפת.
+ *   התוכן יושב ישירות על רקע העמוד ומופרד בקווים דקים בלבד.
  */
-export default function IdentityCard({ data, tone = 'navy' }) {
+export default function IdentityCard({ data, tone = 'navy', layout = 'card' }) {
   const uid = useId()
   const [open, setOpen] = useState([])
 
   const toggle = (i) => setOpen((p) => (p.includes(i) ? p.filter((x) => x !== i) : [...p, i]))
 
   return (
-    <div className={`idcard idcard--${tone}`}>
+    <div className={`idcard idcard--${tone} idcard--${layout}`}>
       <div className="idcard__head">
         <h3 className="idcard__title">{data.cardTitle}</h3>
         <span className="gold-rule gold-rule--sm" aria-hidden="true" />

@@ -4,7 +4,11 @@ import './chapter2.css'
 
 export default function StationNational() {
   return (
-    <section className="section section--white" id={national.id} aria-labelledby="ch2-national-title">
+    <section
+      className="section section--white st--open"
+      id={national.id}
+      aria-labelledby="ch2-national-title"
+    >
       <div className="container">
         <header className="st__head">
           <h2 className="section-title" id="ch2-national-title">
@@ -13,7 +17,7 @@ export default function StationNational() {
           <span className="gold-rule" aria-hidden="true" />
         </header>
 
-        <IdentityCard data={national} tone="navy" />
+        <IdentityCard data={national} tone="navy" layout="open" />
       </div>
     </section>
   )

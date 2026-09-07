@@ -159,3 +159,134 @@
     gap: 8px;
   }
 }
+
+/* ---------- פריסה פתוחה (layout="open") ----------
+   אותו תוכן ואותה התנהגות, בלי מעטפת: התוכן הוא חלק מהעמוד ולא
+   אובייקט שמונח עליו. אין מסגרת, אין צל, אין רקע — רק קווים דקים
+   שמפרידים בין שורה לשורה. */
+.idcard--open {
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* כותרת הכרטיס הופכת לכותרת משנה רגילה של העמוד, על אותו קו ימין
+   כמו הכותרת הראשית וכמו התוכן */
+.idcard--open .idcard__title {
+  font-size: var(--fs-h3);
+  color: var(--navy);
+}
+
+.idcard--open .idcard__head .gold-rule {
+  margin-block: 10px 4px;
+}
+
+/* השורות: עמודת כותרות ברוחב אחיד, כך שכל ההסברים מתחילים באותו קו */
+.idcard--open .idcard__row {
+  grid-template-columns: 160px 1fr;
+  gap: clamp(16px, 2vw, 28px);
+  padding: clamp(15px, 1.7vw, 19px) 0;
+  border-bottom: 0;
+}
+
+/* קו בין שורה לשורה בלבד — בלי קו פותח ובלי קו סוגר, שלא ייווצר
+   רושם של מסגרת */
+.idcard--open .idcard__row + .idcard__row {
+  border-top: 1px solid var(--border);
+}
+
+/* האייקון נשאר סימן קטן לצד שם הסעיף, בלי דיסקית שנקראת ככפתור */
+.idcard--open .idcard__icon {
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+}
+
+.idcard--open .idcard__label {
+  gap: 10px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--navy);
+}
+
+.idcard--open .idcard__text {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* ---- שאלות לדוגמה ---- */
+.idcard--open .idcard__questions {
+  margin-top: 40px;
+}
+
+.idcard--open .idcard__qTitle {
+  font-size: 20px;
+}
+
+.idcard--open .idcard__qHint {
+  margin-bottom: 6px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* אקורדיון מינימלי: שורות מופרדות בקו דק, בלי מלבנים סגורים */
+.idcard--open .idcard__qList {
+  display: block;
+}
+
+.idcard--open .idcard__qList > li + li {
+  border-top: 1px solid var(--border);
+}
+
+.idcard--open .idcard__q {
+  gap: 14px;
+  padding: 15px 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
+}
+
+.idcard--open .idcard__q:hover,
+.idcard--open .idcard__q.is-open {
+  background: none;
+  border: 0;
+}
+
+.idcard--open .idcard__q:hover .idcard__qLabel {
+  color: var(--navy-secondary);
+}
+
+.idcard--open .idcard__qNum {
+  width: 26px;
+  height: 26px;
+  font-size: 14px;
+}
+
+.idcard--open .idcard__qLabel {
+  font-size: 18px;
+}
+
+/* השאלה מיישרת לקו ההתחלה של הטקסט שבשורה: מספר (26px) ורווח (14px) */
+.idcard--open .idcard__qText {
+  margin: 0;
+  padding: 0 0 16px;
+  padding-inline-start: 40px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+  /* במסך צר ההסבר יורד מתחת לשם הסעיף. עמודת הכותרות מבוטלת כאן
+     במפורש: הכלל הכללי חלש ממנה בסלקטור ולא היה גובר עליה */
+  .idcard--open .idcard__row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .idcard--open .idcard__qText {
+    padding-inline-start: 0;
+  }
+}
