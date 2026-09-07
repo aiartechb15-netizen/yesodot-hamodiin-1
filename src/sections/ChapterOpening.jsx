@@ -8,18 +8,12 @@ export default function ChapterOpening() {
       <div className="container">
         <div className="split split--wideText open__split">
           <div>
-            <span className="kicker">פרק 1</span>
-            <h2 className="section-title" id="chapter-open-title">
-              {chapterOpening.title}
-            </h2>
-            <span className="gold-rule" aria-hidden="true" />
-            <p className="lead">{chapterOpening.welcome}</p>
-            {chapterOpening.paragraphs.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
-
+            {/* "מטרת הפרק" היא הכותרת הראשונה של הסקשן, ולכן היא נושאת
+                את ה-id שה-aria-labelledby של הסקשן מצביע עליו */}
             <div className="open__meta">
-              <h3 className="openBlock__title">{chapterOpening.purposeTitle}</h3>
+              <h3 className="openBlock__title" id="chapter-open-title">
+                {chapterOpening.purposeTitle}
+              </h3>
               <span className="gold-rule gold-rule--sm" aria-hidden="true" />
               <p>{chapterOpening.purpose}</p>
 
@@ -32,17 +26,11 @@ export default function ChapterOpening() {
                 </ul>
               </div>
             </div>
-
           </div>
 
-          {/* עמודה שמאלית: התמונה ומתחתיה כרטיס ההנחיות */}
+          {/* עמודה שמאלית: התמונה בלבד */}
           <div className="open__media">
             <img className="open__img" src={openingImage} alt={chapterOpening.image} />
-
-            <aside className="callout callout--teal">
-              <span className="callout__label">{chapterOpening.navigationTitle}</span>
-              <p>{chapterOpening.navigation}</p>
-            </aside>
           </div>
         </div>
       </div>
