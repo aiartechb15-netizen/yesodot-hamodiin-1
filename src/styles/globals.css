@@ -227,39 +227,45 @@ svg {
 }
 
 /* ---------- רקע מודיעיני רציף לעמוד הפרק ----------
-   קודם לכן כל מקטע נצבע בגיליון בעצמו, ולכן התמונה התחילה מחדש בכל
-   מסך ובמעבר ביניהם נראה קו חיתוך. עכשיו יש שכבה אחת לכל הפרק:
-   position: fixed מתחת ל-Header, מאחורי אזור התוכן. היא אינה נגללת,
-   ולכן הרקע נקרא כשכבה אחת ארוכה ורציפה לאורך כל הפרק.
+   הרקע יושב על מעטפת הפרק עצמה (ה-main), ולכן הוא חלק מהעמוד ונגלל
+   יחד עם התוכן — אין כאן position: fixed, אין background-attachment:
+   fixed ואין שכבה שמקובעת לגובה החלון.
 
-   הגיליון נבחר פעם אחת לעמוד (src/data/backgrounds.js) ומוזרק
-   כ---page-motif על ה-main. הבחירה נגזרת ממזהה העמוד ולא מהגרלה,
-   ולכן הרקע קבוע: אותו פרק מקבל תמיד את אותו גיליון, גם ברענון.
+   הגיליון נפרש לרוחב המעטפת בגובה טבעי (100% auto — בלי מתיחה ובלי
+   עיוות של האייקונים), ומתחיל בראש הפרק. עמוד ארוך מהגיליון מקבל
+   חזרות נוספות על ציר ה-Y.
 
-   ההדר, תפריט הצד, הכרטיסים והפוטר שומרים על הרקע האטום שלהם ויושבים
-   מעל השכבה. מסך בחירת הפרקים אינו נושא .hasMotif כלל. */
-.hasMotif::before {
-  content: '';
-  position: fixed;
-  /* מתחת ל-Header ולרוחב המלא; תפריט הצד אטום ומכסה את חלקה */
-  inset: var(--header-h) 0 0 0;
-  z-index: -1;
-  pointer-events: none;
-  /* בסיס הנייר — מה שנראה עד שהגיליון נטען, ואם לא נטען */
-  background-color: var(--paper);
+   התפר בין חזרה לחזרה מרוכך בגיליון SVG במידות הגיליון עצמו: מכיוון
+   שיש לו אותן מידות פנימיות, background-size זהה מותח אותו בדיוק כמו
+   התמונה, והמעבר נופל תמיד על התפר. שני קצותיו שמנת אטומה שמתפוגגת
+   לשקיפות בתוך 16% מגובה האריח (כ-120–145 פיקסלים במסך רגיל), ולכן
+   אין קו, פס או שינוי גוון בין החזרות.
+
+   הגיליון נבחר פעם אחת לעמוד (src/data/backgrounds.js) לפי מזהה
+   העמוד ולא בהגרלה, ולכן הוא קבוע גם ברענון. */
+.hasMotif {
+  position: relative;
+  min-height: 100%;
+  /* בסיס שמנת אחיד — מה שנראה עד שהגיליון נטען, ומתחת לחזרות */
+  background-color: #f7f3ea;
   background-image:
-    /* ינומת שמנת עדינה מעל התמונה: שומרת על קריאוּת הטקסט בלי
-       להסתיר את האיורים */
-    linear-gradient(rgba(248, 245, 238, 0.35), rgba(248, 245, 238, 0.35)),
+    /* ריכוך התפר */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1672' height='941'%3E%3ClinearGradient id='f' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23f7f3ea' stop-opacity='1'/%3E%3Cstop offset='.16' stop-color='%23f7f3ea' stop-opacity='0'/%3E%3Cstop offset='.84' stop-color='%23f7f3ea' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23f7f3ea' stop-opacity='1'/%3E%3C/linearGradient%3E%3Crect width='1672' height='941' fill='url(%23f)'/%3E%3C/svg%3E"),
+    /* ינומת שמנת עדינה מעל האיורים — קריאוּת בלי להעלים אותם */
+    linear-gradient(
+      rgba(248, 245, 238, var(--motif-veil, 0.35)),
+      rgba(248, 245, 238, var(--motif-veil, 0.35))
+    ),
     var(--page-motif);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% auto, auto, 100% auto;
+  background-repeat: repeat-y, repeat, repeat-y;
+  background-attachment: scroll;
 }
 
-/* המקטעים הפנימיים שקופים — בלי רצועות שמנת שחותכות את הרקע בין מסך
-   למסך, ובלי הקווים שהפרידו ביניהן. מקטעי הנייבי נשארים אטומים: הם
-   ניגוד מכוון בעיצוב, ולא רקע. */
+/* המקטעים הפנימיים שקופים — הרצף של הפרק נראה מאחוריהם, בלי רצועות
+   שמנת שחותכות אותו ובלי קווים שמפרידים ביניהן. מקטעי הנייבי נשארים
+   אטומים: הם ניגוד מכוון בעיצוב, ולא רקע. */
 .hasMotif .section--white,
 .hasMotif .section--cream,
 .hasMotif .section--paper {
@@ -268,19 +274,24 @@ svg {
   border-block: 0;
 }
 
-/* מסכים עמוסי מלל, טבלאות ושאלונים — ינומה מעט חזקה יותר מתחתיהם,
+/* התוכן יושב מעל הרקע של המעטפת מעצם היותו צאצא שלה; ה-position
+   כאן רק מקבע את הסדר גם מול שכבות ממוקמות אחרות בתוך המקטע */
+.hasMotif .section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* מסכים עמוסי מלל, טבלאות ושאלונים — שכבת שמנת דקה נוספת מתחתיהם,
    כדי שהאותיות יישארו נוחות לקריאה מעל האיורים */
 .hasMotif :is(#quiz, #ch2-check, #ch2-compare, #ch2-exam, #ch3-summary, #ch3-exam) {
   background-color: rgba(248, 245, 238, 0.42);
 }
 
-/* במסך צר cover מגדיל את הגיליון והמוטיבים גדלים איתו; הינומה
-   מתחזקת מעט כדי שיישארו רמז ולא יתחרו בטקסט */
+/* במסך צר הגיליון נפרש על רוחב קטן יותר והמוטיבים גדלים יחסית לטקסט;
+   הינומה מתחזקת כדי שיישארו רמז ולא יתחרו בו */
 @media (max-width: 720px) {
-  .hasMotif::before {
-    background-image:
-      linear-gradient(rgba(248, 245, 238, 0.52), rgba(248, 245, 238, 0.52)),
-      var(--page-motif);
+  .hasMotif {
+    --motif-veil: 0.5;
   }
 }
 
