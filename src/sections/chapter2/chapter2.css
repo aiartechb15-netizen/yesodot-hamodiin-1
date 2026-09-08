@@ -610,7 +610,7 @@
 
 .of__deepHint {
   margin: 0 0 clamp(18px, 2.4vw, 30px);
-  text-align: center;
+  text-align: start;
   color: var(--muted);
   font-size: 19px;
 }
