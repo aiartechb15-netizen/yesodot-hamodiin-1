@@ -1,113 +1,106 @@
-import { useId, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 import './LearningMap.css'
 
 /**
- * "מודיעין כמערכת לומדת" כחוויית למידה: איור אחד, וחמש נקודות מידע
- * שיושבות עליו. בכניסה למסך לא מוצג הסבר; לחיצה על נקודה פותחת את
- * ההסבר שלה בלבד, ומעבר לנקודה אחרת מחליף אותו.
+ * "מודיעין כמערכת לומדת" — מסך שלם שהאיור הוא הרקע שלו.
  *
- * אין כאן כרטיס, מסגרת, מלבן או צל: הנקודות יושבות ישירות על האיור,
- * וההסבר יושב על רקע העמוד ומופרד מהאיור בקו זהב דק בלבד.
+ * אין כאן תמונה שמונחת בתוך העמוד: האיור נפרש על כל המקטע, מקצה לקצה
+ * ועד תפריט הצד, ומעליו יושבות חמש נקודות מידע. לחיצה על נקודה פותחת
+ * את ההסבר שלה בלבד — ישירות על הרקע, בלי כרטיס ובלי מלבן, ומחוברת
+ * לנקודה בקו זהב דק. אין רשימות, כרטיסיות או חזרה על המלל מתחת לאיור:
+ * כל תוכן המקטע נפתח מן הנקודות.
  *
- * הנקודות ממוקמות באחוזים ביחס לאיור, ולכן הן נשארות על אותו פרט
- * בכל רוחב מסך. במסך צר הן יורדות, ובמקומן רשימת המושגים שמתחת
- * לאיור הופכת לדרך היחידה לפתוח הסבר.
+ * גיאומטריה: הנקודות ממוקמות באחוזים בתוך .lmap__frame — מסגרת שמחשבת
+ * בדיוק את הקופסה שאליה האיור נפרש ב-cover (max בין רוחב המקטע לגובהו
+ * לפי יחס האיור). שכבת הרקע ושכבת הנקודות מקבלות את אותה מסגרת, ולכן
+ * כל נקודה נשארת על הפרט שלה בכל יחס מסך, ולא נודדת עם החיתוך.
  */
-export default function LearningMap({ image, alt, points, groups, doneMessage }) {
+export default function LearningMap({ image, alt, title, titleId, hint, points }) {
   const uid = useId()
-  const panelId = `${uid}-panel`
-
   const [active, setActive] = useState(null)
   const [seen, setSeen] = useState([])
 
-  const select = (id) => {
-    setActive(id)
+  const current = points.find((p) => p.id === active) || null
+  const noteId = `${uid}-note`
+
+  const toggle = (id) => {
+    setActive((prev) => (prev === id ? null : id))
     setSeen((prev) => (prev.includes(id) ? prev : [...prev, id]))
   }
 
-  const current = points.find((p) => p.id === active) || null
-  const allSeen = seen.length === points.length
-  const byId = (id) => points.find((p) => p.id === id)
+  /* Esc סוגר את ההסבר הפתוח — בלי כפתור סגירה שיתחרה באיור */
+  useEffect(() => {
+    if (!active) return undefined
+    const onKey = (e) => {
+      if (e.key === 'Escape') setActive(null)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [active])
 
   return (
     <div className="lmap">
-      <div className="lmap__stage">
-        <img className="lmap__img" src={image} alt={alt} />
-
-        {/* נקודות המידע — יושבות על האיור, לא בתוך מלבן */}
-        {points.map((p) => {
-          const isActive = p.id === active
-          const isSeen = seen.includes(p.id)
-          return (
-            <button
-              key={p.id}
-              type="button"
-              className={`lspot${isActive ? ' is-active' : ''}${isSeen ? ' is-seen' : ''}`}
-              style={{ '--x': `${p.x}%`, '--y': `${p.y}%` }}
-              aria-expanded={isActive}
-              aria-controls={panelId}
-              onClick={() => select(p.id)}
-            >
-              <span className="lspot__dot" aria-hidden="true" />
-              <span className="lspot__label">{p.term}</span>
-            </button>
-          )
-        })}
+      {/* שכבת הרקע: השמנת האטומה חוסמת את גיליון המוטיבים של העמוד,
+          ולכן במקטע הזה האיור הוא הרקע היחיד */}
+      <div className="lmap__bg">
+        <div className="lmap__frame">
+          <img className="lmap__img" src={image} alt={alt} />
+        </div>
       </div>
 
-      {/* מקרא המושגים. במסך צר הוא הופך לדרך הפעולה, ובמסך רחב הוא
-          נשאר שורות ההקשר שכבר קיימות בפרק. */}
-      <div className="lmap__legend">
-        {groups.map((g, i) => (
-          <div className="lmap__group" key={i}>
-            {g.title ? <h4 className="lmap__groupTitle">{g.title}</h4> : null}
-            <p className="lmap__groupLead">{g.lead}</p>
-            <ul className="lmap__terms">
-              {g.ids.map((id) => {
-                const p = byId(id)
-                if (!p) return null
-                const isActive = p.id === active
-                const isSeen = seen.includes(p.id)
-                return (
-                  <li key={id}>
-                    <button
-                      type="button"
-                      className={`lterm${isActive ? ' is-active' : ''}${isSeen ? ' is-seen' : ''}`}
-                      aria-expanded={isActive}
-                      aria-controls={panelId}
-                      onClick={() => select(p.id)}
-                    >
-                      {p.term}
-                    </button>
-                  </li>
-                )
-              })}
-            </ul>
+      {/* שכבת התוכן — מעל האיור. השכבה עצמה שקופה ללחיצות, ורק
+          הנקודות עצמן לוכדות אותן */}
+      <div className="lmap__fore">
+        <header className="lmap__head">
+          <h2 className="lmap__title" id={titleId}>
+            {title}
+          </h2>
+          <span className="lmap__rule" aria-hidden="true" />
+          <p className="lmap__hint">{hint}</p>
+        </header>
+
+        <div
+          className="lmap__frame lmap__frame--hot"
+          style={current ? { '--nx': `${current.x}%`, '--ny': `${current.y}%` } : undefined}
+        >
+          {points.map((p) => {
+            const isActive = p.id === active
+            return (
+              <button
+                key={p.id}
+                type="button"
+                className={`lspot${isActive ? ' is-active' : ''}${
+                  seen.includes(p.id) ? ' is-seen' : ''
+                }`}
+                style={{ '--x': `${p.x}%`, '--y': `${p.y}%` }}
+                aria-expanded={isActive}
+                aria-controls={noteId}
+                onClick={() => toggle(p.id)}
+              >
+                {/* הכיתוב מעל הנקודה: הקו המקשר יוצא מן הנקודה לצדדים,
+                    ואילו הכיתוב היה חוצה אותו לו ישב מתחתיה */}
+                <span className="lspot__label">{p.term}</span>
+                <span className="lspot__dot" aria-hidden="true" />
+              </button>
+            )
+          })}
+
+          {/* ההסבר — אחד בכל רגע, על הרקע עצמו, וקו זהב דק מחבר אותו
+              לנקודה. הצד נבחר פנימה: נקודה בחצי הימני של האיור פותחת
+              שמאלה, ונקודה בחצי השמאלי פותחת ימינה. */}
+          <div className="lmap__note" id={noteId} role="region" aria-live="polite">
+            {current ? (
+              <div
+                className="lnote"
+                key={current.id}
+                data-side={current.x > 50 ? 'left' : 'right'}
+              >
+                <span className="lnote__link" aria-hidden="true" />
+                <p className="lnote__text">{current.text}</p>
+              </div>
+            ) : null}
           </div>
-        ))}
-      </div>
-
-      {/* ההסבר — אחד בכל רגע, על רקע העמוד, מופרד בקו זהב דק */}
-      <div className="lmap__panel" id={panelId} role="region" aria-live="polite">
-        <span className="lmap__panelRule" aria-hidden="true" />
-        {current ? (
-          /* key מאלץ הרכבה מחדש, כדי שההיעלמות וההופעה ירוצו בכל החלפה */
-          <div className="lmap__panelInner" key={current.id}>
-            <h4 className="lmap__panelTerm">{current.term}</h4>
-            <p className="lmap__panelText">{current.text}</p>
-          </div>
-        ) : null}
-      </div>
-
-      {/* מד ההתקדמות — נקודה לכל מושג שנצפה */}
-      <div className="lmap__progress" aria-live="polite">
-        <span className="lmap__dots" aria-hidden="true">
-          {points.map((p) => (
-            <span key={p.id} className={`lmap__dot${seen.includes(p.id) ? ' is-filled' : ''}`} />
-          ))}
-        </span>
-        <span className="sr-only">{`נצפו ${seen.length} מתוך ${points.length} מושגים`}</span>
-        {allSeen ? <span className="lmap__done">{doneMessage}</span> : null}
+        </div>
       </div>
     </div>
   )

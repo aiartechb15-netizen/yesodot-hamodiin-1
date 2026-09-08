@@ -1,45 +1,132 @@
-/* "מודיעין כמערכת לומדת" — איור אחד, חמש נקודות מידע, והסבר אחד
-   שמתחלף. אין כאן כרטיס, מסגרת, מלבן, צל או רקע נפרד: הכול יושב על
-   רקע השמנת של העמוד. */
+/* "מודיעין כמערכת לומדת" — האיור הוא הרקע של המקטע כולו.
+   אין כאן תמונה בתוך העמוד, אין כרטיס, מסגרת, פינות מעוגלות או צל,
+   ואין רקע שני מאחורי האיור: שכבת הרקע אטומה ומכסה את גיליון
+   המוטיבים של העמוד. */
 
-/* ---------- האיור ---------- */
-.lmap__stage {
-  position: relative;
-  /* יחס האיור עצמו — כך אין קפיצת פריסה עד שהוא נטען, והנקודות
-     שממוקמות באחוזים נופלות על אותו פרט בכל רוחב */
-  aspect-ratio: 1672 / 941;
+.lmap {
+  /* ממלא את המקטע לגובהו (המקטע הוא flex-column) ולרוחבו המלא,
+     מקצה לקצה ועד תפריט הצד */
+  flex: 1 1 auto;
+  align-self: stretch;
   width: 100%;
+  position: relative;
+}
+
+/* ---------- שכבת הרקע ---------- */
+.lmap__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  /* השמנת האטומה חוסמת את גיליון הרקע של העמוד — במקטע הזה האיור
+     הוא הרקע היחיד */
+  background: var(--paper);
+}
+
+/* ---------- מסגרת האיור ----------
+   הקופסה שאליה האיור נפרש. ברירת המחדל היא המקטע עצמו; כשיחידות
+   container נתמכות היא מחושבת בדיוק כמו cover, ולכן הנקודות
+   שממוקמות באחוזים בתוכה יושבות על אותו פרט בכל יחס מסך. */
+.lmap__frame {
+  position: absolute;
+  inset: 0;
+}
+
+@supports (width: 1cqw) {
+  .lmap__bg,
+  .lmap__fore {
+    container-type: size;
+  }
+
+  .lmap__frame {
+    inset: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* יחס האיור: 1672 / 941 */
+    width: max(100cqw, calc(100cqh * 1672 / 941));
+    height: max(100cqh, calc(100cqw * 941 / 1672));
+  }
 }
 
 .lmap__img {
   display: block;
   width: 100%;
   height: 100%;
-  /* cover בלי לעוות; המרכז נשאר במסגרת ולכן העדשה אינה נחתכת */
   object-fit: cover;
   object-position: center;
-  /* בלי מסגרת, פינות, צל או רקע — האיור נטמע ברקע השמנת של העמוד */
   border: 0;
   border-radius: 0;
   box-shadow: none;
   background: none;
 }
 
+/* ---------- שכבת התוכן ---------- */
+.lmap__fore {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  /* השכבה עצמה שקופה ללחיצה; רק הנקודות וההסבר לוכדים אותה */
+  pointer-events: none;
+}
+
+.lmap__head {
+  position: absolute;
+  top: clamp(24px, 5vh, 54px);
+  inset-inline-start: var(--ch-gutter);
+  max-width: min(46ch, 48%);
+}
+
+.lmap__title {
+  margin: 0;
+  font-size: clamp(26px, 2.7vw, 40px);
+  line-height: 1.2;
+  color: var(--navy);
+  /* הילת שמנת במקום מלבן לבן: הכיתוב יושב ישירות על האיור */
+  text-shadow:
+    0 0 10px var(--paper),
+    0 0 24px var(--paper);
+}
+
+.lmap__rule {
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin: 14px 0 12px;
+  border-radius: 2px;
+  background: var(--gold);
+}
+
+.lmap__hint {
+  margin: 0;
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  text-shadow:
+    0 0 8px var(--paper),
+    0 0 18px var(--paper);
+}
+
 /* ---------- נקודות המידע ---------- */
+/* קופסת הלחיצה היא הנקודה עצמה, והכיתוב מרחף מעליה מחוץ לזרימה.
+   כך מרכז הנקודה יושב בדיוק על האחוזים שהוגדרו לה, והקו המקשר
+   שיוצא מן ההסבר מכוון אליה ולא לאמצע הכפתור. */
 .lspot {
   position: absolute;
-  /* מיקום פיזי ולא לוגי: האחוזים נמדדים על האיור עצמו, שאינו מתהפך
-     בעמוד RTL — inset-inline-start היה משקף את הנקודות לצד הנגדי */
+  /* מיקום פיזי ולא לוגי: האחוזים נמדדים על האיור, שאינו מתהפך ב-RTL */
   top: var(--y);
   left: var(--x);
   transform: translate(-50%, -50%);
   display: grid;
-  justify-items: center;
-  gap: 7px;
-  padding: 4px;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
   background: none;
   border: 0;
+  border-radius: 50%;
   cursor: pointer;
+  pointer-events: auto;
   color: var(--navy);
 }
 
@@ -53,7 +140,7 @@
     transform 200ms ease,
     box-shadow 200ms ease,
     background-color 200ms ease;
-  /* פעימה עדינה — רמז שיש כאן מה ללחוץ, לא הנפשה שמושכת את העין */
+  /* פעימה עדינה — רמז שיש כאן מה ללחוץ */
   animation: lspotPulse 2.8s ease-in-out infinite;
 }
 
@@ -68,13 +155,16 @@
 }
 
 .lspot__label {
+  position: absolute;
+  bottom: calc(100% - 4px);
+  left: 50%;
+  transform: translateX(-50%);
   font-family: var(--font-heading);
-  font-size: 15px;
+  font-size: clamp(13px, 1.05vw, 16px);
   font-weight: 700;
   line-height: 1;
   color: var(--navy);
   white-space: nowrap;
-  /* הילת שמנת רכה: הכיתוב יושב על איור, ובלעדיה הוא היה מתערבב בקווים */
   text-shadow:
     0 0 6px var(--paper),
     0 0 12px var(--paper);
@@ -96,10 +186,8 @@
 .lspot:focus-visible {
   outline: 3px solid var(--teal);
   outline-offset: 2px;
-  border-radius: var(--radius);
 }
 
-/* נקודה שנצפתה — טבעת דקה סביבה, בלי מסגרת ובלי מילוי נוסף */
 .lspot.is-seen .lspot__dot {
   background: var(--gold-lift);
   animation: none;
@@ -115,175 +203,161 @@
   color: var(--gold-ink);
 }
 
-/* ---------- מקרא המושגים ---------- */
-.lmap__legend {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(18px, 3vw, 44px);
-  margin-top: clamp(14px, 2vw, 22px);
-}
-
-.lmap__groupTitle {
-  margin: 0 0 4px;
-  font-size: 17px;
-  color: var(--navy);
-}
-
-.lmap__groupLead {
-  margin: 0;
-  font-size: 16.5px;
-  color: var(--ink-soft);
-}
-
-.lmap__terms {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 18px;
-  margin: 8px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.lterm {
-  padding: 2px 0;
-  background: none;
-  border: 0;
-  border-bottom: 1px solid transparent;
-  font-family: var(--font-heading);
-  font-size: 16.5px;
-  font-weight: 700;
-  color: var(--navy-secondary);
-  cursor: pointer;
-  transition:
-    color 180ms ease,
-    border-color 180ms ease;
-}
-
-.lterm:hover,
-.lterm:focus-visible {
-  color: var(--gold-ink);
-  border-bottom-color: var(--gold);
-}
-
-.lterm.is-active {
-  color: var(--gold-ink);
-  border-bottom-color: var(--gold);
-}
-
-.lterm.is-seen:not(.is-active) {
-  color: var(--ink-soft);
-}
-
 /* ---------- ההסבר ---------- */
-.lmap__panel {
-  margin-top: clamp(18px, 2.4vw, 28px);
-  /* מקום שמור להסבר הארוך ביותר — בלי קפיצת פריסה בהחלפה */
-  min-height: 132px;
+.lmap__note {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
-/* הקו הדק היחיד שמפריד בין האיור להסבר */
-.lmap__panelRule {
-  display: block;
-  width: 84px;
+.lnote {
+  position: absolute;
+  top: var(--ny);
+  left: var(--nx);
+  width: clamp(230px, 24vw, 360px);
+  pointer-events: auto;
+  isolation: isolate;
+  animation: lnoteIn 280ms ease both;
+}
+
+/* הילת שמנת מטושטשת מאחורי המלל — לא כרטיס ולא מלבן: אין לה קצה,
+   מסגרת, פינות או צל, והיא רק מרפה את האיור מתחת לאותיות כדי
+   שההסבר יישאר קריא גם מעל המסכים והעדשה */
+.lnote::before {
+  content: '';
+  position: absolute;
+  inset: -34px -54px;
+  z-index: 0;
+  /* אליפסה שנוגעת בדיוק באמצע כל צלע ומתפוגגת לשקיפות מלאה בקצה
+     שלה — ולכן אין כאן מלבן נראה, קצה או פינה */
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(251, 248, 241, 0.96) 0%,
+    rgba(251, 248, 241, 0.9) 46%,
+    rgba(251, 248, 241, 0.62) 72%,
+    rgba(251, 248, 241, 0) 100%
+  );
+}
+
+/* הנקודה בחצי השמאלי של האיור פותחת ימינה, ובחצי הימני — שמאלה,
+   כך שההסבר תמיד נפתח פנימה ואינו יוצא מן המקטע */
+.lnote[data-side='right'] {
+  transform: translate(46px, -50%);
+}
+
+.lnote[data-side='left'] {
+  transform: translate(calc(-100% - 46px), -50%);
+}
+
+/* הקו הדק היחיד — מקשר בין הנקודה להסבר */
+.lnote__link {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  width: 46px;
   height: 2px;
   background: var(--gold);
-  margin-bottom: 16px;
 }
 
-@keyframes lmapIn {
+.lnote[data-side='right'] .lnote__link {
+  left: -46px;
+}
+
+.lnote[data-side='left'] .lnote__link {
+  right: -46px;
+}
+
+.lnote__text {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: clamp(16px, 1.25vw, 18.5px);
+  line-height: 1.7;
+  color: var(--ink-soft);
+  /* בלי כרטיס ובלי מלבן: הילת שמנת בלבד, שהמלל יישאר קריא על האיור */
+  text-shadow:
+    0 0 7px var(--paper),
+    0 0 14px var(--paper),
+    0 0 22px var(--paper);
+}
+
+@keyframes lnoteIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
   }
   to {
     opacity: 1;
-    transform: none;
   }
 }
 
-.lmap__panelInner {
-  animation: lmapIn 300ms ease both;
-}
-
-.lmap__panelTerm {
-  margin: 0;
-  font-size: clamp(19px, 1.7vw, 23px);
-  color: var(--navy);
-}
-
-.lmap__panelText {
-  margin: 10px 0 0;
-  max-width: 74ch;
-  font-size: clamp(17px, 1.35vw, 19.5px);
-  line-height: 1.75;
-  color: var(--ink-soft);
-}
-
-/* ---------- מד ההתקדמות ---------- */
-.lmap__progress {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-top: clamp(14px, 2vw, 20px);
-}
-
-.lmap__dots {
-  display: inline-flex;
-  gap: 8px;
-}
-
-.lmap__dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  border: 1px solid var(--gold);
-  background: transparent;
-  transition: background-color 220ms ease;
-}
-
-.lmap__dot.is-filled {
-  background: var(--gold);
-}
-
-.lmap__done {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--teal-ink);
-}
-
+/* ההנפשה חייבת לשמור על ה-transform של הצד, ולכן היא על אטימות בלבד */
 @media (prefers-reduced-motion: reduce) {
   .lspot__dot {
     animation: none;
   }
-  .lmap__panelInner {
+  .lnote {
     animation: none;
   }
   .lspot__dot,
-  .lspot__label,
-  .lterm,
-  .lmap__dot {
+  .lspot__label {
     transition: none;
   }
 }
 
-/* ---------- מסך צר ---------- */
-/* האיור נשאר בראש המסך, והמושגים שמתחתיו הופכים לרשימה שהיא דרך
-   הפעולה: נקודות זעירות על איור קטן אינן ניתנות ללחיצה בנוחות. */
+/* ---------- מסך צר ----------
+   במסך צר ה-cover היה חותך את קצות האיור ומוציא את הנקודות שבשוליו
+   מחוץ למקטע. לכן האיור נפרש כאן על רוחב המקטע ומתמרכז אנכית, כל
+   חמש הנקודות נשארות בתוכו, וההסבר נפתח מתחת לאיור. */
 @media (max-width: 860px) {
+  @supports (width: 1cqw) {
+    .lmap__frame {
+      width: min(100cqw, calc(100cqh * 1672 / 941));
+      height: min(100cqh, calc(100cqw * 941 / 1672));
+    }
+  }
+
+  .lmap__img {
+    object-fit: contain;
+  }
+
+  .lmap__head {
+    inset-inline-start: var(--ch-gutter);
+    inset-inline-end: var(--ch-gutter);
+    max-width: none;
+  }
+
   .lspot {
-    display: none;
+    width: 30px;
+    height: 30px;
   }
-  .lmap__legend {
-    grid-template-columns: 1fr;
-    gap: 18px;
+
+  .lspot__dot {
+    width: 11px;
+    height: 11px;
   }
-  .lmap__terms {
-    gap: 10px 16px;
+
+  .lspot__label {
+    font-size: 12px;
   }
-  .lterm {
-    border-bottom-color: var(--border);
+
+  .lnote,
+  .lnote[data-side='right'],
+  .lnote[data-side='left'] {
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: auto;
+    transform: none;
+    margin-top: clamp(20px, 4vh, 34px);
+    padding-inline: var(--ch-gutter);
   }
-  .lmap__panel {
-    min-height: 150px;
+
+  .lnote__link,
+  .lnote[data-side='right'] .lnote__link,
+  .lnote[data-side='left'] .lnote__link {
+    position: static;
+    display: block;
+    width: 56px;
+    margin: 0 0 12px;
   }
 }

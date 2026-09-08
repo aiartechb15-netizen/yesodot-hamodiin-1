@@ -221,108 +221,14 @@
   font-size: var(--fs-h3);
 }
 
-/* ---------- שער 1: מודיעין כמערכת לומדת ---------- */
-/* שורת ההנחיה שמתחת לכותרת המסך */
-.lsys__hint {
-  margin: 14px 0 clamp(18px, 2.2vw, 26px);
-  font-size: clamp(17px, 1.35vw, 19.5px);
-  color: var(--ink-soft);
-}
-
-/* המקטע "בין מידע לידע" עומד עכשיו לבדו ולא בתוך רשת של שניים */
-.rail--single {
-  margin-top: clamp(30px, 3.6vw, 46px);
-}
-
-.lsys__title {
-  font-size: var(--fs-h3);
-  color: var(--navy);
-}
-
-.lsys__lead {
-  max-width: 900px;
-  font-size: 20px;
-}
-
-/* מסגרת עדינה מאוד: רקע כמעט לבן, קו בז' דק, ללא צל */
-.rail {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: clamp(26px, 2.8vw, 36px);
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-
-.rail__title {
-  font-size: var(--fs-h3);
-  color: var(--navy);
-}
-
-/* אותו מרווח בשני הצדדים, כדי שהטקסט יתחיל באותו גובה */
-.rail .gold-rule {
-  margin-block: 14px 18px;
-}
-
-.rail__lead {
-  margin: 0;
-}
-
-/* ---------- אזור הדוגמה ---------- */
-.inset {
-  position: relative;
-  margin-top: auto;
-  padding: clamp(20px, 2.2vw, 24px);
-  background: var(--cream);
-  border-radius: var(--radius-sm);
-}
-
-.inset__label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--navy-secondary);
-}
-
-.inset p {
-  margin: 0;
-}
-
-/* משפט מסכם — קו דק לרוחב, הדגשה זהובה קצרה במרכזו, ומתחתיו המשפט */
-.keyIdea {
-  margin-top: clamp(46px, 5vw, 66px);
-  text-align: center;
-}
-
-.keyIdea__rule {
-  position: relative;
-  display: block;
-  height: 1px;
-  background: var(--border);
-}
-
-.keyIdea__rule::after {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 56px;
-  height: 3px;
-  border-radius: 2px;
-  background: var(--gold);
-}
-
-.keyIdea__text {
-  max-width: 720px;
-  margin: clamp(26px, 3vw, 34px) auto 0;
-  font-size: 20.5px;
-  font-weight: 600;
-  line-height: 1.65;
-  color: var(--navy);
+/* ---------- שער 1: מודיעין כמערכת לומדת ----------
+   מסך אחד שהאיור הוא הרקע שלו, בגובה מסך מתחת ל-Header ובלי גלילה
+   פנימית. הריפוד מתאפס כדי שהאיור יגיע מקצה לקצה ועד תפריט הצד,
+   ו-overflow: hidden מונע מן החיתוך לחרוג מן המקטע.
+   המבנה הפנימי, שכבת האיור ונקודות המידע — ב-components/LearningMap. */
+.chapterPage .section--learning {
+  padding: 0;
+  overflow: hidden;
 }
 
 /* ---------- שער 2 ---------- */
