@@ -20,6 +20,180 @@
 }
 
 /* ---------- תחנה 1 — פתיח ---------- */
+/* ---------- תחנה 1 — פתיח ----------
+   מסך אחד שנפרש על מלוא רוחב המכל ועל גובה מסך שלם: כותרת המסך וקו
+   הזהב, פסקת הפתיחה מתחתיהן, ואז שני אזורים רחבים — מטרת הפרק מימין
+   ומספר התחנה משמאל — ומתחתם ציר התחנות. אין כאן כרטיסים ואין מסגרות;
+   ההדגשות נעשות בקו זהב, במספור ובמרווח. */
+/* המסך נדחס במכוון: כל שלושת האזורים חייבים להיכנס לגובה מסך אחד,
+   ולכן גם הריפוד האנכי של הסקשן מצומצם כאן */
+.ch2op {
+  padding-block: clamp(40px, 4.4vw, 64px);
+}
+
+.ch2op__inner {
+  display: grid;
+  gap: clamp(22px, 2.6vw, 38px);
+  align-content: center;
+}
+
+.ch2op__title {
+  font-size: clamp(31px, 3.1vw, 46px);
+  color: var(--navy);
+}
+
+.ch2op__head .gold-rule {
+  margin-block: 14px 22px;
+}
+
+.ch2op__lead {
+  max-width: 80ch;
+  font-size: clamp(19px, 1.45vw, 22.5px);
+  line-height: 1.7;
+  color: var(--text);
+}
+
+/* ---- מטרת הפרק ומספר התחנה ---- */
+.ch2op__mid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+}
+
+/* קו הזהב האנכי הוא ההדגשה — לא מסגרת ולא רקע */
+.ch2op__goal {
+  padding-inline-start: clamp(20px, 2.2vw, 32px);
+  border-inline-start: 2px solid var(--gold);
+}
+
+.ch2op__goalLabel {
+  font-size: var(--fs-h3);
+  color: var(--navy);
+}
+
+.ch2op__goalText {
+  margin-top: 12px;
+  max-width: 70ch;
+  font-size: clamp(18px, 1.32vw, 20.5px);
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+/* מספר התחנה — אלמנט עיצובי בלבד, בגוון כחול־אפור שקוף */
+.ch2op__num {
+  justify-self: center;
+  font-family: var(--font-heading);
+  font-size: clamp(84px, 10vw, 158px);
+  font-weight: 700;
+  line-height: 0.85;
+  color: rgba(18, 57, 85, 0.13);
+  user-select: none;
+}
+
+/* ---- מבנה הפרק כציר תחנות ---- */
+.ch2op__structureLabel {
+  margin-bottom: clamp(14px, 1.7vw, 22px);
+  font-size: var(--fs-h3);
+  color: var(--navy);
+}
+
+/* גריד ולא flex: מספר קבוע של תחנות בשורה, כך שהשבירה לשתי שורות
+   יוצאת מסודרת ולא תלויה באורך השם של כל תחנה */
+.ch2op__track {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  row-gap: clamp(18px, 2vw, 26px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ch2op__stop {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+/* קו החיבור בין תחנה לשכנתה — נמתח ממרכז העיגול הזה למרכז הבא,
+   ויושב מתחת לעיגולים עצמם */
+.ch2op__stop::after {
+  content: '';
+  position: absolute;
+  top: 19px;
+  inset-inline-end: -50%;
+  width: 100%;
+  height: 1px;
+  background: var(--teal-smoke);
+  opacity: 0.55;
+}
+
+/* סוף שורה וסוף הציר — אין למה להתחבר */
+.ch2op__stop:nth-child(5n)::after,
+.ch2op__stop:last-child::after {
+  content: none;
+}
+
+.ch2op__dot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 1.5px solid var(--gold);
+  color: var(--navy-secondary);
+  font-size: 15px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.ch2op__stopName {
+  max-width: 17ch;
+  font-size: clamp(15px, 1.05vw, 16.5px);
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 1180px) {
+  .ch2op__track {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .ch2op__stop:nth-child(5n)::after {
+    content: '';
+  }
+  .ch2op__stop:nth-child(3n)::after,
+  .ch2op__stop:last-child::after {
+    content: none;
+  }
+}
+
+@media (max-width: 860px) {
+  /* מספר התחנה יורד מתחת למטרת הפרק ולא נשאר טור ריק לצדה */
+  .ch2op__mid {
+    grid-template-columns: 1fr;
+    gap: clamp(18px, 4vw, 28px);
+  }
+  .ch2op__num {
+    justify-self: start;
+    font-size: clamp(84px, 22vw, 130px);
+  }
+  .ch2op__track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ch2op__stop:nth-child(3n)::after {
+    content: '';
+  }
+  .ch2op__stop:nth-child(2n)::after,
+  .ch2op__stop:last-child::after {
+    content: none;
+  }
+}
+
 /* ---------- תחנה 4 — הקמ״ן והקברניט ---------- */
 /* כל התחנה בנויה סביב משתנה אחד: המרחק בין השניים.
    פתיח מרוכז ← שתי הדמויות סביב אותו מסמך ← משפט הסיכום ←

@@ -718,23 +718,6 @@ p.chIntro__lead {
   max-width: 68ch;
 }
 
-.chIntro__block {
-  margin-top: clamp(30px, 3.4vw, 46px);
-}
-
-.chIntro__block p {
-  margin-top: 14px;
-  font-size: clamp(18px, 1.35vw, 20.5px);
-  line-height: 1.75;
-  color: var(--ink-soft);
-}
-
-/* שורת מבנה הפרק — רצף תחנות עם חיצים. line-height נדיב, כי היא
-   נשברת לכמה שורות וכל שבירה היא מעבר בין שלבים */
-.chIntro__structure {
-  line-height: 1.95;
-}
-
 .chIntro__actions {
   margin-top: clamp(30px, 3.4vw, 44px);
 }
