@@ -263,6 +263,7 @@ svg {
 .hasMotif
   :is(.section--white, .section--cream, .section--paper):not(
     .vstage,
+    #topics,
     #chapter-open,
     #by-domain,
     #next-lesson,
