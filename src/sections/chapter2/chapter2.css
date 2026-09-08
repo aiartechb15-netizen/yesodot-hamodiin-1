@@ -512,19 +512,43 @@
   /* חיתוך בלבד — יחס הגובה-רוחב המקורי נשמר */
   object-fit: cover;
   object-position: 38% center;
-}
+  /* בלי מסגרת, רקע, צל או פינות מעוגלות — הקצה עצמו הוא הדעיכה */
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
 
-/* דעיכה רכה אל רקע העמוד — חזקה יותר בצד הפונה לטקסט */
-.fbuild__art::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(to right, transparent 62%, var(--paper) 100%),
-    linear-gradient(to bottom, transparent 80%, var(--paper) 100%),
-    linear-gradient(to top, transparent 88%, var(--paper) 100%),
-    linear-gradient(to left, transparent 92%, var(--paper) 100%);
+  /* הדעיכה יושבת על התמונה עצמה ולא בשכבת שמנת מעליה: קודם נמתח כאן
+     מלבן בצבע הנייר, וכשרקע העמוד הפך למאויר הוא נקרא כמסגרת בהירה
+     סביב התמונה. מסכה הופכת את הקצוות לשקופים ממש, ולכן הם נטמעים
+     בדיוק בגוון שמאחוריהם — יהיה אשר יהיה.
+
+     שתי מסכות שנחתכות זו בזו ולא אליפסה אחת: אליפסה הייתה עושה
+     מהתצלום צורה ביצית, וכאן הצורה נשארת של תצלום — רק שקצותיו
+     מתפוגגים. הליבה (כ-70% מהתצלום) נשארת אטומה וחדה, והדעיכה
+     בצדדים רחבה מזו שבחלק העליון והתחתון. */
+  --fbuild-fade-x: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.55) 7%,
+    #000 16%,
+    #000 84%,
+    rgba(0, 0, 0, 0.55) 93%,
+    transparent 100%
+  );
+  --fbuild-fade-y: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.55) 4%,
+    #000 9%,
+    #000 91%,
+    rgba(0, 0, 0, 0.55) 96%,
+    transparent 100%
+  );
+  -webkit-mask-image: var(--fbuild-fade-x), var(--fbuild-fade-y);
+  -webkit-mask-composite: source-in;
+  mask-image: var(--fbuild-fade-x), var(--fbuild-fade-y);
+  mask-composite: intersect;
 }
 
 /* חמישה שלבים כתהליך אחד: בלי מסגרות, בלי צל, בלי הדגשה לשלב מסוים.
@@ -828,13 +852,27 @@
   .fbuild__img {
     object-position: 42% center;
   }
-  /* הדעיכה החזקה עוברת לקצה התחתון — הצד שפונה עכשיו לטקסט */
-  .fbuild__art::after {
-    background:
-      linear-gradient(to bottom, transparent 58%, var(--paper) 100%),
-      linear-gradient(to top, transparent 88%, var(--paper) 100%),
-      linear-gradient(to right, transparent 90%, var(--paper) 100%),
-      linear-gradient(to left, transparent 90%, var(--paper) 100%);
+  /* במסך צר התצלום רחב ונמוך, ולכן היחס מתהפך: הדעיכה הרחבה עוברת
+     לקצה העליון והתחתון — הצדדים שפונים עכשיו לטקסט */
+  .fbuild__img {
+    --fbuild-fade-x: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.55) 4%,
+      #000 9%,
+      #000 91%,
+      rgba(0, 0, 0, 0.55) 96%,
+      transparent 100%
+    );
+    --fbuild-fade-y: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.55) 7%,
+      #000 16%,
+      #000 84%,
+      rgba(0, 0, 0, 0.55) 93%,
+      transparent 100%
+    );
   }
   .fsteps {
     --fnum: 40px;
