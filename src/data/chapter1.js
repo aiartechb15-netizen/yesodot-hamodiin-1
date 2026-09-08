@@ -379,6 +379,8 @@ export const gate2 = {
 
 export const byPurpose = {
   title: 'מודיעין לפי ייעוד',
+  /* התווית של האפשרות המצומצמת — הזמנה ללחוץ, לא תוכן */
+  hint: 'לחצו להצגה',
   items: [
     {
       id: 'positive',

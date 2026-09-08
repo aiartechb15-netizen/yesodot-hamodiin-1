@@ -592,3 +592,207 @@
     gap: 8px;
   }
 }
+
+
+/* ---------- מודיעין לפי ייעוד ---------- */
+/* מסך קצר: כמות התוכן כאן קטנה, ולכן הוא אינו נפרש על מסך מלא אלא על
+   כ-75% מגובהו. מה שנשאר מתחתיו הוא הצצה של כ-15% מהמסך הבא — רמז
+   שהעמוד ממשיך. התוכן נצמד לראש המקטע במקום להתמרכז אנכית. */
+.byPurpose {
+  min-height: 75vh;
+  min-height: 75svh;
+  justify-content: flex-start;
+  padding-block: clamp(38px, 4.6vw, 64px);
+  /* שטיפת שמנת עדינה: איורי גיליון הרקע נשארים רמז בפינות ואינם
+     מתחרים בתוכן. אין כאן שכבת איור נוספת ואין אלמנט במרכז הרקע. */
+  background-color: rgba(247, 243, 234, 0.55);
+}
+
+/* שתי אפשרויות זו לצד זו, והקשתות ביניהן. הרוחב היחסי נע לפי מה
+   שפתוח — האפשרות הפעילה מקבלת יותר מקום, הסגורה מצטמצמת. */
+.purpose {
+  display: grid;
+  grid-template-columns: 1.3fr auto 0.7fr;
+  align-items: start;
+  gap: clamp(10px, 2vw, 28px);
+  margin-top: clamp(20px, 2.6vw, 32px);
+  transition: grid-template-columns 300ms ease;
+}
+
+.purpose--negative {
+  grid-template-columns: 0.7fr auto 1.3fr;
+}
+
+.purpose__slot {
+  display: contents;
+}
+
+.purpose__arcs {
+  align-self: center;
+  color: var(--gold);
+  opacity: 0.5;
+  line-height: 0;
+}
+
+.purpose__arcs svg {
+  display: block;
+  width: clamp(28px, 3vw, 52px);
+  height: auto;
+}
+
+/* ---------- אפשרות ---------- */
+.popt {
+  min-width: 0;
+}
+
+.popt__btn {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.4vw, 18px);
+  width: 100%;
+  padding: 6px 2px;
+  background: none;
+  /* בלי מסגרת, כרטיס, מלבן או צל — האפשרויות יושבות על הרקע הפתוח */
+  border: 0;
+  text-align: start;
+  cursor: pointer;
+}
+
+.popt__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--teal);
+  transition:
+    color 280ms ease,
+    transform 280ms ease;
+}
+
+.popt__title {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 1.9vw, 26px);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--navy);
+  transition: color 280ms ease;
+}
+
+/* התווית של האפשרות הסגורה בלבד */
+.popt__cue {
+  display: block;
+  margin-top: 4px;
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--teal-ink);
+  transition:
+    opacity 280ms ease,
+    max-height 280ms ease;
+}
+
+.popt.is-open .popt__cue {
+  opacity: 0;
+  max-height: 0;
+  margin-top: 0;
+  overflow: hidden;
+}
+
+/* האפשרות הפתוחה — אייקון בכחול הכהה וכותרת מלאה */
+.popt.is-open .popt__icon {
+  color: var(--navy);
+  transform: scale(1.06);
+}
+
+/* ריחוף ומיקוד — צבע, הגדלה קלה וזוהר עדין */
+.popt__btn:hover .popt__icon,
+.popt__btn:focus-visible .popt__icon {
+  color: var(--gold-ink);
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 10px rgba(196, 163, 71, 0.35));
+}
+
+.popt__btn:hover .popt__title,
+.popt__btn:focus-visible .popt__title {
+  color: var(--gold-ink);
+}
+
+.popt__btn:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 4px;
+  border-radius: var(--radius);
+}
+
+/* ---------- ההסבר ---------- */
+/* מצב סגור אינו נמחק מה-DOM אלא מצטמצם: כך המעבר רך, ו-visibility
+   מסתירה אותו גם מקוראי מסך ומניווט המקלדת. */
+.popt__panel {
+  max-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  overflow: hidden;
+  transition:
+    max-height 300ms ease,
+    opacity 260ms ease,
+    transform 300ms ease,
+    visibility 0s linear 300ms;
+}
+
+.popt.is-open .popt__panel {
+  max-height: 460px;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    max-height 320ms ease,
+    opacity 280ms ease 60ms,
+    transform 320ms ease,
+    visibility 0s;
+}
+
+.popt__panelInner {
+  padding-top: 6px;
+}
+
+.popt__text {
+  font-size: clamp(17px, 1.35vw, 19.5px);
+  line-height: 1.7;
+}
+
+.popt__example {
+  color: var(--muted);
+  font-size: 17px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .purpose,
+  .popt__panel,
+  .popt__icon,
+  .popt__title,
+  .popt__cue {
+    transition: none;
+  }
+}
+
+/* ---------- מסך צר ---------- */
+/* אחת מתחת לשנייה, והקשתות מסתובבות ויושבות ביניהן */
+@media (max-width: 860px) {
+  .purpose {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .purpose--negative {
+    grid-template-columns: 1fr;
+  }
+  .purpose__arcs {
+    justify-self: center;
+    transform: rotate(90deg);
+  }
+  .purpose__arcs svg {
+    width: 26px;
+  }
+  .byPurpose {
+    min-height: 0;
+    padding-block: clamp(34px, 7vw, 52px);
+  }
+}
