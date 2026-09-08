@@ -17,21 +17,25 @@ export default function ByPurpose() {
   const [open, setOpen] = useState(byPurpose.items[0].id)
 
   const rowRef = useRef(null)
-  const optRefs = useRef({})
   const [rule, setRule] = useState(null)
 
-  /* מרכז הקו הקצר מתחת לאפשרות הפעילה */
+  /* מרכז הקו הקצר מתחת לאפשרות הפעילה. האפשרות נקראת מן ה-DOM ולא
+     מן ה-state, ולכן הפונקציה יציבה ואפשר לרשום את המאזינים פעם
+     אחת בלבד. */
   const measure = useCallback(() => {
     const row = rowRef.current
-    const btn = optRefs.current[open]
+    const btn = row?.querySelector('.pchoice.is-on')
     if (!row || !btn) return
     const r = row.getBoundingClientRect()
     const b = btn.getBoundingClientRect()
     setRule(Math.round(b.left - r.left + b.width / 2))
-  }, [open])
+  }, [])
 
   useLayoutEffect(() => {
     measure()
+  }, [measure, open])
+
+  useLayoutEffect(() => {
     window.addEventListener('resize', measure)
     /* הגופן נטען אחרי הרינדור הראשון ומשנה את רוחב הכיתוב */
     if (document.fonts?.ready) document.fonts.ready.then(measure)
@@ -60,9 +64,6 @@ export default function ByPurpose() {
               return (
                 <button
                   key={item.id}
-                  ref={(el) => {
-                    optRefs.current[item.id] = el
-                  }}
                   className={`pchoice${isOpen ? ' is-on' : ''}`}
                   type="button"
                   role="tab"

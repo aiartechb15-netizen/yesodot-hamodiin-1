@@ -558,10 +558,10 @@
    התוכן — שולי ההתחלה (ימין ב-RTL) קטנים משולי הסיום — ומעט מעל
    מרכזו האנכי, בזכות המרווח שנשאר מתחתיו. */
 .purpose {
-  width: min(1000px, 100%);
+  width: min(920px, 100%);
   /* ההיסט נגזר מן המקום שנשאר בפועל: שליש מן העודף, עד 90 פיקסלים.
      במסך צר שבו אין עודף הוא מתאפס מעצמו ואין דחיסה לצד אחד. */
-  margin-inline-start: clamp(0px, calc((100% - 1000px) * 0.3), 90px);
+  margin-inline-start: clamp(0px, calc((100% - 920px) * 0.3), 90px);
   margin-inline-end: auto;
   margin-block-end: clamp(16px, 4vh, 56px);
   text-align: right;
