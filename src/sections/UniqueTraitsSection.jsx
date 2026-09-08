@@ -1,4 +1,4 @@
-import ExpandCards from '../components/ExpandCards/ExpandCards'
+import TraitList from '../components/TraitList/TraitList'
 import { uniqueTraits } from '../data/chapter1'
 import './sections.css'
 import BackgroundDecor from '../components/BackgroundDecor/BackgroundDecor'
@@ -6,7 +6,7 @@ import BackgroundDecor from '../components/BackgroundDecor/BackgroundDecor'
 export default function UniqueTraitsSection() {
   return (
     <section className="section section--cream" id="unique-traits" aria-labelledby="unique-traits-title">
-      <BackgroundDecor variant="satellite" />
+      <BackgroundDecor variant="globe" />
       <div className="container">
         <h2 className="section-title" id="unique-traits-title">
           {uniqueTraits.title}
@@ -15,11 +15,8 @@ export default function UniqueTraitsSection() {
         <p className="lead" style={{ marginBottom: '28px' }}>
           {uniqueTraits.intro}
         </p>
-        <ExpandCards
+        <TraitList
           items={uniqueTraits.items}
-          columns={3}
-          inline
-          showProgress
           progressLabel={uniqueTraits.completeLabel}
           completedMessage={uniqueTraits.completedMessage}
         />
