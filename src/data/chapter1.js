@@ -176,6 +176,63 @@ export const gate1 = {
   },
 }
 
+/* המסך האינטראקטיבי של "מודיעין כמערכת לומדת".
+   הטקסטים אינם חדשים: כל נקודה מצביעה על אותו ניסוח שכבר קיים
+   ב-gate1 — שני הצדדים ושלושת הרבדים — ולכן אין כאן כפילות מלל.
+   x ו-y הם אחוזים ביחס לאיור, כדי שהנקודות יישארו על אותו פרט
+   בתצלום בכל רוחב מסך. */
+export const learningMap = {
+  hint: 'לחצו על נקודות המידע וגלו כיצד תמונת המודיעין נבנית',
+  doneMessage: 'השלמתם את תמונת המודיעין',
+  alt: 'איור: בצד אחד שטח שבו נעים כוחות, במרכז עדשה שממקדת את תמונת השטח, ובצד השני קצין מודיעין מול מסכים',
+  points: [
+    {
+      id: 'red',
+      term: gate1.learningSystem.sides[0].term,
+      text: gate1.learningSystem.sides[0].text,
+      x: 16,
+      y: 55,
+    },
+    {
+      id: 'knowing',
+      term: gate1.knowingVsUnderstanding.layers[0].term,
+      text: gate1.knowingVsUnderstanding.layers[0].text,
+      x: 12.5,
+      y: 15,
+    },
+    {
+      id: 'understanding',
+      term: gate1.knowingVsUnderstanding.layers[1].term,
+      text: gate1.knowingVsUnderstanding.layers[1].text,
+      x: 43,
+      y: 56,
+    },
+    {
+      id: 'direction',
+      term: gate1.knowingVsUnderstanding.layers[2].term,
+      text: gate1.knowingVsUnderstanding.layers[2].text,
+      x: 57,
+      y: 47,
+    },
+    {
+      id: 'blue',
+      term: gate1.learningSystem.sides[1].term,
+      text: gate1.learningSystem.sides[1].text,
+      x: 84,
+      y: 58,
+    },
+  ],
+  /* שתי שורות הפתיחה שכבר קיימות בפרק משמשות כאן כמקרא לנקודות */
+  groups: [
+    { lead: gate1.learningSystem.meetingLead, ids: ['red', 'blue'] },
+    {
+      title: gate1.knowingVsUnderstanding.title,
+      lead: gate1.knowingVsUnderstanding.lead,
+      ids: ['knowing', 'understanding', 'direction'],
+    },
+  ],
+}
+
 export const approaches = {
   title: 'גישות לבירור המציאות במחקר מודיעיני',
   intro:

@@ -222,6 +222,18 @@
 }
 
 /* ---------- שער 1: מודיעין כמערכת לומדת ---------- */
+/* שורת ההנחיה שמתחת לכותרת המסך */
+.lsys__hint {
+  margin: 14px 0 clamp(18px, 2.2vw, 26px);
+  font-size: clamp(17px, 1.35vw, 19.5px);
+  color: var(--ink-soft);
+}
+
+/* המקטע "בין מידע לידע" עומד עכשיו לבדו ולא בתוך רשת של שניים */
+.rail--single {
+  margin-top: clamp(30px, 3.6vw, 46px);
+}
+
 .lsys__title {
   font-size: var(--fs-h3);
   color: var(--navy);
@@ -230,77 +242,6 @@
 .lsys__lead {
   max-width: 900px;
   font-size: 20px;
-}
-
-.lsys__meet {
-  margin: clamp(26px, 3vw, 34px) 0 14px;
-  font-weight: 600;
-  color: var(--navy-secondary);
-}
-
-/* המפגש — מסגרת אחת, שני הצדדים זה מול זה, מופרדים בקו דק */
-.meet {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-
-.meet__side {
-  position: relative;
-  padding: clamp(22px, 2.4vw, 28px) clamp(22px, 2.4vw, 30px);
-}
-
-/* הקו המפריד יושב על גבול הצד הראשון, כדי שיימתח לגובה המלא */
-.meet__rule {
-  position: absolute;
-  inset-block: 0;
-  inset-inline-end: 0;
-  width: 1px;
-  background: var(--border);
-}
-
-/* סימן המפגש — חץ דו־כיווני זעיר שיושב על הקו המפריד */
-.meet__term {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--navy);
-}
-
-.meet__dot {
-  width: 10px;
-  height: 10px;
-  flex: none;
-  border-radius: 50%;
-}
-
-.meet__side--red .meet__dot {
-  background: var(--danger);
-}
-
-.meet__side--blue .meet__dot {
-  background: var(--navy-secondary);
-}
-
-.meet__text {
-  margin: 0;
-  color: var(--ink-soft);
-}
-
-/* שני אזורי תוכן מקבילים — גריד סימטרי, אותו רוחב ואותו גובה */
-.rails {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: stretch;
-  gap: clamp(22px, 2.4vw, 32px);
-  margin-top: clamp(40px, 4.4vw, 58px);
 }
 
 /* מסגרת עדינה מאוד: רקע כמעט לבן, קו בז' דק, ללא צל */
@@ -326,68 +267,6 @@
 
 .rail__lead {
   margin: 0;
-}
-
-/* ---------- תהליך אנכי: ידיעה, הבנה, הכוונה ---------- */
-.proc {
-  margin: clamp(22px, 2.4vw, 30px) 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.proc__step {
-  position: relative;
-  display: grid;
-  grid-template-columns: 34px 1fr;
-  align-items: start;
-  gap: 14px;
-  padding-block: clamp(16px, 1.8vw, 20px);
-}
-
-.proc__step + .proc__step {
-  border-top: 1px solid var(--border);
-}
-
-.proc__step:first-child {
-  padding-top: 0;
-}
-
-.proc__step:last-child {
-  padding-bottom: 0;
-}
-
-/* אייקון line-art במסגרת עגולה קטנה ועדינה */
-.proc__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  color: var(--navy-secondary);
-}
-
-.proc__term {
-  font-size: 18.5px;
-  margin-bottom: 4px;
-}
-
-.proc__step--0 .proc__term {
-  color: var(--danger);
-}
-
-.proc__step--1 .proc__term {
-  color: var(--gold-ink);
-}
-
-.proc__step--2 .proc__term {
-  color: var(--teal-ink);
-}
-
-.proc__text {
-  margin: 0;
-  color: var(--ink-soft);
 }
 
 /* ---------- אזור הדוגמה ---------- */
@@ -701,20 +580,7 @@
 }
 
 @media (max-width: 860px) {
-  .meet {
-    grid-template-columns: 1fr;
-  }
-  .meet__rule {
-    inset-block: auto;
-    inset-inline: 0;
-    top: auto;
-    bottom: 0;
-    width: auto;
-    height: 1px;
-  }
-  .rails {
-    grid-template-columns: 1fr;
-  }
+
 }
 
 @media (max-width: 760px) {

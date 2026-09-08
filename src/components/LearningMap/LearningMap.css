@@ -1,0 +1,289 @@
+/* "מודיעין כמערכת לומדת" — איור אחד, חמש נקודות מידע, והסבר אחד
+   שמתחלף. אין כאן כרטיס, מסגרת, מלבן, צל או רקע נפרד: הכול יושב על
+   רקע השמנת של העמוד. */
+
+/* ---------- האיור ---------- */
+.lmap__stage {
+  position: relative;
+  /* יחס האיור עצמו — כך אין קפיצת פריסה עד שהוא נטען, והנקודות
+     שממוקמות באחוזים נופלות על אותו פרט בכל רוחב */
+  aspect-ratio: 1672 / 941;
+  width: 100%;
+}
+
+.lmap__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* cover בלי לעוות; המרכז נשאר במסגרת ולכן העדשה אינה נחתכת */
+  object-fit: cover;
+  object-position: center;
+  /* בלי מסגרת, פינות, צל או רקע — האיור נטמע ברקע השמנת של העמוד */
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+}
+
+/* ---------- נקודות המידע ---------- */
+.lspot {
+  position: absolute;
+  /* מיקום פיזי ולא לוגי: האחוזים נמדדים על האיור עצמו, שאינו מתהפך
+     בעמוד RTL — inset-inline-start היה משקף את הנקודות לצד הנגדי */
+  top: var(--y);
+  left: var(--x);
+  transform: translate(-50%, -50%);
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  padding: 4px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: var(--navy);
+}
+
+.lspot__dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 4px rgba(196, 163, 71, 0.22);
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    background-color 200ms ease;
+  /* פעימה עדינה — רמז שיש כאן מה ללחוץ, לא הנפשה שמושכת את העין */
+  animation: lspotPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes lspotPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px rgba(196, 163, 71, 0.22);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(196, 163, 71, 0.08);
+  }
+}
+
+.lspot__label {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--navy);
+  white-space: nowrap;
+  /* הילת שמנת רכה: הכיתוב יושב על איור, ובלעדיה הוא היה מתערבב בקווים */
+  text-shadow:
+    0 0 6px var(--paper),
+    0 0 12px var(--paper);
+  transition: color 200ms ease;
+}
+
+.lspot:hover .lspot__dot,
+.lspot:focus-visible .lspot__dot {
+  transform: scale(1.28);
+  background: var(--gold-lift);
+  box-shadow: 0 0 0 9px rgba(196, 163, 71, 0.2);
+}
+
+.lspot:hover .lspot__label,
+.lspot:focus-visible .lspot__label {
+  color: var(--gold-ink);
+}
+
+.lspot:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+/* נקודה שנצפתה — טבעת דקה סביבה, בלי מסגרת ובלי מילוי נוסף */
+.lspot.is-seen .lspot__dot {
+  background: var(--gold-lift);
+  animation: none;
+}
+
+.lspot.is-active .lspot__dot {
+  transform: scale(1.28);
+  box-shadow: 0 0 0 9px rgba(196, 163, 71, 0.24);
+  animation: none;
+}
+
+.lspot.is-active .lspot__label {
+  color: var(--gold-ink);
+}
+
+/* ---------- מקרא המושגים ---------- */
+.lmap__legend {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 44px);
+  margin-top: clamp(14px, 2vw, 22px);
+}
+
+.lmap__groupTitle {
+  margin: 0 0 4px;
+  font-size: 17px;
+  color: var(--navy);
+}
+
+.lmap__groupLead {
+  margin: 0;
+  font-size: 16.5px;
+  color: var(--ink-soft);
+}
+
+.lmap__terms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lterm {
+  padding: 2px 0;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  font-family: var(--font-heading);
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--navy-secondary);
+  cursor: pointer;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.lterm:hover,
+.lterm:focus-visible {
+  color: var(--gold-ink);
+  border-bottom-color: var(--gold);
+}
+
+.lterm.is-active {
+  color: var(--gold-ink);
+  border-bottom-color: var(--gold);
+}
+
+.lterm.is-seen:not(.is-active) {
+  color: var(--ink-soft);
+}
+
+/* ---------- ההסבר ---------- */
+.lmap__panel {
+  margin-top: clamp(18px, 2.4vw, 28px);
+  /* מקום שמור להסבר הארוך ביותר — בלי קפיצת פריסה בהחלפה */
+  min-height: 132px;
+}
+
+/* הקו הדק היחיד שמפריד בין האיור להסבר */
+.lmap__panelRule {
+  display: block;
+  width: 84px;
+  height: 2px;
+  background: var(--gold);
+  margin-bottom: 16px;
+}
+
+@keyframes lmapIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.lmap__panelInner {
+  animation: lmapIn 300ms ease both;
+}
+
+.lmap__panelTerm {
+  margin: 0;
+  font-size: clamp(19px, 1.7vw, 23px);
+  color: var(--navy);
+}
+
+.lmap__panelText {
+  margin: 10px 0 0;
+  max-width: 74ch;
+  font-size: clamp(17px, 1.35vw, 19.5px);
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+/* ---------- מד ההתקדמות ---------- */
+.lmap__progress {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: clamp(14px, 2vw, 20px);
+}
+
+.lmap__dots {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.lmap__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  background: transparent;
+  transition: background-color 220ms ease;
+}
+
+.lmap__dot.is-filled {
+  background: var(--gold);
+}
+
+.lmap__done {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--teal-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lspot__dot {
+    animation: none;
+  }
+  .lmap__panelInner {
+    animation: none;
+  }
+  .lspot__dot,
+  .lspot__label,
+  .lterm,
+  .lmap__dot {
+    transition: none;
+  }
+}
+
+/* ---------- מסך צר ---------- */
+/* האיור נשאר בראש המסך, והמושגים שמתחתיו הופכים לרשימה שהיא דרך
+   הפעולה: נקודות זעירות על איור קטן אינן ניתנות ללחיצה בנוחות. */
+@media (max-width: 860px) {
+  .lspot {
+    display: none;
+  }
+  .lmap__legend {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .lmap__terms {
+    gap: 10px 16px;
+  }
+  .lterm {
+    border-bottom-color: var(--border);
+  }
+  .lmap__panel {
+    min-height: 150px;
+  }
+}
