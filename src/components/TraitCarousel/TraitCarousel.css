@@ -1,9 +1,9 @@
 /* ---------- קרוסלת המאפיינים ----------
-   מאפיין אחד במרכז, שני חצים בצדדים ושבע תחנות למטה. אין כאן כרטיס,
-   מלבן, מסגרת תוכן או אזור כהה — ההיררכיה נבנית מגודל הכותרת, מקו
-   הזהב ומהמרווח סביב הטקסט. */
+   האלמנט המרכזי של המסך: מאפיין אחד רחב במרכז, שני חצים צמודים לו
+   משני צדיו, ומתחת גוש ניווט אחד. אין כאן כרטיס, מלבן, מסגרת תוכן
+   או אזור כהה — ההיררכיה נבנית מגודל האייקון, הכותרת וקו הזהב. */
 .tcar {
-  margin-top: clamp(26px, 3vw, 42px);
+  margin-top: clamp(24px, 2.8vw, 40px);
 }
 
 /* טבעת הפוקוס יושבת על הקרוסלה כולה, כי היא עצמה מקבלת מיקוד
@@ -14,25 +14,29 @@
   border-radius: 6px;
 }
 
-/* שלושת הטורים נצמדים לרוחב המאפיין עצמו ולא לרוחב אזור התוכן,
-   כדי שהחצים ישבו לצד הטקסט ולא בקצוות המסך. הקבוצה כולה ממורכזת
-   ומוסטת מעט ימינה בעזרת ריפוד בצד שמאל. */
+/* שלושת הטורים נצמדים לרוחב המאפיין עצמו ולא לרוחב אזור התוכן, כדי
+   שהחצים ישבו לצדו ולא בקצוות הרחוקים של המסך */
 .tcar__stage {
   display: grid;
-  grid-template-columns: auto minmax(0, 720px) auto;
+  grid-template-columns: auto minmax(0, 900px) auto;
   justify-content: center;
   align-items: center;
-  gap: clamp(16px, 2.6vw, 44px);
-  padding-inline-end: clamp(0px, 5vw, 92px);
+  gap: clamp(12px, 1.8vw, 28px);
 }
 
-/* ---- החצים ---- */
+/* ---- החצים והתוויות שלצדם ---- */
+.tcar__nav {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  width: clamp(62px, 7.6vw, 112px);
+}
+
 .tcar__arrow {
   display: grid;
   place-items: center;
-  width: clamp(46px, 4vw, 58px);
-  height: clamp(46px, 4vw, 58px);
-  flex: none;
+  width: clamp(50px, 4.4vw, 62px);
+  height: clamp(50px, 4.4vw, 62px);
   border: 1.5px solid var(--navy);
   border-radius: 50%;
   background: transparent;
@@ -45,6 +49,16 @@
   color: var(--cream);
 }
 
+/* גובה קבוע לשתי שורות: בלעדיו תווית ארוכה מזיזה את החץ שלה כלפי
+   מעלה, ושני החצים כבר לא יושבים באותו גובה */
+.tcar__navName {
+  min-height: 2.8em;
+  font-size: 14.5px;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--muted);
+}
+
 /* אייקון ה-chevron מצביע מטה; כאן הוא מסובב לכיוון התנועה */
 .tcar__chev--prev {
   transform: rotate(-90deg);
@@ -54,12 +68,11 @@
   transform: rotate(90deg);
 }
 
-/* ---- המאפיין הפעיל ----
-   ממורכז באזור התוכן ומוסט מעט ימינה יחד עם החצים. */
+/* ---- המאפיין הפעיל ---- */
 .tcar__slide {
-  /* גובה מינימלי אחד לכל המאפיינים, כדי שהחצים והתחנות לא יקפצו
+  /* גובה מינימלי אחד לכל המאפיינים, כדי שהחצים והניווט לא יקפצו
      כשעוברים בין הסבר קצר לארוך */
-  min-height: clamp(230px, 24vw, 290px);
+  min-height: clamp(300px, 27vw, 360px);
   display: grid;
   align-content: center;
 }
@@ -67,27 +80,29 @@
 .tcar__icon {
   display: grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
-  margin-bottom: 18px;
+  width: clamp(56px, 4.6vw, 64px);
+  height: clamp(56px, 4.6vw, 64px);
+  margin-bottom: 22px;
   border-radius: 50%;
   background: var(--teal-soft);
   color: var(--teal-ink);
 }
 
 .tcar__title {
-  font-size: clamp(26px, 2.5vw, 36px);
+  font-size: clamp(28px, 2.6vw, 36px);
   line-height: 1.25;
   color: var(--navy);
 }
 
 .tcar__slide .gold-rule {
-  margin-block: 14px 20px;
+  margin-block: 18px 24px;
 }
 
+/* שורות הקריאה נשארות באורך נוח גם כשאזור המאפיין רחב ממנו */
 .tcar__text {
-  font-size: clamp(19px, 1.45vw, 22px);
-  line-height: 1.78;
+  max-width: 720px;
+  font-size: clamp(19.5px, 1.5vw, 22.5px);
+  line-height: 1.85;
   color: var(--ink-soft);
 }
 
@@ -97,17 +112,17 @@
 }
 
 .tcar__panel--fwd {
-  --tcar-from: 26px;
+  --tcar-from: 28px;
 }
 
 .tcar__panel--back {
-  --tcar-from: -26px;
+  --tcar-from: -28px;
 }
 
 @keyframes tcar-in {
   from {
     opacity: 0;
-    transform: translateX(var(--tcar-from, 26px));
+    transform: translateX(var(--tcar-from, 28px));
   }
   to {
     opacity: 1;
@@ -115,13 +130,22 @@
   }
 }
 
-/* ---- תחנות הניווט ---- */
+/* ---- גוש הניווט התחתון ----
+   התחנות, המונה וההודעה יושבים יחד ובמרווחים קטנים, כדי שייקראו
+   כפקד אחד ולא כשלושה אלמנטים מרחפים */
+.tcar__foot {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  margin-top: clamp(26px, 3vw, 44px);
+}
+
 .tcar__stops {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: clamp(10px, 1.4vw, 18px);
-  margin: clamp(26px, 3vw, 42px) 0 0;
+  gap: clamp(12px, 1.6vw, 22px);
+  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -159,42 +183,48 @@
 }
 
 .tcar__counter {
-  margin-top: 14px;
-  text-align: center;
   font-size: 16.5px;
   color: var(--muted);
 }
 
 .tcar__done {
-  margin-top: 8px;
-  text-align: center;
   font-size: 16.5px;
   font-weight: 700;
   color: var(--teal-ink);
 }
 
 /* ---- מסך צר ----
-   התוכן במרכז והחצים מתחתיו. אין כאן רוחב קבוע ואין גלילה אופקית. */
-@media (max-width: 760px) {
+   התוכן במרכז, שני החצים בשורה אחת מתחתיו והמרווחים מצטמצמים.
+   התוויות שליד החצים יורדות — אין להן מקום בלי לדחוס את השורה. */
+@media (max-width: 860px) {
   .tcar__stage {
     grid-template-columns: 1fr 1fr;
+    gap: clamp(14px, 3vw, 22px);
   }
   .tcar__slide {
     grid-column: 1 / -1;
     grid-row: 1;
-    width: 100%;
-    margin-inline-end: 0;
     min-height: 0;
   }
-  /* שני החצים יורדים לשורה אחת מתחת לתוכן — הקודם מימין, הבא משמאל */
-  .tcar__arrow:first-of-type {
-    grid-column: 1;
+  .tcar__nav {
     grid-row: 2;
+    width: auto;
+  }
+  .tcar__nav--prev {
+    grid-column: 1;
     justify-self: end;
   }
-  .tcar__arrow:last-of-type {
+  .tcar__nav--next {
     grid-column: 2;
-    grid-row: 2;
     justify-self: start;
+  }
+  .tcar__navName {
+    display: none;
+  }
+  .tcar__icon {
+    margin-bottom: 16px;
+  }
+  .tcar__foot {
+    margin-top: clamp(20px, 4vw, 28px);
   }
 }
