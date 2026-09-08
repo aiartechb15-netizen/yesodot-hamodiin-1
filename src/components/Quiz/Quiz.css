@@ -4,6 +4,17 @@
   overflow: hidden;
 }
 
+/* כל אזורי הטקסט של השאלון מיושרים לימין במפורש, ולא נשענים על
+   ה-dir של העמוד בלבד */
+.quiz,
+.quiz__head,
+.quiz__body,
+.quiz__opt,
+.quiz__stmt {
+  direction: rtl;
+  text-align: right;
+}
+
 .quiz__head {
   padding: 20px 30px 16px;
   border-bottom: 1px solid var(--border);

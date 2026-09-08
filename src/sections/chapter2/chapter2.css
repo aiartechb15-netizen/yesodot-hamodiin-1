@@ -328,13 +328,14 @@
    פתיח מרוכז ← שתי הדמויות סביב אותו מסמך ← משפט הסיכום ←
    שני אזורי העמקה סגורים. */
 
+/* כל הטקסט של התחנה מיושר לימין; האיורים נשארים במקומם */
 .of__head {
-  text-align: center;
+  text-align: start;
 }
 
 .of__lead {
   max-width: 60ch;
-  margin-inline: auto;
+  margin-inline: 0 auto;
   color: var(--navy-secondary);
   font-weight: 600;
 }
@@ -350,12 +351,13 @@
   margin-top: clamp(24px, 3.4vw, 46px);
 }
 
+/* הדיוקן נשאר ממורכז בעמודה שלו; רק הכיתוב שמתחתיו מיושר לימין */
 .of__fig {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0;
-  text-align: center;
+  text-align: start;
 }
 
 /* ההילה העגולה שמאחורי הדיוקן — מילוי מתעמעם, לא מסגרת ולא כרטיס */
@@ -432,7 +434,9 @@
 }
 
 .of__cap {
+  align-self: stretch;
   margin-top: clamp(2px, 0.6vw, 10px);
+  text-align: start;
 }
 
 .of__figName {
@@ -441,8 +445,8 @@
 }
 
 .of__figText {
-  max-width: 20ch;
-  margin: 10px auto 0;
+  max-width: 24ch;
+  margin: 10px 0 0;
   color: var(--muted);
   font-size: 20px;
   line-height: 1.6;
@@ -488,7 +492,7 @@
   font-size: clamp(24px, 2.4vw, 34px);
   font-weight: 700;
   line-height: 1.34;
-  text-align: center;
+  text-align: start;
   color: var(--gold-ink);
 }
 
@@ -522,14 +526,14 @@
   display: block;
   width: 1px;
   height: 24px;
-  margin: clamp(28px, 4vw, 52px) auto clamp(16px, 2.2vw, 24px);
+  margin: clamp(28px, 4vw, 52px) 0 clamp(16px, 2.2vw, 24px);
   background: var(--gold);
 }
 
 .of__summary {
   max-width: 62ch;
-  margin: 0 auto;
-  text-align: center;
+  margin: 0 auto 0 0;
+  text-align: start;
   font-size: clamp(20.5px, 1.8vw, 24px);
   line-height: 1.7;
   color: var(--text);
@@ -544,7 +548,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: clamp(10px, 1.6vw, 20px);
 }
 

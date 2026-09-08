@@ -224,8 +224,9 @@
   border-top: 1px solid var(--border);
 }
 
+/* מסך הסיום מיושר לימין כמו שאר המבחן; רק האייקון נשאר במקומו */
 .exam--done .exam__body {
-  text-align: center;
+  text-align: start;
   padding-block: 44px;
 }
 
@@ -246,7 +247,7 @@
 }
 
 .exam--done .gold-rule {
-  margin-inline: auto;
+  margin-inline: 0 auto;
 }
 
 .exam__score {
@@ -257,7 +258,7 @@
 
 .exam--done p {
   max-width: 620px;
-  margin-inline: auto;
+  margin-inline: 0 auto;
 }
 
 .exam__doneActions {
@@ -273,6 +274,6 @@
   .exam__actions {
     flex-direction: column-reverse;
     align-items: stretch;
-    text-align: center;
+    text-align: start;
   }
 }

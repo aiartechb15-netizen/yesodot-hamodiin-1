@@ -11,7 +11,7 @@ export default function StationExam() {
             {exam.title}
           </h2>
           <span className="gold-rule" aria-hidden="true" />
-          <p className="lead" style={{ maxWidth: '780px', margin: '0 auto', textAlign: 'center' }}>
+          <p className="lead" style={{ maxWidth: '780px', marginInlineEnd: 'auto' }}>
             {exam.intro}
           </p>
         </header>

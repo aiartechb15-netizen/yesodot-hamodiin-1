@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from 'react'
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
 import './LearningMap.css'
 
 /**
@@ -28,6 +28,82 @@ export default function LearningMap({ image, alt, title, titleId, hint, points }
     setSeen((prev) => (prev.includes(id) ? prev : [...prev, id]))
   }
 
+  /* תגית שיושבת על נקודה בשולי האיור עלולה לחרוג מן המקטע, מפני
+     שהאיור רחב ממנו ונחתך. כאן נמדדת כל תגית מול גבולות המקטע
+     ומוזזת פנימה במידה הדרושה בלבד; הגבעול נשאר מכוון לסמן, ולכן
+     הקשר בין הכיתוב לנקודה נשמר. */
+  const stageRef = useRef(null)
+  const spotRefs = useRef({})
+
+  const fitLabels = useCallback(() => {
+    const stage = stageRef.current
+    if (!stage) return
+    const bounds = stage.getBoundingClientRect()
+    const edge = 14
+    const gap = 10
+
+    /* המיקום הטבעי נגזר מן הסמן ומרוחב התגית ולא מן התגית עצמה:
+       היא כבר נושאת את ההזזה הקודמת, והסמן אינו. כך החישוב יוצא
+       זהה בכל מדידה ואינו תלוי בסדר רענון הסגנון */
+    const items = Object.values(spotRefs.current)
+      .filter(Boolean)
+      .map((btn) => {
+        const label = btn.querySelector('.lspot__label')
+        const dot = btn.getBoundingClientRect()
+        const box = label.getBoundingClientRect()
+        return {
+          btn,
+          label,
+          center: dot.left + dot.width / 2,
+          half: label.offsetWidth / 2,
+          top: box.top,
+          bottom: box.bottom,
+          shift: 0,
+        }
+      })
+
+    const clamp = (it) => {
+      const left = it.center + it.shift - it.half
+      const right = it.center + it.shift + it.half
+      if (left < bounds.left + edge) it.shift += bounds.left + edge - left
+      else if (right > bounds.right - edge) it.shift += bounds.right - edge - right
+    }
+
+    items.forEach(clamp)
+
+    /* שתי תגיות שכנות באיור צר עלולות להיפגש. הן אטומות, ולכן כל
+       זוג חופף נפרד לשני הצדדים במידה השווה שחסרה לו, וכל אחת
+       נבלמת מחדש בשולי המקטע. שלושה מעברים מספיקים לחמש נקודות. */
+    for (let pass = 0; pass < 3; pass += 1) {
+      for (let i = 0; i < items.length; i += 1) {
+        for (let j = i + 1; j < items.length; j += 1) {
+          const a = items[i]
+          const b = items[j]
+          if (a.bottom <= b.top || b.bottom <= a.top) continue
+          const ac = a.center + a.shift
+          const bc = b.center + b.shift
+          const need = a.half + b.half + gap - Math.abs(ac - bc)
+          if (need <= 0) continue
+          const dir = ac <= bc ? 1 : -1
+          a.shift -= (need / 2) * dir
+          b.shift += (need / 2) * dir
+          clamp(a)
+          clamp(b)
+        }
+      }
+    }
+
+    items.forEach((it) => it.btn.style.setProperty('--shift', `${Math.round(it.shift)}px`))
+  }, [])
+
+  useLayoutEffect(() => {
+    fitLabels()
+    window.addEventListener('resize', fitLabels)
+    /* הגופן נטען אחרי הרינדור הראשון ומשנה את רוחב התגיות */
+    if (document.fonts?.ready) document.fonts.ready.then(fitLabels)
+    return () => window.removeEventListener('resize', fitLabels)
+  }, [fitLabels])
+
   /* Esc סוגר את ההסבר הפתוח — בלי כפתור סגירה שיתחרה באיור */
   useEffect(() => {
     if (!active) return undefined
@@ -39,7 +115,7 @@ export default function LearningMap({ image, alt, title, titleId, hint, points }
   }, [active])
 
   return (
-    <div className="lmap">
+    <div className="lmap" ref={stageRef}>
       {/* שכבת הרקע: השמנת האטומה חוסמת את גיליון המוטיבים של העמוד,
           ולכן במקטע הזה האיור הוא הרקע היחיד */}
       <div className="lmap__bg">
@@ -68,6 +144,9 @@ export default function LearningMap({ image, alt, title, titleId, hint, points }
             return (
               <button
                 key={p.id}
+                ref={(el) => {
+                  spotRefs.current[p.id] = el
+                }}
                 type="button"
                 className={`lspot${isActive ? ' is-active' : ''}${
                   seen.includes(p.id) ? ' is-seen' : ''

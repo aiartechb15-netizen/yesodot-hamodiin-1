@@ -107,10 +107,16 @@
     0 0 18px var(--paper);
 }
 
-/* ---------- נקודות המידע ---------- */
-/* קופסת הלחיצה היא הנקודה עצמה, והכיתוב מרחף מעליה מחוץ לזרימה.
-   כך מרכז הנקודה יושב בדיוק על האחוזים שהוגדרו לה, והקו המקשר
-   שיוצא מן ההסבר מכוון אליה ולא לאמצע הכפתור. */
+/* ---------- נקודות המידע ----------
+   הנקודה היא סמן זהב עם טבעת נייבי והילת שמנת סביבה — ניגוד גבוה
+   מול קווי האיור החיוורים, כדי שייקרא מיד כאלמנט לחיץ. מעליה תגית
+   בהירה עם הכיתוב, וגבעול זהב קצר מחבר ביניהן, כך שאין ספק איזה
+   כיתוב שייך לאיזו נקודה.
+
+   קופסת הלחיצה עצמה ממורכזת על הנקודה, ולכן מרכז הסמן יושב בדיוק
+   על האחוזים שהוגדרו לו והקו המקשר שיוצא מן ההסבר מכוון אליו.
+   התגית יושבת מחוץ לזרימה אך בתוך הכפתור, ולכן גם לחיצה עליה
+   פותחת את ההסבר. */
 .lspot {
   position: absolute;
   /* מיקום פיזי ולא לוגי: האחוזים נמדדים על האיור, שאינו מתהפך ב-RTL */
@@ -119,8 +125,8 @@
   transform: translate(-50%, -50%);
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   background: none;
   border: 0;
@@ -130,57 +136,108 @@
   color: var(--navy);
 }
 
+/* ---------- הסמן ---------- */
 .lspot__dot {
-  width: 14px;
-  height: 14px;
+  position: relative;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: var(--gold);
-  box-shadow: 0 0 0 4px rgba(196, 163, 71, 0.22);
+  border: 2px solid var(--navy);
+  /* טבעת שמנת מפרידה את הסמן מקווי האיור, וצל רך מרים אותו מעליו */
+  box-shadow:
+    0 0 0 4px rgba(251, 248, 241, 0.92),
+    0 3px 10px rgba(7, 26, 45, 0.22);
   transition:
-    transform 200ms ease,
-    box-shadow 200ms ease,
-    background-color 200ms ease;
-  /* פעימה עדינה — רמז שיש כאן מה ללחוץ */
-  animation: lspotPulse 2.8s ease-in-out infinite;
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+/* פעימה — טבעת זהב שנפתחת מן הסמן והולכת ונעלמת. רמז שיש כאן מה
+   ללחוץ, בלי הנפשה שמושכת את העין מן האיור. */
+.lspot__dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  animation: lspotPulse 2.6s ease-out infinite;
 }
 
 @keyframes lspotPulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 4px rgba(196, 163, 71, 0.22);
+  0% {
+    transform: scale(0.72);
+    opacity: 0.6;
   }
-  50% {
-    box-shadow: 0 0 0 10px rgba(196, 163, 71, 0.08);
+  70% {
+    transform: scale(1.75);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.75);
+    opacity: 0;
   }
 }
 
+/* ---------- התגית ---------- */
 .lspot__label {
   position: absolute;
-  bottom: calc(100% - 4px);
+  /* נמדד ממרכז הסמן ולא מקצה הכפתור, כדי שהמרווח יישאר קבוע */
+  bottom: calc(50% + 24px);
   left: 50%;
-  transform: translateX(-50%);
+  /* --shift נקבע ברכיב, ורק לתגיות שהיו חורגות משולי המקטע */
+  transform: translateX(calc(-50% + var(--shift, 0px)));
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: var(--white);
+  border: 1px solid rgba(7, 26, 45, 0.12);
+  box-shadow: 0 2px 10px rgba(7, 26, 45, 0.12);
   font-family: var(--font-heading);
-  font-size: clamp(13px, 1.05vw, 16px);
+  font-size: clamp(14px, 1.15vw, 17px);
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.2;
   color: var(--navy);
   white-space: nowrap;
-  text-shadow:
-    0 0 6px var(--paper),
-    0 0 12px var(--paper);
-  transition: color 200ms ease;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 
+/* הגבעול שמחבר את התגית לסמן */
+.lspot__label::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  /* מקזז את הזזת התגית, כדי שהגבעול יישאר מכוון למרכז הסמן */
+  left: calc(50% - var(--shift, 0px));
+  transform: translateX(-50%);
+  width: 2px;
+  height: 15px;
+  background: var(--gold);
+}
+
+/* ---------- מצבים ---------- */
 .lspot:hover .lspot__dot,
 .lspot:focus-visible .lspot__dot {
-  transform: scale(1.28);
+  transform: scale(1.16);
   background: var(--gold-lift);
-  box-shadow: 0 0 0 9px rgba(196, 163, 71, 0.2);
+  box-shadow:
+    0 0 0 5px rgba(251, 248, 241, 0.95),
+    0 0 0 9px rgba(196, 163, 71, 0.28),
+    0 4px 12px rgba(7, 26, 45, 0.24);
 }
 
 .lspot:hover .lspot__label,
 .lspot:focus-visible .lspot__label {
+  transform: translateX(calc(-50% + var(--shift, 0px))) translateY(-2px);
+  border-color: var(--gold);
   color: var(--gold-ink);
+  box-shadow: 0 4px 14px rgba(7, 26, 45, 0.16);
 }
 
 .lspot:focus-visible {
@@ -188,20 +245,31 @@
   outline-offset: 2px;
 }
 
-.lspot.is-seen .lspot__dot {
-  background: var(--gold-lift);
+/* נקודה שכבר נפתחה — הפעימה נעצרת, והסמן נשאר בולט אך שקט */
+.lspot.is-seen .lspot__dot::after {
   animation: none;
+  opacity: 0;
 }
 
+/* הנקודה הפתוחה — סמן נייבי מלא בטבעת זהב, ותגית נייבי הפוכה.
+   זהו המצב הבולט ביותר במסך, ולכן אין ספק איזה הסבר פתוח. */
 .lspot.is-active .lspot__dot {
-  transform: scale(1.28);
-  box-shadow: 0 0 0 9px rgba(196, 163, 71, 0.24);
-  animation: none;
+  transform: scale(1.16);
+  background: var(--navy);
+  border-color: var(--gold);
+  box-shadow:
+    0 0 0 5px rgba(251, 248, 241, 0.95),
+    0 0 0 9px rgba(196, 163, 71, 0.32),
+    0 4px 12px rgba(7, 26, 45, 0.26);
 }
 
 .lspot.is-active .lspot__label {
-  color: var(--gold-ink);
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--paper);
+  box-shadow: 0 4px 14px rgba(7, 26, 45, 0.22);
 }
+
 
 /* ---------- ההסבר ---------- */
 .lmap__note {
@@ -292,8 +360,9 @@
 
 /* ההנפשה חייבת לשמור על ה-transform של הצד, ולכן היא על אטימות בלבד */
 @media (prefers-reduced-motion: reduce) {
-  .lspot__dot {
+  .lspot__dot::after {
     animation: none;
+    opacity: 0;
   }
   .lnote {
     animation: none;
@@ -326,18 +395,26 @@
     max-width: none;
   }
 
+  /* במסך צר האיור קטן והנקודות צפופות: הסמן והתגית מתכווצים
+     בשיעור זהה, וקופסת הלחיצה נשארת בגודל אצבע */
   .lspot {
-    width: 30px;
-    height: 30px;
+    width: 38px;
+    height: 38px;
   }
 
   .lspot__dot {
-    width: 11px;
-    height: 11px;
+    width: 16px;
+    height: 16px;
   }
 
   .lspot__label {
+    bottom: calc(50% + 19px);
+    padding: 4px 8px;
     font-size: 12px;
+  }
+
+  .lspot__label::after {
+    height: 11px;
   }
 
   .lnote,
