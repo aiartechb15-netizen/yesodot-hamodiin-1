@@ -6,11 +6,11 @@ export default function QuizSection() {
   return (
     <section className="section section--paper" id="quiz" aria-labelledby="quiz-title">
       <div className="container">
-        <h2 className="section-title section-title--center" id="quiz-title">
+        <h2 className="section-title" id="quiz-title">
           {quiz.title}
         </h2>
-        <span className="gold-rule gold-rule--center" aria-hidden="true" />
-        <p className="lead" style={{ maxWidth: '760px', margin: '0 auto 34px', textAlign: 'center' }}>
+        <span className="gold-rule" aria-hidden="true" />
+        <p className="lead" style={{ maxWidth: '760px', margin: '0 auto 34px 0' }}>
           {quiz.intro}
         </p>
         <Quiz />

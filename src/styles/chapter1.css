@@ -62,7 +62,10 @@
 .ch1 .domain__num,
 .ch1 .ladder__step,
 .ch1 .ltr-num,
-.ch1 .qlist__mark {
+.ch1 .qlist__mark,
+.ch1 .tcar__stop > span,
+.ch1 .tcar__stopNum,
+.ch1 .ladder__btn .ladder__step {
   font-size: 1rem;
 }
 
@@ -138,9 +141,9 @@
   text-align: center;
 }
 
-/* כיתובי נקודות המידע שעל האיור — מיקומם ממורכז מעל הנקודה */
-.ch1 .lspot__label,
-.ch1 .lnote__text {
+/* כיתובי נקודות המידע שעל האיור — מיקומם ממורכז מעל הנקודה עצמה,
+   ואילו ההסבר שנפתח מהן הוא טקסט זורם ולכן מיושר לימין */
+.ch1 .lspot__label {
   text-align: center;
 }
 
@@ -171,6 +174,22 @@
   transform: none;
 }
 
+/* מעגל המודיעין מייצג סדר (1←2←3←4), ולכן הוא נקרא מימין לשמאל:
+   התרשים כולו משוקף, והתוכן שבתוכו משוקף בחזרה כדי שיישאר קריא */
+.ch1 .cycle__diagram {
+  transform: scaleX(-1);
+}
+
+.ch1 .cycle__btn {
+  transform: scaleX(-1);
+}
+
+.ch1 .cycle__ringTitle {
+  transform: scaleX(-1);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
 /* רשימות מתחילות מימין */
 .ch1 ul,
 .ch1 ol {
@@ -194,6 +213,17 @@
 
 .ch1 p + p {
   margin-top: 14px;
+}
+
+/* מסך "הפרק הבא" — כותרת, כיתוב ותוכן מיושרים לימין; התצלום שלצידו
+   לא זז */
+.ch1 .next__body {
+  align-items: flex-start;
+  text-align: right;
+}
+
+.ch1 .next__body .gold-rule {
+  margin-inline: 0 auto;
 }
 
 /* ---------- 7. תפריט הצד ---------- */
@@ -220,7 +250,16 @@
 }
 
 .ch1 .chnav__num {
-  font-size: 0.95rem;
+  font-size: 1rem;
+}
+
+/* כיתובים קטנים שנשארו מתחת ל-16px במסך צר */
+.ch1 .chnav__toggleKicker {
+  font-size: 1rem;
+}
+
+.ch1 .cycle__nodeTitle {
+  font-size: max(1rem, 16.5px);
 }
 
 /* ---------- 8. רספונסיביות ---------- */
@@ -244,5 +283,8 @@
   }
   .ch1 p {
     max-width: none;
+  }
+  .ch1 .cover__eyebrow {
+    font-size: 15px;
   }
 }
