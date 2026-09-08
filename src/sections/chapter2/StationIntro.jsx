@@ -39,7 +39,7 @@ export default function StationIntro() {
           </div>
 
           <span className="ch2op__num" aria-hidden="true">
-            {pad(intro.station)}
+            {chapter2Meta.numeral}
           </span>
         </div>
 
