@@ -330,7 +330,7 @@
 
 /* כל הטקסט של התחנה מיושר לימין; האיורים נשארים במקומם */
 .of__head {
-  text-align: start;
+  text-align: right;
 }
 
 .of__lead {
@@ -357,7 +357,7 @@
   flex-direction: column;
   align-items: center;
   margin: 0;
-  text-align: start;
+  text-align: right;
 }
 
 /* ההילה העגולה שמאחורי הדיוקן — מילוי מתעמעם, לא מסגרת ולא כרטיס */
@@ -436,7 +436,7 @@
 .of__cap {
   align-self: stretch;
   margin-top: clamp(2px, 0.6vw, 10px);
-  text-align: start;
+  text-align: right;
 }
 
 .of__figName {
@@ -492,7 +492,7 @@
   font-size: clamp(24px, 2.4vw, 34px);
   font-weight: 700;
   line-height: 1.34;
-  text-align: start;
+  text-align: right;
   color: var(--gold-ink);
 }
 
@@ -533,7 +533,7 @@
 .of__summary {
   max-width: 62ch;
   margin: 0 auto 0 0;
-  text-align: start;
+  text-align: right;
   font-size: clamp(20.5px, 1.8vw, 24px);
   line-height: 1.7;
   color: var(--text);
@@ -610,7 +610,7 @@
 
 .of__deepHint {
   margin: 0 0 clamp(18px, 2.4vw, 30px);
-  text-align: start;
+  text-align: right;
   color: var(--muted);
   font-size: 19px;
 }
@@ -795,6 +795,27 @@
   max-width: 42ch;
   margin: 10px 0 0;
   color: var(--ink-soft);
+}
+
+/* ---- יישור מלא לימין ----
+   כל הטקסט בתחנה מיושר לימין, בלי יוצא מן הכלל: הכותרת וכותרת המשנה,
+   שמות שתי הדמויות וההסבר שמתחת לכל אחת, המשפט המרכזי, פסקת הסיכום
+   והכיתובים שבאזורי ההעמקה. הכלל נוגע ביישור הטקסט בלבד — האיורים,
+   המיקומים והמבנה הגריד/פלקס נשארים בדיוק כפי שהם, ולכן גם אזור
+   הטקסט המרכזי ממשיך לשבת במרכז הבמה והטקסט שבתוכו מיושר לימין.
+   ה---where מוריד את משקל הרשימה, וה---not מוסיף לה משקל של מחלקה,
+   כך שהכלל גובר על כל יישור פנימי אחר שהגיע מסגנון כללי. */
+#ch2-officer,
+#ch2-officer
+  :where(header, div, figure, figcaption, ol, li, h2, h3, h4, p, span, button):not(.ltr-num) {
+  direction: rtl;
+  text-align: right;
+}
+
+/* מספרים וכיתובים לועזיים קצרים שומרים על הבידוד הדו-כיווני שלהם */
+#ch2-officer .ltr-num {
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 /* ---------- תחנה 7 — בניין כוח ---------- */
