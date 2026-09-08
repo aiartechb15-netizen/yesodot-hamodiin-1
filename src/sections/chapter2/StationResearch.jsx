@@ -2,7 +2,6 @@ import { useId, useState } from 'react'
 import Icon from '../../components/Icons/Icons'
 import { strategicResearch as sr } from '../../data/chapter2'
 import './chapter2.css'
-import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 
 function Lenses() {
   const uid = useId()
@@ -49,7 +48,6 @@ function Lenses() {
 export default function StationResearch() {
   return (
     <section className="section section--cream" id={sr.id} aria-labelledby="ch2-research-title">
-      <BackgroundDecor variant="grid" />
       <div className="container">
         <header className="st__head">
           <h2 className="section-title" id="ch2-research-title">

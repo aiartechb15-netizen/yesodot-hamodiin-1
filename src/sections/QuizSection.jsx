@@ -1,12 +1,10 @@
 import Quiz from '../components/Quiz/Quiz'
 import { quiz } from '../data/chapter1'
 import './sections.css'
-import BackgroundDecor from '../components/BackgroundDecor/BackgroundDecor'
 
 export default function QuizSection() {
   return (
     <section className="section section--paper" id="quiz" aria-labelledby="quiz-title">
-      <BackgroundDecor variant="grid" />
       <div className="container">
         <h2 className="section-title section-title--center" id="quiz-title">
           {quiz.title}

@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom'
 import Icon from '../Icons/Icons'
 import './NextChapter.css'
-import BackgroundDecor from '../BackgroundDecor/BackgroundDecor'
 
 /** מעבר מסודר בין פרקי הקורס — נשמר אחיד בכל הפרקים. */
 export default function NextChapter({ kicker, title, text, cta, to }) {
   return (
     <section className="section section--white nextch" aria-labelledby="nextch-title">
-      <BackgroundDecor variant="satellite" />
       <div className="container">
         <div className="nextch__card">
           <span className="nextch__icon" aria-hidden="true">

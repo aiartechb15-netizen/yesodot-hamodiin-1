@@ -3,12 +3,10 @@ import VideoPlaceholder from '../../components/VideoPlaceholder/VideoPlaceholder
 import MultiSelect from '../../components/MultiSelect/MultiSelect'
 import { context as ctx } from '../../data/chapter3'
 import './chapter3.css'
-import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 
 export default function S4Context() {
   return (
     <section className="section section--cream" id={ctx.id} aria-labelledby="ch3-ctx-title">
-      <BackgroundDecor variant="globe" />
       <div className="container">
         <header className="s3head">
           <h2 className="section-title" id="ch3-ctx-title">

@@ -1,4 +1,3 @@
-import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 import { chapter2Meta, intro } from '../../data/chapter2'
 import './chapter2.css'
 
@@ -8,7 +7,6 @@ import './chapter2.css'
 export default function StationIntro() {
   return (
     <section className="section section--cream chIntro" id={intro.id} aria-labelledby="ch2-intro-title">
-      <BackgroundDecor variant="satellite" />
       <div className="container">
         <p className="chIntro__lead">{intro.text}</p>
 

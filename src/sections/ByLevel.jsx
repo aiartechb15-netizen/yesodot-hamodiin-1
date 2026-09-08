@@ -1,7 +1,6 @@
 import { useId, useState } from 'react'
 import { byLevel } from '../data/chapter1'
 import './sections.css'
-import BackgroundDecor from '../components/BackgroundDecor/BackgroundDecor'
 
 function DownArrow() {
   return (
@@ -27,7 +26,6 @@ export default function ByLevel() {
 
   return (
     <section className="section section--cream" id="by-level" aria-labelledby="by-level-title">
-      <BackgroundDecor variant="topo" />
       <div className="container">
         <h2 className="section-title" id="by-level-title">
           {byLevel.title}

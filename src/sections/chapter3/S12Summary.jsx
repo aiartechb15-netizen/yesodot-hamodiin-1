@@ -1,13 +1,11 @@
 import { summary as sm } from '../../data/chapter3'
 import './chapter3.css'
-import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 
 export default function S12Summary() {
   const t = sm.table
 
   return (
     <section className="section section--cream" id={sm.id} aria-labelledby="ch3-sum-title">
-      <BackgroundDecor variant="globe" />
       <div className="container">
         <header className="s3head">
           <h2 className="section-title" id="ch3-sum-title">

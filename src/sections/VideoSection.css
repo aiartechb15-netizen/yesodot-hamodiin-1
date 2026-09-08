@@ -13,54 +13,6 @@
   padding-block: clamp(40px, 5vw, 72px);
 }
 
-/* ---------- שכבות הרקע ---------- */
-
-.vstage__decor {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
-}
-
-.vstage__topo {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* כדור הארץ — צד ימין, מאחורי הסרטון */
-.vstage__globe {
-  position: absolute;
-  top: 50%;
-  right: clamp(-90px, -2vw, 0px);
-  width: clamp(380px, 42vw, 760px);
-  height: auto;
-  transform: translateY(-50%);
-  opacity: 0.85;
-}
-
-/* קשת הזהב — מלווה את הקצה הימני של המסך */
-.vstage__orbit {
-  position: absolute;
-  top: 50%;
-  right: clamp(-40px, 1vw, 40px);
-  height: min(88%, 820px);
-  width: auto;
-  transform: translateY(-50%);
-}
-
-/* חפצי השטח — צד שמאל */
-.vstage__kit {
-  position: absolute;
-  top: 50%;
-  left: clamp(-40px, 0.4vw, 24px);
-  width: clamp(210px, 19vw, 330px);
-  height: auto;
-  transform: translateY(-50%);
-}
-
 /* ---------- הסרטון ---------- */
 
 .vstage__inner {
@@ -122,34 +74,14 @@
    ולבסוף נשאר כדור הארץ העדין בלבד. הסרטון עצמו לא משתנה. */
 
 @media (max-width: 1439px) {
-  .vstage__kit {
-    width: clamp(210px, 21vw, 300px);
-    left: clamp(-60px, -1vw, 8px);
-    opacity: 0.9;
-  }
 }
 
 @media (max-width: 1199px) {
-  .vstage__kit,
-  .vstage__orbit {
-    display: none;
-  }
-
-  .vstage__globe {
-    width: min(58vw, 520px);
-    opacity: 0.6;
-  }
 }
 
 @media (max-width: 767px) {
   .vstage {
     padding-block: clamp(32px, 9vw, 56px);
-  }
-
-  .vstage__globe {
-    width: 88vw;
-    right: -26vw;
-    opacity: 0.45;
   }
 
   .vstage__frame {

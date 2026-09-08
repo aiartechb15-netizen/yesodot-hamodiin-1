@@ -1,12 +1,10 @@
 import ExpandCards from '../../components/ExpandCards/ExpandCards'
 import { relations as rel } from '../../data/chapter3'
 import './chapter3.css'
-import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 
 export default function S11Relations() {
   return (
     <section className="section section--white" id={rel.id} aria-labelledby="ch3-rel-title">
-      <BackgroundDecor variant="topo" />
       <div className="container">
         <header className="s3head">
           <h2 className="section-title" id="ch3-rel-title">

@@ -2,12 +2,10 @@ import Icon from '../../components/Icons/Icons'
 import SortExercise from '../../components/SortExercise/SortExercise'
 import { environments as env } from '../../data/chapter3'
 import './chapter3.css'
-import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 
 export default function S8Environments() {
   return (
     <section className="section section--cream" id={env.id} aria-labelledby="ch3-env-title">
-      <BackgroundDecor variant="globe" />
       <div className="container">
         <header className="s3head">
           <h2 className="section-title" id="ch3-env-title">

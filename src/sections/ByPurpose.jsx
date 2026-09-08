@@ -1,12 +1,10 @@
 import Icon from '../components/Icons/Icons'
 import { byPurpose } from '../data/chapter1'
 import './sections.css'
-import BackgroundDecor from '../components/BackgroundDecor/BackgroundDecor'
 
 export default function ByPurpose() {
   return (
     <section className="section section--white" id="by-purpose" aria-labelledby="by-purpose-title">
-      <BackgroundDecor variant="globe" />
       <div className="container">
         <h2 className="section-title" id="by-purpose-title">
           {byPurpose.title}

@@ -1,4 +1,3 @@
-import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 import { chapter3Meta, opener, operational } from '../../data/chapter3'
 import './chapter3.css'
 
@@ -9,7 +8,6 @@ import './chapter3.css'
 export default function S1Opener() {
   return (
     <section className="section section--cream chIntro" id={opener.id} aria-label={chapter3Meta.introLabel}>
-      <BackgroundDecor variant="satellite" />
       <div className="container">
         <div className="chIntro__lead">
           {chapter3Meta.intro.map((p, i) => (

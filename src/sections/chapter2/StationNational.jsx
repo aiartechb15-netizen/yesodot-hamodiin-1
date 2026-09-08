@@ -1,7 +1,6 @@
 import IdentityCard from '../../components/IdentityCard/IdentityCard'
 import { national } from '../../data/chapter2'
 import './chapter2.css'
-import BackgroundDecor from '../../components/BackgroundDecor/BackgroundDecor'
 
 export default function StationNational() {
   return (
@@ -10,7 +9,6 @@ export default function StationNational() {
       id={national.id}
       aria-labelledby="ch2-national-title"
     >
-      <BackgroundDecor variant="globe" />
       <div className="container">
         <header className="st__head">
           <h2 className="section-title" id="ch2-national-title">
