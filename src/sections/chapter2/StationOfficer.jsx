@@ -242,7 +242,7 @@ export default function StationOfficer() {
     <section className="section section--paper" id={ol.id} aria-labelledby="ch2-officer-title">
       <div className="container">
         <header className="of__head">
-          <h2 className="section-title section-title--center" id="ch2-officer-title">
+          <h2 className="section-title" id="ch2-officer-title">
             {ol.title}
           </h2>
           <p className="lead of__lead">{ol.lead}</p>

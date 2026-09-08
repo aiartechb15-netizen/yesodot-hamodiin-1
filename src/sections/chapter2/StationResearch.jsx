@@ -22,8 +22,7 @@ function Lenses() {
             >
               <span className="lens__top">
                 <span className="lens__ring">
-                  <span className="lens__num ltr-num">{l.number}</span>
-                  <Icon name={l.icon} size={24} />
+                  <Icon name={l.icon} size={26} />
                 </span>
                 <span className="lens__title">{l.title}</span>
               </span>
