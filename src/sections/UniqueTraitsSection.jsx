@@ -15,7 +15,6 @@ export default function UniqueTraitsSection() {
         <TraitCarousel
           items={uniqueTraits.items}
           label={uniqueTraits.title}
-          counterLabel={uniqueTraits.counterLabel}
           completedMessage={uniqueTraits.completedMessage}
         />
       </div>
