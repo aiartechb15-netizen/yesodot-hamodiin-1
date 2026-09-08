@@ -15,7 +15,7 @@ import './LearningMap.css'
  * לפי יחס האיור). שכבת הרקע ושכבת הנקודות מקבלות את אותה מסגרת, ולכן
  * כל נקודה נשארת על הפרט שלה בכל יחס מסך, ולא נודדת עם החיתוך.
  */
-export default function LearningMap({ image, alt, title, titleId, hint, points }) {
+export default function LearningMap({ image, alt, title, titleId, hint, points, decorDots = [] }) {
   const uid = useId()
   const [active, setActive] = useState(null)
   const [seen, setSeen] = useState([])
@@ -121,6 +121,18 @@ export default function LearningMap({ image, alt, title, titleId, hint, points }
       <div className="lmap__bg">
         <div className="lmap__frame">
           <img className="lmap__img" src={image} alt={alt} />
+
+          {/* כתמי שמנת מטושטשים על עיגולי הזהב הדקורטיביים שבאיור.
+              הם יושבים באותה מסגרת כמו הנקודות, ולכן נשארים עליהם
+              בכל יחס מסך; רק חמש הנקודות שיש להן פעולה נשארות. */}
+          {decorDots.map((d, i) => (
+            <span
+              key={i}
+              className="lmap__decor"
+              aria-hidden="true"
+              style={{ '--dx': `${d.x}%`, '--dy': `${d.y}%`, '--ds': `${d.size || 2.1}%` }}
+            />
+          ))}
         </div>
       </div>
 

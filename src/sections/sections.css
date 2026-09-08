@@ -231,6 +231,14 @@
   overflow: hidden;
 }
 
+/* המסך שאחרי האיור ממשיך מתוך הדעיכה ולא מתחיל כמסך חדש: התוכן
+   אינו ממורכז אנכית אלא נפתח בראש המקטע, והריפוד העליון מצומצם,
+   כך שהכותרת עולה מיד מן השוליים הנמוגים של האיור. */
+.chapterPage .section--learning + .section {
+  justify-content: flex-start;
+  padding-block-start: clamp(26px, 3.2vw, 48px);
+}
+
 /* ---------- שער 2 ---------- */
 .reflect {
   margin-top: 34px;

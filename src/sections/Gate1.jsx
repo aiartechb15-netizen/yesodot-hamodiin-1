@@ -17,6 +17,7 @@ export default function Gate1() {
         titleId="gate-1-title"
         hint={learningMap.hint}
         points={learningMap.points}
+        decorDots={learningMap.decorDots}
       />
     </section>
   )
