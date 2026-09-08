@@ -1,0 +1,248 @@
+/* ---------- פרק 1 — RTL מלא וטיפוגרפיה גדולה ----------
+   הקובץ הזה חל רק על עמוד פרק 1 (המחלקה .ch1 על ה-main שלו), ולכן
+   הוא אינו נוגע בפרקים האחרים ובדף הבית. הוא אינו משנה תוכן, צבעים,
+   תמונות או מבנה — רק כיוון, יישור, סדר אלמנטים וגודל כתב.
+
+   שלושה חריגים מכוונים ליישור לימין, כולם קומפוזיציות ממורכזות
+   מלכתחילה ולא טקסט זורם: מסך הפתיחה, כיתובי הנקודות שעל האיור,
+   ותוויות של פקדים קומפקטיים (כפתור, טאב, ניווט קרוסלה). */
+
+/* ---------- 1. כיוון ---------- */
+.ch1 {
+  direction: rtl;
+}
+
+/* ---------- 2. סולם הטיפוגרפיה ---------- */
+/* המשתנים נדרסים ברמת העמוד, ולכן כל רכיב שמשתמש בהם גדל יחד איתם.
+   font-size על .ch1 עצמו נחוץ: ה-body כבר חישב את גודלו מהערך הישן,
+   וילדיו יורשים ממנו ולא מהמשתנה. */
+.ch1 {
+  --fs-h1: clamp(2.3rem, 5vw, 3.4rem);
+  --fs-h2: clamp(2rem, 3.6vw, 2.5rem); /* 32–40 */
+  --fs-h3: clamp(1.5rem, 2.5vw, 1.875rem); /* 24–30 */
+  --fs-lead: clamp(1.3rem, 2.1vw, 1.5rem); /* 20.8–24 */
+  --fs-body: 1.25rem; /* 20 */
+  --fs-small: 1.125rem; /* 18 */
+  --fs-xs: 1rem; /* 16 */
+  font-size: var(--fs-body);
+  line-height: 1.72;
+}
+
+/* טקסט הגוף — 20px בדסקטופ, וגובה שורה נוח */
+.ch1 p,
+.ch1 li,
+.ch1 dd,
+.ch1 blockquote {
+  font-size: var(--fs-body);
+  line-height: 1.72;
+}
+
+/* טקסט משני — לא יורד מ-16px */
+.ch1 .muted,
+.ch1 .small,
+.ch1 .kicker,
+.ch1 .callout__label,
+.ch1 .openBlock__example,
+.ch1 .approaches__label,
+.ch1 .video__note,
+.ch1 .video__caption,
+.ch1 .cycle__loop,
+.ch1 .tcar__navName,
+.ch1 .tcar__done,
+.ch1 .quiz__count,
+.ch1 .quiz__hint,
+.ch1 .lspot__label,
+.ch1 .cover__downLabel {
+  font-size: max(1rem, 1.06em);
+}
+
+/* מספרים בעיגולים ובתגים — קטנים מדי היו בהם 13.5–15 */
+.ch1 .chnav__num,
+.ch1 .cycle__num,
+.ch1 .domain__num,
+.ch1 .ladder__step,
+.ch1 .ltr-num,
+.ch1 .qlist__mark {
+  font-size: 1rem;
+}
+
+/* כותרות משנה של בלוקים — 24–30 */
+.ch1 .openBlock__title,
+.ch1 .block__title,
+.ch1 .rail__title,
+.ch1 .lsys__title,
+.ch1 .s3sub,
+.ch1 .xcards__panelTitle,
+.ch1 .quiz__heading,
+.ch1 .pbody__title,
+.ch1 .tcar__title {
+  font-size: var(--fs-h3);
+  line-height: 1.3;
+}
+
+/* כותרות מקטע — 32–40 */
+.ch1 .section-title {
+  font-size: var(--fs-h2);
+  line-height: 1.24;
+}
+
+/* פקדים — 17–18px לפחות */
+.ch1 .btn,
+.ch1 .tab,
+.ch1 .xcard__title,
+.ch1 .acc__btn,
+.ch1 .pchoice,
+.ch1 .trait__title,
+.ch1 .lterm {
+  font-size: max(1.0625rem, 1em);
+}
+
+/* ---------- 3. יישור לימין ---------- */
+.ch1 :is(h1, h2, h3, h4, h5, h6, p, li, dt, dd, figcaption, label, legend, blockquote, th, td, summary, caption) {
+  text-align: right;
+}
+
+/* מכלים שמרכזו את תוכנם ברמת המכל */
+.ch1 .section-title--center,
+.ch1 .lead,
+.ch1 .st__head,
+.ch1 .gateHead,
+.ch1 .video__body,
+.ch1 .next,
+.ch1 .tcar__stage,
+.ch1 .quiz__body,
+.ch1 .exam__body {
+  text-align: right;
+}
+
+/* פסקאות שמורכזו בעזרת margin אוטומטי — מתחילות עכשיו מימין */
+.ch1 .lead,
+.ch1 .section-title--center + .lead,
+.ch1 .next__text {
+  margin-inline: 0 auto;
+}
+
+/* קווי הזהב חוזרים לצד ההתחלה יחד עם הכותרות שמעליהם */
+.ch1 .gold-rule--center,
+.ch1 .section-title--center + .gold-rule,
+.ch1 .next .gold-rule {
+  margin-inline: 0 auto;
+}
+
+/* ---------- 4. חריגים: קומפוזיציות ממורכזות מלכתחילה ---------- */
+/* מסך הפתיחה של הפרק — הכותרת, המשפט והחץ ממורכזים על התצלום */
+.ch1 .cover__inner,
+.ch1 .cover__inner :is(h1, p, span),
+.ch1 .cover__down,
+.ch1 .cover__down :is(span, p) {
+  text-align: center;
+}
+
+/* כיתובי נקודות המידע שעל האיור — מיקומם ממורכז מעל הנקודה */
+.ch1 .lspot__label,
+.ch1 .lnote__text {
+  text-align: center;
+}
+
+.ch1 .lnote__text {
+  text-align: right;
+}
+
+/* תוויות של פקדים קומפקטיים נשארות ממורכזות בתוך הפקד עצמו */
+.ch1 .btn,
+.ch1 .tcar__nav,
+.ch1 .quiz__actions .btn,
+.ch1 .exam__actions .btn {
+  text-align: center;
+}
+
+/* ---------- 5. סדר אלמנטים ב-RTL ---------- */
+/* חצים וחצי-אקורדיון: מסתובבים לכיוון הנכון בעמוד RTL */
+.ch1 .acc__chev,
+.ch1 .xcard__chev,
+.ch1 .tcar__navIcon,
+.ch1 .of__deepChev {
+  transform: scaleX(-1);
+}
+
+/* אקורדיון פתוח — החץ מצביע מטה, ולכן מבטלים את ההיפוך */
+.ch1 .is-open .acc__chev,
+.ch1 .is-open .xcard__chev {
+  transform: none;
+}
+
+/* רשימות מתחילות מימין */
+.ch1 ul,
+.ch1 ol {
+  padding-inline-start: 0;
+}
+
+/* ---------- 6. רוחב קריאה ומרווחים ---------- */
+/* אחרי הגדלת הכתב, שורה ארוכה מדי נעשית קשה למעקב */
+.ch1 p {
+  max-width: 68ch;
+}
+
+.ch1 .lead {
+  max-width: 60ch;
+}
+
+/* מרווח נשימה בין כותרת לפסקה ובין פסקה לרכיב הבא */
+.ch1 .section-title + .gold-rule {
+  margin-block: 16px 22px;
+}
+
+.ch1 p + p {
+  margin-top: 14px;
+}
+
+/* ---------- 7. תפריט הצד ---------- */
+.ch1 .chnav__title,
+.ch1 .chnav__count,
+.ch1 .chnav__label,
+.ch1 .chnav__num,
+.ch1 .chnav__toggleKicker,
+.ch1 .chnav__toggleCurrent,
+.ch1 .chnav__toggleText {
+  text-align: right;
+}
+
+.ch1 .chnav__title {
+  font-size: 1rem;
+}
+
+.ch1 .chnav__count {
+  font-size: 1rem;
+}
+
+.ch1 .chnav__label {
+  font-size: 1.125rem;
+}
+
+.ch1 .chnav__num {
+  font-size: 0.95rem;
+}
+
+/* ---------- 8. רספונסיביות ---------- */
+/* בטאבלט ובמובייל הסולם יורד מעט, כדי שהכתב לא ישתלט על המסך */
+@media (max-width: 1024px) {
+  .ch1 {
+    --fs-body: 1.1875rem; /* 19 */
+    --fs-lead: clamp(1.25rem, 2.4vw, 1.375rem);
+    --fs-h3: clamp(1.375rem, 3vw, 1.625rem);
+    --fs-h2: clamp(1.75rem, 4.4vw, 2.25rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .ch1 {
+    --fs-body: 1.125rem; /* 18 */
+    --fs-small: 1.0625rem;
+    --fs-lead: 1.1875rem;
+    --fs-h3: clamp(1.3rem, 5.4vw, 1.5rem);
+    --fs-h2: clamp(1.625rem, 6.6vw, 2rem);
+  }
+  .ch1 p {
+    max-width: none;
+  }
+}

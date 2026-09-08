@@ -53,17 +53,27 @@ export default function ByLevel() {
           </ol>
 
           <div className="ladder__panel">
-            <div className="card card--pad" id={`${uid}-panel`} role="region" aria-live="polite">
-              <span className="kicker">רמת מודיעין</span>
-              <h3 className="card-title">{activeLevel.title}</h3>
-              <span className="gold-rule gold-rule--sm" aria-hidden="true" />
-              <p>{activeLevel.text}</p>
-            </div>
+            <div
+              className="card card--pad ladder__card"
+              id={`${uid}-panel`}
+              role="region"
+              aria-live="polite"
+            >
+              <div className="ladder__card-main">
+                <span className="kicker">רמת מודיעין</span>
+                <h3 className="card-title">{activeLevel.title}</h3>
+                <span className="gold-rule gold-rule--sm" aria-hidden="true" />
+                <p>{activeLevel.text}</p>
+              </div>
 
-            <aside className="callout" style={{ marginTop: '22px' }}>
-              <span className="callout__label">{byLevel.callout.label}</span>
-              <p>{byLevel.callout.text}</p>
-            </aside>
+              {/* ההבחנה המרכזית — טקסט חופשי בתחתית הכרטיס: ללא מסגרת, רקע,
+                  צל או פינות מעוגלות. ההפרדה מההסבר נעשית בקו זהב קצר בלבד. */}
+              <div className="ladder__note">
+                <span className="gold-rule gold-rule--sm ladder__note-rule" aria-hidden="true" />
+                <span className="ladder__note-label">{byLevel.callout.label}</span>
+                <p>{byLevel.callout.text}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

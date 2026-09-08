@@ -277,7 +277,7 @@
   display: grid;
   grid-template-columns: minmax(280px, 380px) 1fr;
   gap: clamp(22px, 3vw, 44px);
-  align-items: start;
+  align-items: stretch;
   margin-top: 34px;
 }
 
@@ -352,9 +352,44 @@
   padding-block: 6px;
 }
 
+/* העמודה השמאלית נמתחת לגובה מלא של השורה — כלומר לגובה ארבע
+   הכרטיסיות שמימין כולל המרווחים ביניהן. */
 .ladder__panel {
-  position: sticky;
-  top: calc(var(--header-h) + 24px);
+  display: flex;
+}
+
+/* הכרטיס ממלא את כל גובה העמודה, והתוכן מתפרס בין ראשו לתחתיתו
+   כדי שלא ייווצר חלל ריק. */
+.ladder__card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--s-5);
+  direction: rtl;
+  text-align: right;
+}
+
+/* ההבחנה המרכזית — טקסט חופשי, ללא מסגרת/רקע/צל/פינות מעוגלות */
+.ladder__note {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+.ladder__note-rule {
+  margin-block: 0 var(--s-3);
+}
+
+.ladder__note-label {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold-ink);
+  margin-bottom: var(--s-2);
 }
 
 /* ---------- לפי תחום — קטלוג שורות ----------
@@ -474,9 +509,6 @@
   .ladder {
     grid-template-columns: 1fr;
   }
-  .ladder__panel {
-    position: static;
-  }
   .domains__layout {
     grid-template-columns: 1fr;
   }
@@ -508,11 +540,11 @@
 }
 
 
-/* ---------- מודיעין לפי ייעוד ---------- */
-/* מסך קצר: כמות התוכן כאן קטנה, ולכן הוא אינו נפרש על מסך מלא אלא על
+/* ---------- מודיעין לפי ייעוד ----------
+   מסך קצר: כמות התוכן כאן קטנה, ולכן הוא אינו נפרש על מסך מלא אלא על
    כ-75% מגובהו. מה שנשאר מתחתיו הוא הצצה של כ-15% מהמסך הבא — רמז
    שהעמוד ממשיך. התוכן נצמד לראש המקטע במקום להתמרכז אנכית. */
-.byPurpose {
+.chapterPage .byPurpose {
   min-height: 75vh;
   min-height: 75svh;
   justify-content: flex-start;
@@ -522,188 +554,179 @@
   background-color: rgba(247, 243, 234, 0.55);
 }
 
-/* שתי אפשרויות זו לצד זו, והקשתות ביניהן. הרוחב היחסי נע לפי מה
-   שפתוח — האפשרות הפעילה מקבלת יותר מקום, הסגורה מצטמצמת. */
+/* אזור תוכן אחד, לא שני צדי מסך. הוא יושב מעט ימינה ממרכז אזור
+   התוכן — שולי ההתחלה (ימין ב-RTL) קטנים משולי הסיום — ומעט מעל
+   מרכזו האנכי, בזכות המרווח שנשאר מתחתיו. */
 .purpose {
-  display: grid;
-  grid-template-columns: 1.3fr auto 0.7fr;
-  align-items: start;
-  gap: clamp(10px, 2vw, 28px);
-  margin-top: clamp(20px, 2.6vw, 32px);
-  transition: grid-template-columns 300ms ease;
+  width: min(1000px, 100%);
+  /* ההיסט נגזר מן המקום שנשאר בפועל: שליש מן העודף, עד 90 פיקסלים.
+     במסך צר שבו אין עודף הוא מתאפס מעצמו ואין דחיסה לצד אחד. */
+  margin-inline-start: clamp(0px, calc((100% - 1000px) * 0.3), 90px);
+  margin-inline-end: auto;
+  margin-block-end: clamp(16px, 4vh, 56px);
+  text-align: right;
 }
 
-.purpose--negative {
-  grid-template-columns: 0.7fr auto 1.3fr;
+.purpose__hint {
+  margin: 0 0 clamp(22px, 2.6vw, 34px);
+  font-size: clamp(16.5px, 1.3vw, 18.5px);
+  color: var(--ink-soft);
 }
 
-.purpose__slot {
-  display: contents;
-}
-
-.purpose__arcs {
-  align-self: center;
-  color: var(--gold);
-  opacity: 0.5;
-  line-height: 0;
-}
-
-.purpose__arcs svg {
-  display: block;
-  width: clamp(28px, 3vw, 52px);
-  height: auto;
-}
-
-/* ---------- אפשרות ---------- */
-.popt {
-  min-width: 0;
-}
-
-.popt__btn {
+/* ---- הבורר ----
+   שתי אפשרויות טקסטואליות באותה שורה, בלי כרטיס, כפתור־גלולה או
+   מסגרת. הקו הזהב אינו שייך לאפשרות אלא לשורה כולה, ולכן הוא נע
+   ביניהן ברצף במקום להיעלם ולהופיע. */
+.purpose__choice {
+  position: relative;
   display: flex;
-  align-items: center;
-  gap: clamp(12px, 1.4vw, 18px);
-  width: 100%;
-  padding: 6px 2px;
-  background: none;
-  /* בלי מסגרת, כרטיס, מלבן או צל — האפשרויות יושבות על הרקע הפתוח */
-  border: 0;
-  text-align: start;
-  cursor: pointer;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: clamp(20px, 3.4vw, 48px);
+  /* מקום לקו שמתחת לכיתוב */
+  padding-bottom: 16px;
 }
 
-.popt__icon {
+.pchoice {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  color: var(--teal);
-  transition:
-    color 280ms ease,
-    transform 280ms ease;
-}
-
-.popt__title {
-  display: block;
+  gap: 9px;
+  padding: 0;
+  border: 0;
+  background: none;
   font-family: var(--font-heading);
-  font-size: clamp(20px, 1.9vw, 26px);
+  font-size: clamp(21px, 2vw, 27px);
   font-weight: 700;
-  line-height: 1.25;
-  color: var(--navy);
-  transition: color 280ms ease;
-}
-
-/* התווית של האפשרות הסגורה בלבד */
-.popt__cue {
-  display: block;
-  margin-top: 4px;
-  font-size: 15.5px;
-  font-weight: 700;
-  color: var(--teal-ink);
+  line-height: 1.3;
+  color: var(--navy-secondary);
+  opacity: 0.62;
+  cursor: pointer;
   transition:
-    opacity 280ms ease,
-    max-height 280ms ease;
+    color 0.22s ease,
+    opacity 0.22s ease;
 }
 
-.popt.is-open .popt__cue {
-  opacity: 0;
-  max-height: 0;
-  margin-top: 0;
-  overflow: hidden;
-}
-
-/* האפשרות הפתוחה — אייקון בכחול הכהה וכותרת מלאה */
-.popt.is-open .popt__icon {
-  color: var(--navy);
-  transform: scale(1.06);
-}
-
-/* ריחוף ומיקוד — צבע, הגדלה קלה וזוהר עדין */
-.popt__btn:hover .popt__icon,
-.popt__btn:focus-visible .popt__icon {
-  color: var(--gold-ink);
-  transform: scale(1.12);
-  filter: drop-shadow(0 0 10px rgba(196, 163, 71, 0.35));
-}
-
-.popt__btn:hover .popt__title,
-.popt__btn:focus-visible .popt__title {
-  color: var(--gold-ink);
-}
-
-.popt__btn:focus-visible {
-  outline: 3px solid var(--teal);
-  outline-offset: 4px;
-  border-radius: var(--radius);
-}
-
-/* ---------- ההסבר ---------- */
-/* מצב סגור אינו נמחק מה-DOM אלא מצטמצם: כך המעבר רך, ו-visibility
-   מסתירה אותו גם מקוראי מסך ומניווט המקלדת. */
-.popt__panel {
-  max-height: 0;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(8px);
-  overflow: hidden;
-  transition:
-    max-height 300ms ease,
-    opacity 260ms ease,
-    transform 300ms ease,
-    visibility 0s linear 300ms;
-}
-
-.popt.is-open .popt__panel {
-  max-height: 460px;
+.pchoice:hover,
+.pchoice:focus-visible {
   opacity: 1;
-  visibility: visible;
-  transform: none;
+  color: var(--navy);
+}
+
+.pchoice:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+
+.pchoice.is-on {
+  color: var(--navy);
+  opacity: 1;
+}
+
+/* הנקודה שמורה תמיד ונדלקת רק באפשרות הפעילה, כדי שרוחב האפשרות
+   לא ישתנה בבחירה והקו לא יקפוץ */
+.pchoice__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.pchoice.is-on .pchoice__dot {
+  opacity: 1;
+}
+
+/* הקו הזהב הנע — רוחב קבוע, ממורכז על האפשרות הפעילה */
+.purpose__rule {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 56px;
+  height: 3px;
+  /* היסט פיזי ולא לוגי: translateX שמזיז את הקו הוא פיזי, ובעמוד
+     RTL היסט לוגי היה מזיז אותו לצד הנגדי */
+  margin-left: -28px;
+  border-radius: 2px;
+  background: var(--gold);
   transition:
-    max-height 320ms ease,
-    opacity 280ms ease 60ms,
-    transform 320ms ease,
-    visibility 0s;
+    transform 0.34s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s ease;
 }
 
-.popt__panelInner {
-  padding-top: 6px;
+/* ---- ההסבר ----
+   שני ההסברים בתא אחד: הלא-פעיל מוסתר ב-visibility וממשיך לתרום
+   לגובה, ולכן ההחלפה אינה משנה את גובה המסך */
+.purpose__body {
+  display: grid;
+  margin-top: clamp(24px, 2.8vw, 36px);
 }
 
-.popt__text {
-  font-size: clamp(17px, 1.35vw, 19.5px);
-  line-height: 1.7;
+.pbody {
+  grid-area: 1 / 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.32s ease;
 }
 
-.popt__example {
-  color: var(--muted);
-  font-size: 17px;
+.pbody.is-on {
+  visibility: visible;
+  opacity: 1;
+}
+
+.pbody__title {
+  margin: 0 0 12px;
+  font-size: clamp(20px, 1.7vw, 24px);
+  color: var(--navy);
+}
+
+.pbody__text {
+  margin: 0;
+  max-width: 74ch;
+  font-size: clamp(17.5px, 1.35vw, 19.5px);
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+/* הדוגמה כפסקה עריכתית ולא ככרטיס: שטיפת שמנת־זהב חיוורת מאחורי
+   המלל בלבד, בלי מסגרת, בלי צל ובלי פינות בולטות */
+.pbody__example {
+  margin: clamp(16px, 1.8vw, 22px) 0 0;
+  max-width: 74ch;
+  padding: 12px 16px;
+  border-radius: 2px;
+  background: rgba(196, 163, 71, 0.09);
+  font-size: clamp(16.5px, 1.25vw, 18px);
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+.pbody__exampleLabel {
+  font-weight: 700;
+  color: var(--gold-ink);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .purpose,
-  .popt__panel,
-  .popt__icon,
-  .popt__title,
-  .popt__cue {
+  .purpose__rule,
+  .pbody,
+  .pchoice,
+  .pchoice__dot {
     transition: none;
   }
 }
 
-/* ---------- מסך צר ---------- */
-/* אחת מתחת לשנייה, והקשתות מסתובבות ויושבות ביניהן */
+/* ---------- מסך צר ----------
+   שתי האפשרויות יורדות לשתי שורות כשאין להן מקום, והאזור חוזר
+   למלוא הרוחב במקום לשבת מעט ימינה */
 @media (max-width: 860px) {
   .purpose {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    width: 100%;
+    margin-inline-start: 0;
+    margin-block-end: 0;
   }
-  .purpose--negative {
-    grid-template-columns: 1fr;
-  }
-  .purpose__arcs {
-    justify-self: center;
-    transform: rotate(90deg);
-  }
-  .purpose__arcs svg {
-    width: 26px;
+  .purpose__choice {
+    gap: 12px clamp(18px, 5vw, 32px);
   }
   .byPurpose {
     min-height: 0;
