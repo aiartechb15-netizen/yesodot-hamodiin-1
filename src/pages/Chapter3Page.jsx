@@ -3,6 +3,7 @@ import ChapterCover from '../sections/ChapterCover'
 import coverImage from '../assets/images/תמונה פרק 3.png'
 import NextChapter from '../components/NextChapter/NextChapter'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import { motifStyle } from '../data/backgrounds'
 
 import S1Opener from '../sections/chapter3/S1Opener'
 import S3Operational from '../sections/chapter3/S3Operational'
@@ -25,7 +26,7 @@ export default function Chapter3Page() {
 
   return (
     <>
-      <main id="main" className="chapterPage">
+      <main id="main" className="chapterPage hasMotif" style={motifStyle('ch3')}>
         <ChapterCover
           image={coverImage}
           eyebrow={chapterCover.eyebrow}

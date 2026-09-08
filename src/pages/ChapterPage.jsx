@@ -1,6 +1,7 @@
 import ChapterLayout from '../components/ChapterLayout/ChapterLayout'
 import coverImage from '../assets/images/תמונה מסך פתיחה מהו מודיעין.png'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import { motifStyle } from '../data/backgrounds'
 
 import ChapterCover from '../sections/ChapterCover'
 import ChapterOpening from '../sections/ChapterOpening'
@@ -25,7 +26,7 @@ export default function ChapterPage() {
 
   return (
     <>
-      <main id="main" className="chapterPage">
+      <main id="main" className="chapterPage hasMotif" style={motifStyle('ch1')}>
         <ChapterCover
           image={coverImage}
           eyebrow={chapterCover.eyebrow}

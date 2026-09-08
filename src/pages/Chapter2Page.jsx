@@ -3,6 +3,7 @@ import ChapterCover from '../sections/ChapterCover'
 import coverImage from '../assets/images/תמונה פרק 2.png'
 import NextChapter from '../components/NextChapter/NextChapter'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import { motifStyle } from '../data/backgrounds'
 
 import StationIntro from '../sections/chapter2/StationIntro'
 import StationNational from '../sections/chapter2/StationNational'
@@ -22,7 +23,7 @@ export default function Chapter2Page() {
 
   return (
     <>
-      <main id="main" className="chapterPage">
+      <main id="main" className="chapterPage hasMotif" style={motifStyle('ch2')}>
         <ChapterCover
           image={coverImage}
           eyebrow={chapterCover.eyebrow}

@@ -226,6 +226,80 @@ svg {
   color: var(--teal-light);
 }
 
+/* ---------- רקע מודיעיני על מסכי התוכן ----------
+   כל עמוד בוחר גיליון רקע אחד (src/data/backgrounds.js) ומזריק אותו
+   כ---page-motif על ה-main שלו, יחד עם המחלקה .hasMotif. הבחירה נגזרת
+   ממזהה העמוד ולא מהגרלה, ולכן אותו עמוד מקבל תמיד את אותו גיליון.
+
+   על הגיליון נמתחת ינומת שמנת ממורכזת: אטומה כמעט במרכז, מתפוגגת
+   לקצוות. כך אזור הקריאה נשאר שקט והמוטיבים נשארים רמז עדין בשוליים,
+   בלי שכבה לבנה אטומה שמעלימה את הרקע.
+
+   לא נצבעים: מסכי הפתיחה שנושאים תצלום, מסך הסרטון (שכבר נושא
+   קומפוזיציה מאוירת משלו), המסכים שיש בהם תמונה, ותחנת הקמ״ן והקברניט
+   שכולה איור מרכזי. ההדר, תפריט הצד והפוטר אינם מושפעים כלל: הצביעה
+   חלה על ה-section בלבד, והוא יושב בתוך עמודת התוכן של הפרק. */
+.hasMotif .section {
+  /* שטיפה אחידה על כל הגיליון, ומעליה ליבה ממורכזת וחזקה יותר לאזור
+     הקריאה. שתיהן בגוון השמנת עצמו ואף אחת אינה אטומה — המוטיבים
+     נשארים נראים בשוליים, רק שקטים יותר. */
+  --motif-wash: 0.3;
+  --motif-veil: 0.9;
+  --motif-veil-mid: 0.6;
+}
+
+/* מסכים עמוסי מלל, טבלאות ושאלונים — הינומה מתחזקת, אך אינה אטומה */
+.hasMotif #quiz,
+.hasMotif #ch2-check,
+.hasMotif #ch2-compare,
+.hasMotif #ch2-exam,
+.hasMotif #ch3-summary,
+.hasMotif #ch3-exam {
+  --motif-wash: 0.5;
+  --motif-veil: 0.95;
+  --motif-veil-mid: 0.78;
+}
+
+.hasMotif
+  :is(.section--white, .section--cream, .section--paper):not(
+    .vstage,
+    #chapter-open,
+    #by-domain,
+    #next-lesson,
+    #ch2-force,
+    #ch2-officer
+  ) {
+  /* בסיס שמנת (#f5f0e6) — מה שנראה עד שהגיליון נטען, ואם לא נטען */
+  background-color: var(--cream);
+  background-image:
+    radial-gradient(
+      ellipse 66% 72% at 50% 50%,
+      rgba(245, 240, 230, var(--motif-veil)) 0%,
+      rgba(245, 240, 230, var(--motif-veil-mid)) 46%,
+      rgba(245, 240, 230, 0) 82%
+    ),
+    linear-gradient(
+      rgba(245, 240, 230, var(--motif-wash)),
+      rgba(245, 240, 230, var(--motif-wash))
+    ),
+    var(--page-motif);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* במסך צר cover מגדיל את הגיליון והמוטיבים גדלים איתו; הינומה מתחזקת
+   כדי שיישארו רמז ולא יתחרו בטקסט. cover אינו מותח את התמונה ואינו
+   משפיע על רוחב הפריסה, ולכן אין כאן גלילה אופקית. */
+@media (max-width: 720px) {
+  .hasMotif .section {
+    --motif-wash: 0.4;
+    --motif-veil: 0.92;
+    --motif-veil-mid: 0.78;
+  }
+}
+
+
 /* היפוך צבעי הטקסט על רקע נייבי. הגוונים הכהים (--teal-ink, --gold-ink)
    נועדו לרקע בהיר וכהים מדי כאן, ולכן חוזרים ל---teal-light. */
 .section--navy h1,
