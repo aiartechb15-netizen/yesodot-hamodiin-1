@@ -540,3 +540,30 @@
   flex-direction: column;
   flex: 1 1 auto;
 }
+
+/* ---------- "חשוב לזכור" — בלוק פתוח ----------
+   תוכן רגיל על רקע העמוד: ללא כרטיס, מסגרת, רקע, צל או אייקון.
+   הכותרת בזהב כהה עם קו זהב אנכי דק לצדה (בצד ההתחלה — ימין ב-RTL),
+   והטקסט מתחתיה ברוחב קריאה נוח. */
+.remember {
+  margin-top: var(--s-6);
+  direction: rtl;
+  text-align: right;
+}
+
+.remember__title {
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: var(--lh-tight);
+  color: var(--gold-ink);
+  border-inline-start: 2px solid var(--gold);
+  padding-inline-start: var(--s-3);
+  margin-bottom: var(--s-3);
+}
+
+.remember__text {
+  max-width: 62ch;
+  margin: 0;
+}

@@ -34,10 +34,12 @@ export default function ApproachesSection() {
 
           <ExpandCards items={choosingApproach.factors} columns={2} />
 
-          <aside className="callout" style={{ marginTop: '30px' }}>
-            <span className="callout__label">{choosingApproach.callout.label}</span>
-            <p>{choosingApproach.callout.text}</p>
-          </aside>
+          {/* "חשוב לזכור" — תוכן רגיל על רקע העמוד: ללא כרטיס, מסגרת, רקע או צל.
+              הכותרת בזהב כהה עם קו זהב אנכי קצר לצדה, והטקסט מתחתיה. */}
+          <div className="remember">
+            <h3 className="remember__title">{choosingApproach.callout.label}</h3>
+            <p className="remember__text">{choosingApproach.callout.text}</p>
+          </div>
         </div>
       </section>
     </>
