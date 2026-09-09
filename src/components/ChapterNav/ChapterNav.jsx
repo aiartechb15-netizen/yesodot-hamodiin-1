@@ -11,7 +11,12 @@ const DESKTOP = '(min-width: 1080px)'
 const ACTIVE_LINE = 0.32
 
 /**
- * תפריט הצד של הפרק — אותו רכיב לשלושת הפרקים.
+ * תפריט הצד של הפרק — רכיב אחד ויחיד לשלושת הפרקים, בלי גרסאות
+ * לפי פרק: אותו מבנה, אותו עיצוב ואותו רוחב בכל מקום, ורק רשימת
+ * המקטעים משתנה.
+ *
+ * ברשימה מופיע שם המקטע בלבד — בלי מספור, בלי מונה התקדמות ובלי
+ * ציר אנכי. המקטע הנוכחי נייבי ומודגש, ולצדו פס טורקיז דק.
  * sections: [{ id, label }] — המקטעים הקיימים בפרק, לפי סדר העמוד.
  */
 export default function ChapterNav({ sections, title = 'תוכן הפרק', label = 'ניווט בין מקטעי הפרק' }) {
@@ -103,7 +108,6 @@ export default function ChapterNav({ sections, title = 'תוכן הפרק', labe
     0,
     sections.findIndex((s) => s.id === activeId),
   )
-  const total = sections.length
 
   return (
     <nav className="chnav" aria-label={label}>
@@ -121,9 +125,6 @@ export default function ChapterNav({ sections, title = 'תוכן הפרק', labe
             <span className="chnav__toggleKicker">{title}</span>
             <span className="chnav__toggleCurrent">{sections[activeIndex]?.label}</span>
           </span>
-          <span className="chnav__toggleCount ltr-num" aria-hidden="true">
-            {activeIndex + 1}/{total}
-          </span>
         </button>
       </div>
 
@@ -136,9 +137,6 @@ export default function ChapterNav({ sections, title = 'תוכן הפרק', labe
       <div className={`chnav__panel${open ? ' is-open' : ''}`} id={panelId}>
         <div className="chnav__head">
           <span className="chnav__title">{title}</span>
-          <span className="chnav__count ltr-num">
-            {activeIndex + 1}/{total}
-          </span>
           <button
             type="button"
             className="chnav__close"
@@ -155,14 +153,11 @@ export default function ChapterNav({ sections, title = 'תוכן הפרק', labe
             return (
               <li key={s.id}>
                 <a
-                  className={`chnav__link${isActive ? ' is-active' : ''}${i < activeIndex ? ' is-done' : ''}`}
+                  className={`chnav__link${isActive ? ' is-active' : ''}`}
                   href={`#${s.id}`}
                   aria-current={isActive ? 'true' : undefined}
                   onClick={() => setOpen(false)}
                 >
-                  <span className="chnav__num ltr-num" aria-hidden="true">
-                    {i + 1}
-                  </span>
                   <span className="chnav__label">{s.label}</span>
                 </a>
               </li>

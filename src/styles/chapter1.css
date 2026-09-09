@@ -57,7 +57,6 @@
 }
 
 /* מספרים בעיגולים ובתגים — קטנים מדי היו בהם 13.5–15 */
-.ch1 .chnav__num,
 .ch1 .cycle__num,
 .ch1 .domain__num,
 .ch1 .ladder__step,
@@ -247,38 +246,10 @@
   align-self: flex-start;
 }
 
-/* ---------- 7. תפריט הצד ---------- */
-.ch1 .chnav__title,
-.ch1 .chnav__count,
-.ch1 .chnav__label,
-.ch1 .chnav__num,
-.ch1 .chnav__toggleKicker,
-.ch1 .chnav__toggleCurrent,
-.ch1 .chnav__toggleText {
-  text-align: right;
-}
-
-.ch1 .chnav__title {
-  font-size: 1rem;
-}
-
-.ch1 .chnav__count {
-  font-size: 1rem;
-}
-
-.ch1 .chnav__label {
-  font-size: 1.125rem;
-}
-
-.ch1 .chnav__num {
-  font-size: 1rem;
-}
-
-/* כיתובים קטנים שנשארו מתחת ל-16px במסך צר */
-.ch1 .chnav__toggleKicker {
-  font-size: 1rem;
-}
-
+/* ---------- 7. כיתובים קטנים ----------
+   לתפריט הצד אין כאן עוד כללים: הוא רכיב משותף אחד לשלושת הפרקים
+   (ChapterNav.css), והסולם הגדול של פרק 1 אינו חל עליו — אחרת היה
+   נראה אחרת משאר הפרקים. */
 .ch1 .cycle__nodeTitle {
   font-size: max(1rem, 16.5px);
 }

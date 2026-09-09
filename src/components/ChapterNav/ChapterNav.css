@@ -2,8 +2,9 @@
    רכיב אחד לשלושת הפרקים. בדסקטופ — עמודה קבועה בצד ימין שנשארת
    דביקה בזמן גלילה; במסך צר — פס פתיחה דביק ומגירה נפתחת, כדי שלא
    ייגזל רוחב קבוע מהתוכן.
-   השפה החזותית היא קווים ולא קופסאות: קו אנכי דק לאורך הרשימה,
-   ופס טורקיז קצר שמסמן את המקטע הנוכחי. */
+   העיצוב אחיד לשלושת הפרקים ואין לו גרסאות מקומיות: ברשימה מופיע
+   שם המקטע בלבד — בלי מספור, בלי מונה התקדמות ובלי ציר אנכי רציף.
+   הסימון היחיד הוא פס טורקיז דק לצד המקטע הנוכחי. */
 
 .chnav {
   /* רקע הנייר של העמוד — התפריט הוא רצועת ממשק, לא כרטיס */
@@ -49,51 +50,34 @@
   color: var(--teal-ink);
 }
 
-.chnav__count {
-  font-size: 14.5px;
-  font-weight: 700;
-  color: var(--muted);
-}
-
 /* ---------- הרשימה ---------- */
 .chnav__list {
-  position: relative;
   display: grid;
-  /* מרווח לקו האנכי שרץ לאורך הרשימה */
-  padding-inline-start: 14px;
+  /* רווח אנכי אחיד בין הסעיפים; שאר המרווח מגיע מריפוד הפריט עצמו */
+  gap: 2px;
+  padding-inline-start: 0;
 }
 
-/* הקו הרציף — הציר שעליו יושב סימן המקטע הנוכחי */
-.chnav__list::before {
-  content: '';
-  position: absolute;
-  inset-block: 3px;
-  inset-inline-start: 0;
-  width: 2px;
-  border-radius: 2px;
-  background: var(--border);
-}
-
+/* שם המקטע בלבד. העמוד כולו RTL (dir על ה-html), ולכן start הוא
+   הצד הימני והשמות מיושרים לימין בלי כלל ייעודי לכל פרק. */
 .chnav__link {
   position: relative;
-  display: grid;
-  grid-template-columns: 20px minmax(0, 1fr);
-  align-items: baseline;
-  gap: 8px;
-  padding-block: 7px;
-  padding-inline-end: 6px;
+  display: block;
+  padding-block: 9px;
+  padding-inline: 14px 6px;
   font-size: 16.5px;
-  line-height: 1.42;
+  line-height: 1.45;
+  text-align: start;
   color: var(--ink-soft);
   transition: color var(--dur) var(--ease);
 }
 
-/* פס הסימון — יושב בדיוק על הקו האנכי של הרשימה */
+/* פס הסימון — יושב בצד ההתחלה של הפריט, כלומר מימין ב-RTL */
 .chnav__link::before {
   content: '';
   position: absolute;
-  inset-block: 3px;
-  inset-inline-start: -14px;
+  inset-block: 4px;
+  inset-inline-start: 0;
   width: 2px;
   border-radius: 2px;
   background: transparent;
@@ -105,42 +89,20 @@
   text-decoration: none;
 }
 
-.chnav__link:hover::before {
-  background: var(--gold-soft);
-}
-
-/* מקטעים שכבר נקראו — סימון זהוב עדין מאוד על הציר */
-.chnav__link.is-done::before {
-  background: var(--gold-soft);
-}
-
 .chnav__link.is-active {
   color: var(--navy);
   font-weight: 700;
 }
 
-/* המצב הפעיל: פס טורקיז מלא ורחב במעט מהקו עצמו */
+/* המצב הפעיל: פס טורקיז דק לצד הסעיף */
 .chnav__link.is-active::before {
-  inset-block: 1px;
-  inset-inline-start: -14px;
-  width: 3px;
+  inset-block: 2px;
   background: var(--teal);
 }
 
 .chnav__link:focus-visible {
   outline-offset: 1px;
   border-radius: var(--radius-sm);
-}
-
-.chnav__num {
-  font-size: 13.5px;
-  font-weight: 700;
-  color: var(--muted);
-  text-align: start;
-}
-
-.chnav__link.is-active .chnav__num {
-  color: var(--gold-ink);
 }
 
 /* ---------- מסכים צרים — פס דביק ומגירה ---------- */
@@ -199,14 +161,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-
-  .chnav__toggleCount {
-    margin-inline-start: auto;
-    flex: none;
-    font-size: 14.5px;
-    font-weight: 700;
-    color: var(--muted);
   }
 
   /* המגירה והכיסוי מתחילים מתחת ל-Header: הוא נשאר גלוי ובר-שימוש,
