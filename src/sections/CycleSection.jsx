@@ -18,11 +18,6 @@ export default function CycleSection() {
         </p>
 
         <IntelligenceCycle />
-
-        <aside className="callout callout--teal" style={{ marginTop: '34px' }}>
-          <span className="callout__label">{intelligenceCycle.callout.label}</span>
-          <p>{intelligenceCycle.callout.text}</p>
-        </aside>
       </div>
     </section>
   )
