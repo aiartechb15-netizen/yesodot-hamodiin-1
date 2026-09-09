@@ -944,3 +944,98 @@
     padding-block: clamp(34px, 8vw, 56px);
   }
 }
+
+/* ---------- תחנה 1 — מסך הפתיח ----------
+   שני טורים: מימין הטקסט ומשמאל איור הגלובוס. ב-RTL הטור הראשון הוא
+   הימני, ולכן סדר המקור בלבד קובע ואין צורך בכלל היפוך.
+   הקומפוזיציה ממורכזת אנכית בשטח שנשאר במסך — ה-.section כבר ממרכז
+   את המכל, וכאן שני הטורים מיושרים למרכזם המשותף. */
+.ch3op {
+  padding-block: clamp(44px, 5vw, 78px);
+}
+
+.ch3op__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 44%);
+  align-items: center;
+  gap: clamp(28px, 4.5vw, 72px);
+}
+
+/* עמודת הטקסט — RTL מלא ויישור לימין. הקו האנכי הדק יושב מימין
+   לאזור המלל: ב-RTL זהו inline-start, ולכן הוא נכתב כך ולא כ-right
+   ונשאר נכון גם אם הכיוון יתהפך. */
+.ch3op__text {
+  max-width: 62ch;
+  padding-inline-start: clamp(18px, 2vw, 30px);
+  border-inline-start: 1px solid var(--gold);
+  direction: rtl;
+  text-align: right;
+}
+
+/* כיתוב העל וקו הזהב שלצדו — הקו נמתח משמאל לכיתוב ואינו יורד
+   מתחתיו, ולכן שניהם באותה שורה */
+.ch3op__overline {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1vw, 16px);
+  margin: 0 0 clamp(18px, 2vw, 26px);
+  font-size: clamp(14px, 1.05vw, 16px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--teal-ink);
+}
+
+.ch3op__overlineRule {
+  display: block;
+  width: clamp(34px, 3.4vw, 52px);
+  height: 2px;
+  border-radius: 2px;
+  background: var(--gold);
+}
+
+/* שתי הפסקאות — מעט גדולות מברירת המחדל, ורווח ברור ביניהן */
+.ch3op__para {
+  margin: 0;
+  font-size: clamp(20px, 1.65vw, 24px);
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.ch3op__para + .ch3op__para {
+  margin-top: clamp(20px, 2.2vw, 32px);
+}
+
+/* האיור — בלי מסגרת, כרטיס, צל או רקע. לקובץ עצמו יש ערוץ שקיפות,
+   ולכן הוא יושב ישירות על גיליון הרקע של העמוד ואין צורך למזג אותו
+   או לחתוך אותו: הוא מוצג בשלמותו. */
+.ch3op__art {
+  justify-self: center;
+}
+
+.ch3op__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+}
+
+/* במסך צר הטורים נערמים: הטקסט למעלה והאיור מתחתיו, ממורכז ומוגבל
+   ברוחב כדי שלא ייקח את המסך לעצמו */
+@media (max-width: 860px) {
+  .ch3op__inner {
+    grid-template-columns: 1fr;
+    gap: clamp(26px, 6vw, 40px);
+  }
+
+  .ch3op__text {
+    max-width: none;
+  }
+
+  .ch3op__art {
+    width: min(100%, 420px);
+    justify-self: center;
+  }
+}
