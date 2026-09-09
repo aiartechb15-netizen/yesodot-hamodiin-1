@@ -3,38 +3,17 @@ import Icon from '../../components/Icons/Icons'
 import { operational as op } from '../../data/chapter3'
 import './chapter3.css'
 
-/* המצפן שבמרכז מפת הצרכנים, וארבעת הקווים הדקים שיוצאים ממנו אל
-   הצרכנים. הכול קו בלבד — בלי מילוי, בלי מסגרת ובלי צל. */
-function Dial() {
-  return (
-    <svg className="opdial__art" viewBox="0 0 100 100" fill="none" aria-hidden="true" focusable="false">
-      {/* הקווים אל ארבעת הצרכנים */}
-      <g className="opdial__links" stroke="var(--gold)" strokeWidth="1" vectorEffect="non-scaling-stroke">
-        <path d="M50 42V16" />
-        <path d="M58 50h26" />
-        <path d="M50 58v26" />
-        <path d="M42 50H16" />
-      </g>
-      {/* המצפן */}
-      <g stroke="var(--teal)" strokeWidth="1" vectorEffect="non-scaling-stroke">
-        <circle cx="50" cy="50" r="21" opacity="0.4" />
-        <circle cx="50" cy="50" r="13" opacity="0.28" strokeDasharray="2 5" />
-      </g>
-      <path
-        className="opdial__needle"
-        d="M50 33l5.5 17L50 67l-5.5-17z"
-        stroke="var(--gold)"
-        strokeWidth="1"
-        vectorEffect="non-scaling-stroke"
-      />
-      <circle cx="50" cy="50" r="1.8" fill="var(--gold)" />
-    </svg>
-  )
-}
-
 /* חמש התחנות לפי סדר המסלול המבוקש. הניסוחים הם אלה שבקובץ הנתונים;
    כאן נקבע רק הסדר שבו הן מופיעות על הנתיב. */
 const PATH_ORDER = ['h1', 'h4', 'h5', 'h2', 'h3']
+
+/* פסקת הצרכנים נפתחת בצמד המילים הזה, וזה החלק היחיד בה שמודגש.
+   הפיצול נעשה מן הטקסט שבנתונים ולא מנוסח מחדש: אם הפתיח ישתנה שם,
+   הפסקה תוצג במלואה בלי הדגשה, ולא יופיע כאן טקסט שאינו מן הפרק. */
+const NOTE_LEAD = 'בשנים האחרונות'
+const noteRest = op.consumersNote.startsWith(NOTE_LEAD)
+  ? op.consumersNote.slice(NOTE_LEAD.length)
+  : null
 
 export default function S3Operational() {
   const stations = PATH_ORDER.map((id) => op.how.find((h) => h.id === id)).filter(Boolean)
@@ -54,27 +33,28 @@ export default function S3Operational() {
           <p className="opsec__label">{op.purposeLabel}</p>
           <p className="opsec__purpose">{op.purpose}</p>
 
-          <h3 className="opsec__sub">{op.consumersTitle}</h3>
+          {/* הכותרת יושבת מתחת לחלק הפותח ברוחב מלא, ולא לצדו */}
+          <h3 className="opsec__sub opconsumers__title">{op.consumersTitle}</h3>
           <span className="gold-rule gold-rule--sm" aria-hidden="true" />
 
-          <div className="opdial">
-            <Dial />
-            <span className="opdial__center" aria-hidden="true" />
-            {op.consumers.map((c, i) => (
-              <span className={`opnode opnode--${i}`} key={c.id}>
-                <span className="opnode__icon" aria-hidden="true">
-                  <Icon name={c.icon} size={26} />
-                </span>
-                <span className="opnode__title">{c.title}</span>
-              </span>
+          {/* ארבעת הצרכנים בשורה אחת, מימין לשמאל, מופרדים בקו זהב דק */}
+          <ul className="opconsumers">
+            {op.consumers.map((c) => (
+              <li className="opconsumer" key={c.id}>
+                {c.title}
+              </li>
             ))}
-          </div>
+          </ul>
 
-          {/* משפט המעבר — נקודה טורקיז וקו דק, כחלק מהנתיב */}
-          <p className="opnote">
-            <span className="opnote__dot" aria-hidden="true" />
-            <span className="opnote__label">בשנים האחרונות</span>
-            {op.consumersNote}
+          <p className="opconsumers__note">
+            {noteRest === null ? (
+              op.consumersNote
+            ) : (
+              <>
+                <strong className="opconsumers__lead">{NOTE_LEAD}</strong>
+                {noteRest}
+              </>
+            )}
           </p>
         </div>
 
