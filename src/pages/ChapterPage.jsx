@@ -26,7 +26,7 @@ export default function ChapterPage() {
 
   return (
     <>
-      <main id="main" className="chapterPage hasMotif ch1" style={motifStyle('ch1')}>
+      <main id="main" dir="rtl" className="chapterPage hasMotif ch1" style={motifStyle('ch1')}>
         <ChapterCover
           image={coverImage}
           eyebrow={chapterCover.eyebrow}

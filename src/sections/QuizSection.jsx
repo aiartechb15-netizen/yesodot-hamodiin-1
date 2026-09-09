@@ -10,7 +10,8 @@ export default function QuizSection() {
           {quiz.title}
         </h2>
         <span className="gold-rule" aria-hidden="true" />
-        <p className="lead" style={{ maxWidth: '760px', margin: '0 auto 34px 0' }}>
+        {/* מרג'ין לוגי ולא פיזי: ב-RTL הפסקה נצמדת לימין והשארית נבלעת משמאל */}
+        <p className="lead" style={{ maxWidth: '760px', marginInline: '0 auto', marginBottom: '34px' }}>
           {quiz.intro}
         </p>
         <Quiz />
