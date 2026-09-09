@@ -30,39 +30,6 @@
   padding-block-start: clamp(26px, 3.2vw, 48px);
 }
 
-/* ---------- שער 2 ---------- */
-.reflect {
-  margin-top: 34px;
-  max-width: 780px;
-}
-
-.reflect__q {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--navy);
-  margin-bottom: 14px;
-}
-
-.reflect__area {
-  width: 100%;
-  min-height: 130px;
-  padding: 14px 16px;
-  font: inherit;
-  font-size: 18px;
-  color: var(--text);
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  resize: vertical;
-}
-
-.reflect__saved {
-  display: block;
-  margin-top: 8px;
-  font-size: 16px;
-  color: var(--teal);
-}
-
 /* ---------- סולם הרמות ---------- */
 .ladder {
   display: grid;
