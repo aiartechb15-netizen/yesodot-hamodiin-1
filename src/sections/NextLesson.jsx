@@ -1,16 +1,14 @@
 import { Link } from 'react-router-dom'
 import { nextLesson } from '../data/chapter1'
-import nextImage from '../assets/images/מהו מודיעין תמונה 3.png'
 import './sections.css'
 
 export default function NextLesson() {
   return (
     <section className="section section--white" id="next-lesson" aria-labelledby="next-lesson-title">
       <div className="container">
+        {/* כרטיס אחד וקומפקטי: כיתוב, כותרת, מלל וכפתור. אין בו תמונה
+            ואין עמודה שמורה לה. */}
         <div className="next">
-          <div className="next__media">
-            <img className="next__img" src={nextImage} alt={nextLesson.image} />
-          </div>
           <div className="next__body">
             <span className="kicker">{nextLesson.kicker}</span>
             <h2 className="next__title" id="next-lesson-title">
