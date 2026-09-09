@@ -15,18 +15,31 @@
 
 /* ---------- הסרטון ---------- */
 
+/* עמודה אחת ממורכזת: הסרטון למעלה ומטרת הפרק מתחתיו, שניהם ברוחב
+   זהה ובאותם קצוות. המרווח ביניהם גדול מספיק כדי להפריד וקטן מספיק
+   כדי שיישארו יחידה אחת. */
 .vstage__inner {
+  /* רוחב העמודה המשותף לסרטון ולמטרת הפרק — מקור אמת אחד, ולכן שני
+     החלקים נגמרים בדיוק באותם קצוות. גדול מהנגן המשותף (900px) אבל
+     לא בולע את הצדדים. */
+  --vstage-col: min(100%, 1020px);
   position: relative;
   z-index: 1;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  justify-items: center;
+  gap: clamp(30px, 3.6vw, 56px);
+}
+
+/* כשמטרת הפרק חולקת את המסך עם הסרטון, העמודה מצטמצמת מעט כדי ששניהם
+   ייכנסו יחד לגובה מסך אחד בלי להידחס. דפדפן בלי :has פשוט משאיר את
+   הרוחב המלא — הפריסה נשארת תקינה. */
+.vstage__inner:has(.vstage__purpose) {
+  --vstage-col: min(100%, 880px);
 }
 
 .vstage__video {
   margin: 0;
-  /* גדול מהנגן המשותף (900px) אבל לא בולע את הצדדים, כדי שהקומפוזיציה
-     סביבו תישאר גלויה */
-  width: min(100%, 1020px);
+  width: var(--vstage-col);
 }
 
 .vstage__frame {
@@ -67,6 +80,36 @@
   color: var(--white);
   /* המשולש כבד בצדו האחד; ההיסט מחזיר אותו למרכז האופטי של העיגול */
   padding-inline-start: 5px;
+}
+
+/* ---------- מטרת הפרק ----------
+   יושבת מתחת לסרטון, באותו רוחב עמודה ובאותם קצוות, ומשתמשת בשפה
+   הקיימת של האתר: כותרת, קו זהב קצר מתחתיה, ופסקה שקו זהב אנכי מסמן
+   את תחילתה. בלי כרטיס, בלי מסגרת ובלי רקע משלה. */
+
+.vstage__purpose {
+  width: var(--vstage-col);
+}
+
+.vstage__purposeTitle {
+  margin: 0;
+  font-size: clamp(28px, 2.7vw, 40px);
+  color: var(--navy);
+}
+
+.vstage__purpose .gold-rule {
+  margin-block: 14px 22px;
+}
+
+/* קו הזהב האנכי הוא ההדגשה — בעמוד RTL הוא נופל בצד ימין של הפסקה */
+.vstage__purposeText {
+  max-width: 86ch;
+  margin: 0;
+  padding-inline-start: clamp(18px, 2vw, 28px);
+  border-inline-start: 2px solid var(--gold);
+  font-size: clamp(19px, 1.45vw, 22px);
+  line-height: 1.75;
+  color: var(--ink-soft);
 }
 
 /* ---------- רספונסיביות ----------

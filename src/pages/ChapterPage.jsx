@@ -5,7 +5,6 @@ import { motifStyle } from '../data/backgrounds'
 import '../styles/chapter1.css'
 
 import ChapterCover from '../sections/ChapterCover'
-import ChapterOpening from '../sections/ChapterOpening'
 import VideoSection from '../sections/VideoSection'
 import Gate1 from '../sections/Gate1'
 import ApproachesSection from '../sections/ApproachesSection'
@@ -35,11 +34,13 @@ export default function ChapterPage() {
           tagline={chapterCover.tagline}
           step={chapterCover.step}
           scrollLabel={chapterCover.scrollLabel}
-          nextId="chapter-open"
+          nextId={videos.intro.id}
         />
         <ChapterLayout sections={railSections} label="ניווט בין מקטעי פרק 1">
-          <ChapterOpening />
-          <VideoSection video={videos.intro} />
+          <VideoSection
+            video={videos.intro}
+            purpose={{ title: chapterOpening.purposeTitle, text: chapterOpening.purpose }}
+          />
           <Gate1 />
           <ApproachesSection />
           <UniqueTraitsSection />

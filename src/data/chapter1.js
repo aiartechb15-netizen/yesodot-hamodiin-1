@@ -73,15 +73,6 @@ export const chapterOpening = {
   purposeTitle: 'מטרת הפרק',
   purpose:
     'להקנות היכרות ראשונית ובסיסית עם עולם המודיעין: מהו מודיעין, כיצד מידע הופך לידע, אילו גישות משמשות לבירור המציאות, מה מייחד את העשייה המודיעינית וכיצד נהוג למיין את המודיעין.',
-  outcomesTitle: 'תוצאות למידה',
-  outcomes: [
-    'להסביר את תפקידו המרכזי של המודיעין בקבלת החלטות.',
-    'להבחין בין ידיעה, מידע, ידע, הבנה ותובנה.',
-    'להשוות בין הגישה ההומנית, המדעית והמערכתית.',
-    'לזהות את מאפייני עבודת המודיעין ואת הקשר שלה למקבלי ההחלטות.',
-    'למיין מודיעין לפי ייעוד, רמה, תפוקה, תהליך ותחום.',
-    'לתאר את שלבי מעגל המודיעין ואת הקשר המעגלי ביניהם.',
-  ],
   navigationTitle: 'הנחיית ניווט ללומד',
   navigation:
     'גללו לאורך הפרק. בנקודות המסומנות תוכלו ללחוץ, לפתוח הרחבות ולענות על שאלות קצרות. השלמת כל פריטי החובה תאפשר מעבר לתרגול המסכם.',
@@ -873,21 +864,21 @@ export const footer = {
 }
 
 // תחנות הפרק — משמשות את סרגל הניווט (שם התחנה + מיקום + הקודם/הבא)
+/* מקטע הפתיחה והסרטון אוחדו למסך אחד, ולכן יש להם כאן רשומה אחת. */
 export const railSections = [
-  { id: 'chapter-open', label: 'פתיחת הפרק', station: 1 },
-  { id: 'video-intro', label: 'סרטון פתיחה', station: 2 },
-  { id: 'gate-1', label: 'שער 1 — מבוא ויסודות', station: 3 },
-  { id: 'approaches', label: 'גישות מחקר', station: 4 },
-  { id: 'choosing-approach', label: 'בחירת גישה', station: 5 },
-  { id: 'unique-traits', label: 'ייחוד עבודת המודיעין', station: 6 },
-  { id: 'gate-2', label: 'שער 2 — התפתחות היסטורית', station: 7 },
-  { id: 'by-purpose', label: 'לפי ייעוד', station: 8 },
-  { id: 'by-level', label: 'לפי רמה', station: 9 },
-  { id: 'by-output', label: 'לפי תפוקה', station: 10 },
-  { id: 'by-process', label: 'מעגל המודיעין', station: 11 },
-  { id: 'by-domain', label: 'לפי תחום', station: 12 },
-  { id: 'quiz', label: 'תרגול מסכם', station: 13 },
-  { id: 'next-lesson', label: 'סיום הפרק', station: 14 },
+  { id: 'video-intro', label: 'פתיחת הפרק', station: 1 },
+  { id: 'gate-1', label: 'שער 1 — מבוא ויסודות', station: 2 },
+  { id: 'approaches', label: 'גישות מחקר', station: 3 },
+  { id: 'choosing-approach', label: 'בחירת גישה', station: 4 },
+  { id: 'unique-traits', label: 'ייחוד עבודת המודיעין', station: 5 },
+  { id: 'gate-2', label: 'שער 2 — התפתחות היסטורית', station: 6 },
+  { id: 'by-purpose', label: 'לפי ייעוד', station: 7 },
+  { id: 'by-level', label: 'לפי רמה', station: 8 },
+  { id: 'by-output', label: 'לפי תפוקה', station: 9 },
+  { id: 'by-process', label: 'מעגל המודיעין', station: 10 },
+  { id: 'by-domain', label: 'לפי תחום', station: 11 },
+  { id: 'quiz', label: 'תרגול מסכם', station: 12 },
+  { id: 'next-lesson', label: 'סיום הפרק', station: 13 },
 ]
 
 export const chapterNavLabels = {
