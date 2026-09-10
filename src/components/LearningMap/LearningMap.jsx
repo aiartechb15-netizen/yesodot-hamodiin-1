@@ -38,6 +38,11 @@ export default function LearningMap({ image, alt, title, titleId, hint, points, 
      ומוזזת פנימה במידה הדרושה בלבד; הגבעול נשאר מכוון לסמן, ולכן
      הקשר בין הכיתוב לנקודה נשמר. */
   const stageRef = useRef(null)
+  const noteRef = useRef(null)
+  /* ההיסט האנכי של ההסבר. הוא נמדד ואינו מחושב מראש: מיקום התגיות
+     תלוי בחיתוך האיור וברוחב המסך, ולכן ערך קבוע היה נכון במסך אחד
+     ושגוי באחר. */
+  const [noteDy, setNoteDy] = useState(0)
   const spotRefs = useRef({})
 
   const fitLabels = useCallback(() => {
@@ -123,6 +128,40 @@ export default function LearningMap({ image, alt, title, titleId, hint, points, 
     return () => window.removeEventListener('keydown', onKey)
   }, [active])
 
+  /* ההסבר נפתח לצד הנקודה, ולעיתים נופל בדיוק על תגית של נקודה
+     שכנה. כאן הוא נמדד מול כל התגיות שאינן שלו ומוזז אנכית במידה
+     המזערית שמפנה את הכיסוי — כלפי הכיוון הקרוב מבין השניים. שאר
+     הנקודות נשארות גלויות ולחיצות; רק ההסבר זז. */
+  useLayoutEffect(() => {
+    const note = noteRef.current
+    if (!active || !note) {
+      setNoteDy(0)
+      return
+    }
+
+    /* מודדים ללא ההיסט הקודם, אחרת הוא היה מצטבר */
+    note.style.setProperty('--note-dy', '0px')
+    const nr = note.getBoundingClientRect()
+
+    let shift = 0
+    for (const [id, el] of Object.entries(spotRefs.current)) {
+      if (!el || id === active) continue
+      const label = el.querySelector('.lspot__label')
+      if (!label) continue
+      const lr = label.getBoundingClientRect()
+      const overX = Math.min(nr.right, lr.right) - Math.max(nr.left, lr.left)
+      const overY = Math.min(nr.bottom, lr.bottom) - Math.max(nr.top, lr.top)
+      if (overX <= 0 || overY <= 0) continue
+
+      const down = lr.bottom - nr.top + 14
+      const up = lr.top - nr.bottom - 14
+      const pick = Math.abs(down) <= Math.abs(up) ? down : up
+      if (Math.abs(pick) > Math.abs(shift)) shift = pick
+    }
+
+    setNoteDy(Math.round(shift))
+  }, [active, shown])
+
   return (
     <div className="lmap" ref={stageRef}>
       {/* שכבת הרקע: השמנת האטומה חוסמת את גיליון המוטיבים של העמוד,
@@ -199,6 +238,8 @@ export default function LearningMap({ image, alt, title, titleId, hint, points, 
               <div
                 className={`lnote${active ? ' is-on' : ''}`}
                 key={shownPoint.id}
+                ref={noteRef}
+                style={{ '--note-dy': `${noteDy}px` }}
                 data-side={shownPoint.x > 50 ? 'left' : 'right'}
                 aria-hidden={active ? undefined : 'true'}
               >

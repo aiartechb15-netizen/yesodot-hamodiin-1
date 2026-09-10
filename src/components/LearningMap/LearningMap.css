@@ -287,14 +287,6 @@
 }
 
 .lspot:hover .lspot__label,
-/* בזמן שהסבר פתוח שאר התגיות מתעמעמות: הן אינן נחוצות לקריאה,
-   וכך הטקסט שנפתח אינו נחצה על ידי כיתוב של נקודה שכנה. הנקודות
-   עצמן נשארות גלויות ולחיצות. */
-.lmap__frame--hot:has(.lspot.is-active) .lspot:not(.is-active) .lspot__label {
-  opacity: 0;
-  pointer-events: none;
-}
-
 .lspot:focus-visible .lspot__label {
   transform: translateX(calc(-50% + var(--shift, 0px))) translateY(-2px);
   border-color: var(--gold);
@@ -410,18 +402,21 @@
 
 /* הנקודה בחצי השמאלי של האיור פותחת ימינה, ובחצי הימני — שמאלה,
    כך שההסבר תמיד נפתח פנימה ואינו יוצא מן המקטע */
+/* --note-dy נמדד ברכיב: אם ההסבר היה מכסה תגית של נקודה שכנה, הוא
+   מוזז אנכית במידה המזערית שמפנה אותה. ברוב המקרים הוא אפס. */
 .lnote[data-side='right'] {
-  transform: translate(46px, -50%);
+  transform: translate(46px, calc(-50% + var(--note-dy, 0px)));
 }
 
 .lnote[data-side='left'] {
-  transform: translate(calc(-100% - 46px), -50%);
+  transform: translate(calc(-100% - 46px), calc(-50% + var(--note-dy, 0px)));
 }
 
 /* הקו הדק היחיד — מקשר בין הנקודה להסבר */
 .lnote__link {
   position: absolute;
-  top: 50%;
+  /* מקוזז כנגד הזזת ההסבר, ולכן הוא ממשיך לצאת בגובה הנקודה עצמה */
+  top: calc(50% - var(--note-dy, 0px));
   z-index: 1;
   width: 46px;
   height: 2px;
