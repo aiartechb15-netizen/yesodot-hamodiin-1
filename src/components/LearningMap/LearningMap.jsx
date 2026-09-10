@@ -21,6 +21,11 @@ export default function LearningMap({ image, alt, title, titleId, hint, points, 
   const [seen, setSeen] = useState([])
 
   const current = points.find((p) => p.id === active) || null
+
+  /* ההסבר האחרון שנפתח נשאר מורכב גם אחרי הסגירה, כדי שתהיה לו
+     דעיכה. בלעדיו React היה מסיר אותו מיד והוא היה נעלם בבת אחת. */
+  const [shown, setShown] = useState(null)
+  const shownPoint = points.find((p) => p.id === shown) || null
   const noteId = `${uid}-note`
 
   const toggle = (id) => {
@@ -104,6 +109,10 @@ export default function LearningMap({ image, alt, title, titleId, hint, points, 
     return () => window.removeEventListener('resize', fitLabels)
   }, [fitLabels])
 
+  useEffect(() => {
+    if (active) setShown(active)
+  }, [active])
+
   /* Esc סוגר את ההסבר הפתוח — בלי כפתור סגירה שיתחרה באיור */
   useEffect(() => {
     if (!active) return undefined
@@ -149,7 +158,9 @@ export default function LearningMap({ image, alt, title, titleId, hint, points, 
 
         <div
           className="lmap__frame lmap__frame--hot"
-          style={current ? { '--nx': `${current.x}%`, '--ny': `${current.y}%` } : undefined}
+          style={
+            shownPoint ? { '--nx': `${shownPoint.x}%`, '--ny': `${shownPoint.y}%` } : undefined
+          }
         >
           {points.map((p) => {
             const isActive = p.id === active
@@ -180,14 +191,19 @@ export default function LearningMap({ image, alt, title, titleId, hint, points, 
               לנקודה. הצד נבחר פנימה: נקודה בחצי הימני של האיור פותחת
               שמאלה, ונקודה בחצי השמאלי פותחת ימינה. */}
           <div className="lmap__note" id={noteId} role="region" aria-live="polite">
-            {current ? (
+            {shownPoint ? (
+              /* key מאלץ הרכבה מחדש בכל החלפת נקודה, ולכן דעיכת
+                 הפתיחה רצה גם במעבר בין נקודה לנקודה ולא רק בפתיחה
+                 הראשונה. בסגירה המחלקה is-on יורדת וההסבר נמוג
+                 במקומו, במקום להיעלם בבת אחת. */
               <div
-                className="lnote"
-                key={current.id}
-                data-side={current.x > 50 ? 'left' : 'right'}
+                className={`lnote${active ? ' is-on' : ''}`}
+                key={shownPoint.id}
+                data-side={shownPoint.x > 50 ? 'left' : 'right'}
+                aria-hidden={active ? undefined : 'true'}
               >
                 <span className="lnote__link" aria-hidden="true" />
-                <p className="lnote__text">{current.text}</p>
+                <p className="lnote__text">{shownPoint.text}</p>
               </div>
             ) : null}
           </div>

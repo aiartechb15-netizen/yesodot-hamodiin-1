@@ -334,29 +334,65 @@
   position: absolute;
   top: var(--ny);
   left: var(--nx);
-  width: clamp(230px, 24vw, 360px);
+  width: clamp(320px, 26vw, 400px);
+  padding: 20px;
+  direction: rtl;
+  text-align: right;
   pointer-events: auto;
   isolation: isolate;
-  animation: lnoteIn 280ms ease both;
+  /* דעיכה בפתיחה ובסגירה. ההנפשה על האטימות בלבד, כדי שה-transform
+     שקובע את צד הפתיחה יישאר על כנו. */
+  opacity: 0;
+  transition: opacity 200ms ease;
 }
 
-/* הילת שמנת מטושטשת מאחורי המלל — לא כרטיס ולא מלבן: אין לה קצה,
-   מסגרת, פינות או צל, והיא רק מרפה את האיור מתחת לאותיות כדי
-   שההסבר יישאר קריא גם מעל המסכים והעדשה */
+.lnote.is-on {
+  opacity: 1;
+}
+
+/* ההסבר הסגור אינו חוסם לחיצות על האיור שמתחתיו */
+.lnote:not(.is-on) {
+  pointer-events: none;
+}
+
+/* שכבת הקריאוּת שמאחורי המלל — לא כרטיס: אין לה מסגרת ואין לה צל,
+   וארבעת קצותיה נמוגים לשקיפות מלאה, ולכן היא נקראת כהתבהרות של
+   האיור ולא כמלבן שהודבק עליו.
+
+   המסכה יושבת על השכבה עצמה ולא על הרקע בלבד — היא מפוגגת יחד עם
+   הצבע גם את ה-backdrop-filter. בלעדיה היה נשאר מלבן טשטוש חד בדיוק
+   במקום שהגרדיאנט מנסה להעלים.
+
+   עצירות המסכה בפיקסלים ולא באחוזים: כך אזור הדעיכה שווה תמיד
+   לריפוד ולחריגה שסביבו, והמלל עצמו נשאר אטום לחלוטין בכל גודל
+   הסבר — באחוזים הוא היה מתפוגג בהסברים קצרים. */
 .lnote::before {
   content: '';
   position: absolute;
-  inset: -34px -54px;
+  inset: -14px -24px;
   z-index: 0;
-  /* אליפסה שנוגעת בדיוק באמצע כל צלע ומתפוגגת לשקיפות מלאה בקצה
-     שלה — ולכן אין כאן מלבן נראה, קצה או פינה */
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    rgba(251, 248, 241, 0.96) 0%,
-    rgba(251, 248, 241, 0.9) 46%,
-    rgba(251, 248, 241, 0.62) 72%,
-    rgba(251, 248, 241, 0) 100%
+  border-radius: 14px;
+  background: rgba(248, 245, 236, 0.93);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  --lnote-fade-x: linear-gradient(
+    to left,
+    transparent 0,
+    #000 44px,
+    #000 calc(100% - 44px),
+    transparent 100%
   );
+  --lnote-fade-y: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 32px,
+    #000 calc(100% - 32px),
+    transparent 100%
+  );
+  -webkit-mask-image: var(--lnote-fade-x), var(--lnote-fade-y);
+  -webkit-mask-composite: source-in;
+  mask-image: var(--lnote-fade-x), var(--lnote-fade-y);
+  mask-composite: intersect;
 }
 
 /* הנקודה בחצי השמאלי של האיור פותחת ימינה, ובחצי הימני — שמאלה,
@@ -387,27 +423,17 @@
   right: -46px;
 }
 
+/* הכחול הכהה של האתר על שכבת השמנת — יחס ניגודיות של כ-15:1,
+   הרבה מעל הרף של 4.5:1. הילת הטקסט ירדה: השכבה שמאחוריו כבר
+   מספקת את הקריאוּת, והילה מעליה הייתה מלכלכת את האותיות. */
 .lnote__text {
   position: relative;
   z-index: 1;
   margin: 0;
-  font-size: clamp(18.5px, 1.25vw, 21.5px);
-  line-height: 1.7;
-  color: var(--ink-soft);
-  /* בלי כרטיס ובלי מלבן: הילת שמנת בלבד, שהמלל יישאר קריא על האיור */
-  text-shadow:
-    0 0 7px var(--paper),
-    0 0 14px var(--paper),
-    0 0 22px var(--paper);
-}
-
-@keyframes lnoteIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  font-size: clamp(19.5px, 1.32vw, 22.5px);
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--navy);
 }
 
 /* ההנפשה חייבת לשמור על ה-transform של הצד, ולכן היא על אטימות בלבד */
@@ -417,7 +443,7 @@
     opacity: 0;
   }
   .lnote {
-    animation: none;
+    transition: none;
   }
   .lspot__dot,
   .lspot__label {
@@ -479,6 +505,13 @@
     transform: none;
     margin-top: clamp(20px, 4vh, 34px);
     padding-inline: var(--ch-gutter);
+  }
+
+  /* כאן ההסבר יושב מתחת לאיור על רקע השמנת הנקי ולא מעל האיור, ולכן
+     שכבת הקריאוּת מיותרת. בלעדיה גם אין קצה חד במקום שבו המקטע היה
+     חותך אותה. */
+  .lnote::before {
+    content: none;
   }
 
   .lnote__link,
