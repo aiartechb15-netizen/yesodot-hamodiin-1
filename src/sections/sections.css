@@ -156,7 +156,7 @@
 /* הרשימה מימין, התצלום משמאל, בגובה זהה */
 .domains__layout {
   display: grid;
-  grid-template-columns: 1fr minmax(240px, 0.5fr);
+  grid-template-columns: 1fr minmax(220px, 0.34fr);
   align-items: stretch;
   gap: clamp(24px, 3vw, 40px);
   margin-top: clamp(26px, 3vw, 36px);
@@ -183,7 +183,9 @@
 
 .domain {
   display: grid;
-  grid-template-columns: 26px 34px minmax(150px, 210px) 1fr;
+  /* טור הכותרת נצמד לתוכנו במקום לשמור 210px קבועים: אחרי הגדלת
+     הכתב הוא גזל את רוחב ההסבר, וזה נשבר ל-3–4 מילים בשורה */
+  grid-template-columns: 26px 34px max-content minmax(0, 1fr);
   align-items: center;
   gap: clamp(16px, 1.8vw, 26px);
   min-height: 84px;

@@ -315,7 +315,7 @@
   max-width: min(30ch, 100%);
   margin: 12px 0 0;
   color: var(--muted);
-  font-size: 23.5px;
+  font-size: 22px;
   line-height: 1.6;
 }
 
@@ -472,6 +472,13 @@
   width: 1px;
   height: 22px;
   background: var(--gold);
+}
+
+/* במסך צר הסרגל נשבר לשתי שורות, והקו נשאר תלוי בסוף הראשונה */
+@media (max-width: 480px) {
+  .of__deepDiv {
+    display: none;
+  }
 }
 
 .of__deepPanel {

@@ -236,8 +236,10 @@
 /* ---------- התגית ---------- */
 .lspot__label {
   position: absolute;
-  /* נמדד ממרכז הסמן ולא מקצה הכפתור, כדי שהמרווח יישאר קבוע */
-  bottom: calc(50% + 24px);
+  /* נמדד ממרכז הסמן ולא מקצה הכפתור, כדי שהמרווח יישאר קבוע.
+     המרווח גדול דיו כדי שההסבר שנפתח מנקודה שכנה יעבור מתחת לתגית
+     ולא דרכה. */
+  bottom: calc(50% + 44px);
   left: 50%;
   /* --shift נקבע ברכיב, ורק לתגיות שהיו חורגות משולי המקטע */
   transform: translateX(calc(-50% + var(--shift, 0px)));
@@ -285,6 +287,14 @@
 }
 
 .lspot:hover .lspot__label,
+/* בזמן שהסבר פתוח שאר התגיות מתעמעמות: הן אינן נחוצות לקריאה,
+   וכך הטקסט שנפתח אינו נחצה על ידי כיתוב של נקודה שכנה. הנקודות
+   עצמן נשארות גלויות ולחיצות. */
+.lmap__frame--hot:has(.lspot.is-active) .lspot:not(.is-active) .lspot__label {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .lspot:focus-visible .lspot__label {
   transform: translateX(calc(-50% + var(--shift, 0px))) translateY(-2px);
   border-color: var(--gold);
@@ -333,7 +343,10 @@
 .lnote {
   position: absolute;
   top: var(--ny);
-  left: var(--nx);
+  /* ההסבר אינו מתחיל משמאל לשולי המקטע: .lmap__fore הוא container
+     בגודל, ולכן 100cqw הוא רוחב המקטע ואילו 100% הוא רוחב המסגרת
+     שחורגת ממנו. בלי החסם הזה משפט שלם נחתך ב-overflow. */
+  left: max(var(--nx), calc((100% - 100cqw) / 2 + 24px));
   width: clamp(320px, 26vw, 400px);
   padding: 20px;
   direction: rtl;

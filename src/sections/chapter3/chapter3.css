@@ -125,7 +125,9 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  width: 190px;
+  /* רחב דיו לכיתוב הארוך ביותר בשורה אחת: אחרת הוא נשבר לשתיים,
+     התחנה גבוהה מהאחרות והעיגולים יוצאים מקו אחד */
+  width: 240px;
   text-align: center;
 }
 
@@ -264,6 +266,9 @@
   font-size: 19px;
   color: var(--muted);
   display: block;
+  /* שתי שורות שמורות: כותרת המשנה של אחד הכרטיסים נכנסת לשורה אחת
+     ושל האחרים לשתיים, והשורה השמורה מיישרת את תחתית כולם */
+  min-height: 2lh;
 }
 
 .abbr__text {
@@ -314,6 +319,10 @@
   align-items: flex-end;
   gap: 10px;
   margin-top: 22px;
+  /* בלי זה נשאר ריפוד ברירת המחדל של הדפדפן ל-ol, והסולם מוסט
+     מקצה הימני בעוד שאר הבלוקים במקטע צמודים אליו */
+  padding: 0;
+  list-style: none;
 }
 
 .rung {
@@ -858,13 +867,15 @@
   .oppath {
     grid-template-columns: 1fr;
     gap: 0;
-    padding-inline-start: 34px;
+    /* בלי ריפוד: המספר מקבל טור משלו בתוך הכפתור, ולא נמשך אל
+       השוליים אל מתחת לאייקון */
+    padding-inline-start: 0;
   }
   .oppath::before {
     top: 12px;
     bottom: 12px;
     inset-inline: auto;
-    inset-inline-start: 16px;
+    inset-inline-start: 17px;
     width: 1px;
     height: auto;
   }
@@ -880,7 +891,7 @@
     padding: 0;
   }
   .opstop__num {
-    margin-inline-start: -34px;
+    margin-inline-start: 0;
   }
   .opstop__panelRule {
     margin-inline: 0;

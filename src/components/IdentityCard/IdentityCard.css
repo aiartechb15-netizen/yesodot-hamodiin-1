@@ -25,7 +25,7 @@
 
 .idcard__row {
   display: grid;
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: 220px 1fr;
   gap: 18px;
   align-items: start;
   padding: 14px 0;
@@ -185,7 +185,7 @@
 
 /* השורות: עמודת כותרות ברוחב אחיד, כך שכל ההסברים מתחילים באותו קו */
 .idcard--open .idcard__row {
-  grid-template-columns: 160px 1fr;
+  grid-template-columns: 230px 1fr;
   gap: clamp(16px, 2vw, 28px);
   padding: clamp(15px, 1.7vw, 19px) 0;
   border-bottom: 0;
