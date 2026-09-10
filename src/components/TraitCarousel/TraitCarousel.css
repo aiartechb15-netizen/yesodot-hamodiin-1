@@ -89,7 +89,7 @@
 }
 
 .tcar__navName {
-  font-size: 14.5px;
+  font-size: 13px;
   line-height: 1.4;
   color: var(--muted);
 }
@@ -121,7 +121,7 @@
 
 .tcar__title {
   margin: 0;
-  font-size: clamp(30px, 3vw, 40px);
+  font-size: clamp(23.5px, 3vw, 31.5px);
   line-height: 1.25;
   color: var(--navy);
 }
@@ -139,7 +139,7 @@
 .tcar__text {
   max-width: 720px;
   margin: 0 auto;
-  font-size: clamp(18px, 1.4vw, 20.5px);
+  font-size: clamp(14px, 1.4vw, 16px);
   line-height: 1.85;
   color: var(--ink-soft);
 }
@@ -203,7 +203,7 @@
      ברקע ואינו נקרא כשבב או ככרטיס */
   background: #f7f3ea;
   color: var(--muted);
-  font-size: 14.5px;
+  font-size: 13px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   cursor: pointer;
@@ -239,7 +239,7 @@
   border-color: var(--gold);
   background: var(--gold);
   color: var(--navy);
-  font-size: 16px;
+  font-size: 13px;
 }
 
 /* ---------- הודעת הסיום ---------- */
@@ -249,7 +249,7 @@
   margin: 0;
   min-height: 1.7em;
   text-align: center;
-  font-size: 16.5px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--teal-ink);
   opacity: 0;
@@ -315,13 +315,13 @@
   .tcar__stop {
     width: 34px;
     height: 34px;
-    font-size: 12.5px;
+    font-size: 13px;
   }
 
   .tcar__stop.is-active {
     width: 39px;
     height: 39px;
-    font-size: 13.5px;
+    font-size: 13px;
   }
 }
 
@@ -330,12 +330,12 @@
     width: 30px;
     height: 30px;
     border-width: 1px;
-    font-size: 11.5px;
+    font-size: 13px;
   }
 
   .tcar__stop.is-active {
     width: 35px;
     height: 35px;
-    font-size: 12.5px;
+    font-size: 13px;
   }
 }

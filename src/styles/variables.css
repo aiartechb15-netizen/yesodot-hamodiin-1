@@ -63,17 +63,18 @@
   --font-primary: var(--font-body);
 
   /* כל הגדלים clamp() — רספונסיביים בלי media queries.
-     סולם הקריאה מכוון לטקסט לימודי ולא לממשק: גוף 19px, משני 17px,
-     זעיר 15px. הקורא לומד מהמסך הזה — הוא לא אמור להתאמץ לקרוא. */
-  --fs-hero: clamp(2.5rem, 6.4vw, 4.15rem);
-  --fs-h1: clamp(2.15rem, 4.8vw, 3.25rem);
-  --fs-h2: clamp(1.75rem, 3.4vw, 2.4rem);
-  --fs-h3: clamp(1.375rem, 2.4vw, 1.625rem);
-  --fs-h4: 1.25rem;
-  --fs-lead: clamp(1.225rem, 2.05vw, 1.4375rem);
-  --fs-body: 1.1875rem;
-  --fs-small: 1.0625rem;
-  --fs-xs: 0.9375rem;
+     סולם אחיד אחד לכל האתר, מכויל לטקסט רץ של 15px: משני 13.5,
+     זעיר 12.5. הכותרות גדלות ביחס קבוע מעליו — h3 ×1.4, h2 ×2.1,
+     h1 ×2.9 — ולכן ההיררכיה בולטת יותר ככל שעולים בה. */
+  --fs-hero: clamp(2rem, 5.1vw, 3.3rem);
+  --fs-h1: clamp(1.7rem, 3.8vw, 2.6rem);
+  --fs-h2: clamp(1.4rem, 2.7vw, 1.9rem);
+  --fs-h3: clamp(1.1rem, 1.9vw, 1.3rem);
+  --fs-h4: 1rem;
+  --fs-lead: clamp(1rem, 1.65vw, 1.15rem);
+  --fs-body: 0.9375rem;
+  --fs-small: 0.84375rem;
+  --fs-xs: 0.8125rem;
 
   /* גובה שורה מהודק במכוון — לעברית יש x-height גבוה */
   --lh-tight: 1.22;

@@ -23,7 +23,7 @@
 
 .quiz__count {
   display: block;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--navy-secondary);
   margin-bottom: 10px;
@@ -48,7 +48,7 @@
 }
 
 .quiz__heading {
-  font-size: 22px;
+  font-size: 17.5px;
   color: var(--navy);
 }
 
@@ -62,7 +62,7 @@
 
 .quiz__scenarioLabel {
   display: block;
-  font-size: 14.5px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--navy-secondary);
@@ -70,7 +70,7 @@
 }
 
 .quiz__question {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text);
   margin-bottom: 18px;
@@ -120,7 +120,7 @@
 }
 
 .quiz__hint {
-  font-size: 16.5px;
+  font-size: 13px;
   color: var(--muted);
 }
 
@@ -133,7 +133,7 @@
 
 .quiz__stmtText {
   margin: 0;
-  font-size: 18.5px;
+  font-size: 14.5px;
   font-weight: 600;
   color: var(--navy);
 }
@@ -154,7 +154,7 @@
   border-radius: 999px;
   background: var(--white);
   cursor: pointer;
-  font-size: 17.5px;
+  font-size: 14px;
   transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
@@ -183,7 +183,7 @@
 
 .quiz__stmtFeedback {
   margin: 12px 0 0;
-  font-size: 17px;
+  font-size: 13.5px;
   color: var(--ink-soft);
   border-top: 1px dashed var(--border);
   padding-top: 10px;
@@ -221,7 +221,7 @@
 
 .quiz__feedback p {
   margin: 0;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .quiz__actions {
@@ -282,7 +282,7 @@
 }
 
 .quiz__topicLevel {
-  font-size: 16px;
+  font-size: 13px;
   color: var(--muted);
   min-width: 100px;
   text-align: start;
@@ -333,7 +333,7 @@
 
 .quiz__refreshText {
   display: block;
-  font-size: 17px;
+  font-size: 13.5px;
   color: var(--muted);
 }
 

@@ -516,7 +516,7 @@ svg {
 
 .openBlock__example {
   color: var(--muted);
-  font-size: 18px;
+  font-size: 14px;
 }
 
 /* ---------- callouts ---------- */
@@ -712,7 +712,7 @@ svg {
    קווים מפרידים — רק טקסט, כדי שהמעבר מהתצלום יהיה שקט. */
 .chIntro__lead p,
 p.chIntro__lead {
-  font-size: clamp(19px, 1.5vw, 22px);
+  font-size: clamp(15px, 1.5vw, 17.5px);
   line-height: 1.75;
   color: var(--text);
   max-width: 68ch;

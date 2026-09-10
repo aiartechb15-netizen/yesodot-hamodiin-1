@@ -58,7 +58,7 @@
   margin: 0 0 14px;
   color: var(--cover-gold);
   font-family: var(--font-heading);
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.22em;
   /* התווית קטנה ויושבת מעל האזור הבהיר של השמיים — צל מעט חזק
@@ -71,7 +71,7 @@
   color: var(--cover-ink);
   font-family: var(--font-heading);
   /* דסקטופ: 64px ומטפס עד 72px במסכים רחבים */
-  font-size: clamp(64px, 4.6vw, 72px);
+  font-size: clamp(50.5px, 4.6vw, 57px);
   font-weight: 700;
   line-height: var(--lh-tight);
   letter-spacing: -0.01em;
@@ -101,7 +101,7 @@
   margin: 20px auto 0;
   color: rgba(247, 243, 232, 0.86);
   font-family: var(--font-body);
-  font-size: clamp(19px, 1.35vw, 22px);
+  font-size: clamp(15px, 1.35vw, 17.5px);
   font-weight: 400;
   line-height: 1.5;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
@@ -117,7 +117,7 @@
   margin: 0;
   color: rgba(247, 243, 232, 0.6);
   font-family: var(--font-heading);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.16em;
   /* ספרות ברוחב אחיד — הסימון לא "רוקד" אם המספר יתחלף */
@@ -209,7 +209,7 @@
 .cover__downLabel {
   color: rgba(247, 243, 232, 0.78);
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.08em;
   line-height: 1;
@@ -294,7 +294,7 @@
 /* טאבלט */
 @media (max-width: 1024px) {
   .cover__title {
-    font-size: 52px;
+    font-size: 41px;
   }
 }
 
@@ -309,16 +309,16 @@
 
 @media (max-width: 640px) {
   .cover__title {
-    font-size: clamp(34px, 9vw, 44px);
+    font-size: clamp(27px, 9vw, 35px);
   }
   .cover__eyebrow {
     margin-bottom: 10px;
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 0.18em;
   }
   .cover__tagline {
     margin-top: 16px;
-    font-size: 18px;
+    font-size: 14px;
   }
   /* בצד המסך הצר הסימון היה נדחק אל הכותרת — הוא יורד לשורת החץ,
      צמוד לשוליים, ונשאר קריא בלי לגעת בטקסט */
@@ -326,7 +326,7 @@
     top: auto;
     bottom: clamp(28px, 3.8vh, 38px);
     transform: none;
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 

@@ -37,7 +37,7 @@
   border-radius: 50%;
   background: var(--navy);
   color: var(--white);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
 }
 
@@ -63,7 +63,7 @@
   background: var(--paper);
   border: 1px solid var(--border);
   border-radius: 999px;
-  font-size: 17px;
+  font-size: 13.5px;
   cursor: pointer;
   transition: border-color 0.15s ease, background-color 0.15s ease;
 }
@@ -108,7 +108,7 @@
   align-items: center;
   gap: 8px;
   font-weight: 700;
-  font-size: 17px;
+  font-size: 13.5px;
   color: var(--teal);
   margin-bottom: 6px;
 }
@@ -119,5 +119,5 @@
 
 .scen__feedback p {
   margin: 0;
-  font-size: 17.5px;
+  font-size: 14px;
 }

@@ -12,91 +12,21 @@
   direction: rtl;
 }
 
-/* ---------- 2. סולם הטיפוגרפיה ---------- */
-/* המשתנים נדרסים ברמת העמוד, ולכן כל רכיב שמשתמש בהם גדל יחד איתם.
-   font-size על .ch1 עצמו נחוץ: ה-body כבר חישב את גודלו מהערך הישן,
-   וילדיו יורשים ממנו ולא מהמשתנה. */
+/* ---------- 2. טיפוגרפיה ----------
+   הסולם עצמו אחיד לכל האתר ונקבע ב-variables.css. כאן נשארו רק
+   ההתאמות היחסיות של הפרק: גובה שורה נוח לטקסט רץ, וכיתובים משניים
+   שנקבעים ביחס לגודל שסביבם ולא בערך קבוע. */
 .ch1 {
-  --fs-h1: clamp(2.3rem, 5vw, 3.4rem);
-  --fs-h2: clamp(2rem, 3.6vw, 2.5rem); /* 32–40 */
-  --fs-h3: clamp(1.5rem, 2.5vw, 1.875rem); /* 24–30 */
-  --fs-lead: clamp(1.3rem, 2.1vw, 1.5rem); /* 20.8–24 */
-  --fs-body: 1.25rem; /* 20 */
-  --fs-small: 1.125rem; /* 18 */
-  --fs-xs: 1rem; /* 16 */
   font-size: var(--fs-body);
   line-height: 1.72;
 }
 
-/* טקסט הגוף — 20px בדסקטופ, וגובה שורה נוח */
 .ch1 p,
 .ch1 li,
 .ch1 dd,
 .ch1 blockquote {
   font-size: var(--fs-body);
   line-height: 1.72;
-}
-
-/* טקסט משני — לא יורד מ-16px */
-.ch1 .muted,
-.ch1 .small,
-.ch1 .kicker,
-.ch1 .callout__label,
-.ch1 .openBlock__example,
-.ch1 .approaches__label,
-.ch1 .video__note,
-.ch1 .video__caption,
-.ch1 .cycle__loop,
-.ch1 .tcar__navName,
-.ch1 .tcar__done,
-.ch1 .quiz__count,
-.ch1 .quiz__hint,
-.ch1 .lspot__label,
-.ch1 .cover__downLabel {
-  font-size: max(1rem, 1.06em);
-}
-
-/* מספרים בעיגולים ובתגים — קטנים מדי היו בהם 13.5–15 */
-.ch1 .cycle__num,
-.ch1 .domain__num,
-.ch1 .ladder__step,
-.ch1 .ltr-num,
-.ch1 .qlist__mark,
-.ch1 .tcar__stop > span,
-.ch1 .tcar__stopNum,
-.ch1 .ladder__btn .ladder__step {
-  font-size: 1rem;
-}
-
-/* כותרות משנה של בלוקים — 24–30 */
-.ch1 .openBlock__title,
-.ch1 .block__title,
-.ch1 .rail__title,
-.ch1 .lsys__title,
-.ch1 .s3sub,
-.ch1 .xcards__panelTitle,
-.ch1 .quiz__heading,
-.ch1 .pbody__title,
-.ch1 .tcar__title {
-  font-size: var(--fs-h3);
-  line-height: 1.3;
-}
-
-/* כותרות מקטע — 32–40 */
-.ch1 .section-title {
-  font-size: var(--fs-h2);
-  line-height: 1.24;
-}
-
-/* פקדים — 17–18px לפחות */
-.ch1 .btn,
-.ch1 .tab,
-.ch1 .xcard__title,
-.ch1 .acc__btn,
-.ch1 .pchoice,
-.ch1 .trait__title,
-.ch1 .lterm {
-  font-size: max(1.0625rem, 1em);
 }
 
 /* ---------- 3. יישור לימין ---------- */
@@ -251,7 +181,7 @@
    (ChapterNav.css), והסולם הגדול של פרק 1 אינו חל עליו — אחרת היה
    נראה אחרת משאר הפרקים. */
 .ch1 .cycle__nodeTitle {
-  font-size: max(1rem, 16.5px);
+  font-size: max(1rem, 13px);
 }
 
 /* ---------- 8. שוליים צדדיים של אזור התוכן ----------
@@ -287,28 +217,11 @@
   }
 }
 
-/* בטאבלט ובמובייל הסולם יורד מעט, כדי שהכתב לא ישתלט על המסך */
-@media (max-width: 1024px) {
-  .ch1 {
-    --fs-body: 1.1875rem; /* 19 */
-    --fs-lead: clamp(1.25rem, 2.4vw, 1.375rem);
-    --fs-h3: clamp(1.375rem, 3vw, 1.625rem);
-    --fs-h2: clamp(1.75rem, 4.4vw, 2.25rem);
-  }
-}
-
 @media (max-width: 640px) {
-  .ch1 {
-    --fs-body: 1.125rem; /* 18 */
-    --fs-small: 1.0625rem;
-    --fs-lead: 1.1875rem;
-    --fs-h3: clamp(1.3rem, 5.4vw, 1.5rem);
-    --fs-h2: clamp(1.625rem, 6.6vw, 2rem);
-  }
   .ch1 p {
     max-width: none;
   }
   .ch1 .cover__eyebrow {
-    font-size: 15px;
+    font-size: 13px;
   }
 }
