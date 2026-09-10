@@ -1,6 +1,9 @@
+/* כמו בשאלון: הכרטיס נעוץ לקצה ההתחלה של אזור התוכן — הצד הימני
+   בעמוד RTL — כדי שיתחיל על אותו קו יישור של הכותרת ושל פסקת ההסבר
+   שמעליו. margin-inline: 0 auto הוא margin-right: 0 / margin-left: auto. */
 .exam {
   max-width: 880px;
-  margin-inline: auto;
+  margin-inline: 0 auto;
   overflow: hidden;
 }
 

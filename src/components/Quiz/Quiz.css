@@ -1,6 +1,10 @@
+/* הכרטיס נעוץ לקצה ההתחלה של אזור התוכן — הצד הימני בעמוד RTL — ולא
+   ממורכז בו. כך הוא מתחיל על אותו קו יישור של כותרת המקטע, של קו
+   הזהב ושל פסקת ההסבר שמעליו, והשארית נבלעת בצד שמאל.
+   margin-inline: 0 auto הוא margin-right: 0 / margin-left: auto ב-RTL. */
 .quiz {
   max-width: 860px;
-  margin-inline: auto;
+  margin-inline: 0 auto;
   overflow: hidden;
 }
 
