@@ -1,52 +1,43 @@
 /* ---------- קרוסלת המאפיינים ----------
-   קרוסלה טיפוגרפית: מאפיין אחד במרכז, שני חצים צמודים לו, ומתחתיו
-   קשת זהב רדודה עם שבע תחנות ממוספרות. אין כאן כרטיס, מלבן, מסגרת,
-   רקע לבן או אייקון — ההיררכיה נבנית מגודל הכותרת, מקו הזהב ומן
-   הקשת בלבד. ההתקדמות נקראת מן המספרים שעל הקשת ולא ממונה. */
+   טיפוגרפיה בלבד: כותרת גדולה, קו זהב קצר וההסבר — בלי כרטיס,
+   מלבן, מסגרת, רקע לבן, צל, אייקון או מספר. ההתקדמות נקראת מחצי
+   העיגול הקטן שמתחת לתוכן ולא ממונה או משורת מספרים. */
 .tcar {
-  width: min(1100px, 100%);
-  margin-inline: auto;
-  /* ממלא את הגובה שנשאר מתחת לכותרת המסך וממרכז את עצמו בתוכו,
-     כדי שלא תישאר רצועה ריקה בתחתית המסך */
-  flex: 1 1 auto;
+  /* רוחב מוגבל, ונעוץ בקו הימני של הכותרת שמעליו — לא נפרש על כל
+     רוחב המסך ולא ממורכז */
+  width: min(720px, 100%);
+  margin-inline: 0 auto;
+  /* צמוד לכותרת ולשורת ההנחיה שמעליו */
+  margin-top: clamp(4px, 0.8vw, 10px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: clamp(18px, 2.2vw, 30px);
-  margin-top: clamp(14px, 1.8vw, 24px);
+  gap: clamp(10px, 1.2vw, 16px);
 }
 
-/* טבעת הפוקוס יושבת על הקרוסלה כולה, כי היא עצמה מקבלת מיקוד
-   לצורך הניווט במקשי החצים */
+/* טבעת הפוקוס יושבת על הקרוסלה כולה, כי היא מקבלת מיקוד לצורך
+   הניווט במקשי החצים */
 .tcar:focus-visible {
   outline: 3px solid var(--teal);
   outline-offset: 10px;
   border-radius: 6px;
 }
 
-/* ---------- התוכן והחצים ---------- */
-/* שלושת הטורים נצמדים לרוחב הטקסט ולא לרוחב אזור התוכן, כדי שהחצים
-   ייקראו כחלק מהקרוסלה ולא כפקדים בקצות המסך */
-.tcar__stage {
+/* ---------- התוכן ושני החצים ---------- */
+.tcar__row {
   display: grid;
-  grid-template-columns: auto minmax(0, 760px) auto;
-  justify-content: center;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: clamp(10px, 2vw, 34px);
+  gap: clamp(12px, 1.6vw, 20px);
 }
 
-.tcar__nav {
-  display: grid;
-  justify-items: center;
-  gap: 10px;
-}
-
+/* שני החצים זהים בגודלם ובגובהם, עגולים ועדינים, וצמודים לתוכן */
 .tcar__arrow {
   display: grid;
   place-items: center;
-  width: clamp(52px, 4.4vw, 62px);
-  height: clamp(52px, 4.4vw, 62px);
-  border: 1.5px solid var(--navy);
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border: 1px solid var(--border);
   border-radius: 50%;
   background: transparent;
   color: var(--navy);
@@ -54,18 +45,12 @@
   transition:
     border-color 0.18s ease,
     color 0.18s ease,
-    background-color 0.18s ease,
-    transform 0.18s ease;
+    background-color 0.18s ease;
 }
 
 .tcar__arrow svg {
-  width: 22px;
-  height: 22px;
-}
-
-/* החץ מצויר פונה שמאלה — לכיוון ההתקדמות. "הקודם" מצביע לאחור */
-.tcar__arrow--prev svg {
-  transform: scaleX(-1);
+  width: 20px;
+  height: 20px;
 }
 
 .tcar__arrow:hover:not(:disabled),
@@ -73,7 +58,6 @@
   border-color: var(--gold);
   color: var(--gold-ink);
   background: rgba(196, 163, 71, 0.1);
-  transform: scale(1.05);
 }
 
 .tcar__arrow:focus-visible {
@@ -81,30 +65,20 @@
   outline-offset: 3px;
 }
 
-/* בקצוות אין לאן להתקדם: הכפתור נשאר במקומו ומאבד את הניגודיות */
+/* בקצה אין לאן להתקדם: החץ נשאר במקומו, ברור אך עדין */
 .tcar__arrow:disabled {
   border-color: var(--border);
   color: var(--border);
   cursor: default;
 }
 
-.tcar__navName {
-  font-size: 19px;
-  line-height: 1.4;
-  color: var(--muted);
-}
-
-.tcar__arrow:disabled + .tcar__navName {
-  color: var(--border);
-}
-
 /* ---------- המאפיין הפעיל ---------- */
 /* כל המאפיינים בתא אחד: גובה האזור נקבע מן הארוך שביניהם, ולכן
-   הקשת והחצים אינם זזים במעבר בין הסבר קצר לארוך */
+   העמוד אינו קופץ במעבר בין הסבר קצר לארוך */
 .tcar__slide {
   display: grid;
-  align-items: center;
-  text-align: center;
+  align-items: start;
+  text-align: right;
 }
 
 .tcar__panel {
@@ -112,144 +86,115 @@
   /* visibility ולא display: המאפיינים המוסתרים ממשיכים לתרום לגובה */
   visibility: hidden;
   opacity: 0;
+  text-align: right;
 }
 
 .tcar__panel.is-on {
   visibility: visible;
   opacity: 1;
+  /* fade קצר ועדין בכל החלפה — בלי הזזה, כדי שהעין תישאר על הטקסט */
+  animation: tcar-fade 0.28s ease both;
+}
+
+@keyframes tcar-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .tcar__title {
   margin: 0;
   font-size: clamp(28px, 2.5vw, 34px);
   line-height: 1.25;
+  text-align: right;
   color: var(--navy);
 }
 
-/* קו הזהב הקצר שמתחת לכותרת */
+/* קו הזהב הקצר שמתחת לכותרת — בצד ההתחלה, לא במרכז */
 .tcar__rule {
   display: block;
   width: 52px;
   height: 2px;
-  margin: clamp(16px, 1.6vw, 22px) auto clamp(18px, 1.9vw, 26px);
+  margin: clamp(12px, 1.2vw, 16px) 0 clamp(14px, 1.4vw, 18px);
   border-radius: 2px;
   background: var(--gold);
 }
 
 .tcar__text {
-  max-width: 720px;
-  margin: 0 auto;
-  font-size: clamp(20.5px, 1.4vw, 23.5px);
-  line-height: 1.85;
+  max-width: 62ch;
+  margin: 0;
+  text-align: right;
+  line-height: 1.8;
   color: var(--ink-soft);
 }
 
-/* מעבר בין מאפיינים: הופעה רכה והחלקה קצרה מכיוון התנועה.
-   ההנפשה נדלקת ברגע שהמחלקה is-on מתווספת, ולכן היא רצה מחדש בכל
-   החלפה בלי להרכיב את הרכיב מחדש */
-.tcar__panel.is-on {
-  animation: tcar-in 0.34s ease both;
-}
-
-.tcar__slide--fwd {
-  --tcar-from: 26px;
-}
-
-.tcar__slide--back {
-  --tcar-from: -26px;
-}
-
-@keyframes tcar-in {
-  from {
-    opacity: 0;
-    transform: translateX(var(--tcar-from, 26px));
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* ---------- הקשת ---------- */
-/* אותו יחס גובה-רוחב כמו ה-viewBox, ולכן ה-SVG נכנס בדיוק לקופסה
-   ומיקומי האחוזים של התחנות נופלים בדיוק על הקו */
-.tcar__arc {
+/* ---------- חצי-העיגול ---------- */
+/* קטן וקומפקטי, צמוד לתוכן שמעליו. אותו יחס גובה-רוחב כמו ה-viewBox,
+   ולכן מיקומי האחוזים של הנקודות נופלים בדיוק על הקו. */
+.tcar__dial {
   position: relative;
-  width: min(880px, 100%);
-  aspect-ratio: 880 / 168;
-  margin-inline: auto;
+  width: clamp(196px, 21vw, 232px);
+  aspect-ratio: 232 / 132;
+  /* יושב מתחת לעמודת הטקסט, בקו אחד עם ראשיתה */
+  margin-inline-start: calc(46px + clamp(12px, 1.6vw, 20px));
+  margin-top: clamp(2px, 0.6vw, 8px);
 }
 
-.tcar__arcLine {
+.tcar__dialLine {
   display: block;
   width: 100%;
   height: 100%;
   color: var(--gold);
-  /* הקו עדין; אטימות חלקית מרככת אותו בלי לדלל את צבע הזהב */
-  opacity: 0.75;
+  /* קו עדין: אטימות חלקית מרככת אותו בלי לדלל את צבע הזהב */
+  opacity: 0.55;
 }
 
-.tcar__stop {
+/* שבע נקודות עגולות — בלי מספרים ובלי אייקונים */
+.tcar__dot {
   position: absolute;
   transform: translate(-50%, -50%);
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--border);
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  border: 1px solid var(--navy-secondary);
   border-radius: 50%;
-  /* גוון הבסיס של גיליון הרקע (globals.css, .hasMotif): העיגול חוסם
-     את קו הזהב שעובר במרכזו, כדי שהמספר יישאר קריא, ובכל זאת נבלע
-     ברקע ואינו נקרא כשבב או ככרטיס */
-  background: #f7f3ea;
-  color: var(--muted);
-  font-size: 19px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
+  background: var(--paper);
   cursor: pointer;
   transition:
-    color 0.18s ease,
-    border-color 0.18s ease,
-    background-color 0.18s ease,
     width 0.18s ease,
-    height 0.18s ease;
+    height 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease;
 }
 
-.tcar__stop:hover {
+.tcar__dot:hover {
   border-color: var(--gold);
-  color: var(--navy);
-  transform: translate(-50%, -50%) scale(1.08);
+  background: rgba(196, 163, 71, 0.22);
 }
 
-.tcar__stop:focus-visible {
+.tcar__dot:focus-visible {
   outline: 3px solid var(--teal);
   outline-offset: 3px;
 }
 
-/* מאפיין שכבר נצפה — טבעת טורקיז דקה, בלי למשוך את העין מן הפעיל */
-.tcar__stop.is-visited {
-  border-color: var(--teal);
-  color: var(--teal-ink);
-}
-
-/* המאפיין הפעיל — העיגול הבולט ביותר על הקשת */
-.tcar__stop.is-active {
-  width: 46px;
-  height: 46px;
+/* הנקודה הפעילה — מעט גדולה יותר ומלאה בזהב */
+.tcar__dot.is-active {
+  width: 19px;
+  height: 19px;
   border-color: var(--gold);
   background: var(--gold);
-  color: var(--navy);
-  font-size: 19px;
 }
 
 /* ---------- הודעת הסיום ---------- */
-/* השורה שמורה תמיד ולכן הופעת ההודעה אינה מזיזה דבר; היא מופיעה
-   בפייד בלבד, בלי כרטיס ובלי מסגרת */
+/* שורה אחת שמורה תמיד, ולכן הופעתה אינה מזיזה דבר */
 .tcar__done {
   margin: 0;
-  min-height: 1.7em;
-  text-align: center;
-  font-size: 19px;
+  min-height: 1.6em;
+  text-align: right;
+  font-size: var(--fs-small);
   font-weight: 700;
   color: var(--teal-ink);
   opacity: 0;
@@ -265,77 +210,52 @@
     animation: none;
   }
   .tcar__arrow,
-  .tcar__stop,
+  .tcar__dot,
   .tcar__done {
     transition: none;
   }
-  .tcar__arrow:hover:not(:disabled),
-  .tcar__stop:hover {
-    transform: none;
-  }
-  .tcar__stop:hover {
-    transform: translate(-50%, -50%);
-  }
 }
 
-/* ---------- מסך צר ----------
-   התוכן במרכז, שני החצים בשורה אחת מתחתיו בסדר RTL, והקשת מתכווצת
-   יחסית. התחנות קטנות יותר אך נשארות בגודל שנוח ללחוץ עליו. */
+/* ---------- מסך צר ---------- */
 @media (max-width: 860px) {
   .tcar {
-    gap: clamp(20px, 4vw, 32px);
+    width: 100%;
   }
 
-  .tcar__stage {
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(14px, 4vw, 26px);
+  .tcar__row {
+    gap: 10px;
   }
 
-  .tcar__slide {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    min-height: 0;
+  .tcar__arrow {
+    width: 42px;
+    height: 42px;
   }
 
-  .tcar__nav {
-    grid-row: 2;
-  }
-
-  /* בכיוון RTL העמודה הראשונה בימין — "הקודם" נשאר בימין */
-  .tcar__nav:first-of-type {
-    grid-column: 1;
-    justify-self: end;
-  }
-
-  .tcar__nav:last-of-type {
-    grid-column: 2;
-    justify-self: start;
-  }
-
-  .tcar__stop {
-    width: 34px;
-    height: 34px;
-    font-size: 19px;
-  }
-
-  .tcar__stop.is-active {
-    width: 39px;
-    height: 39px;
-    font-size: 19px;
+  .tcar__dial {
+    width: 190px;
+    margin-inline-start: 52px;
   }
 }
 
 @media (max-width: 480px) {
-  .tcar__stop {
-    width: 30px;
-    height: 30px;
-    border-width: 1px;
-    font-size: 19px;
+  /* בטלפון החצים מתכווצים אך נשארים — הם דרך הניווט הנוחה ביותר
+     לצד ההחלקה, ואין להסתיר אותם */
+  .tcar__row {
+    gap: 6px;
   }
 
-  .tcar__stop.is-active {
-    width: 35px;
-    height: 35px;
-    font-size: 19px;
+  .tcar__arrow {
+    width: 34px;
+    height: 34px;
+  }
+
+  .tcar__arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .tcar__dial {
+    width: 168px;
+    margin-inline-start: 46px;
   }
 }

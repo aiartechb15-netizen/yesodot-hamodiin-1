@@ -1,59 +1,51 @@
-import { useId, useState } from 'react'
+import { useId, useRef, useState } from 'react'
 import './TraitCarousel.css'
 
-/** מספר תחנה דו-ספרתי: 1 → "01". */
-const pad = (n) => String(n).padStart(2, '0')
+/* ---------- גיאומטריית חצי-העיגול ----------
+   חצי עיגול קטן שפתחו כלפי מעלה: הנקודה הראשונה בקצה הימני, ומשם
+   ההתקדמות נעה עם כיוון השעון — ימין ← למטה ← שמאל.
 
-/* ---------- גיאומטריית הקשת ----------
-   קשת מעגלית רדודה בצורת U. כל המידות נגזרות כאן פעם אחת: אותו
-   מעגל מייצר גם את הקו שב-SVG וגם את מיקום שבע התחנות, ולכן כל
-   תחנה יושבת בדיוק על הקו ולא מעליו או מתחתיו.
+   כל המידות נגזרות כאן פעם אחת, ולכן הקו והנקודות יושבים על אותו
+   מעגל בדיוק. הקופסה גדולה מהמעגל ברוחב נקודה, כדי שהנקודות
+   שבקצוות ייכנסו בשלמותן. */
+const R = 100
+const PAD = 16
+const BOX = { w: R * 2 + PAD * 2, h: R + PAD * 2 }
+const CX = BOX.w / 2
+const CY = PAD
 
-   הקופסה רחבה מן הקשת עצמה, כדי שהתחנות שבקצוות ייכנסו בשלמותן.
-   ה-SVG וה-viewBox חולקים את אותו יחס גובה-רוחב, ולכן המרות
-   האחוזים שלמטה נכונות בכל רוחב מסך. */
-const ARC = { w: 880, h: 168, left: 30, right: 850, top: 24, depth: 120 }
-const CHORD = ARC.right - ARC.left
-const RADIUS = (CHORD * CHORD) / (8 * ARC.depth) + ARC.depth / 2
-const CX = (ARC.left + ARC.right) / 2
-const CY = ARC.top + ARC.depth - RADIUS
-const ARC_PATH = `M ${ARC.right} ${ARC.top} A ${RADIUS.toFixed(2)} ${RADIUS.toFixed(2)} 0 0 1 ${ARC.left} ${ARC.top}`
+const ARC_PATH = `M ${CX + R} ${CY} A ${R} ${R} 0 0 1 ${CX - R} ${CY}`
 
-/** מיקום תחנה i על הקשת. RTL: 01 בימין הקשת ו-07 בשמאלה. */
-const stopAt = (i, total) => {
-  const x = ARC.right - (i * CHORD) / (total - 1)
-  const y = CY + Math.sqrt(RADIUS * RADIUS - (x - CX) ** 2)
-  return { left: `${(x / ARC.w) * 100}%`, top: `${(y / ARC.h) * 100}%` }
+/** מיקום נקודה i על חצי-העיגול, באחוזים מן הקופסה. */
+const dotAt = (i, total) => {
+  const angle = (Math.PI * i) / (total - 1)
+  const x = CX + R * Math.cos(angle)
+  const y = CY + R * Math.sin(angle)
+  return { left: `${(x / BOX.w) * 100}%`, top: `${(y / BOX.h) * 100}%` }
 }
 
+/** מרחק אצבע מזערי שנחשב להחלקה ולא לנגיעה */
+const SWIPE = 40
+
 /**
- * קרוסלת המאפיינים — מאפיין אחד במרכז המסך בכל רגע.
+ * קרוסלת המאפיינים — מאפיין אחד בכל רגע.
  *
- * קרוסלה טיפוגרפית: אין כרטיס, מלבן, מסגרת, רקע או אייקון סביב
- * התוכן — רק הכותרת, קו זהב קצר וההסבר, על רקע המסך עצמו.
+ * טיפוגרפיה בלבד: כותרת גדולה, קו זהב קצר וההסבר — בלי כרטיס,
+ * מסגרת, רקע, אייקון או מספר. כל האזור מיושר לימין, בהמשך לקו
+ * הכותרת של המסך.
  *
- * ההתקדמות מוצגת אך ורק בשבע התחנות הממוספרות שעל הקשת: אין מונה
- * "X מתוך 7", אין שורת מספרים ישרה ואין נקודות דקורטיביות.
- *
- * הניווט: שני חצים שצמודים לתוכן — "הקודם" בימין ו"הבא" בשמאל,
- * כמתחייב מכיוון הקריאה — לחיצה על תחנה, ומקשי החצים במקלדת.
- * אין מעבר מעגלי: בקצוות הכפתור המתאים מושבת.
+ * הניווט: שני חצים עגולים משני צדי התוכן, חצי-עיגול של שבע נקודות
+ * מתחתיו, מקשי החצים במקלדת והחלקה במסך מגע. אין מונה "X מתוך 7"
+ * ואין כיתוב ליד החצים — הנקודות הן מד ההתקדמות היחיד.
  */
-export default function TraitCarousel({
-  items,
-  completedMessage,
-  label,
-  prevLabel = 'הקודם',
-  nextLabel = 'הבא',
-}) {
+export default function TraitCarousel({ items, completedMessage, label }) {
   const uid = useId()
   const slideId = `${uid}-slide`
 
   const [index, setIndex] = useState(0)
-  /* 1 = קדימה, ‎-1 = אחורה. קובע מאיזה צד המגירה נכנסת */
-  const [dir, setDir] = useState(1)
   /* המאפיין הראשון נצפה כבר בכניסה למסך, כי הוא המוצג */
   const [visited, setVisited] = useState([0])
+  const touchX = useRef(null)
 
   const total = items.length
   const atStart = index === 0
@@ -61,7 +53,6 @@ export default function TraitCarousel({
 
   const go = (target) => {
     if (target < 0 || target > total - 1 || target === index) return
-    setDir(target > index ? 1 : -1)
     setIndex(target)
     setVisited((v) => (v.includes(target) ? v : [...v, target]))
   }
@@ -80,46 +71,58 @@ export default function TraitCarousel({
     }
   }
 
-  const current = items[index]
+  /* החלקה במסך מגע: שמאלה = המאפיין הבא, ימינה = הקודם */
+  const onTouchStart = (event) => {
+    touchX.current = event.changedTouches[0].clientX
+  }
+
+  const onTouchEnd = (event) => {
+    if (touchX.current === null) return
+    const delta = event.changedTouches[0].clientX - touchX.current
+    touchX.current = null
+    if (Math.abs(delta) < SWIPE) return
+    if (delta < 0) next()
+    else prev()
+  }
+
   const allDone = visited.length === total
 
   return (
-    <div className="tcar" role="group" aria-label={label} tabIndex={0} onKeyDown={onKeyDown}>
-      <div className="tcar__stage">
-        {/* בכיוון RTL העמודה הראשונה יושבת בימין — ולכן "הקודם" כאן */}
-        <div className="tcar__nav">
-          <button
-            className="tcar__arrow tcar__arrow--prev"
-            type="button"
-            onClick={prev}
-            disabled={atStart}
-            aria-label="המאפיין הקודם"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path
-                d="M14.5 5.5 8 12l6.5 6.5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-          <span className="tcar__navName" aria-hidden="true">
-            {prevLabel}
-          </span>
-        </div>
-
-        {/* כל שבעת המאפיינים יושבים זה על זה באותו תא, והלא-פעילים
-            מוסתרים ב-visibility בלבד. כך גובה האזור נקבע מן המאפיין
-            הארוך ביותר בכל רוחב מסך, והקשת והחצים אינם זזים במעבר —
-            בלי גובה מינימלי קבוע שצריך לנחש מראש. */}
-        <div
-          className={`tcar__slide tcar__slide--${dir > 0 ? 'fwd' : 'back'}`}
-          id={slideId}
-          aria-live="polite"
+    <div
+      className="tcar"
+      role="group"
+      aria-label={label}
+      tabIndex={0}
+      onKeyDown={onKeyDown}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
+      {/* התוכן, וחץ עגול בכל אחד מצדיו. בכיוון RTL הראשון בשורה
+          יושב בימין, ולכן הוא "הקודם". */}
+      <div className="tcar__row">
+        <button
+          className="tcar__arrow"
+          type="button"
+          onClick={prev}
+          disabled={atStart}
+          aria-label="המאפיין הקודם"
+          aria-controls={slideId}
         >
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path
+              d="M9.5 5.5 16 12l-6.5 6.5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+
+        {/* שבעת המאפיינים יושבים זה על זה באותו תא: גובה האזור נקבע
+            מן הארוך שביניהם, ולכן העמוד אינו קופץ במעבר ביניהם */}
+        <div className="tcar__slide" id={slideId} aria-live="polite">
           {items.map((item, i) => (
             <div
               className={`tcar__panel${i === index ? ' is-on' : ''}`}
@@ -133,63 +136,55 @@ export default function TraitCarousel({
           ))}
         </div>
 
-        <div className="tcar__nav">
-          <button
-            className="tcar__arrow tcar__arrow--next"
-            type="button"
-            onClick={next}
-            disabled={atEnd}
-            aria-label="המאפיין הבא"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path
-                d="M14.5 5.5 8 12l6.5 6.5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-          <span className="tcar__navName" aria-hidden="true">
-            {nextLabel}
-          </span>
-        </div>
+        <button
+          className="tcar__arrow"
+          type="button"
+          onClick={next}
+          disabled={atEnd}
+          aria-label="המאפיין הבא"
+          aria-controls={slideId}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path
+              d="M14.5 5.5 8 12l6.5 6.5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
       </div>
 
-      {/* הקשת — קו הזהב ושבע התחנות שיושבות עליו */}
-      <div className="tcar__arc">
+      {/* חצי-העיגול: קו דק ושבע נקודות עליו, בלי מספרים ובלי אייקונים */}
+      <div className="tcar__dial">
         <svg
-          className="tcar__arcLine"
-          viewBox={`0 0 ${ARC.w} ${ARC.h}`}
+          className="tcar__dialLine"
+          viewBox={`0 0 ${BOX.w} ${BOX.h}`}
           preserveAspectRatio="xMidYMid meet"
           aria-hidden="true"
           focusable="false"
         >
-          <path d={ARC_PATH} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+          <path d={ARC_PATH} fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
         </svg>
 
         {items.map((item, i) => (
           <button
             key={item.id}
-            className={`tcar__stop${i === index ? ' is-active' : ''}${
-              visited.includes(i) && i !== index ? ' is-visited' : ''
-            }`}
+            className={`tcar__dot${i === index ? ' is-active' : ''}`}
             type="button"
-            style={stopAt(i, total)}
+            style={dotAt(i, total)}
             aria-current={i === index ? 'true' : undefined}
             aria-controls={slideId}
-            aria-label={`${pad(i + 1)} — ${item.title2 || item.title}`}
+            aria-label={item.title2 || item.title}
             onClick={() => go(i)}
-          >
-            <span aria-hidden="true">{pad(i + 1)}</span>
-          </button>
+          />
         ))}
       </div>
 
-      {/* ההודעה מופיעה רק אחרי שביקרו בכל שבע התחנות. השורה שמורה
-          תמיד, כדי שהופעתה לא תזיז את הקשת ואת התוכן שמעליה. */}
+      {/* ההודעה מופיעה רק אחרי שכל שבעת המאפיינים נצפו. השורה שמורה
+          תמיד, ולכן הופעתה אינה מזיזה דבר. */}
       <p className={`tcar__done${allDone ? ' is-on' : ''}`} aria-live="polite">
         {allDone ? completedMessage : ''}
       </p>
