@@ -1,5 +1,4 @@
 import { useId, useState } from 'react'
-import Icon from '../Icons/Icons'
 import { intelligenceCycle } from '../../data/chapter1'
 import './IntelligenceCycle.css'
 
@@ -75,7 +74,6 @@ export default function IntelligenceCycle() {
                   onClick={() => setActive(s.id)}
                 >
                   <span className="cycle__num ltr-num">{s.number}</span>
-                  <Icon name={s.icon} size={22} />
                   <span className="cycle__nodeTitle">{s.title}</span>
                 </button>
               </li>
