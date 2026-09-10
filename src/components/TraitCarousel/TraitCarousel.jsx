@@ -1,27 +1,31 @@
 import { useId, useRef, useState } from 'react'
 import './TraitCarousel.css'
 
-/* ---------- גיאומטריית חצי-העיגול ----------
-   חצי עיגול קטן שפתחו כלפי מעלה: הנקודה הראשונה בקצה הימני, ומשם
-   ההתקדמות נעה עם כיוון השעון — ימין ← למטה ← שמאל.
+/* ---------- גיאומטריית הקשת ----------
+   קשת רחבה ורדודה בצורת חצי-עיגול תחתון: המיתר 500 והעומק 96, ומהם
+   נגזר רדיוס המעגל. אותו מעגל מייצר גם את הקו שב-SVG וגם את מיקום
+   שבע הנקודות, ולכן כל נקודה יושבת על הקו בדיוק.
 
-   כל המידות נגזרות כאן פעם אחת, ולכן הקו והנקודות יושבים על אותו
-   מעגל בדיוק. הקופסה גדולה מהמעגל ברוחב נקודה, כדי שהנקודות
-   שבקצוות ייכנסו בשלמותן. */
-const R = 100
-const PAD = 16
-const BOX = { w: R * 2 + PAD * 2, h: R + PAD * 2 }
-const CX = BOX.w / 2
-const CY = PAD
+   הנקודות מרווחות שווה בזווית — כלומר שווה לאורך הקשת עצמה, ולא
+   שווה בציר האופקי. הראשונה בקצה הימני, ומשם ההתקדמות נעה עם כיוון
+   השעון: ימין ← מטה ← שמאל. */
+const ARC = { w: 560, h: 130, padX: 30, top: 14, depth: 96 }
+const CHORD = ARC.w - ARC.padX * 2
+const R = (CHORD * CHORD) / (8 * ARC.depth) + ARC.depth / 2
+const CX = ARC.w / 2
+const CY = ARC.top + ARC.depth - R
+/* הזווית שבה יושב הקצה הימני של הקשת, ומשם עד הקצה השמאלי */
+const START = Math.atan2(R - ARC.depth, CHORD / 2)
+const SPAN = Math.PI - 2 * START
 
-const ARC_PATH = `M ${CX + R} ${CY} A ${R} ${R} 0 0 1 ${CX - R} ${CY}`
+const ARC_PATH = `M ${ARC.w - ARC.padX} ${ARC.top} A ${R.toFixed(2)} ${R.toFixed(2)} 0 0 1 ${ARC.padX} ${ARC.top}`
 
-/** מיקום נקודה i על חצי-העיגול, באחוזים מן הקופסה. */
+/** מיקום נקודה i על הקשת, באחוזים מן הקופסה. */
 const dotAt = (i, total) => {
-  const angle = (Math.PI * i) / (total - 1)
+  const angle = START + (SPAN * i) / (total - 1)
   const x = CX + R * Math.cos(angle)
   const y = CY + R * Math.sin(angle)
-  return { left: `${(x / BOX.w) * 100}%`, top: `${(y / BOX.h) * 100}%` }
+  return { left: `${(x / ARC.w) * 100}%`, top: `${(y / ARC.h) * 100}%` }
 }
 
 /** מרחק אצבע מזערי שנחשב להחלקה ולא לנגיעה */
@@ -161,7 +165,7 @@ export default function TraitCarousel({ items, completedMessage, label }) {
       <div className="tcar__dial">
         <svg
           className="tcar__dialLine"
-          viewBox={`0 0 ${BOX.w} ${BOX.h}`}
+          viewBox={`0 0 ${ARC.w} ${ARC.h}`}
           preserveAspectRatio="xMidYMid meet"
           aria-hidden="true"
           focusable="false"
