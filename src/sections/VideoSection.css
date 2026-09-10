@@ -37,7 +37,9 @@
   position: relative;
   z-index: 1;
   display: grid;
-  justify-items: center;
+  /* נעיצה לקצה ההתחלה — הצד הימני ב-RTL — ולא מרכוז, כדי שהכותרת,
+     הפסקה והנגן ייגמרו כולם על אותו קו ימני */
+  justify-items: start;
   gap: clamp(30px, 3.6vw, 56px);
 }
 
@@ -51,9 +53,12 @@
   --vstage-col: min(100%, 1600px);
 }
 
+/* הנגן אינו נמדד עוד לפי רוחב העמודה אלא לפי הטוקן המשותף, ולכן
+   הוא זהה בגודלו לכל שאר מסגרות הווידאו באתר. הפסקה שמעליו רשאית
+   להיות רחבה ממנו — שתיהן מתחילות באותו קצה ימני. */
 .vstage__video {
   margin: 0;
-  width: var(--vstage-col);
+  width: min(100%, var(--video-max));
 }
 
 .vstage__frame {
