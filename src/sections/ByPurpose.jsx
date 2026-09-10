@@ -1,6 +1,5 @@
 import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { byPurpose } from '../data/chapter1'
-import sideArt from '../assets/images/איור צד דקורטיבי בגווני כתום.png'
 import './sections.css'
 
 /**
@@ -49,11 +48,6 @@ export default function ByPurpose() {
       id="by-purpose"
       aria-labelledby="by-purpose-title"
     >
-      {/* איור צד דקורטיבי בלבד — גלובוס, לוויין וצלחת קליטה. הוא ממלא
-          את השטח הפנוי משמאל לבלוק התוכן, ואינו מוסר שום מידע שאינו
-          כתוב לצדו; לכן alt ריק ו-aria-hidden. */}
-      <img className="purpose__art" src={sideArt} alt="" aria-hidden="true" />
-
       <div className="container">
         <div className="purpose">
           <h2 className="section-title" id="by-purpose-title">

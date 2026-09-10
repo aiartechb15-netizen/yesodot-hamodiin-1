@@ -307,68 +307,6 @@
   background-color: rgba(247, 243, 234, 0.55);
 }
 
-/* ---------- איור הצד ----------
-   גלובוס, לוויין וצלחת קליטה בגווני כתום־זהב, שממלאים את השטח
-   הפנוי משמאל לבלוק התוכן. הוא חלק מן הרקע ולא כרטיס: אין לו
-   מסגרת, פינות או צל, וארבעת קצותיו נמוגים לשקיפות מלאה.
-
-   לקובץ אין ערוץ שקיפות — רקעו קרם אטום — ולכן mix-blend-mode:
-   multiply הוא שממיס אותו לתוך גיליון הרקע של הפרק: הגוונים
-   הבהירים כמעט נעלמים והגלובוס, הקווים והנקודות הכתומות נשארים.
-   בלעדיו היה נראה כמלבן בהיר שהודבק על הרקע.
-
-   z-index: auto מבטל את הערך שכלל כללי נותן לכל ילד ישיר של מקטע.
-   הוא פותח הקשר ערימה שחוסם את המיזוג מלהגיע לרקע שמתחתיו. המכל
-   שאחריו נשאר ב-z-index 1 ולכן הטקסט ממשיך לשבת מעליו.
-
-   left פיזי ולא לוגי: תוכן האיור נמצא בצדו השמאלי של הקובץ, ולכן
-   מיקומו אינו תלוי בכיוון הכתיבה. */
-.chapterPage .byPurpose .purpose__art {
-  position: absolute;
-  z-index: auto;
-  left: 0;
-  inset-block: 0;
-  width: min(52%, 720px);
-  height: 100%;
-  object-fit: cover;
-  object-position: left center;
-  opacity: 0.62;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-
-  /* דעיכה בשני הצירים. הצד הפונה אל הטקסט נמוג ארוך ומוקדם, כדי
-     שהאיור ייגמר הרבה לפני שהוא מגיע אליו. */
-  --art-fade-x: linear-gradient(
-    to right,
-    transparent 0%,
-    #000 14%,
-    #000 44%,
-    transparent 96%
-  );
-  --art-fade-y: linear-gradient(
-    to bottom,
-    transparent 0%,
-    #000 16%,
-    #000 78%,
-    transparent 100%
-  );
-  -webkit-mask-image: var(--art-fade-x), var(--art-fade-y);
-  -webkit-mask-composite: source-in;
-  mask-image: var(--art-fade-x), var(--art-fade-y);
-  mask-composite: intersect;
-}
-
-/* מתחת לרוחב הזה בלוק התוכן נפרש על מלוא הרוחב ואין עוד שטח פנוי
-   משמאלו. האיור היה יושב מתחת לטקסט ופוגע בקריאוּת, ולכן הוא יורד. */
-@media (max-width: 1080px) {
-  .chapterPage .byPurpose .purpose__art {
-    display: none;
-  }
-}
-
 /* אזור תוכן אחד, לא שני צדי מסך. הוא יושב מעט ימינה ממרכז אזור
    התוכן — שולי ההתחלה (ימין ב-RTL) קטנים משולי הסיום — ומעט מעל
    מרכזו האנכי, בזכות המרווח שנשאר מתחתיו. */
