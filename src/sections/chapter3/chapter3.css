@@ -17,7 +17,7 @@
 
 .s3hint {
   margin-top: 6px;
-  font-size: 13px;
+  font-size: 19px;
   color: var(--muted);
 }
 
@@ -52,7 +52,7 @@
 }
 
 .tile__title {
-  font-size: 14px;
+  font-size: 20.5px;
   font-weight: 700;
   color: var(--navy);
 }
@@ -78,7 +78,7 @@
   padding: 16px 20px;
   background: var(--cream);
   border-radius: var(--radius-sm);
-  font-size: 14.5px;
+  font-size: 21.5px;
   color: var(--navy);
   font-weight: 600;
 }
@@ -150,7 +150,7 @@
 }
 
 .flow3__label {
-  font-size: 14px;
+  font-size: 20.5px;
   font-weight: 700;
   color: var(--navy);
 }
@@ -199,7 +199,7 @@
 }
 
 .env__title {
-  font-size: 18px;
+  font-size: 26.5px;
 }
 
 /* ---------- המחקר האופרטיבי (תחנה 9) ---------- */
@@ -255,25 +255,25 @@
 }
 
 .abbr__code {
-  font-size: 18px;
+  font-size: 26.5px;
   font-weight: 700;
   color: var(--navy);
 }
 
 .abbr__title {
-  font-size: 13px;
+  font-size: 19px;
   color: var(--muted);
   display: block;
 }
 
 .abbr__text {
   color: var(--ink-soft);
-  font-size: 14px;
+  font-size: 20.5px;
 }
 
 .abbr__cue {
   margin-top: auto;
-  font-size: 13px;
+  font-size: 19px;
   font-weight: 700;
   color: var(--teal-ink);
 }
@@ -294,7 +294,7 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  font-size: clamp(16px, 2vw, 20.5px);
+  font-size: clamp(23.5px, 2vw, 30px);
   font-weight: 700;
   color: var(--white);
   white-space: nowrap;
@@ -328,7 +328,7 @@
   border-radius: var(--radius-sm);
   font-weight: 700;
   color: var(--navy);
-  font-size: 14px;
+  font-size: 20.5px;
 }
 
 .rung--0 {
@@ -370,7 +370,7 @@
 .t3 thead th {
   background: var(--navy);
   color: var(--white);
-  font-size: 14px;
+  font-size: 20.5px;
   border-bottom: 0;
 }
 
@@ -410,7 +410,7 @@
 
 .t3card__label {
   display: block;
-  font-size: 13px;
+  font-size: 19px;
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--teal);
@@ -425,14 +425,14 @@
 
 .t3card__col {
   display: block;
-  font-size: 13px;
+  font-size: 19px;
   font-weight: 700;
   color: var(--navy);
 }
 
 .t3card__val {
   display: block;
-  font-size: 14px;
+  font-size: 20.5px;
   color: var(--ink-soft);
 }
 
@@ -516,7 +516,7 @@
 .opsec__label {
   margin: clamp(26px, 3vw, 38px) 0 10px;
   font-family: var(--font-heading);
-  font-size: clamp(15px, 1.6vw, 17.5px);
+  font-size: clamp(22px, 1.6vw, 25.5px);
   font-weight: 700;
   line-height: 1.3;
   color: var(--navy);
@@ -526,7 +526,7 @@
 .opsec__purpose {
   max-width: 62ch;
   margin: 0;
-  font-size: clamp(16px, 1.85vw, 20px);
+  font-size: clamp(23.5px, 1.85vw, 29.5px);
   line-height: 1.6;
   color: var(--navy);
 }
@@ -543,12 +543,12 @@
 
 .opsec__sub--sm {
   margin-top: clamp(26px, 3vw, 38px);
-  font-size: clamp(15px, 1.6vw, 17.5px);
+  font-size: clamp(22px, 1.6vw, 25.5px);
 }
 
 .opsec__hint {
   margin: 12px 0 0;
-  font-size: 13px;
+  font-size: 19px;
   color: var(--muted);
 }
 
@@ -573,7 +573,7 @@
 .opconsumer {
   position: relative;
   font-family: var(--font-heading);
-  font-size: clamp(15px, 1.6vw, 18px);
+  font-size: clamp(22px, 1.6vw, 26.5px);
   font-weight: 700;
   line-height: 1.35;
   color: var(--navy);
@@ -597,7 +597,7 @@
 .opconsumers__note {
   max-width: 76ch;
   margin: clamp(24px, 3vw, 38px) 0 0;
-  font-size: clamp(14px, 1.35vw, 16px);
+  font-size: clamp(20.5px, 1.35vw, 23.5px);
   line-height: 1.75;
   color: var(--ink-soft);
 }
@@ -614,7 +614,7 @@
   max-width: 76ch;
   margin: clamp(26px, 3.2vw, 40px) 0 0;
   padding-inline-start: 22px;
-  font-size: 14px;
+  font-size: 20.5px;
   line-height: 1.7;
   color: var(--ink-soft);
 }
@@ -711,7 +711,7 @@
   border: 1px solid var(--gold);
   background: var(--paper);
   font-family: var(--font-heading);
-  font-size: 13px;
+  font-size: 19px;
   font-weight: 700;
   color: var(--gold-ink);
   transition:
@@ -728,7 +728,7 @@
 
 .opstop__title {
   font-family: var(--font-heading);
-  font-size: 13px;
+  font-size: 19px;
   font-weight: 700;
   line-height: 1.35;
   color: var(--navy);
@@ -798,7 +798,7 @@
 
 .opstop__text {
   margin: 0;
-  font-size: 13px;
+  font-size: 19px;
   line-height: 1.65;
   color: var(--ink-soft);
   text-align: center;
@@ -818,7 +818,7 @@
   grid-template-columns: auto 1fr;
   gap: 12px;
   align-items: baseline;
-  font-size: 14px;
+  font-size: 20.5px;
   color: var(--ink-soft);
 }
 
@@ -928,7 +928,7 @@
   align-items: center;
   gap: clamp(10px, 1vw, 16px);
   margin: 0 0 clamp(18px, 2vw, 26px);
-  font-size: clamp(13px, 1.05vw, 13.5px);
+  font-size: clamp(19px, 1.05vw, 20px);
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--teal-ink);
@@ -945,7 +945,7 @@
 /* שתי הפסקאות — מעט גדולות מברירת המחדל, ורווח ברור ביניהן */
 .ch3op__para {
   margin: 0;
-  font-size: clamp(16px, 1.65vw, 19px);
+  font-size: clamp(23.5px, 1.65vw, 28px);
   line-height: 1.8;
   color: var(--text);
 }

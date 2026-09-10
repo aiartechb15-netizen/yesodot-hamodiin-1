@@ -68,13 +68,13 @@
 }
 
 .idcard__qTitle {
-  font-size: 16.5px;
+  font-size: 24px;
   color: var(--navy);
 }
 
 .idcard__qHint {
   margin: 4px 0 14px;
-  font-size: 13px;
+  font-size: 19px;
   color: var(--muted);
 }
 
@@ -118,13 +118,13 @@
   border-radius: 50%;
   background: var(--gold);
   color: var(--navy);
-  font-size: 13px;
+  font-size: 19px;
   font-weight: 700;
 }
 
 .idcard__qLabel {
   flex: 1;
-  font-size: 13px;
+  font-size: 19px;
   font-weight: 600;
   color: var(--muted);
 }
@@ -145,7 +145,7 @@
 .idcard__qText {
   margin: 8px 0 0;
   padding: 0 16px 6px;
-  font-size: 15px;
+  font-size: 22px;
   font-weight: 600;
   color: var(--navy);
 }
@@ -207,13 +207,13 @@
 
 .idcard--open .idcard__label {
   gap: 10px;
-  font-size: 14px;
+  font-size: 20.5px;
   line-height: 1.6;
   color: var(--navy);
 }
 
 .idcard--open .idcard__text {
-  font-size: 14px;
+  font-size: 20.5px;
   line-height: 1.6;
 }
 
@@ -223,12 +223,12 @@
 }
 
 .idcard--open .idcard__qTitle {
-  font-size: 16px;
+  font-size: 23.5px;
 }
 
 .idcard--open .idcard__qHint {
   margin-bottom: 6px;
-  font-size: 13.5px;
+  font-size: 20px;
   line-height: 1.6;
 }
 
@@ -262,11 +262,11 @@
 .idcard--open .idcard__qNum {
   width: 26px;
   height: 26px;
-  font-size: 13px;
+  font-size: 19px;
 }
 
 .idcard--open .idcard__qLabel {
-  font-size: 14px;
+  font-size: 20.5px;
 }
 
 /* השאלה מיישרת לקו ההתחלה של הטקסט שבשורה: מספר (26px) ורווח (14px) */
@@ -274,7 +274,7 @@
   margin: 0;
   padding: 0 0 16px;
   padding-inline-start: 40px;
-  font-size: 14px;
+  font-size: 20.5px;
   line-height: 1.6;
 }
 

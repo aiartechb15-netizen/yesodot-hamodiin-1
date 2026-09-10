@@ -57,19 +57,19 @@
 
 .video__title {
   color: var(--white);
-  font-size: clamp(17.5px, 2vw, 22px);
+  font-size: clamp(25.5px, 2vw, 32.5px);
   margin-top: 4px;
 }
 
 .video__note {
   margin: 0;
   color: var(--teal-light);
-  font-size: 13.5px;
+  font-size: 20px;
 }
 
 .video__caption {
   margin-top: 14px;
-  font-size: 13px;
+  font-size: 19px;
   color: var(--muted);
   line-height: 1.7;
 }

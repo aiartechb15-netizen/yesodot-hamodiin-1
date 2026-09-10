@@ -20,14 +20,14 @@
 }
 
 .exam__part {
-  font-size: 13px;
+  font-size: 19px;
   font-weight: 700;
   letter-spacing: 0.06em;
   color: var(--teal-ink);
 }
 
 .exam__count {
-  font-size: 13px;
+  font-size: 19px;
   font-weight: 700;
   color: var(--navy-secondary);
 }
@@ -51,19 +51,19 @@
 }
 
 .exam__heading {
-  font-size: 17.5px;
+  font-size: 25.5px;
   color: var(--navy);
 }
 
 .exam__question {
-  font-size: 15.5px;
+  font-size: 22.5px;
   font-weight: 600;
   color: var(--text);
   margin-bottom: 16px;
 }
 
 .exam__fillSentence {
-  font-size: 15.5px;
+  font-size: 22.5px;
   line-height: 2;
   color: var(--text);
   margin-bottom: 16px;
@@ -175,7 +175,7 @@
   margin: 12px 0 0;
   padding-top: 10px;
   border-top: 1px dashed var(--border);
-  font-size: 13px;
+  font-size: 19px;
   color: var(--muted);
 }
 
@@ -211,7 +211,7 @@
 
 .exam__feedback p {
   margin: 0;
-  font-size: 14px;
+  font-size: 20.5px;
 }
 
 .exam__actions {
@@ -251,7 +251,7 @@
 }
 
 .exam__score {
-  font-size: 15px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--navy-secondary);
 }

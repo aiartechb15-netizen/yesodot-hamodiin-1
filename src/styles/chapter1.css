@@ -181,7 +181,7 @@
    (ChapterNav.css), והסולם הגדול של פרק 1 אינו חל עליו — אחרת היה
    נראה אחרת משאר הפרקים. */
 .ch1 .cycle__nodeTitle {
-  font-size: max(1rem, 13px);
+  font-size: max(1rem, 19px);
 }
 
 /* ---------- 8. שוליים צדדיים של אזור התוכן ----------
@@ -222,6 +222,6 @@
     max-width: none;
   }
   .ch1 .cover__eyebrow {
-    font-size: 13px;
+    font-size: 19px;
   }
 }

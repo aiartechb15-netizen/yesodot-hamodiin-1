@@ -44,7 +44,7 @@
 .chnav__title {
   flex: 1;
   font-family: var(--font-heading);
-  font-size: 13px;
+  font-size: 19px;
   font-weight: 700;
   letter-spacing: 0.12em;
   color: var(--teal-ink);
@@ -65,7 +65,7 @@
   display: block;
   padding-block: 9px;
   padding-inline: 14px 6px;
-  font-size: 13px;
+  font-size: 19px;
   line-height: 1.45;
   text-align: start;
   color: var(--ink-soft);
@@ -147,14 +147,14 @@
   }
 
   .chnav__toggleKicker {
-    font-size: 13px;
+    font-size: 19px;
     font-weight: 700;
     letter-spacing: 0.1em;
     color: var(--teal-ink);
   }
 
   .chnav__toggleCurrent {
-    font-size: 13.5px;
+    font-size: 20px;
     font-weight: 700;
     color: var(--navy);
     /* שם מקטע ארוך נחתך ולא שובר את גובה הפס */
@@ -223,6 +223,6 @@
   /* במגירה יש מקום — הפריטים גדולים יותר ליעד מגע נוח */
   .chnav__link {
     padding-block: 10px;
-    font-size: 14px;
+    font-size: 20.5px;
   }
 }

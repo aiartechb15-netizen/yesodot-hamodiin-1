@@ -116,7 +116,7 @@
 }
 
 .topic__kicker {
-  font-size: 13px;
+  font-size: 19px;
   font-weight: 700;
   letter-spacing: 0.12em;
   color: var(--gold-ink);
@@ -124,7 +124,7 @@
 
 .topic__title {
   margin-top: 6px;
-  font-size: clamp(17.5px, 1.5vw, 20.5px);
+  font-size: clamp(25.5px, 1.5vw, 30px);
 }
 
 /* הפס הזהוב הוא כעת סוגר הכרטיס ולא מפריד לפני CTA, ולכן אין לו

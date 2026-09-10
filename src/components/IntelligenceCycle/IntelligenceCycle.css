@@ -20,7 +20,7 @@
 
 .cycle__ringTitle {
   font-family: var(--font-heading);
-  font-size: 19px;
+  font-size: 28px;
   font-weight: 700;
   fill: var(--navy);
 }
@@ -84,7 +84,7 @@
   border-radius: 50%;
   background: var(--cream);
   color: var(--navy);
-  font-size: 13px;
+  font-size: 19px;
   font-weight: 700;
 }
 
@@ -94,7 +94,7 @@
 }
 
 .cycle__nodeTitle {
-  font-size: 13px;
+  font-size: 19px;
   font-weight: 700;
   line-height: 1.35;
 }
@@ -103,12 +103,12 @@
   margin-top: 14px;
   padding-top: 14px;
   border-top: 1px solid var(--border);
-  font-size: 14px;
+  font-size: 20.5px;
 }
 
 .cycle__loop {
   margin-top: 14px;
-  font-size: 13px;
+  font-size: 19px;
   color: var(--muted);
 }
 
@@ -124,6 +124,6 @@
     padding: 9px 6px;
   }
   .cycle__nodeTitle {
-    font-size: 13px;
+    font-size: 19px;
   }
 }
