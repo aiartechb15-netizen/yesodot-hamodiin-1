@@ -330,37 +330,47 @@
   background-color: rgba(247, 243, 234, 0.55);
 }
 
-/* שתי עמודות: התוכן מימין (כ-60%) והאיור משמאל (כ-40%). המכל עצמו
-   שומר על ריפוד 5 הס"מ של הפרק, והפריסה יושבת בתוכו. האיור ממורכז
-   אנכית ביחס לתוכן. */
+/* רכיב אחד בשתי עמודות: התוכן מימין (כ-60%) והאיור משמאל (כ-40%),
+   צמוד אליו. המכל שומר על ריפוד 5 הס"מ של הפרק, והפריסה יושבת בתוכו.
+   האיור ממורכז אנכית ביחס לתוכן. */
 .chapterPage .byPurpose {
   /* נקודת המעבר לעמודה אחת נמדדת ברוחב המקטע ולא ברוחב המסך: תפריט
-     הצד ושולי 5 הס"מ בולעים חלק גדול מן המסך, ובלפטופ של 1440 היו
-     נשארים למלל כ-430 פיקסלים בלבד */
+     הצד ושולי 5 הס"מ בולעים חלק גדול מן המסך */
   container: purpose / inline-size;
 }
 
 .purpose-layout {
   display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  grid-template-columns: minmax(0, 4fr) minmax(0, 3fr);
   align-items: center;
-  gap: clamp(32px, 4vw, 72px);
+  /* מרווח קטן: לאיור יש שוליים שקופים ודועכים משלו, והם משלימים את
+     המרחק בינו לבין הטקסט */
+  gap: clamp(8px, 1.4vw, 24px);
   direction: rtl;
+}
+
+/* הקצה הימני של התוכן נשאר על קו הריפוד של הפרק, כמו בשאר המסכים.
+   בצד שמאל, שם יושב רק האיור, הפריסה נפרשת אל תוך שולי 5 הס"מ ועוצרת
+   24px לפני קצה המקטע — כך גם הטקסט וגם האיור מקבלים רוחב נוסף. */
+.chapterPage.ch1 .byPurpose .purpose-layout {
+  padding-inline-end: 24px;
 }
 
 .purpose {
   min-width: 0;
-  margin-block-end: clamp(16px, 4vh, 56px);
   text-align: right;
 }
 
-/* האיור כ-<img> נפרד ולא כרקע: בלי כרטיס, מסגרת, רקע, פינות או צל.
-   הקובץ כולל ערוץ שקיפות ודעיכה בקצוות, ולכן אין צורך במסכה או
-   במיזוג. */
+/* האיור כ-<img> נפרד ולא כרקע: בלי כרטיס, מסגרת, צל או פינות. הוא
+   נצמד לצד התוכן (inline-start ב-RTL).
+   - חיתוך קל לגובה (6/5 במקום 3/2) מוריד רק את השוליים הדועכים
+     שבצדדים, והמפה עצמה תופסת יותר מן העמודה.
+   - multiply ממזג את הלבן של המפה אל גוון הנייר של המקטע, והמפה
+     נראית מצוירת על אותו רקע ולא מודבקת עליו. */
 .purpose__visual {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   min-width: 0;
   pointer-events: none;
   user-select: none;
@@ -368,24 +378,26 @@
 
 .purpose__visual img {
   display: block;
-  width: min(100%, 540px);
-  max-width: 100%;
+  width: 100%;
+  max-width: 660px;
   height: auto;
-  object-fit: contain;
-  opacity: 0.9;
+  aspect-ratio: 6 / 5;
+  object-fit: cover;
+  mix-blend-mode: multiply;
 }
 
-/* עמודה אחת — התוכן קודם, והאיור מתחתיו, קטן ושקוף יותר. חל במסך צר
-   מ-900, וגם במסך רחב יותר כשאזור התוכן עצמו צר מכדי להכיל שתי
-   עמודות — כלומר כששתי אפשרויות הבורר כבר אינן נכנסות בשורה אחת. */
-@container purpose (max-width: 1399px) {
+/* עמודה אחת — התוכן קודם והאיור מתחתיו. חל רק כשהמקטע צר מכדי להכיל
+   טקסט קריא ושורת טאבים לצד האיור (טאבלט לאורך ומטה). */
+@container purpose (max-width: 859px) {
   .purpose-layout {
     grid-template-columns: minmax(0, 1fr);
-    gap: clamp(20px, 5vw, 32px);
+    gap: clamp(8px, 3vw, 20px);
+  }
+  .purpose__visual {
+    justify-content: center;
   }
   .purpose__visual img {
-    width: min(100%, 360px);
-    opacity: 0.8;
+    width: min(100%, 420px);
   }
 }
 
@@ -397,91 +409,81 @@
 }
 
 .purpose__hint {
-  margin: 0 0 clamp(22px, 2.6vw, 34px);
+  margin: 0 0 clamp(16px, 1.8vw, 24px);
   font-size: clamp(19px, 1.3vw, 21.5px);
   color: var(--ink-soft);
 }
 
-/* ---- הבורר ----
-   שתי אפשרויות טקסטואליות באותה שורה, בלי כרטיס, כפתור־גלולה או
-   מסגרת. הקו הזהב אינו שייך לאפשרות אלא לשורה כולה, ולכן הוא נע
-   ביניהן ברצף במקום להיעלם ולהופיע. */
+/* ---- הטאבים ----
+   שורה אחת על קו בסיס דק לכל רוחב התוכן. הטאב הפעיל כהה, והקו הזהב
+   שמתחתיו יושב על קו הבסיס. הקו אינו שייך לטאב אלא לשורה כולה, ולכן
+   הוא נע ומתמתח ביניהם ברצף במקום להיעלם ולהופיע. */
 .purpose__choice {
   position: relative;
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: clamp(20px, 3.4vw, 48px);
-  /* מקום לקו שמתחת לכיתוב */
-  padding-bottom: 16px;
+  align-items: stretch;
+  gap: clamp(20px, 2.6vw, 40px);
+  border-bottom: 1px solid var(--border);
 }
 
 .pchoice {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  padding: 0;
+  justify-content: center;
+  padding: 10px 2px 14px;
   border: 0;
   background: none;
   font-family: var(--font-heading);
-  font-size: clamp(24px, 2vw, 31.5px);
+  font-size: clamp(21px, 1.6vw, 26px);
+  /* משקל זהה לפעיל וללא-פעיל: רוחב הטאב לא משתנה בבחירה והקו לא קופץ */
   font-weight: 700;
   line-height: 1.3;
-  color: var(--navy-secondary);
-  opacity: 0.62;
+  text-align: center;
+  color: var(--muted);
   cursor: pointer;
-  transition:
-    color 0.22s ease,
-    opacity 0.22s ease;
+  transition: color 0.22s ease;
 }
 
-.pchoice:hover,
-.pchoice:focus-visible {
-  opacity: 1;
-  color: var(--navy);
+.pchoice:hover {
+  color: var(--navy-secondary);
 }
 
 .pchoice:focus-visible {
   outline: 3px solid var(--teal);
-  outline-offset: 6px;
+  outline-offset: 2px;
   border-radius: 4px;
+  color: var(--navy);
 }
 
 .pchoice.is-on {
   color: var(--navy);
-  opacity: 1;
 }
 
-/* הנקודה שמורה תמיד ונדלקת רק באפשרות הפעילה, כדי שרוחב האפשרות
-   לא ישתנה בבחירה והקו לא יקפוץ */
-.pchoice__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--teal);
-  opacity: 0;
-  transition: opacity 0.22s ease;
-}
-
-.pchoice.is-on .pchoice__dot {
-  opacity: 1;
-}
-
-/* הקו הזהב הנע — רוחב קבוע, ממורכז על האפשרות הפעילה */
+/* הקו הזהב הנע — ברוחב הטאב הפעיל, יושב על קו הבסיס */
 .purpose__rule {
   position: absolute;
-  bottom: 0;
+  bottom: -1px;
   left: 0;
-  width: 56px;
+  width: 0;
   height: 3px;
-  /* היסט פיזי ולא לוגי: translateX שמזיז את הקו הוא פיזי, ובעמוד
-     RTL היסט לוגי היה מזיז אותו לצד הנגדי */
-  margin-left: -28px;
-  border-radius: 2px;
+  border-radius: 2px 2px 0 0;
   background: var(--gold);
   transition:
     transform 0.34s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.34s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.2s ease;
+}
+
+/* בעמודה צרה שני הטאבים חולקים את הרוחב שווה בשווה, והכיתוב הארוך
+   יורד לשתי שורות בתוך הטאב במקום לשבור את השורה כולה */
+@container purpose (max-width: 520px) {
+  .purpose__choice {
+    gap: 12px;
+  }
+  .pchoice {
+    flex: 1 1 0;
+    min-width: 0;
+  }
 }
 
 /* ---- ההסבר ----
@@ -489,7 +491,8 @@
    לגובה, ולכן ההחלפה אינה משנה את גובה המסך */
 .purpose__body {
   display: grid;
-  margin-top: clamp(24px, 2.8vw, 36px);
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: clamp(18px, 2vw, 26px);
 }
 
 .pbody {
@@ -505,29 +508,35 @@
 }
 
 .pbody__title {
-  margin: 0 0 12px;
+  margin: 0 0 8px;
   font-size: clamp(23.5px, 1.7vw, 28px);
   color: var(--navy);
 }
 
-.pbody__text {
+/* ההסבר ממלא את עמודת התוכן, עד תקרת קריאוּת של 74 תווים. שתי
+   מחלקות ולא אחת: .ch1 p (68ch) גובר על מחלקה בודדת. */
+.purpose .pbody__text {
   margin: 0;
   max-width: 74ch;
   font-size: clamp(20.5px, 1.35vw, 22.5px);
-  line-height: 1.8;
+  line-height: 1.75;
   color: var(--ink-soft);
 }
 
-/* הדוגמה כפסקה עריכתית ולא ככרטיס: שטיפת שמנת־זהב חיוורת מאחורי
-   המלל בלבד, בלי מסגרת, בלי צל ובלי פינות בולטות */
-.pbody__example {
-  margin: clamp(16px, 1.8vw, 22px) 0 0;
-  max-width: 74ch;
-  padding: 12px 16px;
-  border-radius: 2px;
-  background: rgba(196, 163, 71, 0.09);
+/* תיבת הדוגמאות — חלק מן התוכן ולא כרטיס צף: ברוחב ההסבר, גוון
+   שמנת־זהב בהיר, גבול זהב דק מאוד, פינות מעוגלות קלות ובלי צל */
+.purpose .pbody__example {
+  margin: clamp(14px, 1.6vw, 20px) 0 0;
+  /* ברוחב העמודה כולה, כמו קו הבסיס של הטאבים — הריפוד הפנימי שומר
+     על אורך שורה סביר */
+  max-width: none;
+  padding: clamp(14px, 1.4vw, 18px) clamp(18px, 1.8vw, 24px);
+  border: 1px solid rgba(196, 163, 71, 0.22);
+  border-radius: var(--radius);
+  background: rgba(196, 163, 71, 0.07);
   font-size: clamp(19px, 1.25vw, 20.5px);
   line-height: 1.75;
+  text-align: right;
   color: var(--ink-soft);
 }
 
@@ -539,22 +548,13 @@
 @media (prefers-reduced-motion: reduce) {
   .purpose__rule,
   .pbody,
-  .pchoice,
-  .pchoice__dot {
+  .pchoice {
     transition: none;
   }
 }
 
-/* ---------- מסך צר ----------
-   שתי האפשרויות יורדות לשתי שורות כשאין להן מקום, והאזור חוזר
-   למלוא הרוחב במקום לשבת מעט ימינה */
+/* ---------- מסך צר ---------- */
 @media (max-width: 860px) {
-  .purpose {
-    margin-block-end: 0;
-  }
-  .purpose__choice {
-    gap: 12px clamp(18px, 5vw, 32px);
-  }
   .byPurpose {
     min-height: 0;
     padding-block: clamp(34px, 7vw, 52px);

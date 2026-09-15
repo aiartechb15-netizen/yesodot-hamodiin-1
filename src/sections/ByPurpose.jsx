@@ -4,15 +4,15 @@ import purposeArt from '../assets/images/מודיעין לפי ייעוד תמו
 import './sections.css'
 
 /**
- * "מודיעין לפי ייעוד" — אזור תוכן אחד, קומפקטי ומאוזן.
+ * "מודיעין לפי ייעוד" — רכיב אחד בשתי עמודות: התוכן מימין והאיור
+ * משמאל, צמוד אליו.
  *
- * אין כאן שני צדי מסך, כרטיסים, מסגרות, קשתות, אייקונים או קווים
- * מחברים: כותרת, קו זהב, שורת הנחיה, שתי אפשרויות טקסטואליות באותה
- * שורה, ומתחתיהן ההסבר של האפשרות שנבחרה.
+ * בתוכן: כותרת, קו זהב, שורת הנחיה, שורת טאבים על קו בסיס דק,
+ * ומתחתיה ההסבר של הטאב שנבחר ותיבת הדוגמאות.
  *
- * קו הזהב של הבורר הוא אלמנט אחד שנע בין שתי האפשרויות. מיקומו
- * נמדד מן הכפתור הפעיל ולא מחושב מראש, ולכן הוא מדויק בכל רוחב מסך
- * ובכל אורך כיתוב.
+ * קו הזהב של הטאבים הוא אלמנט אחד שנע ומתמתח בין הטאבים. מיקומו
+ * ורוחבו נמדדים מן הטאב הפעיל ולא מחושבים מראש, ולכן הם מדויקים בכל
+ * רוחב מסך ובכל אורך כיתוב.
  */
 export default function ByPurpose() {
   const [open, setOpen] = useState(byPurpose.items[0].id)
@@ -20,16 +20,15 @@ export default function ByPurpose() {
   const rowRef = useRef(null)
   const [rule, setRule] = useState(null)
 
-  /* מרכז הקו הקצר מתחת לאפשרות הפעילה. האפשרות נקראת מן ה-DOM ולא
-     מן ה-state, ולכן הפונקציה יציבה ואפשר לרשום את המאזינים פעם
-     אחת בלבד. */
+  /* קצה שמאל ורוחב של הטאב הפעיל. הטאב נקרא מן ה-DOM ולא מן ה-state,
+     ולכן הפונקציה יציבה ואפשר לרשום את המאזינים פעם אחת בלבד. */
   const measure = useCallback(() => {
     const row = rowRef.current
     const btn = row?.querySelector('.pchoice.is-on')
     if (!row || !btn) return
     const r = row.getBoundingClientRect()
     const b = btn.getBoundingClientRect()
-    setRule(Math.round(b.left - r.left + b.width / 2))
+    setRule({ x: Math.round(b.left - r.left), w: Math.round(b.width) })
   }, [])
 
   useLayoutEffect(() => {
@@ -57,8 +56,8 @@ export default function ByPurpose() {
           <span className="gold-rule" aria-hidden="true" />
           <p className="purpose__hint">{byPurpose.hint}</p>
 
-          {/* הבורר — שתי אפשרויות טקסטואליות, בלי כרטיס, כפתור־גלולה
-              או מסגרת. הקו הזהב אחד, ונע אל האפשרות שנבחרה. */}
+          {/* שורת הטאבים — קו בסיס דק לכל רוחב השורה, וקו זהב אחד
+              שנע אל הטאב שנבחר ומקבל את רוחבו */}
           <div className="purpose__choice" ref={rowRef} role="tablist" aria-label={byPurpose.title}>
             {byPurpose.items.map((item) => {
               const isOpen = item.id === open
@@ -73,9 +72,6 @@ export default function ByPurpose() {
                   aria-controls={`purpose-${item.id}`}
                   onClick={() => setOpen(item.id)}
                 >
-                  {/* הנקודה שמורה תמיד ונדלקת רק בפעילה, כדי שרוחב
-                      האפשרות לא ישתנה והקו לא יקפוץ */}
-                  <span className="pchoice__dot" aria-hidden="true" />
                   {item.title}
                 </button>
               )
@@ -84,7 +80,11 @@ export default function ByPurpose() {
             <span
               className="purpose__rule"
               aria-hidden="true"
-              style={rule === null ? { opacity: 0 } : { transform: `translateX(${rule}px)` }}
+              style={
+                rule === null
+                  ? { opacity: 0 }
+                  : { width: `${rule.w}px`, transform: `translateX(${rule.x}px)` }
+              }
             />
           </div>
 
