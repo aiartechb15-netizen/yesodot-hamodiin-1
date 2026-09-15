@@ -83,9 +83,6 @@ export default function IntelligenceCycle() {
       </div>
 
       <div className="cycle__panel card card--pad" id={`${uid}-panel`} role="region" aria-live="polite">
-        <span className="kicker">
-          שלב <span className="ltr-num">{activeStage.number}</span> מתוך <span className="ltr-num">4</span>
-        </span>
         <h3 className="card-title">{activeStage.title}</h3>
         <span className="gold-rule gold-rule--sm" aria-hidden="true" />
         <p>{activeStage.text}</p>
