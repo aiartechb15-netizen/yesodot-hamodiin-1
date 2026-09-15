@@ -30,7 +30,8 @@ export default function ByDomain() {
             ))}
           </ol>
 
-          <div className="domains__frame">
+          {/* האיור — בלי מסגרת ובלי כרטיס; קצוותיו נמסכים אל רקע העמוד */}
+          <div className="domains__art">
             <img className="domains__img" src={domainImage} alt={byDomain.imageAlt} />
           </div>
         </div>

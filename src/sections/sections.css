@@ -168,31 +168,77 @@
 /* ---------- לפי תחום — קטלוג שורות ----------
    כל התחומים גלויים יחד. שורה לכל תחום, בגובה אחיד, מופרדות בקו דק.
    ללא כרטיסים וללא צללים. */
-/* הרשימה מימין, האיור משמאל */
+/* מבנה שתי העמודות תלוי ברוחב אזור התוכן ולא ברוחב המסך: התוכן כאן
+   חולק את הרוחב עם תפריט הצד ועם שולי הפרק, ולכן מסך רחב אינו מעיד
+   על עמודה רחבה. */
+#by-domain .container {
+  container-type: inline-size;
+  container-name: domains;
+}
+
+/* הרשימה מימין, האיור משמאל. עמודת האיור רחבה בכ-20% מקודם, והמרווח
+   בינה לרשימה הצטמצם — כך האיור מאזן את חמש השורות שלצידו. */
 .domains__layout {
   display: grid;
-  grid-template-columns: 1fr minmax(220px, 0.34fr);
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 0.44fr);
   align-items: stretch;
-  gap: clamp(24px, 3vw, 40px);
+  gap: clamp(18px, 2.2vw, 30px);
   margin-top: clamp(26px, 3vw, 36px);
 }
 
-/* מסגרת האיור — באותה עמודה וברוחבה, ביחס 4/5 של האיור עצמו, ולכן
-   cover אינו חותך את העיגול המרכזי ואינו מותח. נצמדת לראש הרשימה. */
-.domains__frame {
-  align-self: start;
-  aspect-ratio: 4 / 5;
+/* האיור אינו כרטיס: אין לו מסגרת, רקע, פינות מעוגלות או צל. הוא
+   נמתח לגובה הרשימה כולה — קצהו העליון בקו השורה "מודיעין צבאי"
+   וקצהו התחתון בקו סופה של "מודיעין נגד טרור" — וארבעת קצוותיו
+   נמסכים אל רקע השמנת בדעיכה קצרה, כדי שיישאר ברור ולא ייעלם. */
+.domains__art {
+  align-self: stretch;
   overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0, #000 30px, #000 calc(100% - 30px), transparent 100%),
+    linear-gradient(to left, transparent 0, #000 26px, #000 calc(100% - 26px), transparent 100%);
+  mask-image:
+    linear-gradient(to bottom, transparent 0, #000 30px, #000 calc(100% - 30px), transparent 100%),
+    linear-gradient(to left, transparent 0, #000 26px, #000 calc(100% - 26px), transparent 100%);
+  /* שתי הדעיכות נחתכות זו בזו, ולכן גם ארבע הפינות רכות */
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
 
+/* התמונה ממלאת את השטח שלה ביחס המקורי שלה (4 / 5): cover מגדיל
+   אותה עד שהיא מכסה את השטח, בלי מתיחה ובלי עיוות. */
 .domains__img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+/* אזור תוכן בינוני: העמודה צרה והשורות נשברות, ולכן הרשימה גבוהה
+   בהרבה מן האיור. מתיחה לגובה כזה הייתה חותכת את העדשה העגולה משני
+   צדדיה, ולכן כאן האיור שומר על יחס 4/5 ונצמד לראש הרשימה. */
+@container domains (max-width: 1150px) {
+  .domains__art {
+    align-self: start;
+    aspect-ratio: 4 / 5;
+  }
+}
+
+/* אזור תוכן צר: אין מקום לשתי עמודות — האיור עולה אל מעל הרשימה,
+   ברוחב מלא וביחס 4/5 שלו. */
+@container domains (max-width: 900px) {
+  .domains__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .domains__art {
+    order: -1;
+    align-self: start;
+    width: 100%;
+    max-width: 440px;
+    aspect-ratio: 4 / 5;
+    margin-inline: auto;
+  }
 }
 
 .domains {
@@ -296,16 +342,8 @@
   .ladder__item:not(:last-child) .ladder__arrow {
     flex: none;
   }
-  .domains__layout {
-    grid-template-columns: 1fr;
-  }
-  /* עמודה אחת: האיור עולה מעל רשימת התחומים, ברוחב מלא וביחס 4/5.
-     תקרת הרוחב חלה רק בטאבלט — בטלפון הוא ממלא את כל הרוחב. */
-  .domains__frame {
-    order: -1;
-    width: 100%;
-    max-width: 480px;
-  }
+  /* מעבר העמודה האחת נקבע לפי רוחב אזור התוכן (ראו @container domains
+     למעלה), ולכן אין כאן כפילות שלו */
   .domain {
     grid-template-columns: 26px 34px 1fr;
     row-gap: 8px;
