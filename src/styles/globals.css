@@ -237,9 +237,9 @@ svg {
 
    התפר בין חזרה לחזרה מרוכך בגיליון SVG במידות הגיליון עצמו: מכיוון
    שיש לו אותן מידות פנימיות, background-size זהה מותח אותו בדיוק כמו
-   התמונה, והמעבר נופל תמיד על התפר. שני קצותיו שמנת אטומה שמתפוגגת
-   לשקיפות בתוך 16% מגובה האריח (כ-120–145 פיקסלים במסך רגיל), ולכן
-   אין קו, פס או שינוי גוון בין החזרות.
+   התמונה, והמעבר נופל תמיד על התפר. שני קצותיו שמנת ב-72% אטימות
+   שמתפוגגת לשקיפות בתוך 18% מגובה האריח — מספיק כדי להסתיר את התפר,
+   אבל לא שמנת אטומה שנקראת כרצועה ריקה ונפרדת באמצע העמוד.
 
    הגיליון נבחר פעם אחת לעמוד (src/data/backgrounds.js) לפי מזהה
    העמוד ולא בהגרלה, ולכן הוא קבוע גם ברענון. */
@@ -250,7 +250,7 @@ svg {
   background-color: #f7f3ea;
   background-image:
     /* ריכוך התפר */
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1672' height='941'%3E%3ClinearGradient id='f' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23f7f3ea' stop-opacity='1'/%3E%3Cstop offset='.16' stop-color='%23f7f3ea' stop-opacity='0'/%3E%3Cstop offset='.84' stop-color='%23f7f3ea' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23f7f3ea' stop-opacity='1'/%3E%3C/linearGradient%3E%3Crect width='1672' height='941' fill='url(%23f)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1672' height='941'%3E%3ClinearGradient id='f' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23f7f3ea' stop-opacity='.72'/%3E%3Cstop offset='.07' stop-color='%23f7f3ea' stop-opacity='.34'/%3E%3Cstop offset='.18' stop-color='%23f7f3ea' stop-opacity='0'/%3E%3Cstop offset='.82' stop-color='%23f7f3ea' stop-opacity='0'/%3E%3Cstop offset='.93' stop-color='%23f7f3ea' stop-opacity='.34'/%3E%3Cstop offset='1' stop-color='%23f7f3ea' stop-opacity='.72'/%3E%3C/linearGradient%3E%3Crect width='1672' height='941' fill='url(%23f)'/%3E%3C/svg%3E"),
     /* ינומת שמנת עדינה מעל האיורים — קריאוּת בלי להעלים אותם */
     linear-gradient(
       rgba(248, 245, 238, var(--motif-veil, 0.35)),
@@ -282,9 +282,78 @@ svg {
 }
 
 /* מסכים עמוסי מלל, טבלאות ושאלונים — שכבת שמנת דקה נוספת מתחתיהם,
-   כדי שהאותיות יישארו נוחות לקריאה מעל האיורים */
+   כדי שהאותיות יישארו נוחות לקריאה מעל האיורים. השכבה אינה מלבן
+   שנפתח ונסגר בקצה המקטע: היא עולה מאפס בראשו ונמוגה לאפס בתחתיתו,
+   ולכן עוצמת הרקע משתנה ברכות ואין קו בגבול. */
 .hasMotif :is(#quiz, #ch2-check, #ch2-compare, #ch2-exam, #ch3-summary, #ch3-exam) {
-  background-color: rgba(248, 245, 238, 0.42);
+  --veil: 0.42;
+}
+
+.hasMotif :is(#quiz, #ch2-check, #ch2-compare, #ch2-exam, #ch3-summary, #ch3-exam),
+.chapterPage.hasMotif .byPurpose {
+  --veil-ramp: clamp(140px, 20vh, 240px);
+  background-color: transparent;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(248, 245, 238, 0) 0,
+    rgba(248, 245, 238, var(--veil)) var(--veil-ramp),
+    rgba(248, 245, 238, var(--veil)) calc(100% - var(--veil-ramp)),
+    rgba(248, 245, 238, 0) 100%
+  );
+}
+
+/* ---------- המעבר בין מסכים ----------
+   בלי כותרת, חץ, פס או בלוק: רצועת שמנת שקופה ורכה שיושבת על הגבול
+   עצמו — חציה בתחתית המסך הקודם וחציה בראש המסך הבא — ונמוגה לאפס
+   לשני הכיוונים ולשני הצדדים. גיליון הרקע ממשיך מתחתיה בלי הפסקה,
+   ולכן זה אותו עמוד שנושם, לא עמוד חדש.
+
+   במרכזה קו שיער בזהב חיוור שנפתח מנקודה קטנה ונמוג לשני הצדדים —
+   סימן ש"חלק אחד נגמר", בעוצמה שכמעט אינה נקראת.
+
+   מסכי הנייבי הם ניגוד מכוון ולא רקע, ולכן לא נוגעים בגבולות שלהם.
+   מסך האיור ("מודיעין כמערכת לומדת") נכנס ויוצא בדעיכה משלו. */
+.hasMotif .section + .section::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset-inline: 0;
+  top: 0;
+  height: clamp(160px, 24vh, 260px);
+  transform: translateY(-50%);
+  pointer-events: none;
+  background:
+    /* נקודה זעירה במרכז */
+    radial-gradient(circle, rgba(176, 146, 72, 0.34) 0 1.6px, rgba(176, 146, 72, 0) 2.4px)
+      center / 12px 12px no-repeat,
+    /* קו שיער — שקוף סביב הנקודה, ונמוג לשני הקצוות */
+    linear-gradient(
+        to left,
+        rgba(176, 146, 72, 0) 0%,
+        rgba(176, 146, 72, 0.2) 34%,
+        rgba(176, 146, 72, 0) 47%,
+        rgba(176, 146, 72, 0) 53%,
+        rgba(176, 146, 72, 0.2) 66%,
+        rgba(176, 146, 72, 0) 100%
+      )
+      center / min(420px, 44%) 1px no-repeat,
+    /* ינומת השמנת */
+    linear-gradient(
+      to bottom,
+      rgba(250, 247, 240, 0) 0%,
+      rgba(250, 247, 240, 0.16) 30%,
+      rgba(250, 247, 240, 0.3) 50%,
+      rgba(250, 247, 240, 0.16) 70%,
+      rgba(250, 247, 240, 0) 100%
+    );
+  /* הרצועה נמוגה גם לרוחב, כדי שלא תיקרא כפס שחוצה את המסך */
+  -webkit-mask-image: linear-gradient(to left, transparent, #000 22%, #000 78%, transparent);
+  mask-image: linear-gradient(to left, transparent, #000 22%, #000 78%, transparent);
+}
+
+.hasMotif :is(.section--navy, .section--learning) + .section::before,
+.hasMotif .section + :is(.section--navy, .section--learning)::before {
+  content: none;
 }
 
 /* במסך צר הגיליון נפרש על רוחב קטן יותר והמוטיבים גדלים יחסית לטקסט;
