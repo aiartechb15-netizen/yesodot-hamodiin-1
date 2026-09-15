@@ -16,5 +16,19 @@
     /* stretch, כדי שעמודת התפריט תגיע לגובה התוכן וה-sticky שבתוכה
        יעבוד לאורך כל הפרק */
     align-items: stretch;
+    /* המעבר על רוחב העמודה עצמה: אזור התוכן מתרחב באותה תנועה,
+       ולכן אין קפיצה בין המצבים */
+    transition: grid-template-columns 280ms ease;
+  }
+
+  /* מכווץ: נשאר פס צר עם כפתור הפתיחה בלבד */
+  .chLayout.is-collapsed {
+    --chnav-w: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chLayout {
+    transition: none;
   }
 }

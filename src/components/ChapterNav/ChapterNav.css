@@ -50,6 +50,87 @@
   color: var(--teal-ink);
 }
 
+/* ---------- כפתור הכיווץ ---------- */
+/* קטן ולא בולט: מסגרת דקה, רקע שקוף, ומתחמם לזהב בריחוף. בעמוד RTL
+   התפריט יושב בימין, ולכן במצב פתוח החץ מצביע ימינה — לכיוון שאליו
+   הסרגל מתכווץ — ובמצב מכווץ הוא מתהפך שמאלה, לכיוון הפתיחה. */
+.chnav__collapse {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--navy-secondary);
+  cursor: pointer;
+  transition:
+    border-color 0.18s ease,
+    color 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.chnav__collapse:hover {
+  border-color: var(--gold);
+  color: var(--gold-ink);
+  background: rgba(196, 163, 71, 0.12);
+}
+
+.chnav__collapse:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+/* האייקון מצויר פונה מטה; סיבוב מכוון אותו לצד הנכון */
+.chnav__collapse svg {
+  transform: rotate(-90deg);
+  transition: transform 0.25s ease;
+}
+
+/* הרמז האנכי שנשאר במצב מכווץ */
+.chnav__spine {
+  display: none;
+  writing-mode: vertical-rl;
+  margin-top: 14px;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--teal-ink);
+  opacity: 0.75;
+  user-select: none;
+}
+
+/* ---------- מצב מכווץ ---------- */
+/* רשימת הסעיפים יורדת, ונשאר פס צר עם כפתור הפתיחה והרמז האנכי.
+   שום טקסט אינו נחתך: מה שאינו נכנס פשוט אינו מוצג. */
+.chLayout.is-collapsed .chnav__title,
+.chLayout.is-collapsed .chnav__list {
+  display: none;
+}
+
+.chLayout.is-collapsed .chnav__panel {
+  padding-inline: 12px;
+  overflow: hidden;
+}
+
+.chLayout.is-collapsed .chnav__head {
+  justify-content: center;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+
+.chLayout.is-collapsed .chnav__spine {
+  display: block;
+}
+
+.chLayout.is-collapsed .chnav__collapse svg {
+  transform: rotate(90deg);
+}
+
 /* ---------- הרשימה ---------- */
 .chnav__list {
   display: grid;
@@ -107,6 +188,12 @@
 
 /* ---------- מסכים צרים — פס דביק ומגירה ---------- */
 @media (max-width: 1079px) {
+  /* במסך צר הניווט הוא מגירה, ולכן אין בו כיווץ */
+  .chnav__collapse,
+  .chnav__spine {
+    display: none;
+  }
+
   .chnav {
     position: sticky;
     top: var(--header-h);

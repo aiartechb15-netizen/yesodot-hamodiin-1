@@ -19,7 +19,13 @@ const ACTIVE_LINE = 0.32
  * ציר אנכי. המקטע הנוכחי נייבי ומודגש, ולצדו פס טורקיז דק.
  * sections: [{ id, label }] — המקטעים הקיימים בפרק, לפי סדר העמוד.
  */
-export default function ChapterNav({ sections, title = 'תוכן הפרק', label = 'ניווט בין מקטעי הפרק' }) {
+export default function ChapterNav({
+  sections,
+  title = 'תוכן הפרק',
+  label = 'ניווט בין מקטעי הפרק',
+  collapsed = false,
+  onToggleCollapsed,
+}) {
   const isDesktop = useMediaQuery(DESKTOP)
   const [open, setOpen] = useState(false)
   const [activeId, setActiveId] = useState(() => sections[0]?.id)
@@ -136,6 +142,20 @@ export default function ChapterNav({ sections, title = 'תוכן הפרק', labe
 
       <div className={`chnav__panel${open ? ' is-open' : ''}`} id={panelId}>
         <div className="chnav__head">
+          {/* כיווץ והרחבה — בדסקטופ בלבד; במסך צר יש מגירה במקומו */}
+          {onToggleCollapsed ? (
+            <button
+              type="button"
+              className="chnav__collapse"
+              onClick={onToggleCollapsed}
+              aria-expanded={!collapsed}
+              aria-controls={panelId}
+              title={collapsed ? 'פתיחת תוכן הפרק' : 'צמצום תוכן הפרק'}
+              aria-label={collapsed ? 'פתיחת תוכן הפרק' : 'צמצום תוכן הפרק'}
+            >
+              <Icon name="chevron" size={16} />
+            </button>
+          ) : null}
           <span className="chnav__title">{title}</span>
           <button
             type="button"
@@ -146,6 +166,11 @@ export default function ChapterNav({ sections, title = 'תוכן הפרק', labe
             <Icon name="close" size={18} />
           </button>
         </div>
+
+        {/* במצב מכווץ נשאר רמז אנכי לתוכן הפרק, בלי טקסט חתוך */}
+        <span className="chnav__spine" aria-hidden="true">
+          {title}
+        </span>
 
         <ul className="chnav__list" ref={listRef}>
           {sections.map((s, i) => {
