@@ -1,6 +1,6 @@
 import Icon from '../components/Icons/Icons'
 import { byDomain } from '../data/chapter1'
-import domainImage from '../assets/images/מהו מודיעין תמונה 2.png'
+import domainImage from '../assets/images/מודיעין לפי תחום תמונה.png'
 import './sections.css'
 
 export default function ByDomain() {
@@ -13,7 +13,7 @@ export default function ByDomain() {
         <span className="gold-rule" aria-hidden="true" />
         <p className="lead">{byDomain.intro}</p>
 
-        {/* קטלוג התחומים לצד התצלום — כל התחומים גלויים בבת אחת */}
+        {/* קטלוג התחומים לצד האיור — כל התחומים גלויים בבת אחת */}
         <div className="domains__layout">
           <ol className="domains">
             {byDomain.domains.map((d, i) => (
@@ -30,7 +30,9 @@ export default function ByDomain() {
             ))}
           </ol>
 
-          <img className="domains__img" src={domainImage} alt={byDomain.domains[0].image} />
+          <div className="domains__frame">
+            <img className="domains__img" src={domainImage} alt={byDomain.imageAlt} />
+          </div>
         </div>
       </div>
     </section>

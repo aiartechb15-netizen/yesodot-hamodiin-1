@@ -515,6 +515,7 @@ export const intelligenceCycle = {
 export const byDomain = {
   title: 'מודיעין לפי תחום',
   intro: 'בחרו תחום כדי להציג את ההגדרה שלו.',
+  imageAlt: 'איור המציג תחומי מודיעין שונים במרחב אחד',
   domains: [
     {
       id: 'military',

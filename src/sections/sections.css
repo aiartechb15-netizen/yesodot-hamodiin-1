@@ -168,7 +168,7 @@
 /* ---------- לפי תחום — קטלוג שורות ----------
    כל התחומים גלויים יחד. שורה לכל תחום, בגובה אחיד, מופרדות בקו דק.
    ללא כרטיסים וללא צללים. */
-/* הרשימה מימין, התצלום משמאל, בגובה זהה */
+/* הרשימה מימין, האיור משמאל */
 .domains__layout {
   display: grid;
   grid-template-columns: 1fr minmax(220px, 0.34fr);
@@ -177,14 +177,22 @@
   margin-top: clamp(26px, 3vw, 36px);
 }
 
+/* מסגרת האיור — באותה עמודה וברוחבה, ביחס 4/5 של האיור עצמו, ולכן
+   cover אינו חותך את העיגול המרכזי ואינו מותח. נצמדת לראש הרשימה. */
+.domains__frame {
+  align-self: start;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
 .domains__img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
 }
 
 .domains {
@@ -291,9 +299,12 @@
   .domains__layout {
     grid-template-columns: 1fr;
   }
-  .domains__img {
-    height: auto;
-    aspect-ratio: 16 / 10;
+  /* עמודה אחת: האיור עולה מעל רשימת התחומים, ברוחב מלא וביחס 4/5.
+     תקרת הרוחב חלה רק בטאבלט — בטלפון הוא ממלא את כל הרוחב. */
+  .domains__frame {
+    order: -1;
+    width: 100%;
+    max-width: 480px;
   }
   .domain {
     grid-template-columns: 26px 34px 1fr;
