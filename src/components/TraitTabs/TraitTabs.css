@@ -1,0 +1,317 @@
+/* ---------- מאפייני עבודת המודיעין ----------
+   פס ניווט אחד של שבעה עיגולים ממוספרים המחוברים בקו דק, ומתחתיו
+   אזור תוכן אחד בלבד למאפיין הפעיל. בלי כרטיס לכל מאפיין, בלי חצים,
+   בלי מונה ובלי שורת נקודות. */
+.tsel {
+  /* כחול-אפור עדין — לקו המחבר ולמסגרת העיגולים שאינם פעילים */
+  --tsel-line: #b9c4ce;
+  --tsel-ring: #8d9fb0;
+  --tsel-dot: 54px;
+
+  width: min(1120px, 100%);
+  /* נצמד לימין, בקו אחד עם הכותרת שמעליו */
+  margin-inline: 0 auto;
+  margin-top: clamp(28px, 3vw, 44px);
+  direction: rtl;
+  /* ההתאמות לרוחב נקבעות לפי הרוחב של הרכיב עצמו ולא של המסך: אזור
+     התוכן משתנה עם תפריט הצד ועם השוליים של הפרק */
+  container-type: inline-size;
+}
+
+/* ---------- הפס ---------- */
+.tsel__rail {
+  /* ריפוד קטן סביב הפס, כדי שטבעת הפוקוס לא תיחתך בגלילה */
+  padding: 6px 4px 4px;
+}
+
+.tsel__track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  align-items: start;
+}
+
+/* הקו המחבר: ממרכז העיגול הראשון עד מרכז האחרון. הטורים שווים,
+   ולכן כל מרכז יושב חצי טור מן הקצה — 1/14 מן הרוחב. */
+.tsel__track::before {
+  content: '';
+  position: absolute;
+  top: calc(var(--tsel-dot) / 2);
+  inset-inline: calc(100% / 14);
+  height: 1px;
+  background: var(--tsel-line);
+}
+
+.tsel__tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  padding: 0 6px;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: center;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.tsel__num {
+  display: grid;
+  place-items: center;
+  width: var(--tsel-dot);
+  height: var(--tsel-dot);
+  flex: none;
+  border: 1px solid var(--tsel-ring);
+  border-radius: 50%;
+  /* רקע אטום, כדי שהקו המחבר ייעצר בשולי העיגול ולא יחצה אותו */
+  background: var(--paper);
+  font-family: var(--font-heading);
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--navy-secondary);
+  transition:
+    background-color var(--dur-slow) var(--ease),
+    border-color var(--dur-slow) var(--ease),
+    color var(--dur-slow) var(--ease),
+    box-shadow var(--dur-slow) var(--ease);
+}
+
+.tsel__name {
+  max-width: 15ch;
+  font-size: clamp(17px, 1.15vw, 19px);
+  font-weight: 500;
+  line-height: 1.35;
+  transition: color var(--dur) var(--ease);
+}
+
+.tsel__tab:hover .tsel__num {
+  border-color: var(--gold);
+  color: var(--navy);
+}
+
+.tsel__tab:hover .tsel__name {
+  color: var(--navy);
+}
+
+.tsel__tab:focus-visible {
+  outline: none;
+}
+
+.tsel__tab:focus-visible .tsel__num {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+}
+
+/* המאפיין הפעיל — עיגול מלא בזהב, מספר ושם כהים ובולטים */
+.tsel__tab.is-active .tsel__num {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--navy);
+  font-weight: 700;
+  box-shadow: 0 0 0 6px rgba(196, 163, 71, 0.16);
+}
+
+.tsel__tab.is-active .tsel__name {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+/* ---------- אזור התוכן ---------- */
+.tsel__stage {
+  display: grid;
+  margin-top: clamp(30px, 3vw, 44px);
+  border: 1px solid rgba(196, 163, 71, 0.5);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.tsel__panel {
+  grid-area: 1 / 1;
+  display: grid;
+  /* ב-RTL הטור הראשון בימין: אייקון, תוכן, ומספר גדול בצד השני */
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  /* כל ההסברים חולקים תא אחד בגובה הארוך שבהם; השורות נצמדות לראש
+     האזור ואינן נמתחות לגובה הזה */
+  align-content: start;
+  gap: clamp(22px, 2.4vw, 36px);
+  padding: clamp(28px, 3vw, 44px) clamp(26px, 3.2vw, 52px);
+  /* visibility ולא display: ההסברים המוסתרים ממשיכים לתרום לגובה */
+  visibility: hidden;
+  opacity: 0;
+}
+
+.tsel__panel.is-on {
+  visibility: visible;
+  opacity: 1;
+  animation: tsel-fade 260ms ease both;
+}
+
+.tsel__panel:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: -3px;
+  border-radius: var(--radius-lg);
+}
+
+@keyframes tsel-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tsel__icon {
+  display: grid;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+  border: 1px solid rgba(196, 163, 71, 0.45);
+  border-radius: 50%;
+  background: rgba(196, 163, 71, 0.07);
+  color: var(--gold-ink);
+}
+
+/* קו דק יותר מן האייקונים הקטנים באתר — באייקון גדול הקו הרגיל כבד */
+.tsel__icon svg * {
+  stroke-width: 1.15;
+}
+
+.tsel__body {
+  align-self: center;
+  text-align: right;
+}
+
+.tsel__title {
+  margin: 0;
+  font-size: clamp(27px, 2.3vw, 33px);
+  line-height: 1.25;
+  text-align: right;
+  color: var(--navy);
+}
+
+.tsel__text {
+  max-width: 64ch;
+  margin: 14px 0 0;
+  line-height: 1.8;
+  text-align: right;
+  color: var(--ink-soft);
+}
+
+/* המספר הגדול — נוכח אך שקט, בצד השני של האזור */
+.tsel__bigNum {
+  align-self: center;
+  font-family: var(--font-heading);
+  font-size: clamp(64px, 6vw, 96px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--gold);
+  opacity: 0.22;
+  user-select: none;
+}
+
+/* ---------- הודעת הסיום ---------- */
+.tsel__done {
+  margin: 16px 0 0;
+  min-height: 1.6em;
+  text-align: right;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--teal-ink);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.tsel__done.is-on {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tsel__panel.is-on {
+    animation: none;
+  }
+  .tsel__num,
+  .tsel__name,
+  .tsel__done {
+    transition: none;
+  }
+}
+
+/* ---------- רוחב מצומצם ----------
+   השאילתות נמדדות מול רוחב הרכיב (container) ולא מול המסך. */
+
+/* פס צפוף: עיגולים קטנים מעט, והמספר הגדול יורד כדי לפנות רוחב
+   להסבר עצמו */
+@container (max-width: 880px) {
+  .tsel__track {
+    --tsel-dot: 48px;
+  }
+
+  .tsel__num {
+    font-size: 17px;
+  }
+
+  .tsel__name {
+    max-width: none;
+    font-size: 17px;
+  }
+
+  .tsel__panel {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .tsel__bigNum {
+    display: none;
+  }
+
+  .tsel__icon {
+    width: 72px;
+    height: 72px;
+  }
+
+  .tsel__icon svg {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+/* אין די רוחב לשבעה טורים: הפס נגלל לרוחבו. הגלילה מוגבלת לפס
+   עצמו; העמוד אינו נגלל הצידה, וכיוון ה-RTL נשמר — 01 בימין. */
+@container (max-width: 700px) {
+  .tsel__rail {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--tsel-line) transparent;
+    padding-bottom: 12px;
+  }
+
+  .tsel__track {
+    min-width: 720px;
+  }
+}
+
+@container (max-width: 520px) {
+  .tsel__panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding: 24px 20px;
+  }
+
+  .tsel__icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .tsel__icon svg {
+    width: 32px;
+    height: 32px;
+  }
+}

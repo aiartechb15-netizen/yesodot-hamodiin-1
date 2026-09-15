@@ -41,7 +41,6 @@
 .ch1 .gateHead,
 .ch1 .video__body,
 .ch1 .next,
-.ch1 .tcar__stage,
 .ch1 .quiz__body,
 .ch1 .exam__body {
   text-align: right;
@@ -85,9 +84,10 @@
   font-size: clamp(18.5px, 1.25vw, 21.5px);
 }
 
-/* תוויות של פקדים קומפקטיים נשארות ממורכזות בתוך הפקד עצמו */
+/* תוויות של פקדים קומפקטיים נשארות ממורכזות בתוך הפקד עצמו — וכך
+   גם מספר ושם המאפיין שמתחת לכל עיגול בפס המאפיינים */
 .ch1 .btn,
-.ch1 .tcar__nav,
+.ch1 .tsel__tab,
 .ch1 .quiz__actions .btn,
 .ch1 .exam__actions .btn {
   text-align: center;
@@ -97,7 +97,6 @@
 /* חצים וחצי-אקורדיון: מסתובבים לכיוון הנכון בעמוד RTL */
 .ch1 .acc__chev,
 .ch1 .xcard__chev,
-.ch1 .tcar__navIcon,
 .ch1 .of__deepChev {
   transform: scaleX(-1);
 }
@@ -122,17 +121,6 @@
 
 .ch1 :is(ul, ol):not([class]) {
   padding-inline-start: 1.4em;
-}
-
-/* קו הזהב שמתחת לכותרת בקרוסלת המאפיינים היה ממורכז בעוד הכותרת
-   והטקסט מיושרים לימין — הוא חוזר לצד ההתחלה */
-.ch1 .tcar__rule {
-  margin-inline: 0 auto;
-}
-
-/* גם מלל המאפיין עצמו נצמד לימין ולא מתמרכז כשהמסך מצר */
-.ch1 .tcar__text {
-  margin-inline: 0 auto;
 }
 
 /* ---------- 6. רוחב קריאה ומרווחים ---------- */

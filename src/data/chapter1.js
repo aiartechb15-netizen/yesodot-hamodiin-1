@@ -322,8 +322,7 @@ export const choosingApproach = {
 
 export const uniqueTraits = {
   title: 'מה מייחד את עבודת המודיעין?',
-  intro: 'לחצו על החצים כדי לעבור בין המאפיינים.',
-  counterLabel: 'מתוך',
+  intro: 'בחרו מאפיין כדי להציג את ההסבר שלו.',
   completedMessage: 'עברתם על כל שבעת המאפיינים.',
   items: [
     {

@@ -1,4 +1,4 @@
-import TraitCarousel from '../components/TraitCarousel/TraitCarousel'
+import TraitTabs from '../components/TraitTabs/TraitTabs'
 import { uniqueTraits } from '../data/chapter1'
 import './sections.css'
 
@@ -12,7 +12,7 @@ export default function UniqueTraitsSection() {
         <span className="gold-rule" aria-hidden="true" />
         <p className="lead">{uniqueTraits.intro}</p>
 
-        <TraitCarousel
+        <TraitTabs
           items={uniqueTraits.items}
           label={uniqueTraits.title}
           completedMessage={uniqueTraits.completedMessage}
