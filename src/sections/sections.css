@@ -307,17 +307,70 @@
   background-color: rgba(247, 243, 234, 0.55);
 }
 
-/* אזור תוכן אחד, לא שני צדי מסך. הוא יושב מעט ימינה ממרכז אזור
-   התוכן — שולי ההתחלה (ימין ב-RTL) קטנים משולי הסיום — ומעט מעל
-   מרכזו האנכי, בזכות המרווח שנשאר מתחתיו. */
+/* שתי עמודות: התוכן מימין (כ-60%) והאיור משמאל (כ-40%). המכל עצמו
+   שומר על ריפוד 5 הס"מ של הפרק, והפריסה יושבת בתוכו. האיור ממורכז
+   אנכית ביחס לתוכן. */
+.chapterPage .byPurpose {
+  /* נקודת המעבר לעמודה אחת נמדדת ברוחב המקטע ולא ברוחב המסך: תפריט
+     הצד ושולי 5 הס"מ בולעים חלק גדול מן המסך, ובלפטופ של 1440 היו
+     נשארים למלל כ-430 פיקסלים בלבד */
+  container: purpose / inline-size;
+}
+
+.purpose-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  align-items: center;
+  gap: clamp(32px, 4vw, 72px);
+  direction: rtl;
+}
+
 .purpose {
-  width: min(920px, 100%);
-  /* ההיסט נגזר מן המקום שנשאר בפועל: שליש מן העודף, עד 90 פיקסלים.
-     במסך צר שבו אין עודף הוא מתאפס מעצמו ואין דחיסה לצד אחד. */
-  margin-inline-start: clamp(0px, calc((100% - 920px) * 0.3), 90px);
-  margin-inline-end: auto;
+  min-width: 0;
   margin-block-end: clamp(16px, 4vh, 56px);
   text-align: right;
+}
+
+/* האיור כ-<img> נפרד ולא כרקע: בלי כרטיס, מסגרת, רקע, פינות או צל.
+   הקובץ כולל ערוץ שקיפות ודעיכה בקצוות, ולכן אין צורך במסכה או
+   במיזוג. */
+.purpose__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.purpose__visual img {
+  display: block;
+  width: min(100%, 540px);
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+/* עמודה אחת — התוכן קודם, והאיור מתחתיו, קטן ושקוף יותר. חל במסך צר
+   מ-900, וגם במסך רחב יותר כשאזור התוכן עצמו צר מכדי להכיל שתי
+   עמודות — כלומר כששתי אפשרויות הבורר כבר אינן נכנסות בשורה אחת. */
+@container purpose (max-width: 1399px) {
+  .purpose-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(20px, 5vw, 32px);
+  }
+  .purpose__visual img {
+    width: min(100%, 360px);
+    opacity: 0.8;
+  }
+}
+
+/* במסך טלפון צר האיור רק מעמיס — הוא יורד */
+@media (max-width: 480px) {
+  .purpose__visual {
+    display: none;
+  }
 }
 
 .purpose__hint {
@@ -474,8 +527,6 @@
    למלוא הרוחב במקום לשבת מעט ימינה */
 @media (max-width: 860px) {
   .purpose {
-    width: 100%;
-    margin-inline-start: 0;
     margin-block-end: 0;
   }
   .purpose__choice {

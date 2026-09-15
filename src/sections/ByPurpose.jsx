@@ -1,5 +1,6 @@
 import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { byPurpose } from '../data/chapter1'
+import purposeArt from '../assets/images/מודיעין לפי ייעוד תמונת רקע.png'
 import './sections.css'
 
 /**
@@ -48,7 +49,7 @@ export default function ByPurpose() {
       id="by-purpose"
       aria-labelledby="by-purpose-title"
     >
-      <div className="container">
+      <div className="container purpose-layout">
         <div className="purpose">
           <h2 className="section-title" id="by-purpose-title">
             {byPurpose.title}
@@ -111,6 +112,11 @@ export default function ByPurpose() {
               )
             })}
           </div>
+        </div>
+
+        {/* איור דקורטיבי בלבד — אינו מוסר מידע שאינו כתוב לצדו */}
+        <div className="purpose__visual" aria-hidden="true">
+          <img src={purposeArt} alt="" />
         </div>
       </div>
     </section>
