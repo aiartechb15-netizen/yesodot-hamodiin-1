@@ -39,16 +39,31 @@
   margin-top: 34px;
 }
 
+/* עמודת הרמות נמתחת לגובה הכרטיסייה (align-items: stretch ב-.ladder):
+   הכרטיס הראשון נצמד לראשה והאחרון לתחתיתה. */
 .ladder__list {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 0;
+  margin: 0;
 }
 
 .ladder__item {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+}
+
+/* הגובה העודף מתחלק שווה בין שלושת אזורי החצים, והחץ ממורכז באזורו —
+   כך המרווח מעל כל חץ ומתחתיו אחיד, בלי תלות בגובה הכרטיסים. */
+.ladder__item:not(:last-child) {
+  flex: 1 0 auto;
+}
+
+.ladder__item:not(:last-child) .ladder__arrow {
+  flex: 1 0 auto;
+  align-items: center;
 }
 
 .ladder__btn {
@@ -264,6 +279,14 @@
 @media (max-width: 1000px) {
   .ladder {
     grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .ladder__list {
+    justify-content: flex-start;
+  }
+  .ladder__item:not(:last-child),
+  .ladder__item:not(:last-child) .ladder__arrow {
+    flex: none;
   }
   .domains__layout {
     grid-template-columns: 1fr;
