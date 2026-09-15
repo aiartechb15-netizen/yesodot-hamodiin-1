@@ -391,11 +391,11 @@
 
 .purpose-layout {
   display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 3fr);
+  grid-template-columns: minmax(0, 4fr) minmax(0, 3.3fr);
   align-items: center;
-  /* מרווח קטן: לאיור יש שוליים שקופים ודועכים משלו, והם משלימים את
-     המרחק בינו לבין הטקסט */
-  gap: clamp(8px, 1.4vw, 24px);
+  /* מרווח קטן: לאיור יש דעיכה רכה בצד הפונה אל הטקסט, והיא משלימה
+     את המרחק ביניהם */
+  gap: clamp(6px, 0.9vw, 16px);
   direction: rtl;
 }
 
@@ -413,10 +413,17 @@
 
 /* האיור כ-<img> נפרד ולא כרקע: בלי כרטיס, מסגרת, צל או פינות. הוא
    נצמד לצד התוכן (inline-start ב-RTL).
-   - חיתוך קל לגובה (6/5 במקום 3/2) מוריד רק את השוליים הדועכים
-     שבצדדים, והמפה עצמה תופסת יותר מן העמודה.
+   - חיתוך ל-7/6 (במקום 3/2) מוריד רק את השוליים השקופים שבצדדים.
+     התמונה עצמה אינה נמתחת — cover מגדיל אותה ביחס המקורי עד שהיא
+     מכסה את השטח — ולכן המפה יוצאת גדולה בכ-27% מקודם, גם ברוחב
+     וגם בגובה, באותה עמודה.
+   - החיתוך מקרב את ציור המפה אל התוכן: מה שנחתך הוא השוליים
+     הריקים שהפרידו ביניהם.
    - multiply ממזג את הלבן של המפה אל גוון הנייר של המקטע, והמפה
-     נראית מצוירת על אותו רקע ולא מודבקת עליו. */
+     נראית מצוירת על אותו רקע ולא מודבקת עליו.
+   - ארבעת הקצוות נמוגים במסכה. הצד הפונה אל הטקסט (ימין) נמוג ארוך
+     יותר, ולכן האיור נגמר הרבה לפני שהוא מגיע אליו; הקצה השמאלי
+     נמוג קצר, כדי שלא ייחתך כקו מול קצה המקטע. */
 .purpose__visual {
   display: flex;
   align-items: center;
@@ -429,11 +436,33 @@
 .purpose__visual img {
   display: block;
   width: 100%;
-  max-width: 660px;
+  max-width: 720px;
   height: auto;
-  aspect-ratio: 6 / 5;
+  aspect-ratio: 7 / 6;
   object-fit: cover;
   mix-blend-mode: multiply;
+
+  /* דעיכה בשני הצירים. הערכים באחוזים, ולכן אזור הדעיכה גדל יחד עם
+     האיור ונשאר רך באותה מידה בכל רוחב מסך. */
+  --pv-fade-x: linear-gradient(
+    to left,
+    transparent 0%,
+    #000 22%,
+    #000 93%,
+    transparent 100%
+  );
+  --pv-fade-y: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 14%,
+    #000 86%,
+    transparent 100%
+  );
+  -webkit-mask-image: var(--pv-fade-x), var(--pv-fade-y);
+  -webkit-mask-composite: source-in;
+  mask-image: var(--pv-fade-x), var(--pv-fade-y);
+  /* שתי הדעיכות נחתכות זו בזו, ולכן גם ארבע הפינות רכות */
+  mask-composite: intersect;
 }
 
 /* עמודה אחת — התוכן קודם והאיור מתחתיו. חל רק כשהמקטע צר מכדי להכיל
@@ -447,7 +476,7 @@
     justify-content: center;
   }
   .purpose__visual img {
-    width: min(100%, 420px);
+    width: min(100%, 460px);
   }
 }
 
