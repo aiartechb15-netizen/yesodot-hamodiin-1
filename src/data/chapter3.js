@@ -309,7 +309,7 @@ export const tactical = {
   kicker: 'תחנה 6',
   navLabel: 'מודיעין מבצעי / טקטי',
   title: 'מודיעין מבצעי / טקטי',
-  cardTitle: 'כרטיס זהות — מודיעין מבצעי / טקטי',
+  cardTitle: 'כרטיס זהות',
   rows: [
     {
       id: 'purpose',
