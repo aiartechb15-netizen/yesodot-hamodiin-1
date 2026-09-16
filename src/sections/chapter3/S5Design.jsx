@@ -38,9 +38,16 @@ function Unit({ id }) {
 export default function S5Design() {
   const uid = useId()
   const [step, setStep] = useState(0)
+  /* כיוון המעבר האחרון — קובע מאיזה צד נכנסת השקופית */
+  const [dir, setDir] = useState(1)
   const touchX = useRef(null)
 
-  const go = (next) => setStep(Math.min(STEPS - 1, Math.max(0, next)))
+  const go = (next) => {
+    const target = Math.min(STEPS - 1, Math.max(0, next))
+    if (target === step) return
+    setDir(target > step ? 1 : -1)
+    setStep(target)
+  }
 
   /* ב-RTL חץ שמאלה מקדם קדימה וחץ ימינה חוזר אחורה */
   const onKeyDown = (e) => {
@@ -91,17 +98,20 @@ export default function S5Design() {
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
           >
-            <div className="stages-track" style={{ transform: `translateX(${step * 100}%)` }}>
+            {/* המסילה אינה נעה: רק השקופית הפעילה מוצגת, ולכן גובה
+                האזור הוא גובה התוכן שלה ואין חלל מתחתיו. השקופיות
+                האחרות מוסתרות ב-display: none אך נשארות מורכבות,
+                ולכן מצב התרגול נשמר. */}
+            <div className={`stages-track is-${dir > 0 ? 'fwd' : 'back'}`}>
             {/* שלב 1 ושלב 2 — שתי יחידות ידע בכל אחד */}
             {SCREENS.map((ids, i) => (
               <div
-                className="stage-slide"
+                className={`stage-slide${step === i ? ' is-on' : ''}`}
                 key={ids.join('-')}
                 id={`${uid}-slide-${i}`}
                 role="group"
                 aria-roledescription="שלב"
                 aria-label={`שלב ${i + 1} מתוך ${STEPS}`}
-                aria-hidden={step !== i}
               >
                 <div className="knowledge-grid">
                   {ids.map((id) => (
@@ -114,12 +124,11 @@ export default function S5Design() {
             {/* שלב 3 — התרגול. אותו רכיב ואותם נתונים כמו קודם, והוא
                 נשאר מורכב גם כשאינו מוצג, ולכן התשובות נשמרות. */}
             <div
-              className="stage-slide"
+              className={`stage-slide${step === 2 ? ' is-on' : ''}`}
               id={`${uid}-slide-2`}
               role="group"
               aria-roledescription="שלב"
               aria-label={`שלב 3 מתוך ${STEPS}`}
-              aria-hidden={step !== 2}
             >
               <div className="s3exercise dsgn__exercise">
                 <h3 className="s3sub">{design.exercise.title}</h3>

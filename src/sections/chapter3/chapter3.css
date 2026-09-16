@@ -40,44 +40,45 @@
   color: var(--muted);
 }
 
-/* ---------- צרכנים / גורמים ---------- */
-.tiles {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+/* ---------- מפת השינוי (תחנה 4) ----------
+   הפריסה, המפה והרצועה יושבות ברכיבים שלהן. כאן נשאר רק מה שנוגע
+   למסך עצמו: הריווח בין שלושת חלקיו ורוחב הטקסט שבראשו.
+
+   הכרטיסים הממוזערים שהיו כאן קודם (.tiles / .tile) ירדו יחד עם
+   רצף הכרטיסים של המסך, ואיתם האייקונים הדקורטיביים שבתוכם. */
+.ctxmap__head {
+  margin-bottom: clamp(34px, 4vw, 54px);
 }
 
-.tile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 20px 14px;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  text-align: center;
+/* הטקסט בראש המסך נפרש על מלוא הרוחב שבין שני השוליים, ואינו
+   נעצר במידת הקריאוּת הכללית — כך שאר המסך והפתיח מתחילים
+   ומסתיימים באותם קצוות. */
+.ctxmap .container :is(p, li) {
+  max-width: none;
 }
 
-.tile__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: var(--cream);
-  color: var(--navy-secondary);
+.ctxmap__intro {
+  margin: 0;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  color: var(--text);
 }
 
-.tile__title {
-  font-size: var(--font-small-size);
-  font-weight: 700;
-  color: var(--navy);
+/* העיקרון — אותו ידע שהיה בכרטיס "העיקרון", כשורה שקטה ובלי מסגרת */
+.ctxmap__principle {
+  margin: 14px 0 0;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  color: var(--muted);
 }
 
-.tiles--5 {
-  grid-template-columns: repeat(5, 1fr);
+.ctxmap__video {
+  margin: 20px 0 0;
+}
+
+/* רצועת התרחיש נפרדת מן המפה במרווח, ולא בקו או במסגרת */
+.ctxmap .sstrip {
+  margin-top: clamp(40px, 5vw, 68px);
 }
 
 /* ---------- שאלות מרכזיות ---------- */
@@ -587,6 +588,10 @@
   padding-block: 48px 40px;
 }
 
+/* גובה הקרוסלה הוא גובה השקופית הפעילה בלבד. קודם שלוש השקופיות
+   ישבו זו לצד זו בשורה אחת, ולכן האזור היה תמיד בגובה הגבוהה שבהן —
+   שקופית התרגול — ומתחת לתוכן הקצר של שלבים 1 ו-2 נשאר חלל של מאות
+   פיקסלים. */
 .stages-carousel {
   position: relative;
   overflow: hidden;
@@ -594,30 +599,65 @@
   height: auto;
   min-height: 0;
   /* המרווח בין תחתית התוכן לשורת המעבר */
-  margin-bottom: 48px;
+  margin-bottom: 44px;
 }
 
 .stages-track {
-  display: flex;
-  align-items: stretch;
+  display: block;
+  height: auto;
+  min-height: 0;
   direction: rtl;
-  transition: transform 400ms ease-in-out;
 }
 
+/* רק השקופית הפעילה מוצגת. האחרות מוסתרות ב-display: none אך
+   נשארות מורכבות, ולכן מצב התרגול נשמר. */
 .stage-slide {
-  flex: 0 0 100%;
+  display: none;
   width: 100%;
   min-width: 0;
   height: auto;
   min-height: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
   padding-block: 0;
 }
 
-.stage-slide[aria-hidden='true'] {
-  visibility: hidden;
+.stage-slide.is-on {
+  display: grid;
+  position: relative;
+  grid-template-rows: auto auto auto;
+  align-content: start;
+  row-gap: 0;
+}
+
+/* המעבר נעשה עכשיו בהופעה והחלקה קצרה של השקופית הנכנסת, ולא
+   בהזזת מסילה בגובה קבוע. קדימה היא נכנסת משמאל, אחורה מימין. */
+@keyframes stageInFwd {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes stageInBack {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.stages-track.is-fwd .stage-slide.is-on {
+  animation: stageInFwd 400ms ease-in-out both;
+}
+
+.stages-track.is-back .stage-slide.is-on {
+  animation: stageInBack 400ms ease-in-out both;
 }
 
 /* ---- שורת המעבר ----
@@ -686,7 +726,7 @@
 
 /* המרווח בין הכותרת הראשית לתוכן השלב */
 .dsgn__head {
-  margin-bottom: 48px;
+  margin: 0 0 44px;
 }
 
 /* שתי עמודות שוות, עם קו אנכי דק בדיוק באמצע המרווח שביניהן */
@@ -1105,10 +1145,14 @@
   .opstop__panel,
   .opstop__num,
   .opstop__title,
-  .stages-track,
   .dsgn__navBtn,
   .dsgn__dot {
     transition: none;
+  }
+
+  .stages-track.is-fwd .stage-slide.is-on,
+  .stages-track.is-back .stage-slide.is-on {
+    animation: none;
   }
 }
 
@@ -1134,12 +1178,10 @@
     max-width: none;
   }
 
-  .stage-slide {
-    padding-block: clamp(24px, 6vw, 40px);
-  }
-
+  /* גם במסך צר אין לשקופית ריפוד משלה: המרווחים נקבעים בכותרת
+     ובקרוסלה, כך שהמרחקים זהים בכל הרוחבים */
   .dsgn__head {
-    margin-bottom: clamp(30px, 8vw, 56px);
+    margin-bottom: 36px;
   }
 }
 
