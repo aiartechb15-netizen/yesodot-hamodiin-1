@@ -52,18 +52,31 @@
 }
 
 /* התווית מעל הכותרת. לא .kicker הגלובלי: הוא בטורקיז כהה לרקעים
-   בהירים, וכאן צריך זהב שנקרא מעל התצלום. */
+   בהירים, וכאן צריך תווית שנקראת מעל תצלום.
+
+   טקסט זהב בלבד נבלע ברקעים עמוסים (אורות הערים בתצלום של פרק 2),
+   ולכן התווית יושבת על משטח Navy כהה ומעט שקוף, עם קו זהב דק
+   מסביב וטשטוש קל שמרגיע את הנקודות הבהירות שמאחוריה. היא נשארת
+   קטנה ומשנית לכותרת: אותו רוחב כמו הטקסט שבתוכה, לא כפתור. */
 .cover__eyebrow {
-  display: block;
-  margin: 0 0 14px;
-  color: var(--cover-gold);
+  display: inline-block;
+  /* letter-spacing מוסיף רווח אחרי האות האחרונה — בעברית זהו הצד
+     השמאלי. ריפוד שמאל מצומצם באותה מידה מחזיר את הכיתוב למרכז. */
+  padding: 7px 16px 7px calc(16px - 0.18em);
+  margin: 0 0 20px;
+  border: 1px solid rgba(201, 165, 82, 0.55);
+  border-radius: 6px;
+  background: rgba(7, 26, 45, 0.78);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  /* זהב בהיר, בגוון שמנת — נקרא מעל ה-Navy הכהה */
+  color: #e7cd93;
   font-family: var(--font-heading);
-  font-size: 19px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  /* התווית קטנה ויושבת מעל האזור הבהיר של השמיים — צל מעט חזק
-     מזה של שאר הכיתובים, אחרת הזהב נבלע בזוהר */
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.62);
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .cover__title {
@@ -312,9 +325,10 @@
     font-size: clamp(34px, 13.2vw, 44px);
   }
   .cover__eyebrow {
-    margin-bottom: 10px;
-    font-size: 19px;
-    letter-spacing: 0.18em;
+    padding: 6px 13px 6px calc(13px - 0.16em);
+    margin-bottom: 16px;
+    font-size: 19.5px;
+    letter-spacing: 0.16em;
   }
   .cover__tagline {
     margin-top: 16px;
