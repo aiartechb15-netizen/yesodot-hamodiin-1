@@ -232,21 +232,25 @@
   line-height: 1.6;
 }
 
-/* אקורדיון מינימלי: שורות מופרדות בקו דק, בלי מלבנים סגורים */
+/* שלוש השאלות זו לצד זו: שליש מן השורה לכל אחת, מימין לשמאל.
+   align-items: start — פתיחת שאלה מאריכה את הפריט שלה בלבד, ושתי
+   האחרות נשארות במקומן ואינן יורדות לשורה חדשה. */
 .idcard--open .idcard__qList {
-  display: block;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+  direction: rtl;
 }
 
-.idcard--open .idcard__qList > li + li {
-  border-top: 1px solid var(--border);
-}
-
+/* אקורדיון מינימלי: בלי מלבנים סגורים ובלי קווים לרוחב המסך */
 .idcard--open .idcard__q {
   gap: 14px;
-  padding: 15px 0;
+  padding: 12px 0;
   background: none;
   border: 0;
   border-radius: 0;
+  text-align: right;
 }
 
 .idcard--open .idcard__q:hover,
@@ -276,6 +280,13 @@
   padding-inline-start: 40px;
   font-size: 20.5px;
   line-height: 1.6;
+}
+
+/* מסך צר: אין די רוחב לשלוש עמודות, והשאלות חוזרות לעמודה אחת */
+@media (max-width: 768px) {
+  .idcard--open .idcard__qList {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media (max-width: 700px) {
