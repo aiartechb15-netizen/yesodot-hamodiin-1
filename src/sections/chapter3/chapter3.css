@@ -508,18 +508,31 @@
   justify-content: flex-start;
 }
 
-/* מכל אחד לכל המקטע, פרוש על מלוא רוחב עמודת התוכן. אין כאן תקרת
-   רוחב, אין מרכוז ואין שוליים משלו: 5 הס״מ מוגדרים פעם אחת על עמודת
-   התוכן (ChapterLayout.css), וכל שוליים נוספים כאן היו נספרים
-   פעמיים — 10 ס״מ בפועל. */
-.chapterPage .container.opsec__wrap {
+/* כל השכבות של המקטע פרושות על מלוא רוחב עמודת התוכן: אין בהן תקרת
+   רוחב, מרכוז, שוליים או ריפוד אופקיים משלהן. 5 הס״מ מוגדרים פעם
+   אחת בלבד, על עמודת התוכן עצמה (ChapterLayout.css), וכל ריווח נוסף
+   כאן היה נספר פעמיים — 10 ס״מ בפועל. */
+.chapterPage #ch3-operational,
+.chapterPage #ch3-operational .container,
+.chapterPage #ch3-operational .opscreen {
   box-sizing: border-box;
-  width: auto;
+  width: 100%;
   max-width: none;
   margin-inline: 0;
   padding-inline: 0;
+}
+
+.chapterPage .container.opsec__wrap {
   direction: rtl;
   text-align: right;
+}
+
+/* הטקסט הזורם במקטע מגיע עד שולי ה-5 ס״מ ואינו נעצר במידת הקריאוּת
+   הכללית (68ch ב-globals.css), כדי שהמרווח משני הצדדים יהיה זהה.
+   החריג מכוון ומוגבל למקטע הזה בלבד; שאר הפרק והאתר ממשיכים לפי
+   מידת הקריאוּת הרגילה. */
+.chapterPage #ch3-operational :is(p, li) {
+  max-width: none;
 }
 
 .opscreen {
