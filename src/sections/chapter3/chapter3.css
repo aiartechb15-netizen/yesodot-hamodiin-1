@@ -557,6 +557,127 @@
   padding-block: clamp(40px, 5vw, 72px);
 }
 
+/* ---------- תחנה 5 — עיצוב המערכה ----------
+   שלושה מסכים רצופים בתוך מקטע אחד: שני מסכי ידע ואחריהם התרגול.
+   המקטע נשאר אחד כדי שסרגל תוכן הפרק לא ישתנה. */
+
+/* 5 הס״מ מוגדרים פעם אחת על עמודת התוכן (ChapterLayout.css); כאן רק
+   הכיוון והיישור, אחרת הריווח היה נספר פעמיים */
+.chapterPage .container.dsgn__wrap {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0;
+  direction: rtl;
+  text-align: right;
+}
+
+.dsgn__screen {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
+  padding-block: clamp(40px, 5vw, 72px);
+}
+
+/* במסך הראשון הכותרת פותחת מלמעלה; בשניים האחרים התוכן ממורכז
+   אנכית ומסביבו שטח נשימה */
+.dsgn__screen--center {
+  justify-content: center;
+}
+
+/* המעבר בין המסכים — קו אופקי כמעט בלתי מורגש, לא מפריד כבד */
+.dsgn__screen + .dsgn__screen {
+  border-top: 1px solid rgba(196, 163, 71, 0.16);
+}
+
+/* רווח רחב בין הכותרת הראשית ליחידות התוכן */
+.dsgn__head {
+  margin-bottom: clamp(48px, 7vw, 110px);
+}
+
+/* שתי עמודות שוות, עם קו אנכי דק בדיוק באמצע המרווח שביניהן */
+.knowledge-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(70px, 8vw, 140px);
+  direction: rtl;
+  align-items: start;
+}
+
+.knowledge-grid::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 50%;
+  width: 1px;
+  background: var(--border);
+}
+
+.dsgn__unit {
+  min-width: 0;
+}
+
+.dsgn__unitTitle {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: var(--font-h3-size);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--navy);
+}
+
+/* רוחב קריאה: בלי התקרה הזאת השורות נמתחות על כל העמודה */
+.dsgn__text {
+  max-width: 46ch;
+  margin: 0;
+}
+
+/* ---- חיווי ההתקדמות ----
+   נקודות ומספר בלבד, בתחתית כל מסך. קטן ועדין, לא כפתור. */
+.dsgn__progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: auto 0 0;
+  padding-top: clamp(28px, 4vw, 52px);
+  font-size: var(--font-small-size);
+  color: var(--muted);
+}
+
+.dsgn__dots {
+  display: flex;
+  gap: 7px;
+}
+
+.dsgn__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+.dsgn__dot.is-on {
+  background: var(--gold);
+}
+
+/* ---- מסך התרגול ----
+   חמש שורות ברוחב אחיד ובגובה אחיד, והכפתור בקצה השמאלי שמתחתן.
+   מוגבל למקטע הזה: הרכיב עצמו משמש גם במקומות אחרים. */
+.dsgn__exercise .fill__list {
+  grid-auto-rows: 1fr;
+  gap: 14px;
+}
+
+.dsgn__exercise .fill__actions {
+  display: flex;
+  /* flex-end ב-RTL הוא הקצה השמאלי */
+  justify-content: flex-end;
+}
+
 /* ---------- מטרתו ---------- */
 /* כותרת קטנה, בכחול הכהה של האתר כמו שאר הכותרות — ולא תווית זהב */
 .opsec__label {
@@ -874,6 +995,38 @@
 }
 
 /* ---------- מסך צר ---------- */
+@media (max-width: 900px) {
+  /* יחידות הידע נערמות אחת מתחת לשנייה, והקו האנכי שביניהן הופך
+     לקו אופקי דק */
+  .knowledge-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(32px, 8vw, 56px);
+  }
+
+  .knowledge-grid::before {
+    content: none;
+  }
+
+  .knowledge-grid > * + * {
+    border-top: 1px solid var(--border);
+    padding-top: clamp(28px, 7vw, 48px);
+  }
+
+  .dsgn__text {
+    max-width: none;
+  }
+
+  /* מסך מלא לכל חלק אינו נחוץ כשהתוכן נערם — הוא רק יוצר חללים ריקים */
+  .dsgn__screen {
+    min-height: 0;
+    padding-block: clamp(34px, 8vw, 56px);
+  }
+
+  .dsgn__head {
+    margin-bottom: clamp(30px, 8vw, 56px);
+  }
+}
+
 @media (max-width: 860px) {
   /* ארבעת הצרכנים עוברים לשתי שורות ושתי עמודות, עדיין בלי כרטיסים
      ובלי מסגרות. קו הזהב נשאר רק בין שתי העמודות — הפריט שפותח שורה
