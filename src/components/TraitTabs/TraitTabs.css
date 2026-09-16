@@ -190,8 +190,8 @@
 
 .tsel__title {
   margin: 0;
-  font-size: clamp(27px, 2.3vw, 33px);
-  line-height: 1.25;
+  font-size: var(--font-h3-size);
+  line-height: var(--font-h3-line-height);
   text-align: right;
   color: var(--navy);
 }

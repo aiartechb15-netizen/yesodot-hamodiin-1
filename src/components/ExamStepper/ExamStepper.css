@@ -54,12 +54,12 @@
 }
 
 .exam__heading {
-  font-size: 25.5px;
+  font-size: var(--font-h3-size);
   color: var(--navy);
 }
 
 .exam__question {
-  font-size: 22.5px;
+  font-size: var(--font-body-size);
   font-weight: 600;
   color: var(--text);
   margin-bottom: 16px;

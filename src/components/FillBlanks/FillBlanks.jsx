@@ -35,7 +35,7 @@ export default function FillBlanks({ bank, bankLabel, sentences, hint, onResult 
         </ul>
       </div>
 
-      {hint ? <p className="fill__hint small muted">{hint}</p> : null}
+      {hint ? <p className="fill__hint muted">{hint}</p> : null}
 
       <ol className="fill__list">
         {sentences.map((s, i) => {

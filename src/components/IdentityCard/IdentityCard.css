@@ -68,13 +68,13 @@
 }
 
 .idcard__qTitle {
-  font-size: 24px;
+  font-size: var(--font-h4-size);
   color: var(--navy);
 }
 
 .idcard__qHint {
   margin: 4px 0 14px;
-  font-size: 19px;
+  font-size: var(--font-body-size);
   color: var(--muted);
 }
 
@@ -145,7 +145,7 @@
 .idcard__qText {
   margin: 8px 0 0;
   padding: 0 16px 6px;
-  font-size: 22px;
+  font-size: var(--font-body-size);
   font-weight: 600;
   color: var(--navy);
 }
@@ -207,14 +207,14 @@
 
 .idcard--open .idcard__label {
   gap: 10px;
-  font-size: 20.5px;
-  line-height: 1.6;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
   color: var(--navy);
 }
 
 .idcard--open .idcard__text {
-  font-size: 20.5px;
-  line-height: 1.6;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
 }
 
 /* ---- שאלות לדוגמה ---- */
@@ -223,13 +223,13 @@
 }
 
 .idcard--open .idcard__qTitle {
-  font-size: 23.5px;
+  font-size: var(--font-h4-size);
 }
 
 .idcard--open .idcard__qHint {
   margin-bottom: 6px;
-  font-size: 20px;
-  line-height: 1.6;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
 }
 
 /* שלוש השאלות זו לצד זו: שליש מן השורה לכל אחת, מימין לשמאל.
@@ -285,8 +285,8 @@
   margin: 0;
   padding: 0 0 16px;
   padding-inline-start: 40px;
-  font-size: 20.5px;
-  line-height: 1.6;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
 }
 
 /* מסך צר: אין די רוחב לשלוש עמודות, והשאלות חוזרות לעמודה אחת */

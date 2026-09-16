@@ -125,7 +125,7 @@
 
 .topic__title {
   margin-top: 0;
-  font-size: clamp(25.5px, 1.5vw, 30px);
+  font-size: var(--font-h3-size);
   color: var(--white);
 }
 

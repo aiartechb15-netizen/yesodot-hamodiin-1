@@ -47,7 +47,7 @@
 }
 
 .mcheck__question {
-  font-size: 23.5px;
+  font-size: var(--font-body-size);
   font-weight: 600;
   color: var(--navy);
   margin-bottom: 16px;

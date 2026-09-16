@@ -79,7 +79,7 @@
 }
 
 .sortx__catTitle {
-  font-size: 25px;
+  font-size: var(--font-h3-size);
   color: var(--navy);
 }
 

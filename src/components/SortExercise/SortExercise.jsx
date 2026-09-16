@@ -48,7 +48,7 @@ export default function SortExercise({ terms, categories, hint, explanation, onR
 
   return (
     <div className="sortx">
-      <p className="sortx__hint small muted">{hint}</p>
+      <p className="sortx__hint muted">{hint}</p>
 
       <div className="sortx__pool" aria-label="מושגים למיון">
         {pool.length ? (

@@ -61,14 +61,14 @@
 
 .video__title {
   color: var(--white);
-  font-size: clamp(25.5px, 2vw, 32.5px);
+  font-size: var(--font-h3-size);
   margin-top: 4px;
 }
 
 .video__note {
   margin: 0;
   color: var(--teal-light);
-  font-size: 20px;
+  font-size: var(--font-body-size);
 }
 
 .video__caption {
@@ -97,12 +97,9 @@
     height: 56px;
   }
 
+  /* הגדלים נשארים אלה של המערכת גם במסך צר — ראו --font-h3-size
+     ו---font-body-size, שמתכווצים בעצמם עם רוחב המסך */
   .video__title {
     margin-top: 0;
-    font-size: clamp(19px, 5vw, 23px);
-  }
-
-  .video__note {
-    font-size: 16px;
   }
 }

@@ -14,7 +14,7 @@
 .msel__question {
   padding: 0;
   margin-bottom: 14px;
-  font-size: 22.5px;
+  font-size: var(--font-body-size);
   font-weight: 600;
   color: var(--navy);
 }

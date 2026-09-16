@@ -12,7 +12,7 @@ export default function ScenarioPicker({ scenarios, options, hint }) {
 
   return (
     <div className="scen">
-      <p className="scen__hint small muted">{hint}</p>
+      <p className="scen__hint muted">{hint}</p>
 
       <ol className="scen__list">
         {scenarios.map((s, i) => {

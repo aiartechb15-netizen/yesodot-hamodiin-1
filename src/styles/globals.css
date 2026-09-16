@@ -78,24 +78,30 @@ h4 {
 }
 
 h1 {
-  font-size: var(--fs-h1);
-  font-weight: 800;
-  line-height: var(--lh-tight);
+  font-size: var(--font-h1-size);
+  font-weight: var(--font-h1-weight);
+  line-height: var(--font-h1-line-height);
   letter-spacing: -0.01em;
 }
 
 h2 {
-  font-size: var(--fs-h2);
+  font-size: var(--font-h2-size);
+  font-weight: var(--font-h2-weight);
+  line-height: var(--font-h2-line-height);
 }
 
 h3 {
-  font-size: var(--fs-h3);
+  font-size: var(--font-h3-size);
+  font-weight: var(--font-h3-weight);
+  line-height: var(--font-h3-line-height);
 }
 
 /* h4 בגופן הגוף ולא בגופן הכותרות — הוא כותרת משנה בתוך פסקה,
    ובגודל הזה הסנס הגיאומטרי נקרא ככותרת ולא כטקסט */
 h4 {
-  font-size: var(--fs-h4);
+  font-size: var(--font-h4-size);
+  font-weight: var(--font-h4-weight);
+  line-height: var(--font-h4-line-height);
   font-family: var(--font-body);
 }
 
@@ -444,7 +450,8 @@ svg {
 }
 
 .section-title {
-  font-size: var(--fs-h2);
+  font-size: var(--font-h2-size);
+  line-height: var(--font-h2-line-height);
 }
 
 .section-title--center {
@@ -471,9 +478,11 @@ svg {
   margin-block: var(--s-3) var(--s-4);
 }
 
+/* טקסט הפתיחה — באותו גודל ובאותו גובה שורה כמו פסקה, כפי שהוא
+   נקרא בפרק 1. ההבחנה בינו לפסקה נעשית ברוחב השורה ובמיקום. */
 .lead {
-  font-size: var(--fs-lead);
-  line-height: 1.62;
+  font-size: var(--font-lead-size);
+  line-height: var(--font-body-line-height);
   color: var(--text);
   max-width: 62ch;
 }

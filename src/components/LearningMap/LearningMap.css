@@ -131,7 +131,7 @@
 
 .lmap__title {
   margin: 0;
-  font-size: clamp(30px, 2.7vw, 46px);
+  font-size: var(--font-h2-size);
   line-height: 1.2;
   color: var(--navy);
   /* הילת שמנת במקום מלבן לבן: הכיתוב יושב ישירות על האיור */
@@ -151,7 +151,7 @@
 
 .lmap__hint {
   margin: 0;
-  font-size: clamp(18.5px, 1.3vw, 22px);
+  font-size: var(--font-body-size);
   line-height: 1.6;
   color: var(--ink-soft);
   text-shadow:

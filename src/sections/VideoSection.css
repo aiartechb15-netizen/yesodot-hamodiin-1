@@ -112,7 +112,7 @@
 
 .vstage__purposeTitle {
   margin: 0;
-  font-size: clamp(32.5px, 2.7vw, 46px);
+  font-size: var(--font-h2-size);
   color: var(--navy);
 }
 
@@ -126,7 +126,7 @@
   margin: 0;
   padding-inline-start: clamp(18px, 2vw, 28px);
   border-inline-start: 2px solid var(--gold);
-  font-size: clamp(22px, 1.45vw, 25.5px);
+  font-size: var(--font-body-size);
   line-height: 1.75;
   color: var(--ink-soft);
 }
