@@ -326,6 +326,41 @@
   height: 94px;
 }
 
+/* ---------- הקרבה המקצועית הנכונה (תחנה 11) ----------
+   בלוק פתוח ולא כרטיס: בלי רקע לבן, בלי מסגרת, בלי צל, בלי פינות
+   מעוגלות ובלי ריפוד צדדי. מה שמפריד אותו מן האקורדיונים שמעליו הוא
+   קו אופקי דק ומרווח — ותו לא. */
+.s3prox {
+  margin-top: 48px;
+  padding: 32px 0 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--border);
+  border-radius: 0;
+  box-shadow: none;
+  direction: rtl;
+  text-align: right;
+}
+
+/* הכותרת בגוון הזהב הכהה של האתר — הזהב הבהיר נכשל בניגודיות מול
+   רקע בהיר — ובאותו גודל של כותרת משנה בשאר הפרק */
+.s3prox__title {
+  margin: 0;
+  font-size: var(--font-h3-size);
+  line-height: var(--font-h3-line-height);
+  color: var(--gold-ink);
+}
+
+/* קו הזהב הקצר שמתחת לכותרת, ו-16px ממנו עד הפסקה */
+.s3prox > .gold-rule {
+  margin-block: 12px 16px;
+}
+
+.s3prox__text {
+  margin: 0;
+  max-width: 78ch;
+}
+
 /* ---------- טבלת סיכום (תחנה 12) ---------- */
 .t3wrap {
   overflow-x: auto;

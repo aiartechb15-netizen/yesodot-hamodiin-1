@@ -16,9 +16,12 @@ export default function S11Relations() {
 
         <ExpandCards items={rel.items} columns={2} />
 
-        <aside className="callout" style={{ marginTop: '26px' }}>
-          <span className="callout__label">{rel.callout.label}</span>
-          <p>{rel.callout.text}</p>
+        {/* מקטע פתוח ולא כרטיס: התוכן יושב ישירות על רקע העמוד, ומה
+            שמפריד אותו מן האקורדיונים שמעליו הוא קו דק ומרווח בלבד */}
+        <aside className="s3prox">
+          <h3 className="s3prox__title">{rel.callout.label}</h3>
+          <span className="gold-rule gold-rule--sm" aria-hidden="true" />
+          <p className="s3prox__text">{rel.callout.text}</p>
         </aside>
       </div>
     </section>
