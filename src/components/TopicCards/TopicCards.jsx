@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom'
 import { topicCards } from '../../data/chapter1'
 import './TopicCards.css'
 
-/* שלוש הכניסות לקורס. כל כרטיס הוא מלבן אופקי החצוי לשניים בדיוק
-   לרוחבו: מימין אזור לבן שבו מספר הפרק ושמו בלבד, ומשמאל התצלום
-   בתוך ריפוד קטן כדי שלא ייגע במסגרת.
+/* שלוש הכניסות לקורס. כל כרטיס הוא התצלום עצמו מקצה לקצה, ועליו
+   הצללה רכה בתחתיתו ובפינה הימנית-התחתונה מספר הפרק ושמו בלבד.
+   אין אזור לבן בתוך הכרטיס.
    אין CTA פנימי ואין חץ: הכרטיס כולו הוא הקישור, ולכן סימן פעולה
    נוסף היה כפילות של מה שכבר קיים בכל שטחו. */
 export default function TopicCards() {
@@ -23,8 +23,8 @@ export default function TopicCards() {
                     loading="lazy"
                     style={{ objectPosition: card.position, filter: card.filter }}
                   />
-                  {/* הצללה רכה בתחתית התצלום בלבד — היא מתחילה מתחת
-                      לאמצעו ומתחזקת בהדרגה, ולכן אין קו מפגש חד */}
+                  {/* הצללה רכה בתחתית הכרטיס — היא מתחילה מתחת לאמצעו
+                      ומתחזקת בהדרגה, ולכן אין קו מפגש חד */}
                   <span className="topic__shade" aria-hidden="true" />
                 </div>
                 <div className="topic__body">
