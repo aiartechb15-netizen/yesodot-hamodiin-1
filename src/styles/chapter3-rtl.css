@@ -1,0 +1,143 @@
+/* ---------- פרק 3 — RTL מלא, יישור אחיד ושוליים ----------
+   הקובץ חל רק על עמוד פרק 3 (המחלקה .ch3 על ה-main שלו), ולכן אינו
+   נוגע בשאר הפרקים ובדף הבית. הוא אינו משנה תוכן, צבעים, תמונות,
+   סדר מקטעים או רכיבים — רק כיוון, יישור ושוליים.
+
+   שלושה חריגים מכוונים ליישור לימין, כולם קומפוזיציות ממורכזות
+   מלכתחילה ולא טקסט זורם: מסך הפתיחה של הפרק, כיתוב שיושב מתחת
+   לעיגול ממוספר בתרשים זרימה, ותוויות של פקדים קומפקטיים (כפתור,
+   ציפ). אלה מסומנים בהערה במקומם. */
+
+/* ---------- 1. כיוון ---------- */
+.ch3 {
+  direction: rtl;
+}
+
+/* ---------- 2. יישור לימין ---------- */
+.ch3 :is(h1, h2, h3, h4, h5, h6, p, li, dt, dd, figcaption, label, legend, blockquote, th, td, summary, caption) {
+  text-align: right;
+}
+
+/* מכלים שמרכזו את תוכנם ברמת המכל */
+.ch3 .section-title--center,
+.ch3 .lead,
+.ch3 .s3head,
+.ch3 .video__body,
+.ch3 .quiz__body,
+.ch3 .exam__body {
+  text-align: right;
+}
+
+/* פסקאות וקווי זהב שמורכזו בשוליים אוטומטיים — מתחילים מימין */
+.ch3 .lead,
+.ch3 .section-title--center + .lead,
+.ch3 .gold-rule--center,
+.ch3 .section-title--center + .gold-rule {
+  margin-inline: 0 auto;
+}
+
+/* ---------- 3. אייקון, מספר ותבליט — בצד ימין של הכיתוב ---------- */
+/* כרטיס עם אייקון מעל הכותרת: האייקון עולה לפינה הימנית והכיתוב
+   שמתחתיו מיושר לימין, במקום ששניהם יתמרכזו */
+.ch3 .tile {
+  align-items: flex-start;
+  text-align: right;
+}
+
+/* רשימות: התבליט או המספר יושב מימין לטקסט ואינו נחתך */
+.ch3 ul,
+.ch3 ol {
+  padding-inline-start: 0;
+}
+
+.ch3 :is(ul, ol):not([class]) {
+  padding-inline-start: 1.4em;
+}
+
+/* ---------- 4. מסך הווידאו ---------- */
+/* הכיתוב שעל מסך ההמתנה של הנגן — טקסט ולא חלק מכפתור ההפעלה */
+.ch3 .video__title,
+.ch3 .video__note {
+  text-align: right;
+}
+
+/* ---------- 5. כרטיס "הפרק הבא" ---------- */
+/* כל תוכן הכרטיס מיושר לימין; רק הכפתור נשאר ממורכז בתחתיתו */
+.ch3 .nextch,
+.ch3 .nextch :is(h2, p, span) {
+  text-align: right;
+}
+
+.ch3 .nextch .gold-rule {
+  margin-inline: 0 auto;
+}
+
+/* ---------- 6. חריגים: קומפוזיציות ממורכזות מלכתחילה ---------- */
+/* מסך הפתיחה של הפרק — הכותרת, המשפט והחץ ממורכזים על התצלום */
+.ch3 .cover__inner,
+.ch3 .cover__inner :is(h1, p, span),
+.ch3 .cover__down,
+.ch3 .cover__down :is(span, p) {
+  text-align: center;
+}
+
+/* כיתוב שיושב מתחת לעיגול ממוספר בתרשים זרימה — ממורכז מתחת לעיגול
+   שלו, כך שהוא נקרא כשייך לו ולא לשכנו */
+.ch3 .opstop__title,
+.ch3 .opstop__text,
+.ch3 .flow3__label {
+  text-align: center;
+}
+
+/* תוויות של פקדים קומפקטיים נשארות ממורכזות בתוך הפקד עצמו */
+.ch3 .btn,
+.ch3 .sortx__chip,
+.ch3 .quiz__actions .btn,
+.ch3 .exam__actions .btn {
+  text-align: center;
+}
+
+/* ---------- 7. חצים בכיוון RTL ---------- */
+.ch3 .acc__chev,
+.ch3 .xcard__chev {
+  transform: scaleX(-1);
+}
+
+.ch3 .is-open .acc__chev,
+.ch3 .is-open .xcard__chev {
+  transform: none;
+}
+
+/* ---------- 8. שוליים של אזור התוכן ----------
+   חמישה סנטימטרים מארבעת צדי עמודת התוכן. הריפוד הצדדי יושב על המכל
+   של כל מקטע, והריפוד העליון והתחתון על עמודת התוכן כולה — כלומר
+   מעל המקטע הראשון ומתחת לאחרון, ולא בין מקטע למקטע.
+
+   השוליים חלים על אזור התוכן בלבד: הכותרת העליונה של האתר ותפריט
+   הצד הם מחוץ לעמודה הזאת ואינם מושפעים. */
+.chapterPage.ch3 .container {
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 5cm;
+}
+
+/* מכל בתוך מכל אינו מוסיף ריפוד שני */
+.chapterPage.ch3 .container .container {
+  padding-inline: 0;
+}
+
+.chapterPage.ch3 .chLayout__main {
+  padding-block: 5cm;
+}
+
+/* ---------- 9. מסכים קטנים ---------- */
+/* בטאבלט ובמובייל אין די רוחב ל-5 ס״מ משני הצדדים */
+@media (max-width: 900px) {
+  .chapterPage.ch3 .container {
+    padding-inline: 24px;
+  }
+
+  .chapterPage.ch3 .chLayout__main {
+    padding-block: 24px;
+  }
+}
