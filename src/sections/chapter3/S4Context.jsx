@@ -1,59 +1,40 @@
-import Icon from '../../components/Icons/Icons'
-import VideoPlaceholder from '../../components/VideoPlaceholder/VideoPlaceholder'
-import MultiSelect from '../../components/MultiSelect/MultiSelect'
+import ChangeMap from '../../components/ChangeMap/ChangeMap'
+import ScenarioSteps from '../../components/ScenarioSteps/ScenarioSteps'
+import VideoModal from '../../components/VideoModal/VideoModal'
 import { context as ctx } from '../../data/chapter3'
 import './chapter3.css'
 
+/* המסך נקרא כמפת שינוי אחת ולא כרצף כרטיסים: כותרת ופתיח, אחריהם
+   האינפוגרפיקה המעגלית עם אזור ההסבר שמתחלף לצדה, ומתחתיהם רצועת
+   התרחיש שממנה נפתח התרגול.
+
+   כל הידע שהיה כאן קודם נשאר: חמשת הגורמים הם צמתי המפה, העיקרון
+   נקרא כשורה שקטה מתחת לפתיח, הסרטון עבר לחלון מודאלי שנפתח
+   מקישור טקסט, וחמש שאלות התרגול נקראות אחת בכל פעם. */
 export default function S4Context() {
   return (
-    <section className="section section--cream" id={ctx.id} aria-labelledby="ch3-ctx-title">
-      <div className="container">
-        <header className="s3head">
+    <section className="section section--cream ctxmap" id={ctx.id} aria-labelledby="ch3-ctx-title">
+      <div className="container ctxmap__wrap">
+        <header className="ctxmap__head">
+          <p className="kicker">{ctx.eyebrow}</p>
           <h2 className="section-title" id="ch3-ctx-title">
-            {ctx.title}
+            {ctx.mapTitle}
           </h2>
           <span className="gold-rule" aria-hidden="true" />
+
+          <p className="ctxmap__intro">{ctx.intro}</p>
+          <p className="ctxmap__principle">{ctx.principle}</p>
+
+          {/* div ולא p: הרכיב מכיל גם את חלון ה-dialog, ו-p אינו יכול
+              להכיל אותו */}
+          <div className="ctxmap__video">
+            <VideoModal video={ctx.video} label={ctx.videoLink} />
+          </div>
         </header>
 
-        <div className="s3blocks">
-          <div className="videoWrap">
-            <VideoPlaceholder video={ctx.video} />
-          </div>
+        <ChangeMap factors={ctx.factors} hub={ctx.hub} />
 
-          <aside className="callout">
-            <span className="callout__label">העיקרון</span>
-            <p>{ctx.principle}</p>
-          </aside>
-
-          <div>
-            <p className="lead" style={{ maxWidth: '900px' }}>
-              {ctx.factorsIntro}
-            </p>
-            <ul className="tiles tiles--5" style={{ marginTop: '20px' }}>
-              {ctx.factors.map((f) => (
-                <li className="tile" key={f.id}>
-                  <span className="tile__icon">
-                    <Icon name={f.icon} size={22} />
-                  </span>
-                  <span className="tile__title">{f.title}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="s3sub">{ctx.exercise.title}</h3>
-            <span className="gold-rule gold-rule--sm" aria-hidden="true" />
-            <div style={{ marginTop: '18px' }}>
-              <MultiSelect
-                scenarioLabel={ctx.exercise.scenarioLabel}
-                scenario={ctx.exercise.scenario}
-                question={ctx.exercise.question}
-                options={ctx.exercise.options}
-              />
-            </div>
-          </div>
-        </div>
+        <ScenarioSteps strip={ctx.strip} exercise={ctx.exercise} />
       </div>
     </section>
   )

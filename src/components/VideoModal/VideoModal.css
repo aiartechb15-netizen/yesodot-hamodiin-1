@@ -1,0 +1,130 @@
+/* ---------- קישור הסרטון ----------
+   קישור טקסט ולא כפתור: משקל רגיל, בלי מילוי, בלי מסגרת ובלי צל.
+   הקו התחתון הוא מה שמסמן אותו כניתן ללחיצה. */
+.vlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: var(--font-small-size);
+  font-weight: 700;
+  color: var(--teal-ink);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+.vlink:hover {
+  color: var(--navy-secondary);
+}
+
+.vlink__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+}
+
+/* ---------- החלון ----------
+   ה-dialog עצמו הוא גם שכבת הרקע, ולכן הוא נפרש על כל המסך ומרכז
+   את התיבה. בלי מילוי משלו: הצבע מגיע מ-::backdrop. */
+.vmodal {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  height: 100%;
+  margin: 0;
+  padding: 24px;
+  border: 0;
+  background: none;
+  overflow: auto;
+}
+
+.vmodal::backdrop {
+  background: rgba(7, 26, 45, 0.72);
+}
+
+.vmodal__box {
+  direction: rtl;
+  text-align: right;
+  width: min(880px, 100%);
+  margin: auto;
+  padding: 28px 30px 30px;
+  background: var(--paper);
+  border-radius: var(--radius);
+}
+
+.vmodal__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.vmodal__title {
+  margin: 0;
+  font-size: var(--font-h3-size);
+}
+
+.vmodal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  padding: 0;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--navy);
+  cursor: pointer;
+}
+
+.vmodal__close:hover {
+  border-color: var(--gold);
+}
+
+/* מסגרת הנגן — שטח בגוון נייבי ביחס 16:9, כמו מסך המתנה של נגן */
+.vmodal__frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+  background: var(--navy);
+  border-radius: var(--radius-sm);
+  color: var(--teal-light);
+}
+
+.vmodal__play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid var(--teal-light);
+}
+
+.vmodal__note {
+  margin: 0;
+  font-size: var(--font-small-size);
+}
+
+.vmodal__detail {
+  margin: 16px 0 0;
+  font-size: var(--font-small-size);
+  color: var(--muted);
+}

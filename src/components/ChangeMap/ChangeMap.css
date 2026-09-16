@@ -1,0 +1,245 @@
+/* ---------- פריסת שתי העמודות ----------
+   היחס המבוקש הוא 55/45. הוא נכתב כאן ביחידות fr ולא באחוזים מפני
+   ש-55% + 45% + 48px של מרווח גדולים יחד מרוחב המכל, והעמודה
+   השמאלית הייתה נדחקת החוצה. ב-fr היחס נשמר בדיוק והמרווח נגרע
+   מן הרוחב לפני החלוקה. minmax(0,...) מונע מתוכן ארוך למתוח עמודה
+   מעבר לחלקהּ. */
+.cmap {
+  display: grid;
+  grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
+  gap: 48px;
+  align-items: center;
+  direction: rtl;
+}
+
+/* ---------- המפה המעגלית ---------- */
+/* המידה המלאה היא 380×380, אבל בעמודה צרה ממנה המפה אינה נדחסת
+   לאליפסה: כל המידות שבתוכה — הרדיוס, העיגול המרכזי ושתי הטבעות —
+   נגזרות מ---size באותו יחס, ולכן היא מתכווצת כמקשה אחת ונשארת
+   מעגל. במידה המלאה היחסים מחזירים בדיוק 125, 142, 186 ו-250. */
+.cmap__dial {
+  position: relative;
+  width: min(380px, 100%);
+  /* הגובה נגזר מן הרוחב ולא נכתב בנפרד: אחוז בגובה היה נמדד מול
+     גובה ההורה ולא מול הרוחב, והמפה הייתה נמעכת לאליפסה */
+  aspect-ratio: 1;
+  margin-inline: auto;
+}
+
+/* שתי טבעות דקות בלבד — בלי מילוי, בלי צל ובלי מסגרת כבדה */
+.cmap__ring {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.cmap__ring--inner {
+  /* 186/380 */
+  width: 48.95%;
+  border: 1px solid var(--gold);
+}
+
+.cmap__ring--outer {
+  /* 250/380 */
+  width: 65.79%;
+  border: 1px solid var(--teal-smoke);
+}
+
+/* העיגול המרכזי — נייבי מלא, שלוש שורות טקסט קצרות */
+.cmap__hub {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  /* 142/380 */
+  width: 37.37%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--teal-light);
+  text-align: center;
+}
+
+.cmap__hubLine {
+  display: block;
+  font-size: var(--font-small-size);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* ---------- גורם על הטבעת ----------
+   המיקום מחושב מן הזווית שמגיעה מן הרכיב: מזיזים לאורך הרדיוס ואז
+   מבטלים את הסיבוב, כדי שהכיתוב יישאר ישר. רקע שקוף, בלי מסגרת
+   מלבנית ובלי אייקון — מספר, שם, וזהו. */
+.cmap__node {
+  position: absolute;
+  top: var(--y);
+  right: var(--x);
+  transform: translate(50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  /* צר דיו כדי שהשמות הארוכים יישברו לשתי שורות. בשורה אחת שני
+     הגורמים שבצדי המעגל היו נכנסים אל תוך העיגול המרכזי: הם יושבים
+     בגובהו, והמרחק שנשאר להם ממנו קצר מחצי אורך הכיתוב. */
+  width: 86px;
+  padding: 4px;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: var(--navy);
+  text-align: center;
+  cursor: pointer;
+}
+
+.cmap__nodeNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  color: var(--navy);
+  font-size: var(--font-small-size);
+  font-weight: 700;
+  line-height: 1;
+  transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+}
+
+.cmap__nodeName {
+  font-size: var(--font-small-size);
+  font-weight: 700;
+  line-height: 1.3;
+  transition: color 0.16s ease;
+}
+
+.cmap__node:hover .cmap__nodeNum {
+  border-color: var(--gold);
+}
+
+/* הגורם הפעיל — העיגול בטורקיז מלא עם טקסט לבן, והשם בטורקיז */
+.cmap__node.is-on .cmap__nodeNum {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--white);
+}
+
+.cmap__node.is-on .cmap__nodeName {
+  color: var(--teal-ink);
+}
+
+/* ---------- אזור ההסבר ----------
+   חמשת ההסברים באותו תא גריד, זה על גבי זה. גובה האזור הוא של
+   הארוך שבהם, ולכן העמוד אינו קופץ במעבר בין גורמים.
+
+   הקו האנכי הדק יושב בצד הפונה אל המפה. ב-RTL זהו inline-start,
+   ולכן הוא נכתב כך ונשאר נכון גם אם הכיוון יתהפך. */
+.cmap__details {
+  display: grid;
+  border-inline-start: 2px solid var(--gold);
+  padding-inline-start: 28px;
+}
+
+.cmap__detail {
+  grid-area: 1 / 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.16s ease;
+}
+
+.cmap__detail.is-on {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* המספר — גדול ועדין, סימן מקום ולא כותרת.
+   היישור נכתב במפורש: .ltr-num הופך את כיוון הספרה ל-LTR, ובלעדיו
+   ה-start של הבלוק היה נמדד משמאל והמספר היה נודד לקצה השני. */
+.cmap__detailNum {
+  display: block;
+  text-align: right;
+  font-family: var(--font-heading);
+  font-size: var(--font-h2-size);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--gold-soft);
+}
+
+.cmap__detailTitle {
+  margin: 10px 0 0;
+  font-size: var(--font-h3-size);
+}
+
+.cmap__detailText {
+  margin: 14px 0 0;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  color: var(--text);
+}
+
+/* קו אופקי דק לפני השאלה המנחה */
+.cmap__detailQ {
+  margin: 20px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  font-weight: 700;
+  color: var(--teal-ink);
+}
+
+/* ---------- מובייל ----------
+   מתחת ל-820px העמודות נערמות: קודם המפה במרכז ואחריה ההסבר.
+   הקו האנכי הופך לקו אופקי מעל ההסבר. */
+@media (max-width: 820px) {
+  .cmap {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .cmap__details {
+    border-inline-start: 0;
+    padding-inline-start: 0;
+    border-top: 2px solid var(--gold);
+    padding-top: 24px;
+  }
+}
+
+/* המפה נבנתה סביב 380px. במסך צר ממנה היא מצטמצמת כמקשה אחת —
+   הרדיוס, העיגול המרכזי והטבעות יורדים יחד ביחס קבוע, ולכן היא
+   נשארת מעגל ולא נשברת. */
+@media (max-width: 420px) {
+  .cmap__hubLine {
+    font-size: var(--font-label-size);
+  }
+
+  /* המפה מתכווצת אבל רוחב הגורם קבוע, ולכן הוא מצטמצם כאן יחד איתה —
+     אחרת הכיתוב היה נכנס שוב אל העיגול המרכזי */
+  .cmap__node {
+    width: 74px;
+  }
+
+  .cmap__nodeName {
+    font-size: var(--font-label-size);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cmap__detail,
+  .cmap__nodeNum,
+  .cmap__nodeName {
+    transition: none;
+  }
+}
