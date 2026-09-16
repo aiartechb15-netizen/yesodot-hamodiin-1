@@ -2,12 +2,34 @@
    כל מה שמוגדר כאן חל על פרק 2 בלבד, דרך המחלקה .ch2Page שעל ה-main
    שלו. שאר הפרקים אינם מושפעים. */
 
-/* השוליים הרוחביים מצטמצמים לכ-5 ס״מ בכל צד במקום תקרת ה---ch-max:
-   התוכן נפרש רחב יותר על המסך ופחות "צף" במרכז. במסך צר נשמרת רצפת
-   ה---ch-gutter כדי שהטקסט לא ייחנק. */
-.chapterPage.ch2Page .container {
+/* ---------- מסגרת אזור התוכן ----------
+   אזור התוכן הראשי (ללא ההדר וללא תפריט הצד, שיושבים מחוץ לו) מקבל
+   5 ס״מ מכל צד — וזו המידה היחידה. כל שכבה פנימית שהוסיפה ריווח
+   אופקי משלה מתאפסת: הרוחב המרבי והריפוד של המכל, והרוחב המרבי
+   והמרכוז של לוחות פנימיים. כך התוכן מתחיל בדיוק ב-5 הס״מ ולא
+   מצטמצם וממורכז בתוכם. */
+.chapterPage.ch2Page .chLayout__main {
+  box-sizing: border-box;
+  width: calc(100% - 10cm);
   max-width: none;
-  padding-inline: clamp(22px, 6vw, 5cm);
+  margin: 5cm;
+  padding: 0;
+}
+
+.chapterPage.ch2Page .chLayout__main > *,
+.chapterPage.ch2Page .chLayout__main .container,
+.chapterPage.ch2Page .chLayout__main .sboard {
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+/* במסך צר אין די רוחב ל-5 ס״מ משני הצדדים */
+@media (max-width: 900px) {
+  .chapterPage.ch2Page .chLayout__main {
+    width: calc(100% - 48px);
+    margin: 24px;
+  }
 }
 
 /* סולם הטיפוגרפיה של הפרק עולה בכ-10%. הטוקנים הם מקור האמת של
@@ -56,44 +78,10 @@
 }
 
 /* ---------- תחנה 6 — מודיעין אסטרטגי ----------
-   שוליים חיצוניים של 5 ס״מ מימין ומשמאל, נמדדים מקצות אזור התוכן
-   הראשי (ההדר ותפריט הצד יושבים מחוץ לו ואינם נכללים בחישוב).
-   הריפוד האנכי נשאר 5 ס״מ.
+   השוליים של המקטע הם השוליים של אזור התוכן (ראו למעלה): 5 ס״מ,
+   בלי ריווח נוסף מצטבר.
 
-   כדי שלא ייווצר ריווח מצטבר מעבר לכך, שלוש שכבות מתאפסות בתוך
-   המקטע: הריפוד הצדדי שלו עצמו, הריפוד והרוחב המרבי של המכל,
-   ותקרת הרוחב של הלוח (min(1200px, 88%)) עם המרכוז שלו. */
-.chapterPage.ch2Page #ch2-strategic {
-  box-sizing: border-box;
-  width: auto;
-  max-width: none;
-  margin-inline: 5cm;
-  padding-block: 5cm;
-  padding-inline: 0;
-}
-
-.chapterPage.ch2Page #ch2-strategic .container {
-  width: 100%;
-  max-width: none;
-  margin-inline: 0;
-  padding-inline: 0;
-}
-
-.chapterPage.ch2Page #ch2-strategic .sboard {
-  width: 100%;
-  max-width: none;
-  margin-inline: 0;
-}
-
-/* במסך צר אין די רוחב ל-5 ס״מ משני הצדדים */
-@media (max-width: 900px) {
-  .chapterPage.ch2Page #ch2-strategic {
-    margin-inline: 24px;
-    padding-block: 24px;
-  }
-}
-
-/* מקטע פתוח ולא כרטיס: אין מעטפת לבנה, מסגרת, פינות או צל, והתוכן
+   מקטע פתוח ולא כרטיס: אין מעטפת לבנה, מסגרת, פינות או צל, והתוכן
    יושב ישירות על רקע העמוד. שתי עמודות — התרשים המעגלי מימין ושכבת
    הידע משמאל — ומעליהן הכותרת, על פני שתיהן. */
 .sboard {
