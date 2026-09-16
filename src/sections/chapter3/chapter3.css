@@ -578,10 +578,23 @@
    ב-DOM: הגובה נקבע לפי השלב הגבוה ולכן אין קפיצה במעבר, ומצב
    התרגול נשמר. השלבים שאינם מוצגים מוסתרים ב-visibility — הם אינם
    נגישים למקלדת ולקוראי מסך, אבל ממשיכים לתפוס מקום. */
+/* המקטע אינו נמתח לגובה מסך: גובהו נגזר מן התוכן, והכותרת, השלב
+   ושורת המעבר נקראים כיחידה אחת מחוברת. הסלקטור נושא מזהה כדי לגבור
+   על min-height ו-padding-block של .section הכללי. */
+.chapterPage #ch3-design.dsgn {
+  min-height: 0;
+  justify-content: flex-start;
+  padding-block: 48px 40px;
+}
+
 .stages-carousel {
   position: relative;
   overflow: hidden;
   width: 100%;
+  height: auto;
+  min-height: 0;
+  /* המרווח בין תחתית התוכן לשורת המעבר */
+  margin-bottom: 48px;
 }
 
 .stages-track {
@@ -595,10 +608,12 @@
   flex: 0 0 100%;
   width: 100%;
   min-width: 0;
+  height: auto;
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding-block: clamp(30px, 4vw, 56px);
+  justify-content: flex-start;
+  padding-block: 0;
 }
 
 .stage-slide[aria-hidden='true'] {
@@ -608,24 +623,34 @@
 /* ---- שורת המעבר ----
    הקודם מימין, הבא משמאל, וחיווי השלבים ביניהם. כפתורי טקסט בלבד:
    בלי רקע, מסגרת או כרטיס. */
+/* שורת המעבר יושבת מיד מתחת לתוכן — בזרימה הרגילה, בלי מיקום מוחלט
+   ובלי ריווח אוטומטי שדוחף אותה לתחתית המסך. שלוש עמודות: הקודם
+   בעמודה הימנית, החיווי במרכז והבא בשמאלית — ולכן החיווי נשאר
+   ממורכז גם כשאחד הכפתורים אינו מוצג. */
 .dsgn__nav {
-  display: flex;
+  position: static;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   gap: clamp(16px, 2vw, 32px);
-  padding-top: clamp(20px, 2.6vw, 34px);
+  width: 100%;
+  margin: 0;
+  padding-top: 0;
 }
 
-/* שני הצדדים שומרים על רוחבם גם כשאין בהם כפתור, כך שחיווי השלבים
-   נשאר במרכז בכל שלושת השלבים */
 .dsgn__navSide {
-  flex: 1 1 0;
   min-width: 0;
   display: flex;
 }
 
+/* ב-RTL העמודה הראשונה היא הימנית: start הוא ימין ו-end הוא שמאל */
+.dsgn__navSide--prev {
+  justify-self: start;
+}
+
 .dsgn__navSide--next {
-  justify-content: flex-end;
+  grid-column: 3;
+  justify-self: end;
 }
 
 .dsgn__navBtn {
@@ -659,9 +684,9 @@
   color: var(--gold);
 }
 
-/* רווח רחב בין הכותרת הראשית ליחידות התוכן */
+/* המרווח בין הכותרת הראשית לתוכן השלב */
 .dsgn__head {
-  margin-bottom: clamp(48px, 7vw, 110px);
+  margin-bottom: 48px;
 }
 
 /* שתי עמודות שוות, עם קו אנכי דק בדיוק באמצע המרווח שביניהן */
@@ -687,6 +712,11 @@
   min-width: 0;
 }
 
+/* קו הזהב (2px) יושב בין כותרת המשנה לפסקה, וסך המרווח ביניהן 20px */
+.dsgn__unit .gold-rule--sm {
+  margin-block: 9px;
+}
+
 .dsgn__unitTitle {
   margin: 0;
   font-family: var(--font-heading);
@@ -703,8 +733,10 @@
 }
 
 /* ---- חיווי ההתקדמות ----
-   נקודות ומספר בלבד, בתחתית כל מסך. קטן ועדין, לא כפתור. */
+   נקודות ומספר בלבד, במרכז שורת המעבר. קטן ועדין, לא כפתור. */
 .dsgn__progress {
+  grid-column: 2;
+  justify-self: center;
   display: flex;
   flex-direction: column;
   align-items: center;
