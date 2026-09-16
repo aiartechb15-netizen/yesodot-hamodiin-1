@@ -110,3 +110,64 @@
 /* ---------- 8. שוליים של אזור התוכן ----------
    חמשת הסנטימטרים מארבעת הצדדים מוגדרים פעם אחת לכל הפרקים, על
    עמודת התוכן עצמה (ChapterLayout.css), ולכן אין להם כאן כלל נפרד. */
+
+/* ---------- 9. הרווח בין מקטעי הפרק ----------
+   מקטע ראשי הוא ילד ישיר של עמודת התוכן — בדיוק אותם מקטעים שמופיעים
+   בתפריט הפרק. תת-מקטעים, כרטיסים ופסקאות יושבים עמוק יותר בעץ ואינם
+   מקבלים את הריווח הזה, וגם לא מקטעים שנמצאים בתוך תרגיל (כמו שתי
+   הקטגוריות של תרגול הגרירה).
+
+   הריפוד הפנימי נכתב כאן ולא בכל מקטע בנפרד, ולכן הוא גובר על
+   הריפודים המקומיים שנקבעו לכל תחנה — והמידה נשארת אחת לכל הפרק. */
+.chapterPage.ch3 .chLayout__main > section {
+  padding-block: 40px;
+  scroll-margin-top: 90px;
+}
+
+.chapterPage.ch3 .chLayout__main > section + section {
+  margin-top: 140px;
+}
+
+/* קו הפרדה קצר ועדין בראש כל מקטע שאינו הראשון — זהב בהיר, מיושר
+   לימין, בלי רקע ובלי מסגרת. הוא פריט ראשון בתוך המקטע (המקטע הוא
+   flex בעמודה), ולכן margin-left: auto דוחף אותו אל הקצה הימני.
+
+   ל-::before של מקטע כבר היה שימוש בגיליון הכללי — קו שיער רחב עם
+   נקודה במרכזו, ממוקם absolute וממוסך בשני קצותיו. כאן הוא מוחלף
+   בקו הקצר, ולכן כל התכונות שהגיעו משם מתאפסות במפורש: בלי מיקום
+   מוחלט, בלי הזזה ובלי מסכה — אחרת הקו החדש היה נמוג ונעלם. */
+.chapterPage.ch3 .chLayout__main > section + section::before {
+  content: '';
+  display: block;
+  position: static;
+  inset: auto;
+  transform: none;
+  flex: none;
+  width: 64px;
+  height: 1px;
+  margin: 0 0 56px auto;
+  background: rgba(198, 155, 45, 0.35);
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* מרווח נשימה בין כותרת המקטע לתוכן שמתחתיה */
+.chapterPage.ch3 .s3head,
+.chapterPage.ch3 .opsec__head {
+  margin-bottom: clamp(32px, 3vw, 40px);
+}
+
+/* ---------- 10. מסכים קטנים ---------- */
+@media (max-width: 900px) {
+  .chapterPage.ch3 .chLayout__main > section {
+    padding-block: 24px;
+  }
+
+  .chapterPage.ch3 .chLayout__main > section + section {
+    margin-top: 80px;
+  }
+
+  .chapterPage.ch3 .chLayout__main > section + section::before {
+    margin-bottom: 40px;
+  }
+}
