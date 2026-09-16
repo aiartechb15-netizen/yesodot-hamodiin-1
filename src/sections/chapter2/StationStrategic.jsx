@@ -147,20 +147,6 @@ export default function StationStrategic() {
               </p>
             </div>
 
-            {/* מקרי הבוחן: שורות פתוחות, מופרדות בקו דק */}
-            <div className="sboard__cases">
-              <h3 className="sboard__casesTitle">{board.casesTitle}</h3>
-              <p className="sboard__casesHint">{board.casesHint}</p>
-
-              <ul className="sboard__list">
-                {board.cases.map((c) => (
-                  <li className="sboard__case" key={c.id}>
-                    <span className="sboard__caseLabel">{c.label}</span>
-                    <p className="sboard__caseText">{c.text}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
         </div>
       </div>

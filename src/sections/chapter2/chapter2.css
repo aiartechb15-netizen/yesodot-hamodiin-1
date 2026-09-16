@@ -254,8 +254,14 @@
 
 /* ---- העמודה השמאלית ----
    קו זהב אנכי דק בצד הימני שלה (inline-start ב-RTL) מפריד אותה מן
-   התרשים. בתוכה שכבת הידע של הנושא שנבחר, ומתחתיה מקרי הבוחן. */
+   התרשים, ובתוכה שכבת הידע של הנושא שנבחר.
+   היא נמתחת לגובה התרשים והתוכן ממורכז בה אנכית, כך שאין חלל ריק
+   מתחתיו וקו הזהב מלווה את מלוא גובה הקומפוזיציה. */
 .sboard__side {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   border-inline-start: 1px solid rgba(196, 163, 71, 0.5);
   padding-inline-start: clamp(24px, 2.6vw, 40px);
 }
@@ -340,58 +346,8 @@
   color: var(--gold-ink);
 }
 
-/* ---- מקרי בוחן ----
-   השאלות הן שורות פתוחות — בלי קופסה, רקע או מסגרת — ומופרדות
-   בקו אופקי דק. */
-.sboard__cases {
-  margin-top: clamp(26px, 3vw, 40px);
-}
-
-.sboard__casesTitle {
-  margin: 0;
-  font-size: var(--fs-h3);
-  color: var(--navy);
-}
-
-.sboard__casesHint {
-  margin: 10px 0 clamp(18px, 2vw, 26px);
-  font-size: 20px;
-  line-height: 1.6;
-  color: var(--muted);
-}
-
-.sboard__list {
-  display: grid;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.sboard__case {
-  padding-block: clamp(16px, 1.8vw, 22px);
-}
-
-.sboard__case + .sboard__case {
-  border-top: 1px solid var(--border);
-}
-
-.sboard__caseLabel {
-  display: block;
-  font-size: 19px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--teal-ink);
-}
-
-.sboard__caseText {
-  margin: 8px 0 0;
-  font-size: clamp(20px, 1.4vw, 23px);
-  line-height: 1.6;
-  color: var(--navy-secondary);
-}
-
-/* מסך צר: הכול נערם — כותרת, תרשים, מקרי בוחן — והקו האנכי שבין
-   העמודות הופך לקו אופקי מעל מקרי הבוחן */
+/* מסך צר: הכול נערם — כותרת, תרשים, שכבת הידע — והקו האנכי שבין
+   העמודות הופך לקו אופקי מעל שכבת הידע */
 @media (max-width: 900px) {
   .sboard {
     grid-template-columns: minmax(0, 1fr);
