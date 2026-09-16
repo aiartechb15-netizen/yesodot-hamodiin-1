@@ -1,4 +1,4 @@
-import { Fragment, useId, useState } from 'react'
+import { Fragment, useCallback, useId, useLayoutEffect, useRef, useState } from 'react'
 import Icon from '../../components/Icons/Icons'
 import { officerAndLeader as ol } from '../../data/chapter2'
 import './chapter2.css'
@@ -238,6 +238,73 @@ function DeepDives() {
 export default function StationOfficer() {
   const [kaman, kabarnit] = ol.sides
 
+  const stageRef = useRef(null)
+  /* ההיסט שכבר מוחל בפועל. ref ולא state: המדידה צריכה לקזז אותו
+     מיד, גם כשהיא רצה כמה פעמים לפני שהרינדור הבא מתרחש. */
+  const shiftRef = useRef(0)
+  const [shift, setShift] = useState(0)
+
+  /* מרכז אזור התוכן התחתון על נקודת האמצע שבין שתי הדמויות עצמן.
+     שתי העמודות ברשת שוות ברוחבן, אבל כל דיוקן נצמד לקצה הימני של
+     העמודה שלו — הימני אל קצה הבמה והשמאלי אל המרכז — ולכן אמצע
+     שתי הדמויות אינו מרכז הרשת. המרחק נמדד מן ה-DOM ולא מחושב מראש,
+     כדי שיהיה מדויק בכל רוחב מסך.
+     בעמודה אחת (מסך צר) אין שתי דמויות זו לצד זו, והאזור חוזר
+     למקומו הרגיל. */
+  const measure = useCallback(() => {
+    const stage = stageRef.current
+    const block = stage?.querySelector('.of__bottom')
+    const a = stage?.querySelector('.of__fig--kaman .of__portrait')
+    const b = stage?.querySelector('.of__fig--kabarnit .of__portrait')
+    if (!stage || !block || !a || !b) return
+
+    const ra = a.getBoundingClientRect()
+    const rb = b.getBoundingClientRect()
+    /* בעמודה אחת הדיוקנים יושבים זה מתחת לזה ולא זה לצד זה */
+    if (Math.abs(ra.top - rb.top) > 1) {
+      shiftRef.current = 0
+      setShift(0)
+      return
+    }
+
+    const figuresMid = (ra.left + ra.width / 2 + rb.left + rb.width / 2) / 2
+
+    /* מודדים את המיקום הטבעי של האזור — בלי ההיסט — בכיבוי רגעי של
+       ה-transform. קיזוז לפי הערך השמור היה שגוי כשהמדידה רצה לפני
+       שהרינדור הקודם הספיק להחיל אותו. transform אינו משפיע על
+       הפריסה, ולכן הכיבוי אינו מזיז דבר על המסך. */
+    const inline = block.style.transform
+    block.style.transform = 'none'
+    const rBlock = block.getBoundingClientRect()
+    block.style.transform = inline
+
+    const naturalMid = rBlock.left + rBlock.width / 2
+    const next = Math.round(figuresMid - naturalMid)
+    if (next === shiftRef.current) return
+
+    shiftRef.current = next
+    setShift(next)
+  }, [])
+
+  useLayoutEffect(() => {
+    measure()
+    window.addEventListener('resize', measure)
+    /* הגופן נטען אחרי הרינדור הראשון ומשנה את רוחב הכיתובים */
+    if (document.fonts?.ready) document.fonts.ready.then(measure)
+
+    /* רוחב הבמה משתנה גם בלי שינוי בגודל החלון — תפריט הצד נפתח
+       ונסגר, והגופן נטען מאוחר יותר. בלי מדידה חוזרת ההיסט נשאר של
+       הפריסה הקודמת. */
+    const stage = stageRef.current
+    const ro = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(measure)
+    if (ro && stage) ro.observe(stage)
+
+    return () => {
+      window.removeEventListener('resize', measure)
+      ro?.disconnect()
+    }
+  }, [measure])
+
   return (
     <section className="section section--paper" id={ol.id} aria-labelledby="ch2-officer-title">
       <div className="container">
@@ -250,7 +317,7 @@ export default function StationOfficer() {
 
         {/* הבמה: שתי הדמויות פונות אל אותו מסמך. במרכז — המסמך והמשפט
             בלבד, בלי עיגול, מסגרת, רקע או צל סביבם. */}
-        <div className="of__stage">
+        <div className="of__stage" ref={stageRef}>
           <Figure side={kaman} />
 
           <div className="of__core">
@@ -267,10 +334,13 @@ export default function StationOfficer() {
           <Figure side={kabarnit} />
 
           {/* אזור התוכן התחתון — יחידה אחת: הקו, המשפט ושורת ההעמקה.
-              הוא יושב בשורה השנייה של גריד הבמה ומתמרכז עליו, כלומר על
-              נקודת האמצע שבין שתי הדמויות ומתחת למשפט שבמרכז — ולא לפי
-              רוחב המסך או רוחב אזור התוכן. */}
-          <div className="of__bottom">
+              הוא יושב בשורה השנייה של גריד הבמה, ומרכזו מיושר לנקודת
+              האמצע שבין שתי הדמויות — לא לפי רוחב המסך ולא לפי אזור
+              התוכן שנשאר ליד תפריט הצד. ההיסט נמדד ב-measure. */}
+          <div
+            className="of__bottom"
+            style={shift ? { transform: `translateX(${shift}px)` } : undefined}
+          >
             <span className="of__tick" aria-hidden="true" />
             <p className="of__summary">{ol.summary}</p>
 
