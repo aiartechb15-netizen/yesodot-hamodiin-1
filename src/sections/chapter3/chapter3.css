@@ -119,68 +119,12 @@
   font-weight: 700;
 }
 
-/* ---------- לוחמ״מ (תחנה 7) ---------- */
-.flow3 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 26px 20px;
-  margin: 0;
-  list-style: none;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-
-.flow3__item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.flow3__node {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  /* רחב דיו לכיתוב הארוך ביותר בשורה אחת: אחרת הוא נשבר לשתיים,
-     התחנה גבוהה מהאחרות והעיגולים יוצאים מקו אחד */
-  width: 240px;
-  text-align: center;
-}
-
-.flow3__circle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 66px;
-  height: 66px;
-  border-radius: 50%;
-  color: var(--white);
-}
-
-.flow3__circle--0 {
-  background: var(--teal-smoke);
-}
-.flow3__circle--1 {
-  background: var(--teal);
-}
-.flow3__circle--2 {
-  background: var(--navy);
-}
-
-.flow3__label {
-  font-size: var(--font-small-size);
-  font-weight: 700;
-  color: var(--navy);
-}
-
-.flow3__arrow {
-  color: var(--navy);
-  opacity: 0.5;
-  margin-bottom: 26px;
+/* ---------- לוחמ״מ (תחנה 7) ----------
+   כרטיסיית התהליך שהייתה בראש המסך ירדה, ואיתה כל הסגנון שלה
+   (.flow3 על חלקיו). המסך פותח ב"כיצד זה עובד?", ולכן המרווח
+   שמתחת לפסקת הפתיחה נקבע כאן ולא נשען על מרווח הכרטיסייה. */
+.chapterPage #ch3-lohamam .s3head {
+  margin-bottom: 48px;
 }
 
 /* ---------- השוואת סביבות (תחנה 8) ---------- */
@@ -492,10 +436,6 @@
   .tiles--5,
   .abbrs {
     grid-template-columns: 1fr;
-  }
-  .flow3__arrow {
-    transform: rotate(-90deg);
-    margin-bottom: 0;
   }
   .rungs {
     flex-direction: column;

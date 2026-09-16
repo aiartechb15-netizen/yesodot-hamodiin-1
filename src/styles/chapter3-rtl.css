@@ -83,8 +83,7 @@
 
 /* כיתובי התרשימים מיושרים לימין כמו כל טקסט אחר בפרק */
 .ch3 .opstop__title,
-.ch3 .opstop__text,
-.ch3 .flow3__label {
+.ch3 .opstop__text {
   text-align: right;
 }
 

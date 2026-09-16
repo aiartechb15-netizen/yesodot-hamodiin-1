@@ -1,25 +1,9 @@
-import Icon from '../../components/Icons/Icons'
 import { lohamam as lm } from '../../data/chapter3'
 import './chapter3.css'
 
-function Arrow() {
-  // חץ בכיוון הקריאה בעברית (ימין → שמאל)
-  return (
-    <span className="flow3__arrow" aria-hidden="true">
-      <svg viewBox="0 0 40 12" width="36" height="12" focusable="false">
-        <path
-          d="M38 6H4M10 1.5 4 6l6 4.5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </span>
-  )
-}
-
+/* כרטיסיית התהליך שהייתה בראש המסך — שלושת השלבים, העיגולים,
+   האייקונים והחצים שביניהם — ירדה. מה שנשאר פותח ישירות ב"כיצד זה
+   עובד?" ובתיבת "שימו לב" שלצידה. */
 export default function S7Lohamam() {
   return (
     <section className="section section--white" id={lm.id} aria-labelledby="ch3-lm-title">
@@ -35,20 +19,6 @@ export default function S7Lohamam() {
         </header>
 
         <div className="s3blocks">
-          <ol className="flow3" aria-label="תהליך הלוחמ״מ">
-            {lm.flow.map((f, i) => (
-              <li className="flow3__item" key={f.id}>
-                <span className="flow3__node">
-                  <span className={`flow3__circle flow3__circle--${i}`} aria-hidden="true">
-                    <Icon name={f.icon} size={28} />
-                  </span>
-                  <span className="flow3__label">{f.title}</span>
-                </span>
-                {i < lm.flow.length - 1 ? <Arrow /> : null}
-              </li>
-            ))}
-          </ol>
-
           <div className="grid-2">
             <article>
               <h3 className="openBlock__title">כיצד זה עובד?</h3>
