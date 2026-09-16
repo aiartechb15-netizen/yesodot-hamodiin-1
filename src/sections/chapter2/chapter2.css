@@ -283,15 +283,35 @@
 /* ---- הבמה: שתי הדמויות פונות אל אותו מסמך ---- */
 .of__stage {
   /* קוטר הילת הדיוקן. משמש גם לחישוב גובה קו החיבור אל המרכז */
-  --of-portrait: clamp(178px, 20vw, 300px);
+  --of-portrait: clamp(150px, 14vw, 300px);
+  /* הבמה ממורכזת באזור התוכן עצמו (תפריט הצד מחוץ למכל ואינו נכנס
+     לחשבון), ברוחב קבוע ובשלוש עמודות: דמות, המסמך והמשר, דמות.
+     שתי עמודות ה-1fr זהות והדיוקנים ממורכזים בהן, ולכן הסימטריות
+     סביב עמודת המרכז נובעת מן הפריסה ואינה נמדדת בזמן ריצה. */
+  width: min(1080px, 90%);
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  /* ברירת המחדל גמישה, ומתחתיה מוגדרת הפריסה המדויקת לאזור תוכן רחב
+     (ראו ה-@container שאחריה) */
+  grid-template-columns: 1fr minmax(0, 260px) 1fr;
   align-items: center;
   /* column-gap ולא gap: השורה השנייה (אזור התוכן התחתון) שומרת על
      המרווחים שהיו לה כשישבה מחוץ לבמה */
-  column-gap: clamp(10px, 2vw, 40px);
+  column-gap: clamp(16px, 2.4vw, 48px);
   row-gap: 0;
-  margin-top: clamp(24px, 3.4vw, 46px);
+  margin: clamp(24px, 3.4vw, 46px) auto 0;
+}
+
+/* הפריסה המדויקת — 1fr · 260px · 1fr עם מרווח של 48px — דורשת במה של
+   כ-956 פיקסלים: שני דיוקנים בני 300, עמודת מרכז של 260 ושני מרווחים.
+   הבמה היא 90% מאזור התוכן, ולכן הסף הוא כ-1070 פיקסלים של אזור תוכן.
+   מתחתיו אותו מבנה בדיוק, רק שעמודת המרכז והמרווח גמישים והדיוקן קטן
+   — אחרת שלוש העמודות היו חורגות מן הבמה ופותחות גלילה אופקית. */
+@container ofstage (min-width: 1070px) {
+  .of__stage {
+    --of-portrait: clamp(178px, 20vw, 300px);
+    grid-template-columns: 1fr 260px 1fr;
+    column-gap: 48px;
+  }
 }
 
 /* אזור התוכן התחתון — שורה שנייה בגריד הבמה, פרושה על שלוש העמודות
@@ -301,9 +321,14 @@
 .of__bottom {
   grid-row: 2;
   grid-column: 1 / -1;
-  justify-self: center;
-  width: clamp(620px, 100%, 680px);
+  justify-self: stretch;
+  width: min(760px, 85%);
+  /* השוליים האוטומטיים ממרכזים אותו על הבמה — ומכיוון שהבמה עצמה
+     ממורכזת באזור התוכן, גם הבלוק הזה יושב על אותו ציר אמצע */
+  margin: 56px auto 0;
   min-width: 0;
+  direction: rtl;
+  text-align: right;
 }
 
 /* כל צד הוא בלוק אחד: האיור, הכותרת וההסבר נעוצים באותו קו ימני
@@ -311,7 +336,9 @@
 .of__fig {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  /* הדיוקן ממורכז בעמודתו, ולכן שתי הדמויות סימטריות משני צדי
+     עמודת המרכז. הכיתוב שמתחתיו נשאר ברוחב מלא ומיושר לימין. */
+  align-items: center;
   margin: 0;
   text-align: right;
 }
@@ -426,7 +453,9 @@
   align-items: center;
   justify-content: center;
   gap: clamp(14px, 1.8vw, 24px);
-  padding-inline: clamp(12px, 2.6vw, 44px);
+  /* עמודת המרכז רחבה 260px והמרווח שמשני צדיה הוא 48px, ולכן אין
+     צורך בריפוד פנימי נוסף */
+  padding-inline: 0;
 }
 
 .of__doc {
@@ -491,14 +520,18 @@
   display: block;
   width: 1px;
   height: 24px;
-  margin: clamp(28px, 4vw, 52px) 0 clamp(16px, 2.2vw, 24px);
+  /* המרווח מן הבמה נקבע ב---of__bottom (56px), ולכן כאן נשאר רק
+     המרווח אל הפסקה שמתחת */
+  margin: 0 0 clamp(16px, 2.2vw, 24px);
   background: var(--gold);
 }
 
 .of__summary {
-  /* רוחב השורה נקבע עכשיו ברוחב .of__bottom (620–680px) */
+  /* רוחב השורה נקבע עכשיו ברוחב .of__bottom */
   max-width: none;
-  margin-inline: 0;
+  /* בלי מרווח תחתון משלה: המרווח אל שורת "להעמקה" הוא 24px והוא
+     מוגדר שם (.of__deep) */
+  margin: 0;
   text-align: right;
   font-size: clamp(23.5px, 1.8vw, 28px);
   line-height: 1.7;
@@ -507,7 +540,7 @@
 
 /* ---- שני אזורי ההעמקה — סגורים כברירת מחדל ---- */
 .of__deep {
-  margin-top: clamp(26px, 3.4vw, 44px);
+  margin-top: 24px;
 }
 
 .of__deepBar {
@@ -783,6 +816,18 @@
   :where(header, div, figure, figcaption, ol, li, h2, h3, h4, p, span, button):not(.ltr-num) {
   direction: rtl;
   text-align: right;
+}
+
+/* אזור התוכן של התחנה: הבמה ממורכזת בתוכו, ולכן הוא — ולא רוחב
+   המסך — מגדיר את ציר האמצע. תפריט הצד יושב מחוצה לו ואינו נכנס
+   לחשבון. */
+#ch2-officer .container {
+  position: relative;
+  direction: rtl;
+  /* הפריסה של הבמה נמדדת ברוחב אזור התוכן עצמו ולא ברוחב המסך:
+     תפריט הצד נפתח ונסגר, והרוחב שנשאר לבמה משתנה איתו */
+  container-type: inline-size;
+  container-name: ofstage;
 }
 
 /* יוצא הדופן היחיד: המשפט שעל ציר האמצע. הוא אינו טקסט זורם אלא
@@ -1076,6 +1121,7 @@
     grid-column: 1;
     justify-self: stretch;
     width: 100%;
+    margin: clamp(26px, 6vw, 40px) auto 0;
   }
   .of__link,
   .of__axis {

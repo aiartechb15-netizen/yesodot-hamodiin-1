@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useId, useLayoutEffect, useRef, useState } from 'react'
+import { Fragment, useId, useState } from 'react'
 import Icon from '../../components/Icons/Icons'
 import { officerAndLeader as ol } from '../../data/chapter2'
 import './chapter2.css'
@@ -238,70 +238,10 @@ function DeepDives() {
 export default function StationOfficer() {
   const [kaman, kabarnit] = ol.sides
 
-  const stageRef = useRef(null)
-  const [shift, setShift] = useState({ core: 0, bottom: 0 })
-
-  /* מרכז אזור התוכן התחתון על נקודת האמצע שבין שתי הדמויות עצמן.
-     שתי העמודות ברשת שוות ברוחבן, אבל כל דיוקן נצמד לקצה הימני של
-     העמודה שלו — הימני אל קצה הבמה והשמאלי אל המרכז — ולכן אמצע
-     שתי הדמויות אינו מרכז הרשת. המרחק נמדד מן ה-DOM ולא מחושב מראש,
-     כדי שיהיה מדויק בכל רוחב מסך.
-     בעמודה אחת (מסך צר) אין שתי דמויות זו לצד זו, והאזור חוזר
-     למקומו הרגיל. */
-  const measure = useCallback(() => {
-    const stage = stageRef.current
-    const block = stage?.querySelector('.of__bottom')
-    const core = stage?.querySelector('.of__core')
-    const a = stage?.querySelector('.of__fig--kaman .of__portrait')
-    const b = stage?.querySelector('.of__fig--kabarnit .of__portrait')
-    if (!stage || !block || !core || !a || !b) return
-
-    const ra = a.getBoundingClientRect()
-    const rb = b.getBoundingClientRect()
-    /* בעמודה אחת הדיוקנים יושבים זה מתחת לזה ולא זה לצד זה */
-    if (Math.abs(ra.top - rb.top) > 1) {
-      setShift((prev) => (prev.core === 0 && prev.bottom === 0 ? prev : { core: 0, bottom: 0 }))
-      return
-    }
-
-    /* מרכז החלל שבין שתי הדמויות. שני הדיוקנים זהים ברוחבם, ולכן זו
-       גם נקודת האמצע שבין מרכזיהם. */
-    const target = (rb.right + ra.left) / 2
-
-    /* המיקום הטבעי נמדד בכיבוי רגעי של ה-transform: קיזוז לפי הערך
-       השמור היה שגוי כשהמדידה רצה לפני שהרינדור הקודם הספיק להחיל
-       אותו. transform אינו משפיע על הפריסה, ולכן הכיבוי אינו מזיז
-       דבר על המסך. */
-    const offsetOf = (el) => {
-      const inline = el.style.transform
-      el.style.transform = 'none'
-      const r = el.getBoundingClientRect()
-      el.style.transform = inline
-      return Math.round(target - (r.left + r.width / 2))
-    }
-
-    const next = { core: offsetOf(core), bottom: offsetOf(block) }
-    setShift((prev) => (prev.core === next.core && prev.bottom === next.bottom ? prev : next))
-  }, [])
-
-  useLayoutEffect(() => {
-    measure()
-    window.addEventListener('resize', measure)
-    /* הגופן נטען אחרי הרינדור הראשון ומשנה את רוחב הכיתובים */
-    if (document.fonts?.ready) document.fonts.ready.then(measure)
-
-    /* רוחב הבמה משתנה גם בלי שינוי בגודל החלון — תפריט הצד נפתח
-       ונסגר, והגופן נטען מאוחר יותר. בלי מדידה חוזרת ההיסט נשאר של
-       הפריסה הקודמת. */
-    const stage = stageRef.current
-    const ro = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(measure)
-    if (ro && stage) ro.observe(stage)
-
-    return () => {
-      window.removeEventListener('resize', measure)
-      ro?.disconnect()
-    }
-  }, [measure])
+  /* אין כאן עוד מדידה בזמן ריצה ואין היסטים: שתי עמודות הדמויות
+     זהות ברוחבן והדיוקנים ממורכזים בהן, ולכן עמודת המרכז — המסמך
+     והמשפט — היא ציר האמצע בפועל, ואזור התוכן התחתון ממורכז עליו
+     בשוליים אוטומטיים (chapter2.css). */
 
   return (
     <section className="section section--paper" id={ol.id} aria-labelledby="ch2-officer-title">
@@ -315,15 +255,12 @@ export default function StationOfficer() {
 
         {/* הבמה: שתי הדמויות פונות אל אותו מסמך. במרכז — המסמך והמשפט
             בלבד, בלי עיגול, מסגרת, רקע או צל סביבם. */}
-        <div className="of__stage" ref={stageRef}>
+        <div className="of__stage">
           <Figure side={kaman} />
 
           {/* המסמך והמשפט כיחידה אחת, ממורכזת בחלל שבין שתי הדמויות:
               אנכית דרך גובה הרצועה שב-CSS, ואופקית דרך ההיסט הנמדד */}
-          <div
-            className="of__core"
-            style={shift.core ? { transform: `translateX(${shift.core}px)` } : undefined}
-          >
+          <div className="of__core">
             <span className="of__axis of__axis--top" aria-hidden="true">
               <span className="of__axisDot" />
             </span>
@@ -340,10 +277,7 @@ export default function StationOfficer() {
               הוא יושב בשורה השנייה של גריד הבמה, ומרכזו מיושר לנקודת
               האמצע שבין שתי הדמויות — לא לפי רוחב המסך ולא לפי אזור
               התוכן שנשאר ליד תפריט הצד. ההיסט נמדד ב-measure. */}
-          <div
-            className="of__bottom"
-            style={shift.bottom ? { transform: `translateX(${shift.bottom}px)` } : undefined}
-          >
+          <div className="of__bottom">
             <span className="of__tick" aria-hidden="true" />
             <p className="of__summary">{ol.summary}</p>
 
