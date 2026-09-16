@@ -765,12 +765,8 @@
     border-color 240ms ease;
 }
 
-.opstop__icon {
-  display: inline-flex;
-  color: var(--navy-secondary);
-  transition: color 240ms ease;
-}
-
+/* בכפתור התחנה שני חלקים בלבד — עיגול המספר וכותרת התחנה שמתחתיו,
+   במרווח אחד ואחיד (gap של .opstop__btn) */
 .opstop__title {
   font-family: var(--font-heading);
   font-size: var(--font-small-size);
@@ -801,10 +797,6 @@
   background: var(--gold);
   border-color: var(--gold);
   color: var(--white);
-}
-
-.opstop.is-open .opstop__icon {
-  color: var(--teal);
 }
 
 .opstop.is-open .opstop__title {
@@ -876,7 +868,6 @@
 @media (prefers-reduced-motion: reduce) {
   .opstop__panel,
   .opstop__num,
-  .opstop__icon,
   .opstop__title {
     transition: none;
   }
@@ -919,7 +910,7 @@
     padding-block: 12px;
   }
   .opstop__btn {
-    grid-template-columns: auto auto 1fr;
+    grid-template-columns: auto 1fr;
     justify-items: start;
     align-items: center;
     gap: 12px;

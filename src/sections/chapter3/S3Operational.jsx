@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Icon from '../../components/Icons/Icons'
 import { operational as op } from '../../data/chapter3'
 import './chapter3.css'
 
@@ -81,9 +80,6 @@ export default function S3Operational() {
                   >
                     <span className="opstop__num ltr-num" aria-hidden="true">
                       {i + 1}
-                    </span>
-                    <span className="opstop__icon" aria-hidden="true">
-                      <Icon name={item.icon} size={22} />
                     </span>
                     <span className="opstop__title">{item.title}</span>
                   </button>
