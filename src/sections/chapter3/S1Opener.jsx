@@ -1,5 +1,7 @@
 import { chapter3Meta, opener } from '../../data/chapter3'
-import worldImage from '../../assets/images/פרק 3 עולם.png'
+/* הקובץ המקורי נשמר עם לוח המשבצות של השקיפות צרוב בתוך הפיקסלים,
+   ולכן הוחלף בנכס עם ערוץ שקיפות אמיתי. */
+import worldImage from '../../assets/images/chapter3-world.webp'
 import './chapter3.css'
 
 /* מסך התוכן הראשון של הפרק, מיד אחרי מסך הפתיחה. שני טורים בלבד:

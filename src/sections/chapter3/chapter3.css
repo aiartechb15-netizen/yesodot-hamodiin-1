@@ -916,9 +916,11 @@
 
 .ch3op__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 44%);
+  /* עמודת האיור רחבה מעט יותר מקודם (50% במקום 44%), כדי שהאיור יעמוד
+     מול שתי פסקאות הטקסט ולא ייראה קטן מהן */
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 50%);
   align-items: center;
-  gap: clamp(28px, 4.5vw, 72px);
+  gap: clamp(22px, 3.4vw, 56px);
 }
 
 /* עמודת הטקסט — RTL מלא ויישור לימין. הקו האנכי הדק יושב מימין
@@ -965,11 +967,36 @@
   margin-top: clamp(20px, 2.2vw, 32px);
 }
 
-/* האיור — בלי מסגרת, כרטיס, צל או רקע. לקובץ עצמו יש ערוץ שקיפות,
-   ולכן הוא יושב ישירות על גיליון הרקע של העמוד ואין צורך למזג אותו
-   או לחתוך אותו: הוא מוצג בשלמותו. */
+/* האיור — בלי מסגרת, כרטיס, צל או רקע. לקובץ יש ערוץ שקיפות אמיתי
+   (הרקע הוסר מן הפיקסלים עצמם), ולכן הוא יושב ישירות על גיליון הרקע
+   של העמוד ואין לו קצה מלבני.
+
+   דעיכה עדינה מרככת את השוליים: חזקה יותר בצד הפונה אל הטקסט, ורק
+   רמז למעלה ולמטה. האיור עצמו נשאר מלא — הדעיכה נוגעת בשוליים בלבד. */
 .ch3op__art {
   justify-self: center;
+  --ch3op-fade-x: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.75) 4%,
+    #000 10%,
+    #000 80%,
+    rgba(0, 0, 0, 0.55) 94%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  --ch3op-fade-y: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.7) 3%,
+    #000 9%,
+    #000 91%,
+    rgba(0, 0, 0, 0.7) 97%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-image: var(--ch3op-fade-x), var(--ch3op-fade-y);
+  mask-image: var(--ch3op-fade-x), var(--ch3op-fade-y);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }
 
 .ch3op__img {
