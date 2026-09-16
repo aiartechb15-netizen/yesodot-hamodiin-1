@@ -81,6 +81,39 @@
   gap: 10px;
 }
 
+/* בכרטיס של תחנה 6 שלוש שאלות הדוגמה יושבות בשורה אחת, בשלוש
+   עמודות שוות: הראשונה מימין והשלישית משמאל (סדר המקור ב-RTL).
+   align-items: start — פתיחת שאלה מאריכה את העמודה שלה בלבד ואינה
+   מזיזה את השתיים האחרות. */
+#ch3-tactical .idcard__qList {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+  align-items: start;
+}
+
+#ch3-tactical .idcard__qList > li {
+  min-width: 0;
+}
+
+/* השאלות הסגורות יוצאות בגובה זהה גם אם כיתוב נשבר לשתי שורות */
+#ch3-tactical .idcard__q {
+  height: 100%;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  #ch3-tactical .idcard__qList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  #ch3-tactical .idcard__qList {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .idcard__q {
   display: flex;
   align-items: center;
