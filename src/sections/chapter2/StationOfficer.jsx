@@ -272,17 +272,16 @@ export default function StationOfficer() {
           </div>
 
           <Figure side={kabarnit} />
+        </div>
 
-          {/* אזור התוכן התחתון — יחידה אחת: הקו, המשפט ושורת ההעמקה.
-              הוא יושב בשורה השנייה של גריד הבמה, ומרכזו מיושר לנקודת
-              האמצע שבין שתי הדמויות — לא לפי רוחב המסך ולא לפי אזור
-              התוכן שנשאר ליד תפריט הצד. ההיסט נמדד ב-measure. */}
-          <div className="of__bottom">
-            <span className="of__tick" aria-hidden="true" />
-            <p className="of__summary">{ol.summary}</p>
+        {/* אזור התוכן התחתון — יחידה אחת: הקו, המשפט ושורת ההעמקה.
+            הוא יושב מתחת לבמה אבל מחוצה לה, ישירות במכל התחנה, ולכן
+            קצהו הימני נופל בדיוק על הקצה הימני של הכותרת. */}
+        <div className="of__bottom">
+          <span className="of__tick" aria-hidden="true" />
+          <p className="of__summary">{ol.summary}</p>
 
-            <DeepDives />
-          </div>
+          <DeepDives />
         </div>
       </div>
     </section>
