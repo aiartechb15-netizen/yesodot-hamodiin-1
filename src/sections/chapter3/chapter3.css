@@ -127,6 +127,36 @@
   margin-bottom: 48px;
 }
 
+/* ההישג המרכזי — טקסט פתוח ולא כרטיס. הקו העליון הדק הוא ההפרדה
+   היחידה בינו לבין שתי העמודות שמעליו. */
+.lm__achieve {
+  margin-top: 48px;
+  padding: 32px 0 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgba(196, 163, 71, 0.22);
+  border-radius: 0;
+  box-shadow: none;
+  direction: rtl;
+  text-align: right;
+}
+
+/* כותרת בזהב, בגודל כותרות המשנה של הפרק */
+.lm__achieveTitle {
+  margin: 0;
+  font-size: var(--font-h3-size);
+  color: var(--gold-ink);
+}
+
+/* קו הזהב הקצר שמתחת לכותרת — 16px בינו לפסקה */
+.lm__achieve > .gold-rule--sm {
+  margin-block: 10px 16px;
+}
+
+.lm__achieveText {
+  margin: 0;
+}
+
 /* ---------- השוואת סביבות (תחנה 8) ---------- */
 .envs {
   display: grid;

@@ -32,10 +32,13 @@ export default function S7Lohamam() {
             </aside>
           </div>
 
-          <aside className="callout">
-            <span className="callout__label">{lm.achievementTitle}</span>
-            <p>{lm.achievement}</p>
-          </aside>
+          {/* ההישג המרכזי — מקטע פתוח על רקע העמוד: בלי כרטיס, מסגרת,
+              רקע או צל. ההפרדה ממה שמעליו היא קו אופקי דק ומרווח. */}
+          <section className="lm__achieve">
+            <h3 className="lm__achieveTitle">{lm.achievementTitle}</h3>
+            <span className="gold-rule gold-rule--sm" aria-hidden="true" />
+            <p className="lm__achieveText">{lm.achievement}</p>
+          </section>
         </div>
       </div>
     </section>
