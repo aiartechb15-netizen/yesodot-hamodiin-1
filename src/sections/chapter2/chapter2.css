@@ -97,6 +97,15 @@
   margin-block: 14px 0;
 }
 
+/* פסקת הפתיחה — טקסט זורם מתחת לכותרת, ברוחב קריאה */
+.sboard__intro {
+  max-width: 68ch;
+  margin: clamp(14px, 1.6vw, 20px) 0 0;
+  font-size: clamp(20px, 1.4vw, 23px);
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
 /* ---- התרשים המעגלי ----
    מרובע אחד: במרכזו העיגול והטבעות, וארבעת הנושאים יושבים על ארבעת
    כיווניו — בדיוק במקומות שבהם הטבעות נפתחות. */
@@ -137,6 +146,14 @@
   stroke: rgba(23, 152, 154, 0.38);
 }
 
+/* קשת ההדגשה של הנושא הפעיל — סוגרת את הפתח שבו הוא יושב ונעה
+   אליו ברצף. קו בלבד, מעט עבה יותר, בלי זוהר ובלי צל. */
+.sboard__ring--active {
+  stroke: var(--teal);
+  stroke-width: 3;
+  transition: stroke-dashoffset 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* העיגול המרכזי — מילוי נייבי מלא, כיתוב לבן, בלי מסגרת וללא צל */
 .sboard__center {
   display: grid;
@@ -158,9 +175,22 @@
 
 /* ארבעת הנושאים. הם יושבים על פתחי הטבעות, ולכן נראים כחלק מן
    התרשים ולא כתוויות שהונחו עליו. */
+/* הנושאים הם כפתורי הבורר, אבל אינם נראים ככפתורים: בלי רקע, מסגרת
+   או ריפוד — רק הכיתוב עצמו, במקומו על המעגל. */
 .sboard__node {
   position: absolute;
   width: 32%;
+  padding: 4px 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.sboard__node:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 .sboard__node--top,
@@ -196,27 +226,125 @@
 }
 
 .sboard__nodeTitle {
+  display: block;
   margin: 0;
+  font-family: var(--font-heading);
   font-size: clamp(21px, 1.6vw, 25.5px);
   font-weight: 700;
   line-height: 1.3;
   color: var(--navy);
+  transition: color 0.2s ease;
 }
 
 .sboard__nodeSub {
+  display: block;
   margin: 4px 0 0;
   font-size: clamp(17.5px, 1.2vw, 20px);
   line-height: 1.5;
   color: var(--ink-soft);
+  transition: color 0.2s ease;
+}
+
+/* הנושא הפעיל — טורקיז; ההדגשה בצבע בלבד, בלי רקע או מסגרת */
+.sboard__node.is-on .sboard__nodeTitle,
+.sboard__node.is-on .sboard__nodeSub,
+.sboard__node:hover .sboard__nodeTitle {
+  color: var(--teal-ink);
+}
+
+/* ---- העמודה השמאלית ----
+   קו זהב אנכי דק בצד הימני שלה (inline-start ב-RTL) מפריד אותה מן
+   התרשים. בתוכה שכבת הידע של הנושא שנבחר, ומתחתיה מקרי הבוחן. */
+.sboard__side {
+  border-inline-start: 1px solid rgba(196, 163, 71, 0.5);
+  padding-inline-start: clamp(24px, 2.6vw, 40px);
+}
+
+/* ---- שכבת הידע ----
+   טקסט פתוח על רקע העמוד: בלי כרטיס, מסגרת, רקע או צל. ההופעה
+   קצרה ועדינה, רק כדי לסמן שהתוכן התחלף. */
+.sboard__panel {
+  animation: sboardFade 0.22s ease both;
+}
+
+@keyframes sboardFade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.sboard__panelTitle {
+  margin: 0;
+  font-size: clamp(23.5px, 1.7vw, 28px);
+  color: var(--navy);
+}
+
+/* שם הנושא בלבד מודגש; ההשלמה שלצידו בטון רך יותר */
+.sboard__panelSub {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.sboard__panelLead {
+  margin: 10px 0 0;
+  font-size: clamp(20px, 1.4vw, 22.5px);
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+/* נקודות מרכזיות — סימון טורקיז קטן במקום תבליט ברירת המחדל */
+.sboard__points {
+  margin: clamp(14px, 1.6vw, 20px) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.sboard__points li {
+  position: relative;
+  padding-inline-start: 18px;
+  font-size: clamp(19px, 1.3vw, 21px);
+  line-height: 1.6;
+  color: var(--navy-secondary);
+}
+
+.sboard__points li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+
+/* השאלה לחשיבה — שורה מופרדת בקו דק, בלי רקע ובלי מסגרת */
+.sboard__panelQ {
+  margin: clamp(14px, 1.6vw, 20px) 0 0;
+  padding-top: clamp(12px, 1.4vw, 16px);
+  border-top: 1px solid var(--border);
+  font-size: clamp(19px, 1.3vw, 21px);
+  line-height: 1.6;
+  color: var(--navy-secondary);
+}
+
+.sboard__panelQLabel {
+  font-weight: 700;
+  color: var(--gold-ink);
 }
 
 /* ---- מקרי בוחן ----
-   קו זהב אנכי דק בצד הימני של העמודה (inline-start ב-RTL) מפריד
-   אותה מן התרשים. השאלות הן שורות פתוחות — בלי קופסה, רקע או
-   מסגרת — ומופרדות בקו אופקי דק. */
+   השאלות הן שורות פתוחות — בלי קופסה, רקע או מסגרת — ומופרדות
+   בקו אופקי דק. */
 .sboard__cases {
-  border-inline-start: 1px solid rgba(196, 163, 71, 0.5);
-  padding-inline-start: clamp(24px, 2.6vw, 40px);
+  margin-top: clamp(26px, 3vw, 40px);
 }
 
 .sboard__casesTitle {
@@ -270,11 +398,20 @@
     column-gap: 0;
   }
 
-  .sboard__cases {
+  .sboard__side {
     border-inline-start: 0;
     border-top: 1px solid rgba(196, 163, 71, 0.5);
     padding-inline-start: 0;
     padding-top: clamp(22px, 5vw, 32px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sboard__panel {
+    animation: none;
+  }
+  .sboard__ring--active {
+    transition: none;
   }
 }
 
