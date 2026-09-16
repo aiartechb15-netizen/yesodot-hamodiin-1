@@ -64,13 +64,18 @@
   padding-block: clamp(44px, 5vw, 78px);
 }
 
-/* הטקסט תופס את רוב הרוחב והאיור כ-27% ממנו. ב-RTL הטור הראשון הוא
-   הימני, ולכן הטקסט מימין והאיור משמאל בלי כלל היפוך. */
+/* הטקסט תופס את רוב הרוחב והאיור כ-32% ממנו. ב-RTL הטור הראשון הוא
+   הימני, ולכן הטקסט מימין והאיור משמאל בלי כלל היפוך.
+
+   המרווח בין הטורים הצטמצם: קודם הוא הגיע ל-84 פיקסלים, והאיור —
+   שממורכז בטורו — נדחק אל קצה המסך והתרחק מן הטקסט בכ-300 פיקסלים.
+   עכשיו הוא נצמד לצד התוכן (justify-self: start הוא ימין ב-RTL),
+   ושני הטורים נקראים כקומפוזיציה אחת. */
 .ch2op__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(170px, 27%);
+  grid-template-columns: minmax(0, 1fr) minmax(190px, 34%);
   align-items: center;
-  gap: clamp(30px, 5vw, 84px);
+  gap: clamp(20px, 2.4vw, 40px);
 }
 
 /* ‏.hasMotif .section > * נותן z-index: 1 לכל ילד ישיר של מקטע, והוא
@@ -86,7 +91,9 @@
 .ch2op__text {
   display: grid;
   gap: clamp(14px, 1.5vw, 20px);
-  max-width: 66ch;
+  /* מעט רחב מקודם (66ch): בלוק הטקסט נמשך שמאלה אל עבר האיור,
+     והמסדרון הריק שביניהם מצטמצם משני צדדיו */
+  max-width: 72ch;
   direction: rtl;
   text-align: right;
 }
@@ -130,16 +137,44 @@
 }
 
 /* ---- האיור ----
-   בלי מסגרת, בלי פינות מעוגלות, בלי צל ובלי רקע משלו. שתי שכבות
-   מטפלות במפגש עם העמוד: multiply מוחק את הלבן של הקובץ אל תוך
-   השמנת של הרקע, כך שאין בכלל מלבן תמונה; ומעליו מסכה עדינה בקצוות
-   — אותה טכניקה שבתצלום של תחנה 7 — שמונעת מהקווים הדקים שיוצאים
-   מהאיור להיגמר בחיתוך חד. */
+   בלי מסגרת, בלי פינות מעוגלות, בלי צל ובלי רקע משלו. שלוש שכבות
+   מטפלות במפגש עם העמוד:
+   - multiply מוחק את הלבן של הקובץ אל תוך השמנת של הרקע, כך שאין
+     בכלל מלבן תמונה;
+   - מסכה מעגלית (ולא מלבנית) שמתאימה לצורת האיור עצמו: הגלובוס
+     והלוויין נשארים חדים, והקשתות והנקודות הדקות שסביבם מתפוגגות
+     אל הרקע במקום להיגמר בקצה הקובץ;
+   - הילה רכה מאחוריו בגוון הטורקיז של האתר, באטימות נמוכה מאוד,
+     שמחברת אותו אל גיליון הרקע במקום להשאירו "מודבק" עליו. */
 .ch2op__art {
-  justify-self: center;
+  position: relative;
+  /* נצמד לצד התוכן — inline-start הוא ימין ב-RTL — ומוסט אליו עוד
+     מעט בשוליים שליליים, כדי שלא יישאר מסדרון ריק ביניהם. לקובץ יש
+     שוליים לבנים פנימיים, ולכן הגלובוס עצמו רחוק מקצה המכל. */
+  justify-self: start;
+  margin-inline-start: clamp(-64px, -3.2vw, -24px);
+  width: min(100%, 480px);
+}
+
+/* ההילה — מילוי מתעמעם בלבד: אין לה קצה, טבעת או צל */
+.ch2op__art::before {
+  content: '';
+  position: absolute;
+  inset: -12%;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(23, 152, 154, 0.09) 0%,
+    rgba(23, 152, 154, 0.05) 44%,
+    rgba(23, 152, 154, 0) 70%
+  );
+  pointer-events: none;
 }
 
 .ch2op__img {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
   height: auto;
@@ -149,28 +184,17 @@
   box-shadow: none;
   mix-blend-mode: multiply;
 
-  --ch2op-fade-x: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(0, 0, 0, 0.5) 3%,
-    #000 8%,
-    #000 92%,
-    rgba(0, 0, 0, 0.5) 97%,
-    transparent 100%
+  /* הליבה חדה, ומשם החוצה מעגל שמתפוגג עד לשקיפות מלאה בקצה */
+  --ch2op-fade: radial-gradient(
+    circle at 50% 50%,
+    #000 0 58%,
+    rgba(0, 0, 0, 0.85) 72%,
+    rgba(0, 0, 0, 0.45) 86%,
+    rgba(0, 0, 0, 0.14) 95%,
+    rgba(0, 0, 0, 0) 100%
   );
-  --ch2op-fade-y: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.5) 3%,
-    #000 8%,
-    #000 92%,
-    rgba(0, 0, 0, 0.5) 97%,
-    transparent 100%
-  );
-  -webkit-mask-image: var(--ch2op-fade-x), var(--ch2op-fade-y);
-  -webkit-mask-composite: source-in;
-  mask-image: var(--ch2op-fade-x), var(--ch2op-fade-y);
-  mask-composite: intersect;
+  -webkit-mask-image: var(--ch2op-fade);
+  mask-image: var(--ch2op-fade);
 }
 
 /* במסך צר הטורים נערמים: הטקסט למעלה והאיור מתחתיו, ממורכז וקטן —
@@ -182,7 +206,7 @@
   }
 
   .ch2op__art {
-    width: min(100%, 300px);
+    width: min(100%, 320px);
     justify-self: center;
   }
 }
@@ -211,8 +235,23 @@
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: clamp(10px, 2vw, 40px);
+  /* column-gap ולא gap: השורה השנייה (אזור התוכן התחתון) שומרת על
+     המרווחים שהיו לה כשישבה מחוץ לבמה */
+  column-gap: clamp(10px, 2vw, 40px);
+  row-gap: 0;
   margin-top: clamp(24px, 3.4vw, 46px);
+}
+
+/* אזור התוכן התחתון — שורה שנייה בגריד הבמה, פרושה על שלוש העמודות
+   וממורכזת עליהן. שתי עמודות ה-1fr זהות ברוחבן, ולכן מרכז הגריד הוא
+   בדיוק נקודת האמצע שבין שתי הדמויות, וגם הציר שעליו יושב המשפט
+   המרכזי. הטקסט בתוכו נשאר מיושר לימין. */
+.of__bottom {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: clamp(620px, 100%, 680px);
+  min-width: 0;
 }
 
 /* כל צד הוא בלוק אחד: האיור, הכותרת וההסבר נעוצים באותו קו ימני
@@ -399,10 +438,9 @@
 }
 
 .of__summary {
-  max-width: 62ch;
-  /* margin: 0 auto 0 0 דחף אותו שמאלה בעמוד RTL; הצורה הלוגית
-     נועצת אותו בקו הימני, והעודף נופל שמאלה */
-  margin-inline: 0 auto;
+  /* רוחב השורה נקבע עכשיו ברוחב .of__bottom (620–680px) */
+  max-width: none;
+  margin-inline: 0;
   text-align: right;
   font-size: clamp(23.5px, 1.8vw, 28px);
   line-height: 1.7;
@@ -972,6 +1010,14 @@
   .of__stage {
     grid-template-columns: 1fr;
     gap: clamp(26px, 6vw, 40px);
+  }
+  /* בעמודה אחת אין שתי דמויות לחשב ביניהן: אזור התוכן התחתון חוזר
+     להיות הבלוק האחרון ברצף, ברוחב מלא */
+  .of__bottom {
+    grid-row: auto;
+    grid-column: 1;
+    justify-self: stretch;
+    width: 100%;
   }
   .of__link,
   .of__axis {
