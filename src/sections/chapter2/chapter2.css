@@ -56,24 +56,40 @@
 }
 
 /* ---------- תחנה 6 — מודיעין אסטרטגי ----------
-   שוליים פנימיים של 5 ס״מ מארבעת הצדדים, על המקטע כולו: הכותרת
-   והפתיח, התרשים, שכבת הידע, הרשימות ושאלת החשיבה. ההדר ותפריט הצד
-   יושבים מחוץ למקטע ואינם מושפעים.
-   הריפוד הצדדי של המכל מתאפס כאן, אחרת הוא היה מצטבר עם 5 הס״מ
-   ומגיע לכ-10 ס״מ בכל צד. */
+   שוליים חיצוניים של 5 ס״מ מימין ומשמאל, נמדדים מקצות אזור התוכן
+   הראשי (ההדר ותפריט הצד יושבים מחוץ לו ואינם נכללים בחישוב).
+   הריפוד האנכי נשאר 5 ס״מ.
+
+   כדי שלא ייווצר ריווח מצטבר מעבר לכך, שלוש שכבות מתאפסות בתוך
+   המקטע: הריפוד הצדדי שלו עצמו, הריפוד והרוחב המרבי של המכל,
+   ותקרת הרוחב של הלוח (min(1200px, 88%)) עם המרכוז שלו. */
 .chapterPage.ch2Page #ch2-strategic {
   box-sizing: border-box;
-  padding: 5cm;
+  width: auto;
+  max-width: none;
+  margin-inline: 5cm;
+  padding-block: 5cm;
+  padding-inline: 0;
 }
 
 .chapterPage.ch2Page #ch2-strategic .container {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
   padding-inline: 0;
+}
+
+.chapterPage.ch2Page #ch2-strategic .sboard {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
 }
 
 /* במסך צר אין די רוחב ל-5 ס״מ משני הצדדים */
 @media (max-width: 900px) {
   .chapterPage.ch2Page #ch2-strategic {
-    padding: 24px;
+    margin-inline: 24px;
+    padding-block: 24px;
   }
 }
 
