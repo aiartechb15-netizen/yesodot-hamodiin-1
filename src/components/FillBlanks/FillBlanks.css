@@ -46,7 +46,7 @@
   border-radius: 50%;
   background: var(--cream);
   color: var(--navy);
-  font-size: 19px;
+  font-size: var(--font-small-size);
   font-weight: 700;
 }
 
@@ -63,7 +63,7 @@
 
 .fill__select {
   font: inherit;
-  font-size: 20.5px;
+  font-size: var(--font-body-size);
   font-weight: 600;
   color: var(--navy);
   padding: 5px 10px;
@@ -82,7 +82,7 @@
 .fill__answer {
   grid-column: 2;
   margin: 8px 0 0;
-  font-size: 19px;
+  font-size: var(--font-small-size);
   color: var(--muted);
 }
 

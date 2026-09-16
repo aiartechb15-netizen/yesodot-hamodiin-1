@@ -1,5 +1,18 @@
 
 
+/* ---------- טיפוגרפיה ----------
+   אין בפרק הזה גדלי כתב מקומיים. כל טקסט מצביע על תפקיד בסולם
+   המשותף שב-variables.css — אותו סולם שפרקים 1 ו-2 נשענים עליו —
+   ולכן טקסט מאותו סוג נראה זהה בכל הפרקים:
+
+     כותרת מקטע   --font-h2-size     כותרת משנה  --font-h3-size
+     כותרת קטנה   --font-h4-size     פסקה        --font-body-size
+     טקסט משני    --font-small-size  תווית       --font-label-size
+
+   מספור, כיתובי תרשים והערות הם "טקסט משני"; תווית עם ריווח
+   אותיות היא "תווית". אין להחזיר לכאן מספר בפיקסלים: שינוי גודל
+   של תפקיד נעשה בטוקן, וחל על כל האתר יחד. */
+
 /* ---------- כותרות תחנה ---------- */
 .s3head {
   margin-bottom: clamp(24px, 3vw, 38px);
@@ -84,7 +97,7 @@
   padding: 16px 20px;
   background: var(--cream);
   border-radius: var(--radius-sm);
-  font-size: 21.5px;
+  font-size: var(--font-body-size);
   color: var(--navy);
   font-weight: 600;
 }
@@ -263,13 +276,13 @@
 }
 
 .abbr__code {
-  font-size: 26.5px;
+  font-size: var(--font-h3-size);
   font-weight: 700;
   color: var(--navy);
 }
 
 .abbr__title {
-  font-size: 19px;
+  font-size: var(--font-small-size);
   color: var(--muted);
   display: block;
   /* שתי שורות שמורות: כותרת המשנה של אחד הכרטיסים נכנסת לשורה אחת
@@ -279,12 +292,12 @@
 
 .abbr__text {
   color: var(--ink-soft);
-  font-size: 20.5px;
+  font-size: var(--font-body-size);
 }
 
 .abbr__cue {
   margin-top: auto;
-  font-size: 19px;
+  font-size: var(--font-small-size);
   font-weight: 700;
   color: var(--teal-ink);
 }
@@ -305,7 +318,7 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  font-size: clamp(23.5px, 2vw, 30px);
+  font-size: var(--font-h3-size);
   font-weight: 700;
   color: var(--white);
   white-space: nowrap;
@@ -385,7 +398,7 @@
 .t3 thead th {
   background: var(--navy);
   color: var(--white);
-  font-size: 20.5px;
+  font-size: var(--font-body-size);
   border-bottom: 0;
 }
 
@@ -425,7 +438,7 @@
 
 .t3card__label {
   display: block;
-  font-size: 19px;
+  font-size: var(--font-label-size);
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--teal);
@@ -440,14 +453,14 @@
 
 .t3card__col {
   display: block;
-  font-size: 19px;
+  font-size: var(--font-small-size);
   font-weight: 700;
   color: var(--navy);
 }
 
 .t3card__val {
   display: block;
-  font-size: 20.5px;
+  font-size: var(--font-body-size);
   color: var(--ink-soft);
 }
 
@@ -743,7 +756,7 @@
   border: 1px solid var(--gold);
   background: var(--paper);
   font-family: var(--font-heading);
-  font-size: 19px;
+  font-size: var(--font-small-size);
   font-weight: 700;
   color: var(--gold-ink);
   transition:
@@ -850,7 +863,7 @@
   grid-template-columns: auto 1fr;
   gap: 12px;
   align-items: baseline;
-  font-size: 20.5px;
+  font-size: var(--font-body-size);
   color: var(--ink-soft);
 }
 
