@@ -9,6 +9,40 @@
   min-width: 0;
 }
 
+/* ---------- שוליים של אזור התוכן ----------
+   חמישה סנטימטרים בדיוק מארבעת הצדדים. הרוחב הוא רוחב העמודה פחות
+   שני השוליים, ולכן השוליים אינם מצטברים ואין גלישה.
+
+   השוליים חלים על אזור התוכן בלבד: הכותרת העליונה של האתר ותפריט
+   הצד יושבים מחוצה לו ואינם מושפעים. */
+.chapterPage .chLayout__main {
+  box-sizing: border-box;
+  width: calc(100% - 10cm);
+  max-width: none;
+  margin: 5cm;
+  padding: 0;
+}
+
+/* המקטעים שבתוך אזור התוכן אינם מוסיפים שוליים צדדיים משלהם, ואינם
+   מצמצמים וממרכזים אותו — כל שורה מתחילה בדיוק בשולי ה-5 ס״מ.
+   הריפוד האנכי של המקטעים נשאר: הוא הקצב שבין מסך למסך. */
+.chapterPage .chLayout__main > *,
+.chapterPage .chLayout__main .container,
+.chapterPage .chLayout__main .section {
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+/* מתחת ל-900px אין ברוחב המסך מקום לשני שוליים של 5 ס״מ — שם הם
+   מתכווצים ל-24px, אחרת לא היה נשאר רוחב לתוכן עצמו */
+@media (max-width: 900px) {
+  .chapterPage .chLayout__main {
+    width: auto;
+    margin: 24px;
+  }
+}
+
 @media (min-width: 1080px) {
   .chLayout {
     display: grid;

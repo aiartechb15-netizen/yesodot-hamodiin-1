@@ -502,13 +502,27 @@
   justify-content: flex-start;
 }
 
-/* מכל מרכזי אחד לכל המקטע, ברוחב קריאה של 1050 פיקסלים. התוכן שבתוכו
-   מיושר לימין — המכל ממורכז, לא הטקסט. */
+/* מכל אחד לכל המקטע, פרוש על מלוא רוחב עמודת התוכן פחות 5 ס״מ מכל
+   צד. אין כאן תקרת רוחב ואין מרכוז: קודם היה כאן max-width של 1050
+   פיקסלים עם margin-inline: auto, ומעליו גם הריפוד של 5 הס״מ — ואז
+   נשארו לתוכן 672 פיקסלים בלבד, כ-295 פיקסלים מכל צד.
+   5 הס״מ נמדדים מעמודת התוכן בלבד; סרגל הפרק יושב מחוצה לה ואינו
+   נכלל בהם. */
 .chapterPage .container.opsec__wrap {
-  max-width: 1050px;
-  margin-inline: auto;
+  box-sizing: border-box;
+  width: auto;
+  max-width: none;
+  margin-inline: 5cm;
+  padding-inline: 0;
   direction: rtl;
   text-align: right;
+}
+
+/* בטאבלט ובמובייל אין די רוחב ל-5 ס״מ משני הצדדים */
+@media (max-width: 900px) {
+  .chapterPage .container.opsec__wrap {
+    margin-inline: 24px;
+  }
 }
 
 .opscreen {
@@ -930,6 +944,19 @@
   border-inline-start: 1px solid var(--gold);
   direction: rtl;
   text-align: right;
+}
+
+/* כותרת העמוד של המסך — הגודל, המשקל, הצבע וגובה השורה מגיעים כולם
+   מ-.section-title ומברירת המחדל של h2, בדיוק כמו כותרות העמוד בשאר
+   הפרק, ולכן אין כאן הגדרה משלהם. הקצה הימני נקבע על ידי
+   .ch3op__text ולכן הוא זהה לקצה הימני של כיתוב העל ושל הפסקאות. */
+.ch3op__title {
+  margin: 0;
+}
+
+/* קו הזהב שמתחת לכותרת — 32px מדויקים בינו לכיתוב העל שמתחתיו */
+.ch3op__titleRule {
+  margin-block: var(--s-4) 32px;
 }
 
 /* כיתוב העל וקו הזהב שלצדו — הקו נמתח משמאל לכיתוב ואינו יורד

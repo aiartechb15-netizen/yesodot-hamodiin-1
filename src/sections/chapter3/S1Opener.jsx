@@ -17,6 +17,13 @@ export default function S1Opener() {
     >
       <div className="container ch3op__inner">
         <div className="ch3op__text">
+          {/* כותרת העמוד של המסך — אותו סגנון של כותרות העמוד בשאר הפרק
+              (.section-title + קו הזהב שמתחתיה) */}
+          <h2 className="section-title ch3op__title">
+            {opener.title}
+          </h2>
+          <span className="gold-rule ch3op__titleRule" aria-hidden="true" />
+
           <p className="ch3op__overline">
             {chapter3Meta.introOverline}
             <span className="ch3op__overlineRule" aria-hidden="true" />
