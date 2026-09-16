@@ -215,23 +215,39 @@
 }
 
 /* ---------- השוואת סביבות (תחנה 8) ---------- */
+/* המרווח בין שני הכרטיסים לבין כותרת התרגול — 120 פיקסלים מדויקים.
+   הוא נכתב כ-row-gap של הגריד שמכיל את שניהם ולא כ-margin-top על
+   התרגול, מפני ש-.s3blocks הוא גריד שכבר יש לו gap משלו: margin
+   היה מצטבר עליו ויוצא כ-154 פיקסלים במקום 120. במקטע הזה יש בגריד
+   שני ילדים בדיוק — הכרטיסים והתרגול — ולכן ה-row-gap חל פעם אחת,
+   נמדד מתחתית הכרטיס הגבוה מבין השניים, ואינו נוגע בכרטיסים עצמם. */
+#ch3-environments .s3blocks {
+  row-gap: 120px;
+}
+
+@media (max-width: 900px) {
+  #ch3-environments .s3blocks {
+    row-gap: 72px;
+  }
+}
+
 .envs {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
+/* הפס הצבעוני העבה שהיה בראש הכרטיסים — כחול באופרטיבי וטורקיז
+   בטקטי — ירד. הוא נוצר מ-border-top של 3 פיקסלים שדרס את הצד
+   העליון של המסגרת, ולא מ-::before, מ-box-shadow או מאלמנט פנימי,
+   ולכן די בהסרתו כדי שהמסגרת העדינה תקיף את הכרטיס בשווה מארבעת
+   הצדדים. הרקע הלבן, הצל, האייקונים והטקסטים נשארים. */
 .env {
   padding: 28px 26px;
   background: var(--white);
   border: 1px solid var(--border);
-  border-top: 3px solid var(--navy-secondary);
   border-radius: var(--radius);
   box-shadow: var(--shadow-card);
-}
-
-.env--tac {
-  border-top-color: var(--teal);
 }
 
 .env__icon {
