@@ -16,11 +16,8 @@ export default function ByDomain() {
         {/* קטלוג התחומים לצד האיור — כל התחומים גלויים בבת אחת */}
         <div className="domains__layout">
           <ol className="domains">
-            {byDomain.domains.map((d, i) => (
+            {byDomain.domains.map((d) => (
               <li className="domain" key={d.id}>
-                <span className="domain__num ltr-num" aria-hidden="true">
-                  {i + 1}
-                </span>
                 <span className="domain__icon" aria-hidden="true">
                   <Icon name={d.icon} size={20} />
                 </span>

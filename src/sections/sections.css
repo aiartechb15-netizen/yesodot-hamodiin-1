@@ -176,42 +176,67 @@
   container-name: domains;
 }
 
-/* הרשימה מימין, האיור משמאל. עמודת האיור רחבה בכ-20% מקודם, והמרווח
-   בינה לרשימה הצטמצם — כך האיור מאזן את חמש השורות שלצידו. */
+/* הרשימה מימין, האיור משמאל. עמודת האיור רחבה יותר (0.6fr במקום
+   0.44fr) והמרווח בינה לרשימה קטן, כך שהאיור מאזן את חמש השורות
+   שלצידו במקום להצטמצם לרצועה. */
 .domains__layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(250px, 0.44fr);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.6fr);
   align-items: stretch;
-  gap: clamp(18px, 2.2vw, 30px);
+  gap: clamp(16px, 1.8vw, 26px);
   margin-top: clamp(26px, 3vw, 36px);
 }
 
 /* האיור אינו כרטיס: אין לו מסגרת, רקע, פינות מעוגלות או צל. הוא
-   נמתח לגובה הרשימה כולה — קצהו העליון בקו השורה "מודיעין צבאי"
-   וקצהו התחתון בקו סופה של "מודיעין נגד טרור" — וארבעת קצוותיו
-   נמסכים אל רקע השמנת בדעיכה קצרה, כדי שיישאר ברור ולא ייעלם. */
+   נמתח לגובה הרשימה וחורג ממנה מעט למעלה ולמטה (השוליים השליליים),
+   ולכן הוא ארוך ונוכח יותר מן הקטלוג שלצידו — בלי לגזול ממנו מקום.
+
+   ארבעת קצוותיו נמסכים אל רקע השמנת בדעיכה ארוכה באחוזים, ולא
+   בכמה פיקסלים: אזור המעבר גדל יחד עם האיור, ולכן הוא נגמר
+   בהתפוגגות הדרגתית ולא בקצה. */
 .domains__art {
   align-self: stretch;
+  margin-block: calc(-1 * clamp(18px, 2.6vw, 52px));
   overflow: hidden;
-  -webkit-mask-image:
-    linear-gradient(to bottom, transparent 0, #000 30px, #000 calc(100% - 30px), transparent 100%),
-    linear-gradient(to left, transparent 0, #000 26px, #000 calc(100% - 26px), transparent 100%);
-  mask-image:
-    linear-gradient(to bottom, transparent 0, #000 30px, #000 calc(100% - 30px), transparent 100%),
-    linear-gradient(to left, transparent 0, #000 26px, #000 calc(100% - 26px), transparent 100%);
+  --dart-fade-y: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.5) 6%,
+    #000 14%,
+    #000 86%,
+    rgba(0, 0, 0, 0.5) 94%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  --dart-fade-x: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.5) 5%,
+    #000 12%,
+    #000 88%,
+    rgba(0, 0, 0, 0.5) 95%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-image: var(--dart-fade-y), var(--dart-fade-x);
+  mask-image: var(--dart-fade-y), var(--dart-fade-x);
   /* שתי הדעיכות נחתכות זו בזו, ולכן גם ארבע הפינות רכות */
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
 }
 
 /* התמונה ממלאת את השטח שלה ביחס המקורי שלה (4 / 5): cover מגדיל
-   אותה עד שהיא מכסה את השטח, בלי מתיחה ובלי עיוות. */
+   אותה עד שהיא מכסה את השטח, בלי מתיחה ובלי עיוות.
+
+   רקע הקובץ הוא שמנת אטומה בגוון בהיר מעט מרקע העמוד, ולכן
+   mix-blend-mode: multiply הוא שממיס אותו לתוך הרקע: הגוונים
+   הבהירים כמעט נעלמים והציור עצמו נשאר. בלעדיו האיור נקרא כמלבן
+   בהיר שהודבק על העמוד. */
 .domains__img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
+  mix-blend-mode: multiply;
 }
 
 /* אזור תוכן בינוני: העמודה צרה והשורות נשברות, ולכן הרשימה גבוהה
@@ -254,19 +279,12 @@
   display: grid;
   /* טור הכותרת נצמד לתוכנו במקום לשמור 210px קבועים: אחרי הגדלת
      הכתב הוא גזל את רוחב ההסבר, וזה נשבר ל-3–4 מילים בשורה */
-  grid-template-columns: 26px 34px max-content minmax(0, 1fr);
+  grid-template-columns: 34px max-content minmax(0, 1fr);
   align-items: center;
   gap: clamp(16px, 1.8vw, 26px);
   min-height: 84px;
   padding-block: clamp(16px, 1.8vw, 22px);
   border-bottom: 1px solid var(--border);
-}
-
-.domain__num {
-  font-size: 19px;
-  font-weight: 700;
-  color: var(--gold-ink);
-  text-align: center;
 }
 
 .domain__icon {
@@ -345,11 +363,11 @@
   /* מעבר העמודה האחת נקבע לפי רוחב אזור התוכן (ראו @container domains
      למעלה), ולכן אין כאן כפילות שלו */
   .domain {
-    grid-template-columns: 26px 34px 1fr;
+    grid-template-columns: 34px 1fr;
     row-gap: 8px;
   }
   .domain__text {
-    grid-column: 3 / -1;
+    grid-column: 2 / -1;
   }
 }
 
