@@ -573,23 +573,90 @@
   text-align: right;
 }
 
-.dsgn__screen {
+/* ---- הקרוסלה ----
+   שלושת השלבים יושבים בשורה אחת, והמסילה נעה אופקית. כולם נשארים
+   ב-DOM: הגובה נקבע לפי השלב הגבוה ולכן אין קפיצה במעבר, ומצב
+   התרגול נשמר. השלבים שאינם מוצגים מוסתרים ב-visibility — הם אינם
+   נגישים למקלדת ולקוראי מסך, אבל ממשיכים לתפוס מקום. */
+.stages-carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.stages-track {
+  display: flex;
+  align-items: stretch;
+  direction: rtl;
+  transition: transform 400ms ease-in-out;
+}
+
+.stage-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - var(--header-h));
-  min-height: calc(100svh - var(--header-h));
-  padding-block: clamp(40px, 5vw, 72px);
-}
-
-/* במסך הראשון הכותרת פותחת מלמעלה; בשניים האחרים התוכן ממורכז
-   אנכית ומסביבו שטח נשימה */
-.dsgn__screen--center {
   justify-content: center;
+  padding-block: clamp(30px, 4vw, 56px);
 }
 
-/* המעבר בין המסכים — קו אופקי כמעט בלתי מורגש, לא מפריד כבד */
-.dsgn__screen + .dsgn__screen {
-  border-top: 1px solid rgba(196, 163, 71, 0.16);
+.stage-slide[aria-hidden='true'] {
+  visibility: hidden;
+}
+
+/* ---- שורת המעבר ----
+   הקודם מימין, הבא משמאל, וחיווי השלבים ביניהם. כפתורי טקסט בלבד:
+   בלי רקע, מסגרת או כרטיס. */
+.dsgn__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(16px, 2vw, 32px);
+  padding-top: clamp(20px, 2.6vw, 34px);
+}
+
+/* שני הצדדים שומרים על רוחבם גם כשאין בהם כפתור, כך שחיווי השלבים
+   נשאר במרכז בכל שלושת השלבים */
+.dsgn__navSide {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+}
+
+.dsgn__navSide--next {
+  justify-content: flex-end;
+}
+
+.dsgn__navBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 2px;
+  background: none;
+  border: 0;
+  font-family: var(--font-heading);
+  font-size: var(--font-small-size);
+  font-weight: 700;
+  color: var(--navy-secondary);
+  cursor: pointer;
+  transition: color 200ms ease;
+}
+
+.dsgn__navBtn:hover {
+  color: var(--gold-ink);
+}
+
+.dsgn__navBtn:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.dsgn__navArrow {
+  font-size: 1.15em;
+  line-height: 1;
+  color: var(--gold);
 }
 
 /* רווח רחב בין הכותרת הראשית ליחידות התוכן */
@@ -642,8 +709,7 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  margin: auto 0 0;
-  padding-top: clamp(28px, 4vw, 52px);
+  margin: 0;
   font-size: var(--font-small-size);
   color: var(--muted);
 }
@@ -653,15 +719,32 @@
   gap: 7px;
 }
 
+/* הנקודות הן כפתורי מעבר, אבל נשארות נקודות: אזור הלחיצה גדול
+   מהנקודה עצמה דרך הריפוד, והנקודה מצוירת ברקע הכפתור */
 .dsgn__dot {
   width: 6px;
   height: 6px;
+  padding: 0;
+  border: 0;
   border-radius: 50%;
   background: var(--border);
+  box-sizing: content-box;
+  background-clip: content-box;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.dsgn__dot:hover {
+  background: var(--gold-soft);
 }
 
 .dsgn__dot.is-on {
   background: var(--gold);
+}
+
+.dsgn__dot:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 4px;
 }
 
 /* ---- מסך התרגול ----
@@ -989,7 +1072,10 @@
 @media (prefers-reduced-motion: reduce) {
   .opstop__panel,
   .opstop__num,
-  .opstop__title {
+  .opstop__title,
+  .stages-track,
+  .dsgn__navBtn,
+  .dsgn__dot {
     transition: none;
   }
 }
@@ -1016,10 +1102,8 @@
     max-width: none;
   }
 
-  /* מסך מלא לכל חלק אינו נחוץ כשהתוכן נערם — הוא רק יוצר חללים ריקים */
-  .dsgn__screen {
-    min-height: 0;
-    padding-block: clamp(34px, 8vw, 56px);
+  .stage-slide {
+    padding-block: clamp(24px, 6vw, 40px);
   }
 
   .dsgn__head {
