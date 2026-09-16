@@ -239,10 +239,7 @@ export default function StationOfficer() {
   const [kaman, kabarnit] = ol.sides
 
   const stageRef = useRef(null)
-  /* ההיסט שכבר מוחל בפועל. ref ולא state: המדידה צריכה לקזז אותו
-     מיד, גם כשהיא רצה כמה פעמים לפני שהרינדור הבא מתרחש. */
-  const shiftRef = useRef(0)
-  const [shift, setShift] = useState(0)
+  const [shift, setShift] = useState({ core: 0, bottom: 0 })
 
   /* מרכז אזור התוכן התחתון על נקודת האמצע שבין שתי הדמויות עצמן.
      שתי העמודות ברשת שוות ברוחבן, אבל כל דיוקן נצמד לקצה הימני של
@@ -254,36 +251,37 @@ export default function StationOfficer() {
   const measure = useCallback(() => {
     const stage = stageRef.current
     const block = stage?.querySelector('.of__bottom')
+    const core = stage?.querySelector('.of__core')
     const a = stage?.querySelector('.of__fig--kaman .of__portrait')
     const b = stage?.querySelector('.of__fig--kabarnit .of__portrait')
-    if (!stage || !block || !a || !b) return
+    if (!stage || !block || !core || !a || !b) return
 
     const ra = a.getBoundingClientRect()
     const rb = b.getBoundingClientRect()
     /* בעמודה אחת הדיוקנים יושבים זה מתחת לזה ולא זה לצד זה */
     if (Math.abs(ra.top - rb.top) > 1) {
-      shiftRef.current = 0
-      setShift(0)
+      setShift((prev) => (prev.core === 0 && prev.bottom === 0 ? prev : { core: 0, bottom: 0 }))
       return
     }
 
-    const figuresMid = (ra.left + ra.width / 2 + rb.left + rb.width / 2) / 2
+    /* מרכז החלל שבין שתי הדמויות. שני הדיוקנים זהים ברוחבם, ולכן זו
+       גם נקודת האמצע שבין מרכזיהם. */
+    const target = (rb.right + ra.left) / 2
 
-    /* מודדים את המיקום הטבעי של האזור — בלי ההיסט — בכיבוי רגעי של
-       ה-transform. קיזוז לפי הערך השמור היה שגוי כשהמדידה רצה לפני
-       שהרינדור הקודם הספיק להחיל אותו. transform אינו משפיע על
-       הפריסה, ולכן הכיבוי אינו מזיז דבר על המסך. */
-    const inline = block.style.transform
-    block.style.transform = 'none'
-    const rBlock = block.getBoundingClientRect()
-    block.style.transform = inline
+    /* המיקום הטבעי נמדד בכיבוי רגעי של ה-transform: קיזוז לפי הערך
+       השמור היה שגוי כשהמדידה רצה לפני שהרינדור הקודם הספיק להחיל
+       אותו. transform אינו משפיע על הפריסה, ולכן הכיבוי אינו מזיז
+       דבר על המסך. */
+    const offsetOf = (el) => {
+      const inline = el.style.transform
+      el.style.transform = 'none'
+      const r = el.getBoundingClientRect()
+      el.style.transform = inline
+      return Math.round(target - (r.left + r.width / 2))
+    }
 
-    const naturalMid = rBlock.left + rBlock.width / 2
-    const next = Math.round(figuresMid - naturalMid)
-    if (next === shiftRef.current) return
-
-    shiftRef.current = next
-    setShift(next)
+    const next = { core: offsetOf(core), bottom: offsetOf(block) }
+    setShift((prev) => (prev.core === next.core && prev.bottom === next.bottom ? prev : next))
   }, [])
 
   useLayoutEffect(() => {
@@ -320,7 +318,12 @@ export default function StationOfficer() {
         <div className="of__stage" ref={stageRef}>
           <Figure side={kaman} />
 
-          <div className="of__core">
+          {/* המסמך והמשפט כיחידה אחת, ממורכזת בחלל שבין שתי הדמויות:
+              אנכית דרך גובה הרצועה שב-CSS, ואופקית דרך ההיסט הנמדד */}
+          <div
+            className="of__core"
+            style={shift.core ? { transform: `translateX(${shift.core}px)` } : undefined}
+          >
             <span className="of__axis of__axis--top" aria-hidden="true">
               <span className="of__axisDot" />
             </span>
@@ -339,7 +342,7 @@ export default function StationOfficer() {
               התוכן שנשאר ליד תפריט הצד. ההיסט נמדד ב-measure. */}
           <div
             className="of__bottom"
-            style={shift ? { transform: `translateX(${shift}px)` } : undefined}
+            style={shift.bottom ? { transform: `translateX(${shift.bottom}px)` } : undefined}
           >
             <span className="of__tick" aria-hidden="true" />
             <p className="of__summary">{ol.summary}</p>
