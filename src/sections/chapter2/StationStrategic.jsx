@@ -13,8 +13,10 @@ export default function StationStrategic() {
           <span className="gold-rule" aria-hidden="true" />
         </header>
 
-        <div className="st__blocks">
-          <IdentityCard data={strategic} tone="teal" />
+        {/* פריסה פתוחה: אותו תוכן ואותה התנהגות, בלי מעטפת לבנה —
+            התוכן יושב ישירות על רקע העמוד */}
+        <div className="st__blocks st__blocks--open">
+          <IdentityCard data={strategic} tone="teal" layout="open" />
         </div>
       </div>
     </section>

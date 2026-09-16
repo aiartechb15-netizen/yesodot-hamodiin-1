@@ -243,7 +243,8 @@
   direction: rtl;
 }
 
-/* אקורדיון מינימלי: בלי מלבנים סגורים ובלי קווים לרוחב המסך */
+/* אקורדיון מינימלי: בלי מלבנים סגורים ובלי רקע — רק שורה, חץ פתיחה
+   וקו הפרדה דק מתחתיה */
 .idcard--open .idcard__q {
   gap: 14px;
   padding: 12px 0;
@@ -257,6 +258,12 @@
 .idcard--open .idcard__q.is-open {
   background: none;
   border: 0;
+}
+
+/* הקו יושב על פריט הרשימה ולא על הכפתור, ולכן הוא נשאר מתחת לשאלה
+   גם כשהיא פתוחה והתשובה מוצגת */
+.idcard--open .idcard__qList > li {
+  border-bottom: 1px solid var(--border);
 }
 
 .idcard--open .idcard__q:hover .idcard__qLabel {
