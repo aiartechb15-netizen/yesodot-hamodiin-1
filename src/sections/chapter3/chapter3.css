@@ -583,9 +583,42 @@
    ושורת המעבר נקראים כיחידה אחת מחוברת. הסלקטור נושא מזהה כדי לגבור
    על min-height ו-padding-block של .section הכללי. */
 .chapterPage #ch3-design.dsgn {
+  position: relative;
   min-height: 0;
   justify-content: flex-start;
-  padding-block: 48px 40px;
+  /* 100px מעל הכותרת — יחד עם 80px שמתחת לרצועת התרחיש שלפניה, שני
+     החלקים נקראים כשני מקטעים ולא כרצף אחד */
+  padding-block: 100px 40px;
+}
+
+/* הרווח שמתחת לרצועת "תרחיש ליישום", בתחתית מסך מפת השינוי */
+.chapterPage #ch3-context.ctxmap {
+  padding-bottom: 80px;
+}
+
+/* קו ההפרדה בין שני החלקים, ומעבר שמנת רך מאחוריו.
+   ::after ולא ::before: ל-::before של מקטע במסך עם גיליון רקע כבר יש
+   תפקיד (רצועת המעבר הכללית שב-globals.css), והחלפתו הייתה מבטלת
+   אותה. הקו נפרש על רוחב עמודת התוכן בלבד — 5 הס״מ כבר מוגדרים על
+   העמודה עצמה — ונמוג לשני קצותיו, ולכן אין לו קצה חד. */
+.chapterPage #ch3-design.dsgn::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 70px;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+        to left,
+        rgba(183, 145, 55, 0) 0%,
+        rgba(183, 145, 55, 0.28) 18%,
+        rgba(183, 145, 55, 0.28) 82%,
+        rgba(183, 145, 55, 0) 100%
+      )
+      top / 100% 1px no-repeat,
+    linear-gradient(to bottom, rgba(248, 245, 238, 0.7) 0, rgba(248, 245, 238, 0) 70px);
 }
 
 /* גובה הקרוסלה הוא גובה השקופית הפעילה בלבד. קודם שלוש השקופיות
