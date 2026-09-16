@@ -73,7 +73,7 @@
    ושני הטורים נקראים כקומפוזיציה אחת. */
 .ch2op__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(190px, 34%);
+  grid-template-columns: minmax(0, 1fr) minmax(210px, 34%);
   align-items: center;
   gap: clamp(20px, 2.4vw, 40px);
 }
