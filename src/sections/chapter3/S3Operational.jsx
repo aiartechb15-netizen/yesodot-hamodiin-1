@@ -66,32 +66,54 @@ export default function S3Operational() {
           <span className="gold-rule gold-rule--sm" aria-hidden="true" />
           <p className="opsec__hint">{op.howHint}</p>
 
-          <ol className="oppath">
-            {stations.map((item, i) => {
-              const isOpen = item.id === open
-              return (
-                <li className={`opstop${isOpen ? ' is-open' : ''}`} key={item.id}>
-                  <button
-                    type="button"
-                    className="opstop__btn"
-                    aria-expanded={isOpen}
-                    aria-controls={`opstop-${item.id}`}
-                    onClick={() => setOpen(item.id)}
-                  >
-                    <span className="opstop__num ltr-num" aria-hidden="true">
-                      {i + 1}
-                    </span>
-                    <span className="opstop__title">{item.title}</span>
-                  </button>
+          {/* הנתיב בנוי משלוש שורות בגובה קבוע — התחנות, קו הזהב ואזור
+              ההסבר — ולכן גובהו אינו משתנה בין תחנה לתחנה.
 
-                  <div className="opstop__panel" id={`opstop-${item.id}`}>
-                    <span className="opstop__panelRule" aria-hidden="true" />
-                    <p className="opstop__text">{item.text}</p>
-                  </div>
-                </li>
-              )
-            })}
-          </ol>
+              ההסבר אינו יושב עוד בתוך התחנה שנבחרה אלא באזור משותף
+              אחד מתחת לכולן: חמשת ההסברים נמצאים שם כל הזמן זה על גבי
+              זה, והמעבר ביניהם הוא בשקיפות בלבד. כך שום דבר שמתחת
+              לנתיב אינו זז בלחיצה.
+
+              aria-pressed ולא aria-expanded: הכפתורים אינם פותחים
+              וסוגרים חמישה אזורים נפרדים אלא בוחרים איזה מהם מוצג
+              באזור האחד והקבוע. */}
+          <div className="oppath">
+            <ol className="oppath__stops">
+              {stations.map((item, i) => {
+                const isOpen = item.id === open
+                return (
+                  <li className={`opstop${isOpen ? ' is-open' : ''}`} key={item.id}>
+                    <button
+                      type="button"
+                      className="opstop__btn"
+                      aria-pressed={isOpen}
+                      aria-controls="opstop-desc"
+                      onClick={() => setOpen(item.id)}
+                    >
+                      <span className="opstop__num ltr-num" aria-hidden="true">
+                        {i + 1}
+                      </span>
+                      <span className="opstop__title">{item.title}</span>
+                    </button>
+                  </li>
+                )
+              })}
+            </ol>
+
+            <span className="oppath__rule" aria-hidden="true" />
+
+            <div className="oppath__desc" id="opstop-desc" aria-live="polite">
+              {stations.map((item) => (
+                <p
+                  className={`opstop__text${item.id === open ? ' is-on' : ''}`}
+                  key={item.id}
+                  aria-hidden={item.id !== open}
+                >
+                  {item.text}
+                </p>
+              ))}
+            </div>
+          </div>
 
           {/* סוף הנתיב — התוצר, כטקסט על הרקע */}
           <p className="opnote opnote--end">

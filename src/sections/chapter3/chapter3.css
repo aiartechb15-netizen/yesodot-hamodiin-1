@@ -863,8 +863,10 @@
   margin-top: 0;
 }
 
+/* מרווח קבוע אחרי הנתיב, ולא clamp: המידה נמדדת מאזור שגובהו
+   קבוע, ולכן אין סיבה שתשתנה */
 .opsec__sub--sm {
-  margin-top: clamp(26px, 3vw, 38px);
+  margin-top: 34px;
 }
 
 .opsec__hint {
@@ -965,6 +967,11 @@
   border-color: var(--gold);
 }
 
+/* הפסקה המסכמת של הנתיב — מרווח קבוע מתחת לאזור הקבוע */
+.opnote--end {
+  margin-top: 36px;
+}
+
 .opnote__label {
   font-weight: 700;
   color: var(--navy-secondary);
@@ -985,19 +992,38 @@
   opacity: 0.7;
 }
 
-/* ---------- נתיב חמש התחנות ---------- */
+/* ---------- נתיב חמש התחנות ----------
+   שלוש שורות בגובה קבוע, ולכן גובה הנתיב זהה בכל חמשת המצבים:
+
+     שורת התחנות   36px למספר + 8px + 70px לכותרת = 114px
+     קו הזהב       20px
+     אזור ההסבר    80px
+
+   מה שקובע את הגובה הוא המידה הקבועה ולא התוכן, ולכן גם התחנה בעלת
+   הכותרת הארוכה ביותר וגם זו בעלת ההסבר הארוך ביותר יושבות באותו
+   גובה. שום דבר שמתחת לנתיב — הפסקה המסכמת ו"שאלות מרכזיות" — אינו
+   זז בלחיצה. */
 .oppath {
+  display: grid;
+  grid-template-rows: auto 20px 80px;
+  row-gap: 8px;
+  margin: clamp(26px, 3.2vw, 40px) 0 0;
+}
+
+.oppath__stops {
   position: relative;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: clamp(10px, 1.6vw, 22px);
-  margin: clamp(26px, 3.2vw, 40px) 0 0;
+  column-gap: clamp(10px, 1.6vw, 22px);
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
-/* הקו הרציף שמחבר בין התחנות — עובר מאחורי עיגולי המספרים */
-.oppath::before {
+/* הקו הרציף שמחבר בין התחנות — עובר מאחורי עיגולי המספרים.
+   17px הוא מרכזו של עיגול בן 34px שיושב בראש שורה בת 36px, ולכן
+   הקו אינו זז כשמחליפים תחנה. */
+.oppath__stops::before {
   content: "";
   position: absolute;
   top: 17px;
@@ -1011,10 +1037,20 @@
   min-width: 0;
 }
 
+/* שתי שורות בכל תחנה: המספר והכותרת. כך חמשת המספרים יושבים על קו
+   אופקי אחד, וכותרת בת שורה אחת וכותרת בת שתי שורות תופסות אותו
+   גובה בדיוק.
+
+   שורת הכותרת היא minmax(70px, auto) ולא 70px קבועים: במסך צר
+   העמודה מצטמצמת והכותרת הארוכה נשברת ליותר משתי שורות, ובגובה
+   נעול היא הייתה נחתכת ונשפכת על קו הזהב וההסבר. זה אינו פוגע
+   ביציבות — חמש הכותרות מוצגות תמיד, ולכן גובה השורה נקבע לפי
+   הארוכה שבהן ואינו משתנה בלחיצה. */
 .opstop__btn {
   display: grid;
+  grid-template-rows: 36px minmax(70px, auto);
+  row-gap: 8px;
   justify-items: center;
-  gap: 10px;
   width: 100%;
   padding: 0 4px;
   background: none;
@@ -1026,6 +1062,7 @@
 .opstop__num {
   display: grid;
   place-items: center;
+  align-self: start;
   width: 34px;
   height: 34px;
   border-radius: 50%;
@@ -1041,14 +1078,18 @@
     border-color 240ms ease;
 }
 
-/* בכפתור התחנה שני חלקים בלבד — עיגול המספר וכותרת התחנה שמתחתיו,
-   במרווח אחד ואחיד (gap של .opstop__btn) */
+/* הכותרת ממלאת את השורה בת 70px ונצמדת לראשה */
 .opstop__title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 70px;
   font-family: var(--font-heading);
   font-size: var(--font-small-size);
   font-weight: 700;
   line-height: 1.35;
   color: var(--navy);
+  text-align: center;
   transition: color 240ms ease;
 }
 
@@ -1079,42 +1120,56 @@
   color: var(--teal-ink);
 }
 
-/* ההסבר נפתח ישירות מתחת לכותרת התחנה, על הרקע, בלי מסגרת */
-.opstop__panel {
-  max-height: 0;
-  opacity: 0;
-  visibility: hidden;
-  overflow: hidden;
-  transition:
-    max-height 300ms ease,
-    opacity 240ms ease,
-    visibility 0s linear 300ms;
+/* כיתוב התחנה וההסבר ממורכזים, בניגוד לברירת המחדל של הפרק שמיישרת
+   כל טקסט לימין. שניהם כיתובים על תרשים ולא טקסט רץ, והם ממורכזים
+   מתחת למספר שלהם ובמרכז אזור התחנות. הבורר מקונן תחת .oppath כדי
+   לגבור על הכלל הכללי של chapter3-rtl.css. */
+.oppath .opstop__title,
+.oppath .opstop__text {
+  text-align: center;
 }
 
-.opstop.is-open .opstop__panel {
-  max-height: 260px;
-  opacity: 1;
-  visibility: visible;
-  transition:
-    max-height 320ms ease,
-    opacity 260ms ease 60ms,
-    visibility 0s;
-}
-
-.opstop__panelRule {
-  display: block;
+/* קו הזהב — אחד לכל הנתיב, בשורה משלו, ואינו זז בין תחנה לתחנה */
+.oppath__rule {
+  justify-self: center;
+  align-self: center;
   width: 26px;
   height: 2px;
-  margin: 12px auto 10px;
   background: var(--gold);
 }
 
+/* ---------- אזור ההסבר הפעיל ----------
+   אזור אחד לכל חמש התחנות, ממורכז ברוחב הנתיב ולא מתחת לעמודה
+   שנבחרה. חמשת ההסברים יושבים באותו תא גריד זה על גבי זה, הגובה
+   קבוע ב-80px, וההסבר הקצר פשוט משאיר מקום ריק מתחתיו. */
+.oppath__desc {
+  display: grid;
+  align-items: start;
+  height: 80px;
+  min-height: 80px;
+  overflow: hidden;
+}
+
+/* המעבר הוא בשקיפות בלבד — לא בגובה, בשוליים, בריפוד או בגובה שורה.
+   ההסתרה מעץ הנגישות נעשית ב-aria-hidden מן הרכיב ולא ב-visibility:
+   visibility עם השהיה נשאר לפעמים תקוע על visible כשמחליפים תחנה
+   באמצע המעבר, ואז שני הסברים היו רשומים כגלויים בבת אחת.
+   pointer-events מונע סימון של טקסט שקוף שאינו מוצג. */
 .opstop__text {
+  grid-area: 1 / 1;
   margin: 0;
   font-size: var(--font-small-size);
   line-height: 1.65;
   color: var(--ink-soft);
   text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.opstop__text.is-on {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* ---------- שאלות מרכזיות ---------- */
@@ -1142,7 +1197,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .opstop__panel,
+  .opstop__text,
   .opstop__num,
   .opstop__title,
   .dsgn__navBtn,
@@ -1202,14 +1257,13 @@
   }
 
   /* הנתיב הופך לציר אנכי: הקו עובר בצד ההתחלה, והתחנות מתחתיו */
-  .oppath {
+  .oppath__stops {
     grid-template-columns: 1fr;
-    gap: 0;
     /* בלי ריפוד: המספר מקבל טור משלו בתוך הכפתור, ולא נמשך אל
        השוליים אל מתחת לאייקון */
     padding-inline-start: 0;
   }
-  .oppath::before {
+  .oppath__stops::before {
     top: 12px;
     bottom: 12px;
     inset-inline: auto;
@@ -1220,21 +1274,30 @@
   .opstop {
     padding-block: 12px;
   }
+  /* בציר האנכי המספר והכותרת יושבים זה לצד זה, ולכן שתי השורות
+     הקבועות של המסך הרחב מתבטלות כאן */
   .opstop__btn {
     grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
     justify-items: start;
     align-items: center;
     gap: 12px;
     text-align: start;
     padding: 0;
   }
+  .oppath .opstop__title {
+    min-height: 0;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: start;
+  }
   .opstop__num {
     margin-inline-start: 0;
   }
-  .opstop__panelRule {
-    margin-inline: 0;
+  .oppath__rule {
+    justify-self: start;
   }
-  .opstop__text {
+  .oppath .opstop__text {
     text-align: start;
   }
   .opscreen {
