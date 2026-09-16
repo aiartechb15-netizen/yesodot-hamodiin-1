@@ -409,7 +409,10 @@
 
 .purpose-layout {
   display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 3.3fr);
+  /* הכותרת וההנחיה בשורה עליונה על פני שתי העמודות, ומתחתיהן התוכן
+     (58%) מימין והאיור (42%) משמאל */
+  grid-template-columns: minmax(0, 58fr) minmax(0, 42fr);
+  row-gap: clamp(14px, 1.8vw, 26px);
   align-items: center;
   /* מרווח קטן: לאיור יש דעיכה רכה בצד הפונה אל הטקסט, והיא משלימה
      את המרחק ביניהם */
@@ -424,6 +427,11 @@
   padding-inline-end: 24px;
 }
 
+.purpose__head {
+  grid-column: 1 / -1;
+  text-align: right;
+}
+
 .purpose {
   min-width: 0;
   text-align: right;
@@ -431,7 +439,7 @@
 
 /* האיור כ-<img> נפרד ולא כרקע: בלי כרטיס, מסגרת, צל או פינות. הוא
    נצמד לצד התוכן (inline-start ב-RTL).
-   - חיתוך ל-17/16 (במקום 3/2) מוריד רק את השוליים השקופים שבצדדים.
+   - חיתוך ל-7/6 (במקום 3/2) מוריד רק את השוליים השקופים שבצדדים.
      התמונה עצמה אינה נמתחת — cover מגדיל אותה ביחס המקורי עד שהיא
      מכסה את השטח — ולכן המפה יוצאת גדולה בכ-27% מקודם, גם ברוחב
      וגם בגובה, באותה עמודה.
@@ -439,10 +447,10 @@
      הריקים שהפרידו ביניהם.
    - multiply ממזג את הלבן של המפה אל גוון הנייר של המקטע, והמפה
      נראית מצוירת על אותו רקע ולא מודבקת עליו.
-   - ארבעת הקצוות נמוגים במסכה. הצד הפונה אל הטקסט (ימין) נמוג לאורך
-     שליש מרוחב האיור, בשלוש עצירות שמרככות את עקומת המעבר, ולכן
-     האיור נגמר הרבה לפני שהוא מגיע אל הטקסט; הקצה השמאלי נמוג קצר,
-     כדי שלא ייחתך כקו מול קצה המקטע.
+   - ארבעת הקצוות נמוגים במסכה. הצד הפונה אל הטקסט (ימין) נמוג דעיכה
+     קצרה — כ-15% מרוחב האיור — ולכן הוא נמסך אל השמנת בלי לאבד את
+     המסלולים; הקצה השמאלי נמוג קצר עוד יותר, כדי שלא ייחתך כקו מול
+     קצה המקטע.
    - שוליים שליליים בצד ההתחלה (ימין ב-RTL) מזיזים את האיור עוד מעט
      אל עבר התוכן. הוא נכנס אל תוך המרווח שבין העמודות, אבל רק
      בקצהו הנמוג לחלוטין, ולכן אינו מכסה טקסט. */
@@ -451,6 +459,8 @@
   align-items: center;
   justify-content: flex-start;
   min-width: 0;
+  /* מרכז האיור יושב על מרכז אזור התוכן, ומשם מוסט מעט כלפי מעלה */
+  margin-block-end: clamp(16px, 2.2vw, 40px);
   pointer-events: none;
   user-select: none;
 }
@@ -458,9 +468,11 @@
 .purpose__visual img {
   display: block;
   width: 100%;
-  max-width: 760px;
+  /* תקרה שמונעת מן האיור להתנשא הרבה מעל גובה התוכן שלצידו ולפתוח
+     חלל ריק מעליו ומתחתיו */
+  max-width: 520px;
   height: auto;
-  aspect-ratio: 17 / 16;
+  aspect-ratio: 7 / 6;
   object-fit: cover;
   margin-inline-start: clamp(-26px, -1.3vw, -10px);
   mix-blend-mode: multiply;
@@ -470,9 +482,8 @@
   --pv-fade-x: linear-gradient(
     to left,
     rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.18) 13%,
-    rgba(0, 0, 0, 0.6) 23%,
-    #000 33%,
+    rgba(0, 0, 0, 0.45) 6%,
+    #000 15%,
     #000 93%,
     rgba(0, 0, 0, 0) 100%
   );
@@ -507,29 +518,27 @@
   }
 }
 
-/* במסך טלפון צר האיור רק מעמיס — הוא יורד */
-@media (max-width: 480px) {
-  .purpose__visual {
-    display: none;
-  }
-}
+/* במסך צר האיור אינו יורד אלא נשאר אחרון, מתחת לתוכן ולדוגמה */
 
 .purpose__hint {
-  margin: 0 0 clamp(16px, 1.8vw, 24px);
+  /* המרווח אל השורה שמתחת מגיע מ-row-gap של הפריסה */
+  margin: 0;
   font-size: clamp(19px, 1.3vw, 21.5px);
   color: var(--ink-soft);
 }
 
 /* ---- הטאבים ----
-   שורה אחת על קו בסיס דק לכל רוחב התוכן. הטאב הפעיל כהה, והקו הזהב
-   שמתחתיו יושב על קו הבסיס. הקו אינו שייך לטאב אלא לשורה כולה, ולכן
-   הוא נע ומתמתח ביניהם ברצף במקום להיעלם ולהופיע. */
+   שורה אחת קומפקטית: רוחבה כרוחב שני הכיתובים בלבד, והיא נצמדת לימין
+   ואינה נמתחת על פני העמודה. הטאב הפעיל כהה ומודגש, הלא-פעיל
+   אפור־כחול, והקו הזהב שמתחת לפעיל אינו שייך לטאב אלא לשורה כולה,
+   ולכן הוא נע ומתמתח ביניהם ברצף במקום להיעלם ולהופיע. */
 .purpose__choice {
   position: relative;
   display: flex;
   align-items: stretch;
+  width: max-content;
+  max-width: 100%;
   gap: clamp(20px, 2.6vw, 40px);
-  border-bottom: 1px solid var(--border);
 }
 
 .pchoice {
@@ -541,11 +550,11 @@
   background: none;
   font-family: var(--font-heading);
   font-size: clamp(21px, 1.6vw, 26px);
-  /* משקל זהה לפעיל וללא-פעיל: רוחב הטאב לא משתנה בבחירה והקו לא קופץ */
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.3;
   text-align: center;
-  color: var(--muted);
+  /* אפור־כחול: אותו גוון טקסט של הפרק, מרוכך */
+  color: rgba(59, 71, 87, 0.66);
   cursor: pointer;
   transition: color 0.22s ease;
 }
@@ -563,12 +572,13 @@
 
 .pchoice.is-on {
   color: var(--navy);
+  font-weight: 700;
 }
 
-/* הקו הזהב הנע — ברוחב הטאב הפעיל, יושב על קו הבסיס */
+/* הקו הזהב הנע — ברוחב הטאב הפעיל, מתחתיו */
 .purpose__rule {
   position: absolute;
-  bottom: -1px;
+  bottom: 0;
   left: 0;
   width: 0;
   height: 3px;
@@ -584,6 +594,7 @@
    יורד לשתי שורות בתוך הטאב במקום לשבור את השורה כולה */
 @container purpose (max-width: 520px) {
   .purpose__choice {
+    width: 100%;
     gap: 12px;
   }
   .pchoice {
@@ -613,35 +624,30 @@
   opacity: 1;
 }
 
-.pbody__title {
-  margin: 0 0 8px;
-  font-size: clamp(23.5px, 1.7vw, 28px);
-  color: var(--navy);
-}
-
-/* ההסבר ממלא את עמודת התוכן, עד תקרת קריאוּת של 74 תווים. שתי
+/* ההסבר ממלא את עמודת התוכן, עד תקרת קריאוּת של 78 תווים. שתי
    מחלקות ולא אחת: .ch1 p (68ch) גובר על מחלקה בודדת. */
 .purpose .pbody__text {
   margin: 0;
-  max-width: 74ch;
+  max-width: 78ch;
   font-size: clamp(20.5px, 1.35vw, 22.5px);
-  line-height: 1.75;
+  line-height: 1.8;
   color: var(--ink-soft);
 }
 
-/* תיבת הדוגמאות — חלק מן התוכן ולא כרטיס צף: ברוחב ההסבר, גוון
-   שמנת־זהב בהיר, גבול זהב דק מאוד, פינות מעוגלות קלות ובלי צל */
+/* הדוגמה — שורת טקסט נקייה ולא כרטיס: בלי רקע, מסגרת, פינות או צל.
+   כל מה שמסמן אותה הוא קו זהב אנכי דק בצד ההתחלה (ימין ב-RTL).
+   המרווח מן הפסקה קטן, ולכן שתיהן נקראות כיחידת תוכן אחת. */
 .purpose .pbody__example {
-  margin: clamp(14px, 1.6vw, 20px) 0 0;
-  /* ברוחב העמודה כולה, כמו קו הבסיס של הטאבים — הריפוד הפנימי שומר
-     על אורך שורה סביר */
-  max-width: none;
-  padding: clamp(14px, 1.4vw, 18px) clamp(18px, 1.8vw, 24px);
-  border: 1px solid rgba(196, 163, 71, 0.22);
-  border-radius: var(--radius);
-  background: rgba(196, 163, 71, 0.07);
+  margin: clamp(12px, 1.3vw, 16px) 0 0;
+  max-width: 78ch;
+  padding: 2px 0;
+  padding-inline-start: clamp(14px, 1.3vw, 18px);
+  border: 0;
+  border-inline-start: 2px solid var(--gold);
+  border-radius: 0;
+  background: none;
   font-size: clamp(19px, 1.25vw, 20.5px);
-  line-height: 1.75;
+  line-height: 1.8;
   text-align: right;
   color: var(--ink-soft);
 }

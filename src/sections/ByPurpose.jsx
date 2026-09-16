@@ -49,15 +49,18 @@ export default function ByPurpose() {
       aria-labelledby="by-purpose-title"
     >
       <div className="container purpose-layout">
-        <div className="purpose">
+        {/* הכותרת וההנחיה נפרשות מעל שתי העמודות ופותחות את המסך */}
+        <header className="purpose__head">
           <h2 className="section-title" id="by-purpose-title">
             {byPurpose.title}
           </h2>
           <span className="gold-rule" aria-hidden="true" />
           <p className="purpose__hint">{byPurpose.hint}</p>
+        </header>
 
-          {/* שורת הטאבים — קו בסיס דק לכל רוחב השורה, וקו זהב אחד
-              שנע אל הטאב שנבחר ומקבל את רוחבו */}
+        <div className="purpose">
+          {/* שורת הטאבים — קומפקטית ומיושרת לימין, וקו זהב אחד שנע אל
+              הטאב שנבחר ומקבל את רוחבו */}
           <div className="purpose__choice" ref={rowRef} role="tablist" aria-label={byPurpose.title}>
             {byPurpose.items.map((item) => {
               const isOpen = item.id === open
@@ -102,7 +105,8 @@ export default function ByPurpose() {
                   aria-labelledby={`purpose-tab-${item.id}`}
                   aria-hidden={isOpen ? undefined : 'true'}
                 >
-                  <h3 className="pbody__title">{item.title}</h3>
+                  {/* אין כאן כותרת חוזרת: שם הסוג כבר מופיע בטאב שנבחר,
+                      וה-tabpanel נקרא ממנו ב-aria-labelledby */}
                   <p className="pbody__text">{item.text}</p>
                   <p className="pbody__example">
                     <span className="pbody__exampleLabel">{item.examplesLabel}: </span>
