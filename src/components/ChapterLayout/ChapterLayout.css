@@ -16,10 +16,13 @@
    השוליים חלים על אזור התוכן בלבד: הכותרת העליונה של האתר ותפריט
    הצד יושבים מחוצה לו ואינם מושפעים. */
 .chapterPage .chLayout__main {
+  /* מידת המסגרת כמשתנה: מסך שנפרש מקצה לקצה (האיור של "מודיעין
+     כמערכת לומדת") מבטל אותה בדיוק לפי הערך הזה ולא לפי מספר קבוע */
+  --ch-frame: 5cm;
   box-sizing: border-box;
-  width: calc(100% - 10cm);
+  width: calc(100% - 2 * var(--ch-frame));
   max-width: none;
-  margin: 5cm;
+  margin: var(--ch-frame);
   padding: 0;
 }
 
@@ -38,8 +41,9 @@
    מתכווצים ל-24px, אחרת לא היה נשאר רוחב לתוכן עצמו */
 @media (max-width: 900px) {
   .chapterPage .chLayout__main {
+    --ch-frame: 24px;
     width: auto;
-    margin: 24px;
+    margin: var(--ch-frame);
   }
 }
 
