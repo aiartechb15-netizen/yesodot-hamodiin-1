@@ -914,13 +914,12 @@
   padding-block: clamp(44px, 5vw, 78px);
 }
 
+/* עמודה אחת בלבד: אחרי שהאיור ירד אין יותר טור שמור לצידו, והטקסט
+   נשאר במקומו ובמידתו (62ch) במקום להימתח על כל הרוחב */
 .ch3op__inner {
   display: grid;
-  /* עמודת האיור רחבה מעט יותר מקודם (50% במקום 44%), כדי שהאיור יעמוד
-     מול שתי פסקאות הטקסט ולא ייראה קטן מהן */
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 50%);
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  gap: clamp(22px, 3.4vw, 56px);
 }
 
 /* עמודת הטקסט — RTL מלא ויישור לימין. הקו האנכי הדק יושב מימין
@@ -976,55 +975,9 @@
    שסביבם נשארים חדים ובעוצמה מלאה — ורמז חלש בלבד למעלה ולמטה.
    האטימות של האיור עצמו אינה יורדת, ואין כאן שכבת צבע מעליו: שטיפה
    בגוון אחיד הייתה נקראת כמלבן על גיליון הרקע המצויר של הפרק. */
-.ch3op__art {
-  justify-self: center;
-  --ch3op-fade-x: linear-gradient(
-    to right,
-    #000 0%,
-    #000 70%,
-    rgba(0, 0, 0, 0.85) 80%,
-    rgba(0, 0, 0, 0.35) 92%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  --ch3op-fade-y: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.55) 0%,
-    rgba(0, 0, 0, 0.85) 5%,
-    #000 12%,
-    #000 88%,
-    rgba(0, 0, 0, 0.85) 95%,
-    rgba(0, 0, 0, 0.55) 100%
-  );
-  -webkit-mask-image: var(--ch3op-fade-x), var(--ch3op-fade-y);
-  mask-image: var(--ch3op-fade-x), var(--ch3op-fade-y);
-  -webkit-mask-composite: source-in;
-  mask-composite: intersect;
-}
-
-.ch3op__img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  background: none;
-}
-
-/* במסך צר הטורים נערמים: הטקסט למעלה והאיור מתחתיו, ממורכז ומוגבל
-   ברוחב כדי שלא ייקח את המסך לעצמו */
+/* במסך צר הטקסט משתמש בכל רוחב אזור התוכן */
 @media (max-width: 860px) {
-  .ch3op__inner {
-    grid-template-columns: 1fr;
-    gap: clamp(26px, 6vw, 40px);
-  }
-
   .ch3op__text {
     max-width: none;
-  }
-
-  .ch3op__art {
-    width: min(100%, 420px);
-    justify-self: center;
   }
 }
