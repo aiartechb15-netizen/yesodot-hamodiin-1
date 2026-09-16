@@ -1,37 +1,7 @@
-.fill__bank {
-  padding: 18px 22px;
-  background: var(--cream);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-
-.fill__bankLabel {
-  display: block;
-  font-size: 19px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--teal-ink);
-  margin-bottom: 10px;
-}
-
-.fill__bankList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.fill__chip {
-  padding: 6px 14px;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  font-size: 19px;
-  font-weight: 600;
-  color: var(--navy);
-}
-
+/* ההוראות הן כעת האלמנט הראשון בתרגול — המרווח שמעליהן נקבע
+   במקטע שמכיל אותן ולא כאן */
 .fill__hint {
-  margin: 14px 0 0;
+  margin: 0;
 }
 
 .fill__list {

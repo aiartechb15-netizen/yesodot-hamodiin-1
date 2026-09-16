@@ -3,10 +3,11 @@ import Icon from '../Icons/Icons'
 import './FillBlanks.css'
 
 /**
- * השלמת משפטים מתוך אוצר מילים. הבחירה נעשית מרשימה נפתחת,
- * והפתרון נחשף רק אחרי לחיצה על "בדיקה".
+ * השלמת משפטים. הבחירה נעשית מרשימה נפתחת שאפשרויותיה הן מאגר
+ * המושגים (bank), והפתרון נחשף רק אחרי לחיצה על "בדיקה".
+ * המאגר אינו מוצג עוד ככרטיסייה נפרדת מעל התרגול.
  */
-export default function FillBlanks({ bank, bankLabel, sentences, hint, onResult }) {
+export default function FillBlanks({ bank, sentences, hint, onResult }) {
   const uid = useId()
   const [values, setValues] = useState({})
   const [checked, setChecked] = useState(false)
@@ -24,17 +25,6 @@ export default function FillBlanks({ bank, bankLabel, sentences, hint, onResult 
 
   return (
     <div className="fill">
-      <div className="fill__bank">
-        <span className="fill__bankLabel">{bankLabel}</span>
-        <ul className="fill__bankList">
-          {bank.map((w) => (
-            <li key={w} className="fill__chip">
-              {w}
-            </li>
-          ))}
-        </ul>
-      </div>
-
       {hint ? <p className="fill__hint muted">{hint}</p> : null}
 
       <ol className="fill__list">

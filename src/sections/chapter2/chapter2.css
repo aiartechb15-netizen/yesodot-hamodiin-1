@@ -1582,12 +1582,8 @@
    והמכל מתחיל להתמרכז בתוכה. במסכים צרים יותר הוא ממילא ממלא את
    העמודה, ושוליים של 5 ס"מ היו רק מכווצים אותו. */
 @media (min-width: 1600px) {
-  .chapterPage .st--open .container {
-    max-width: none;
-    margin-inline: 0;
-    padding-inline: 5cm var(--ch-gutter);
-  }
-
+  /* השוליים עצמם מגיעים מעמודת התוכן (ChapterLayout.css); כאן נשארת
+     רק תקרת רוחב הקריאה של הבלוקים שבתוך המקטע */
   .st--open .st__head,
   .st--open .idcard {
     max-width: var(--ch-max);

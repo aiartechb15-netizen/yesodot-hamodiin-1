@@ -24,17 +24,16 @@ export default function S5Design() {
             ))}
           </div>
 
-          <div>
+          {/* התרגול — אחרי שכרטיסיית אוצר המילים ירדה, ההוראות הן
+              האלמנט הראשון שמתחת לכותרת ולקו הזהב שלה */}
+          <div className="s3exercise">
             <h3 className="s3sub">{design.exercise.title}</h3>
             <span className="gold-rule gold-rule--sm" aria-hidden="true" />
-            <div style={{ marginTop: '18px' }}>
-              <FillBlanks
-                bank={design.exercise.bank}
-                bankLabel={design.exercise.bankLabel}
-                sentences={design.exercise.sentences}
-                hint={design.exercise.hint}
-              />
-            </div>
+            <FillBlanks
+              bank={design.exercise.bank}
+              sentences={design.exercise.sentences}
+              hint={design.exercise.hint}
+            />
           </div>
         </div>
       </div>

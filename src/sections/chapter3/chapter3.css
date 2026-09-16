@@ -15,6 +15,12 @@
   color: var(--navy);
 }
 
+/* התרגול — 24px מדויקים בין כותרת התרגול (על קו הזהב שמתחתיה)
+   לבין שורת ההוראות שפותחת את התרגול עצמו */
+.s3exercise > .gold-rule--sm {
+  margin-bottom: 24px;
+}
+
 .s3hint {
   margin-top: 6px;
   font-size: var(--font-body-size);
@@ -502,27 +508,18 @@
   justify-content: flex-start;
 }
 
-/* מכל אחד לכל המקטע, פרוש על מלוא רוחב עמודת התוכן פחות 5 ס״מ מכל
-   צד. אין כאן תקרת רוחב ואין מרכוז: קודם היה כאן max-width של 1050
-   פיקסלים עם margin-inline: auto, ומעליו גם הריפוד של 5 הס״מ — ואז
-   נשארו לתוכן 672 פיקסלים בלבד, כ-295 פיקסלים מכל צד.
-   5 הס״מ נמדדים מעמודת התוכן בלבד; סרגל הפרק יושב מחוצה לה ואינו
-   נכלל בהם. */
+/* מכל אחד לכל המקטע, פרוש על מלוא רוחב עמודת התוכן. אין כאן תקרת
+   רוחב, אין מרכוז ואין שוליים משלו: 5 הס״מ מוגדרים פעם אחת על עמודת
+   התוכן (ChapterLayout.css), וכל שוליים נוספים כאן היו נספרים
+   פעמיים — 10 ס״מ בפועל. */
 .chapterPage .container.opsec__wrap {
   box-sizing: border-box;
   width: auto;
   max-width: none;
-  margin-inline: 5cm;
+  margin-inline: 0;
   padding-inline: 0;
   direction: rtl;
   text-align: right;
-}
-
-/* בטאבלט ובמובייל אין די רוחב ל-5 ס״מ משני הצדדים */
-@media (max-width: 900px) {
-  .chapterPage .container.opsec__wrap {
-    margin-inline: 24px;
-  }
 }
 
 .opscreen {
