@@ -43,94 +43,95 @@
    ומלמטה. היחס נשאר לרוחב בכל רוחב מסך דסקטופ. */
 .topic {
   position: relative;
-  display: block;
+  /* שתי שורות שוות בדיוק: מחצית לתצלום ומחצית לכיתוב. הן נגזרות
+     מגובה הכרטיס עצמו, ולכן שלושת הכרטיסים חצויים באותה נקודה. */
+  display: grid;
+  grid-template-rows: 50% 50%;
   height: clamp(255px, calc(58vh - 165px), 470px);
   overflow: hidden;
-  background: var(--cream);
+  background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   color: inherit;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+/* במעבר עכבר רק הגדלה עדינה — בלי הזזה ובלי שינוי צבע */
 .topic:hover {
-  transform: translateY(-3px);
+  transform: scale(1.012);
   box-shadow: var(--shadow-card-hover);
-  border-color: var(--gold-soft);
   text-decoration: none;
 }
 
 .topic--soon:hover {
   transform: none;
   box-shadow: var(--shadow-card);
-  border-color: var(--border);
 }
 
-/* התצלום ממלא את הכרטיס כולו. object-position מוסט ימינה בתוך
-   התצלום, כך שמרכז התמונה נופל באזור השמאלי — החלק שאינו מכוסה */
+/* מחצית התצלום — ריפוד של 10px מכל צדדיה, ולכן התצלום אינו נוגע
+   במסגרת הכרטיס. הפינות שלו מעוגלות בהתאמה לפינות הכרטיס. */
+.topic__media {
+  position: relative;
+  padding: 10px;
+  /* הפינות התחתונות ישרות: שם התצלום נפגש עם אזור הכיתוב */
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  overflow: hidden;
+}
+
 .topic__img {
-  position: absolute;
-  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 70% 50%;
+  border-radius: 8px;
   transition: transform 0.4s ease;
 }
 
 .topic:hover .topic__img {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
-/* המסך הקרמי — נפתח מהקצה הימני ונמוג אל תוך התצלום.
-   רדיאלי ולא ליניארי, כדי שהמפגש בין הטקסט לתמונה יהיה רך ולא קו.
-   251 248 241 הוא --paper; הוא נכתב כרכיבים כדי לשלוט בשקיפות. */
-.topic__veil {
-  --veil: 251 248 241;
+/* ההצללה יושבת בתוך אותו ריפוד כמו התצלום, ולכן היא מכסה אותו
+   בדיוק ואינה גולשת אל שולי הכרטיס. היא מתחילה מתחת לאמצע התצלום
+   ומתחזקת בהדרגה עד תחתיתו. */
+.topic__shade {
   position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    72% 145% at 100% 50%,
-    rgb(var(--veil) / 1) 0%,
-    rgb(var(--veil) / 0.99) 42%,
-    rgb(var(--veil) / 0.86) 58%,
-    rgb(var(--veil) / 0.46) 74%,
-    rgb(var(--veil) / 0.12) 88%,
-    rgb(var(--veil) / 0) 100%
+  inset: 10px;
+  border-radius: 8px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 45%,
+    rgba(0, 0, 0, 0.1) 62%,
+    rgba(0, 0, 0, 0.26) 78%,
+    rgba(0, 0, 0, 0.46) 92%,
+    rgba(0, 0, 0, 0.56) 100%
   );
+  pointer-events: none;
 }
 
-/* padding-inline: התחלה (ימין) לטקסט, סוף (שמאל) שומר את מחצית
-   הכרטיס פנויה לתצלום */
+/* מחצית הכיתוב — לבנה, מיושרת לימין, והיחידה כולה ממורכזת בגובהה */
 .topic__body {
-  position: absolute;
-  inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding-inline: clamp(20px, 2.2vw, 30px) 36%;
-  text-align: start;
+  padding: 22px;
+  direction: rtl;
+  text-align: right;
 }
 
 .topic__kicker {
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.12em;
   color: var(--gold-ink);
 }
 
 .topic__title {
-  margin-top: 6px;
+  margin-top: 8px;
   font-size: clamp(25.5px, 1.5vw, 30px);
-}
-
-/* הפס הזהוב הוא כעת סוגר הכרטיס ולא מפריד לפני CTA, ולכן אין לו
-   שוליים תחתונים שידחפו את גוש הטקסט מעלה מהמרכז */
-.topic__body .gold-rule--sm {
-  margin-block: 12px 0;
+  color: var(--navy);
 }
 
 @media (max-width: 1000px) {
@@ -149,10 +150,12 @@
     grid-template-columns: 1fr;
     gap: 18px;
   }
+  /* עמודה אחת: הכרטיס מקבל גובה נדיב יותר, כדי ששתי המחציות יישארו
+     שוות וגם הכיתוב יישב בנוח */
   .topic {
-    height: clamp(178px, 46vw, 230px);
+    height: clamp(260px, 62vw, 330px);
   }
   .topic__body {
-    padding-inline: 22px 44%;
+    padding: 20px;
   }
 }
