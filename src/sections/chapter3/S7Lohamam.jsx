@@ -3,7 +3,8 @@ import './chapter3.css'
 
 /* כרטיסיית התהליך שהייתה בראש המסך — שלושת השלבים, העיגולים,
    האייקונים והחצים שביניהם — ירדה. מה שנשאר פותח ישירות ב"כיצד זה
-   עובד?" ובתיבת "שימו לב" שלצידה. */
+   עובד?", ומתחתיו הערת "שימו לב" — הערה פתוחה ולא כרטיס לצדו, ולכן
+   הטקסט נפרש על מלוא רוחב אזור התוכן. */
 export default function S7Lohamam() {
   return (
     <section className="section section--white" id={lm.id} aria-labelledby="ch3-lm-title">
@@ -19,18 +20,16 @@ export default function S7Lohamam() {
         </header>
 
         <div className="s3blocks">
-          <div className="grid-2">
-            <article>
-              <h3 className="openBlock__title">כיצד זה עובד?</h3>
-              <span className="gold-rule gold-rule--sm" aria-hidden="true" />
-              <p>{lm.body}</p>
-            </article>
+          <article className="lm__how">
+            <h3 className="openBlock__title">כיצד זה עובד?</h3>
+            <span className="gold-rule gold-rule--sm" aria-hidden="true" />
+            <p>{lm.body}</p>
 
-            <aside className="callout callout--teal">
-              <span className="callout__label">{lm.routineCallout.label}</span>
-              <p>{lm.routineCallout.text}</p>
+            <aside className="lm__note">
+              <span className="lm__noteLabel">{lm.routineCallout.label}</span>
+              <p className="lm__noteText">{lm.routineCallout.text}</p>
             </aside>
-          </div>
+          </article>
 
           {/* ההישג המרכזי — מקטע פתוח על רקע העמוד: בלי כרטיס, מסגרת,
               רקע או צל. ההפרדה ממה שמעליו היא קו אופקי דק ומרווח. */}
