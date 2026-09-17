@@ -1,3 +1,9 @@
+/* הפס הזהב שהיה לאורך ראש הכרטיס ירד. הוא נוצר מ-border-top של
+   3 פיקסלים שדרס את הצד העליון של המסגרת — לא מ-::before, מ-::after,
+   מ-box-shadow או מאלמנט פנימי — ולכן די בהסרתו כדי שהמסגרת העדינה
+   של 1px תקיף את הכרטיס בשווה מארבעת הצדדים.
+
+   קו הזהב הקצר שמתחת לכותרת (.gold-rule) הוא חלק מן התוכן ונשאר. */
 .nextch__card {
   display: flex;
   flex-direction: column;
@@ -8,7 +14,6 @@
   padding: clamp(30px, 4vw, 48px);
   background: var(--paper);
   border: 1px solid var(--border);
-  border-top: 3px solid var(--gold);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
 }
