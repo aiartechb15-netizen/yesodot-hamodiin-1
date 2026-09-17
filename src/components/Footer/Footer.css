@@ -35,6 +35,16 @@
   color: rgba(255, 255, 255, 0.55);
 }
 
+/* עמודת הצד השמאלי של הפוטר. align-items: flex-start הוא הצד הימני
+   בעברית, ולכן שורת יצירת הקשר מיושרת לימין בדיוק כמו שורת הקרדיטים
+   שמעליה. הרווח של 10 פיקסלים הוא ה-gap בין השתיים. */
+.ftr__end {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
 .ftr__credits {
   display: flex;
   align-items: center;
@@ -60,6 +70,27 @@
 .ftr__creditsName {
   color: rgba(255, 255, 255, 0.55);
   font-size: 19px;
+  white-space: nowrap;
+}
+
+/* הגודל והצבע זהים ל-ftr__creditsName — הקישור אינו מודגש ואינו
+   מקו-תחתי, כדי שלא יבלוט מעל שורת הקרדיטים. המעבר הבהיר בריחוף
+   ובפוקוס הוא הסימן שמדובר בקישור. */
+.ftr__contact {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 19px;
+  text-align: right;
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.ftr__contact:hover,
+.ftr__contact:focus-visible {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* המספר עצמו אינו נשבר לשתי שורות גם כשהמשפט נשבר במסך צר */
+.ftr__contact span {
   white-space: nowrap;
 }
 
