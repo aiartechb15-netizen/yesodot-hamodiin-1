@@ -1,5 +1,5 @@
 import { chapter2Meta, intro } from '../../data/chapter2'
-import earthImage from '../../assets/images/כדור לווין פרק 2.png'
+import earthImage from '../../assets/images/כדור לווין פרק 2 שקוף.png'
 import './chapter2.css'
 
 /* מסך התוכן הראשון של הפרק, מיד אחרי מסך הפתיחה. שני טורים בלבד:

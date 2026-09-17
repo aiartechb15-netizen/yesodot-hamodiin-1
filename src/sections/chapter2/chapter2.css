@@ -495,6 +495,10 @@
      שמחברת אותו אל גיליון הרקע במקום להשאירו "מודבק" עליו. */
 .ch2op__art {
   position: relative;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  filter: none;
   /* ממורכז בתוך טורו, ומיושר אנכית מול הטקסט דרך align-items של
      .ch2op__inner. בלי שוליים שליליים: הם היו דוחפים אותו אל מחוץ
      לאזור התוכן, ושם הוא נחתך. */
@@ -507,23 +511,13 @@
   width: min(100%, 660px);
 }
 
-/* ההילה — מילוי מתעמעם בלבד: אין לה קצה, טבעת או צל. היא נפרשת
-   כמידת האיור המוגדל, כי הוא גדל סביב מרכזו אל מעבר למכל. */
-.ch2op__art::before {
-  content: '';
-  position: absolute;
-  inset: -32%;
-  z-index: 0;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(23, 152, 154, 0.09) 0%,
-    rgba(23, 152, 154, 0.05) 44%,
-    rgba(23, 152, 154, 0) 70%
-  );
-  pointer-events: none;
-}
+/* ההילה הטורקיז שהייתה כאן ירדה: היא נקראה ככתם ירקרק סביב האיור.
+   המעטפת שקופה לגמרי ואין לה מסגרת, צל או פילטר. */
 
+/* הקובץ עצמו שקוף עכשיו: גיליון השמנת שהיה צרוב בו הוסר מן הפיקסלים
+   (‏"כדור לווין פרק 2 שקוף.png"), ולכן אין יותר מלבן תמונה ואין צורך
+   ב-mix-blend-mode כדי להמיס אותו אל הרקע. הכדור, הלוויין והקווים
+   נשארים באטימות מלאה. */
 .ch2op__img {
   position: relative;
   z-index: 1;
@@ -532,9 +526,11 @@
   height: auto;
   border: 0;
   border-radius: 0;
-  background: none;
+  background: transparent;
   box-shadow: none;
-  mix-blend-mode: multiply;
+  filter: none;
+  opacity: 1;
+  mix-blend-mode: normal;
 
   /* הדעיכה בקצוות נשארת, אבל היא רחוקה עכשיו מן האיור עצמו: אטומה
      לגמרי עד 96% ורק ברצועה החיצונית הדקה יורדת לאפס. נמדד בקובץ —
